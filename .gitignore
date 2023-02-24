@@ -48,13 +48,13 @@ sysinfo.txt
 crashlytics-build.properties
 
 #
-.vsconfig
-Assets/Plugins.meta
-Assets/Plugins/
-Assets/TextMesh Pro.meta
-Assets/TextMesh Pro/
-UserSettings/Layouts/CurrentMaximizeLayout.dwlt
-UserSettings/Layouts/default-2021.dwlt
-ProjectSettings/EditorSettings.asset
-UserSettings/
-ProjectSettings/
+#.vsconfig
+#Assets/Plugins.meta
+#Assets/Plugins/
+#Assets/TextMesh Pro.meta
+#Assets/TextMesh Pro/
+#UserSettings/Layouts/CurrentMaximizeLayout.dwlt
+#UserSettings/Layouts/default-2021.dwlt
+#ProjectSettings/EditorSettings.asset
+#UserSettings/
+#ProjectSettings/
