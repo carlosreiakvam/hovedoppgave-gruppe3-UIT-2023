@@ -8,10 +8,10 @@ using Unity.Services.Relay.Models;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
+using QFSW.QC;
 
 public class RelayConnector : MonoBehaviour
 {
-
     private async void Start()
     {
         await UnityServices.InitializeAsync();
@@ -27,6 +27,7 @@ public class RelayConnector : MonoBehaviour
 
     }
 
+    [Command]
     private async void CreateRelay()
     {
         try
@@ -52,6 +53,8 @@ public class RelayConnector : MonoBehaviour
         }
 
     }
+
+    [Command]
     private async void JoinRelay(string joinCode)
     {
         try
