@@ -50,12 +50,12 @@ sysinfo.txt
 
 
 #
-.vsconfig
-Assets/Plugins.meta
-Assets/Plugins/
-Assets/Plugins/QFSW/
-Assets/TextMesh Pro.meta
-Assets/TextMesh Pro/
+#.vsconfig
+#Assets/Plugins.meta
+#Assets/Plugins/
+#Assets/Plugins/QFSW/
+#Assets/TextMesh Pro.meta
+#Assets/TextMesh Pro/
 #UserSettings/Layouts/CurrentMaximizeLayout.dwlt
 #UserSettings/Layouts/default-2021.dwlt
 #ProjectSettings/EditorSettings.asset
