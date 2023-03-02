@@ -12,8 +12,20 @@ using QFSW.QC;
 
 public class RelayConnector : MonoBehaviour
 {
+
+    //Singleton pattern: https://www.youtube.com/watch?v=2pCkInvkwZ0&t=125s
+    public static RelayConnector instance;
+    
     private async void Start()
     {
+        if(instance != null && instance != this)
+        {
+            Destroy(this); //make sure only one singleton exist at any time
+            Debug.Log("RelayConnector was destoyed, because another Singleton was created");
+        }
+
+        instance = this;
+
         await UnityServices.InitializeAsync();
 
         AuthenticationService.Instance.SignedIn += () =>
@@ -21,9 +33,6 @@ public class RelayConnector : MonoBehaviour
             Debug.Log("Signed In; player ID: " + AuthenticationService.Instance.PlayerId);
         };
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-        //CreateRelay(); //hardcoded for testing without an interface or console. run on host (serverside) 
-        //JoinRelay(code); //run on client with the code that is provided by the host
 
     }
 
