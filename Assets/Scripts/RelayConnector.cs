@@ -25,7 +25,7 @@ public class RelayConnector : MonoBehaviour
         {
             Debug.Log("creating RelayConnector for the first time");
             _instance = this;
-            signInToRelay();
+            SignInToRelay();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -36,10 +36,9 @@ public class RelayConnector : MonoBehaviour
     }
 
 
-    private static async void signInToRelay()
+    private static async void SignInToRelay()
     {
         await UnityServices.InitializeAsync();
-
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed In; player ID: " + AuthenticationService.Instance.PlayerId);
@@ -57,7 +56,7 @@ public class RelayConnector : MonoBehaviour
             allocation = await RelayService.Instance.CreateAllocationAsync(3);
             joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
-            RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
+            RelayServerData relayServerData = new(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             NetworkManager.Singleton.StartHost();
 
