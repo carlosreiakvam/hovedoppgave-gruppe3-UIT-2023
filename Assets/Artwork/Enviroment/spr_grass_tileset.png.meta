@@ -1,0 +1,1718 @@
+fileFormatVersion: 2
+guid: 6f8e3a6d345aafd4fb2fbf93bc1e0ef5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: grass_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 400
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee2111a06e041bc42a192cab62d0f0f2
+      internalID: 655012172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 400
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad8fb92288cd81a448df3708edef7d2e
+      internalID: 1657199744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 384
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8af7dbe594ff5c4a96601ae7c2743f2
+      internalID: -518106950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass_6
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 384
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e446bb76e086a74293658971a341585
+      internalID: -285173561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 107d8af97a2aa3f448bd62d9517873a7
+      internalID: 1839987323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass_1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 489c0f8b970877a4681bc93f8205ed89
+      internalID: 1978284811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3632c25eec7786d43a5aabb581d7b3bd
+      internalID: -384028538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33be4a1218134c349a515a62d1e86074
+      internalID: -559786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b084327e220eec64f8f21114d8d9e970
+      internalID: -1918201853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 017336863df96e84daaabd371e0440ab
+      internalID: 511705443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 701cdacf70872274fa150c57e04ab8e3
+      internalID: -1184889815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_4
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 675b94c759a53654abbad3c6f372504f
+      internalID: -2105691154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be537b958a53cfd488b0bb6d3af53453
+      internalID: 1867298772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 848fbac60ecef3d4e84b49a1b596bd09
+      internalID: -696715851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a6cada68241aa04b9e1b1ceecf6730f
+      internalID: 1764499164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bush_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cc6cce6f10f100448897ce0ee7d18c3
+      internalID: -1400425343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c026fcae0704fa346abe45580d7cfc74
+      internalID: -659488190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f66a09b982c408041aabce76da906c19
+      internalID: 1685346171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddf6d221b00c9d34dbcae2f087c45982
+      internalID: 2077597875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7327400193db0cb44a7edc9a18e2262d
+      internalID: -527172329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e367a83a6a46d3248bbd8b9a1d492531
+      internalID: 478497033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2f32a102f36e4d41ab79690fcd47ad9
+      internalID: -1693376962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a59719af149cf844781d66172bfd11d1
+      internalID: -1244596670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireplace_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84692d4dcdc944e448db14ec375f0832
+      internalID: -1813010285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crate_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 353befc0526aa2d4abd14f201496dafb
+      internalID: -762972719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crate_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f782a1bf2f6cc384c95d4622b7848f94
+      internalID: 1527787558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crate_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d2ecbb95e06f14abd87d2c9b4bd5ab
+      internalID: -633222448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crate_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9eb4734e7a5e2746b7cf6e06fadabdb
+      internalID: 1998460704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: barrel_0
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 16
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 079d60089aafc9940bdc15dbbc75a5b9
+      internalID: 1841138618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest_0
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 16
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11a156e07b8cd68438c5e705e01d998c
+      internalID: 481411427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest_1
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e6932207c2d8b4786039d848294e2f
+      internalID: 1835025075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tree_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 48
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d448e48dd5362dd488533d5a29bd5bc5
+      internalID: 82114222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tree_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 48
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5a8715aac5278c45b28dffcabf94331
+      internalID: 720267310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tree_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 80
+        width: 48
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33d907f0b7ee2064db4f42411f035c8d
+      internalID: 339126460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 3e4da618a7607ba4d9b729002a3237ff
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      spr_grass_tileset_381: 205685612
+      spr_grass_tileset_499: 1687280714
+      spr_grass_tileset_852: -154421823
+      spr_grass_tileset_123: 75143101
+      spr_grass_tileset_840: -148355096
+      spr_grass_tileset_353: -1097553554
+      spr_grass_tileset_629: -859779821
+      spr_grass_tileset_305: 790965245
+      spr_grass_tileset_232: -1130384958
+      spr_grass_tileset_833: -321257646
+      spr_grass_tileset_455: 1440714612
+      spr_grass_tileset_647: -1567770230
+      spr_grass_tileset_419: 816833820
+      spr_grass_tileset_851: -2145755592
+      bush_6: -696715851
+      spr_grass_tileset_67: -718939474
+      spr_grass_tileset_408: -838307561
+      spr_grass_tileset_424: 1892856163
+      spr_grass_tileset_461: 433482020
+      spr_grass_tileset_343: 672050968
+      spr_grass_tileset_33: -985612518
+      spr_grass_tileset_344: 1314717382
+      spr_grass_tileset_481: 470274669
+      spr_grass_tileset_612: -1780618821
+      spr_grass_tileset_698: 692142940
+      spr_grass_tileset_257: -1065811296
+      spr_grass_tileset_587: -2096343021
+      spr_grass_tileset_394: 452305765
+      spr_grass_tileset_681: 1404902548
+      spr_grass_tileset_792: -640159378
+      spr_grass_tileset_699: 526472501
+      spr_grass_tileset_638: 1836627151
+      spr_grass_tileset_347: 2086488986
+      spr_grass_tileset_300: -1985478511
+      spr_grass_tileset_861: -1233144938
+      spr_grass_tileset_529: -378045505
+      spr_grass_tileset_542: 750564472
+      spr_grass_tileset_234: -203155683
+      spr_grass_tileset_355: 380108629
+      spr_grass_tileset_321: -1742196825
+      spr_grass_tileset_641: -1421865112
+      spr_grass_tileset_95: -135703060
+      spr_grass_tileset_293: 2033513750
+      spr_grass_tileset_642: -1878864717
+      spr_grass_tileset_37: -608521387
+      spr_grass_tileset_555: -167878318
+      spr_grass_tileset_552: -347323048
+      spr_grass_tileset_489: 1159339243
+      spr_grass_tileset_21: 17514236
+      spr_grass_tileset_358: 472135273
+      spr_grass_tileset_661: -1220925098
+      spr_grass_tileset_34: -460338078
+      spr_grass_tileset_271: 622122327
+      spr_grass_tileset_283: -374452095
+      spr_grass_tileset_826: -1222186892
+      spr_grass_tileset_856: -1839106232
+      spr_grass_tileset_492: 839321897
+      spr_grass_tileset_567: 726801762
+      chest_2: 678024767
+      spr_grass_tileset_236: 1155068602
+      spr_grass_tileset_354: 978710909
+      spr_grass_tileset_324: 1688979828
+      spr_grass_tileset_809: 180425993
+      spr_grass_tileset_171: 426445818
+      spr_grass_tileset_84: 1909628704
+      spr_grass_tileset_105: 330294203
+      spr_grass_tileset_86: -1332129472
+      spr_grass_tileset_549: 866553010
+      spr_grass_tileset_803: 1609914563
+      spr_grass_tileset_430: -2033840219
+      spr_grass_tileset_22: -521929666
+      spr_grass_tileset_87: -1862701567
+      spr_grass_tileset_662: 1541767922
+      spr_grass_tileset_656: 1351066270
+      spr_grass_tileset_298: -1528584837
+      spr_grass_tileset_676: -17884861
+      spr_grass_tileset_691: -544937303
+      spr_grass_tileset_304: -1319311160
+      spr_grass_tileset_350: -947486626
+      spr_grass_tileset_5: 350006567
+      spr_grass_tileset_771: 1531774866
+      grass_7: 1656542437
+      spr_grass_tileset_230: 563426851
+      spr_grass_tileset_493: -1518939205
+      spr_grass_tileset_452: -2084242509
+      spr_grass_tileset_111: 1938702665
+      spr_grass_tileset_525: -200611152
+      spr_grass_tileset_299: -586908950
+      spr_grass_tileset_616: -374024818
+      spr_grass_tileset_697: -600815433
+      spr_grass_tileset_222: 1799850596
+      spr_grass_tileset_821: -1292531751
+      spr_grass_tileset_444: 708361441
+      spr_grass_tileset_93: -1665366102
+      spr_grass_tileset_100: 578077570
+      spr_grass_tileset_631: -324937483
+      spr_grass_tileset_192: 1336316629
+      spr_grass_tileset_634: 1354086549
+      spr_grass_tileset_574: -233558035
+      spr_grass_tileset_167: -2042408062
+      spr_grass_tileset_470: -483330508
+      spr_grass_tileset_76: -1073538200
+      spr_grass_tileset_510: 1860643437
+      spr_grass_tileset_538: 991507247
+      spr_grass_tileset_42: -1210612737
+      chest_0: 481411427
+      spr_grass_tileset_106: 394545888
+      spr_grass_tileset_178: 149375371
+      spr_grass_tileset_396: 84776935
+      spr_grass_tileset_421: 1686697426
+      spr_grass_tileset_346: -209268537
+      spr_grass_tileset_107: 1995813683
+      spr_grass_tileset_428: 1432046203
+      spr_grass_tileset_741: 1463159876
+      spr_grass_tileset_442: 1201156813
+      spr_grass_tileset_19: 24105381
+      spr_grass_tileset_523: 1705764331
+      barrel_0: 1841138618
+      spr_grass_tileset_695: 1220044208
+      spr_grass_tileset_847: 721442129
+      spr_grass_tileset_117: -211245878
+      spr_grass_tileset_414: -1794974089
+      crate_2: -633222448
+      spr_grass_tileset_513: 1703643096
+      spr_grass_tileset_795: -634439274
+      spr_grass_tileset_426: 253745581
+      spr_grass_tileset_704: 2145770508
+      spr_grass_tileset_154: 35503663
+      spr_grass_tileset_700: 426585065
+      spr_grass_tileset_294: 102471318
+      spr_grass_tileset_214: -388862622
+      spr_grass_tileset_60: -1578814740
+      spr_grass_tileset_451: 1592538541
+      spr_grass_tileset_545: 1320825511
+      spr_grass_tileset_762: 2020790193
+      rock_10: -1643677376
+      spr_grass_tileset_494: 277310979
+      spr_grass_tileset_808: -1856411856
+      spr_grass_tileset_397: 331922725
+      spr_grass_tileset_645: 675749646
+      spr_grass_tileset_804: -1732187982
+      spr_grass_tileset_384: 2070872783
+      spr_grass_tileset_201: -1594805235
+      spr_grass_tileset_227: 1914490592
+      spr_grass_tileset_179: 185101586
+      spr_grass_tileset_701: -2078706704
+      spr_grass_tileset_308: 1921670339
+      spr_grass_tileset_96: 327791284
+      spr_grass_tileset_663: 1606862406
+      spr_grass_tileset_207: -1793742957
+      spr_grass_tileset_854: 237891991
+      spr_grass_tileset_507: -1494498141
+      spr_grass_tileset_251: 882489483
+      spr_grass_tileset_530: 936699377
+      spr_grass_tileset_521: -1931914352
+      spr_grass_tileset_57: 1653445537
+      spr_grass_tileset_685: -1634524090
+      spr_grass_tileset_622: -120346191
+      spr_grass_tileset_365: 1537994501
+      spr_grass_tileset_579: -1070628321
+      spr_grass_tileset_334: 1588601384
+      spr_grass_tileset_237: 672454749
+      spr_grass_tileset_441: -1205624374
+      spr_grass_tileset_556: -1567931492
+      spr_grass_tileset_516: -500567465
+      spr_grass_tileset_310: -890336928
+      spr_grass_tileset_756: 200639226
+      spr_grass_tileset_56: -1240437972
+      spr_grass_tileset_174: 403510469
+      bush_4: -2105691154
+      spr_grass_tileset_425: 1995165651
+      spr_grass_tileset_351: 2129526172
+      spr_grass_tileset_848: 354488610
+      spr_grass_tileset_382: -294192185
+      spr_grass_tileset_570: 2041539734
+      spr_grass_tileset_800: 1598290118
+      spr_grass_tileset_403: -1256596182
+      spr_grass_tileset_318: -1776440946
+      spr_grass_tileset_755: 480437561
+      spr_grass_tileset_671: 1559641150
+      spr_grass_tileset_148: 1363021
+      spr_grass_tileset_258: 789661638
+      spr_grass_tileset_660: -231656007
+      spr_grass_tileset_45: 1154060710
+      spr_grass_tileset_798: 482629741
+      spr_grass_tileset_71: 1987730238
+      spr_grass_tileset_759: 1856368786
+      spr_grass_tileset_176: -400670671
+      spr_grass_tileset_90: -2110033033
+      spr_grass_tileset_276: 1783402724
+      spr_grass_tileset_392: 809480828
+      spr_grass_tileset_286: -204628539
+      spr_grass_tileset_799: -480133349
+      spr_grass_tileset_38: 400793805
+      spr_grass_tileset_125: 1194911383
+      spr_grass_tileset_589: -1685878549
+      spr_grass_tileset_476: -54498857
+      spr_grass_tileset_482: 1154800969
+      spr_grass_tileset_842: -703289192
+      spr_grass_tileset_859: 1746447195
+      spr_grass_tileset_757: -1009270697
+      spr_grass_tileset_390: -375561013
+      spr_grass_tileset_120: -320565415
+      spr_grass_tileset_465: 1998327719
+      spr_grass_tileset_845: -1426631671
+      spr_grass_tileset_51: 760774354
+      spr_grass_tileset_536: -1579558786
+      spr_grass_tileset_228: 507147488
+      spr_grass_tileset_486: -112307149
+      spr_grass_tileset_36: -1291882242
+      spr_grass_tileset_134: 1445416787
+      spr_grass_tileset_64: -1734834251
+      spr_grass_tileset_175: 1204729155
+      spr_grass_tileset_91: 1489447034
+      spr_grass_tileset_303: -1827878430
+      spr_grass_tileset_740: 1607979106
+      spr_grass_tileset_639: 1896980512
+      spr_grass_tileset_395: -463404674
+      spr_grass_tileset_301: 1081967059
+      spr_grass_tileset_758: -1927046841
+      spr_grass_tileset_743: 2058080676
+      spr_grass_tileset_260: -314222058
+      spr_grass_tileset_402: -1229396823
+      spr_grass_tileset_69: -1697610786
+      spr_grass_tileset_240: -2079886767
+      spr_grass_tileset_580: -593456845
+      spr_grass_tileset_709: 526090663
+      spr_grass_tileset_389: -1911268686
+      spr_grass_tileset_385: -786079839
+      crate_11: 560799559
+      spr_grass_tileset_508: 1987807410
+      spr_grass_tileset_839: -483209994
+      spr_grass_tileset_245: -1051980701
+      spr_grass_tileset_447: 326358632
+      spr_grass_tileset_372: 2080253158
+      spr_grass_tileset_453: -1019956573
+      spr_grass_tileset_544: 1789190032
+      spr_grass_tileset_445: 1749884939
+      spr_grass_tileset_434: 63754439
+      spr_grass_tileset_83: 1291668449
+      spr_grass_tileset_77: -155022103
+      spr_grass_tileset_238: 922661287
+      spr_grass_tileset_416: 593927555
+      spr_grass_tileset_267: 504022745
+      rock_7: -972091458
+      spr_grass_tileset_400: 1424225140
+      spr_grass_tileset_862: -2080563526
+      spr_grass_tileset_432: 1204424648
+      spr_grass_tileset_405: 664595740
+      spr_grass_tileset_18: -363972728
+      spr_grass_tileset_126: -795931338
+      spr_grass_tileset_109: 880147328
+      spr_grass_tileset_562: -166210649
+      spr_grass_tileset_364: -750779771
+      spr_grass_tileset_526: 241789118
+      spr_grass_tileset_559: -1223452869
+      spr_grass_tileset_546: 77588966
+      spr_grass_tileset_269: 965408355
+      spr_grass_tileset_614: 2129662135
+      rock_2: 2077597875
+      spr_grass_tileset_518: 221339321
+      spr_grass_tileset_597: 848420942
+      spr_grass_tileset_55: -575848509
+      spr_grass_tileset_454: -1280980441
+      spr_grass_tileset_472: -5196727
+      spr_grass_tileset_506: -361772073
+      spr_grass_tileset_226: 9085589
+      spr_grass_tileset_360: -874835039
+      spr_grass_tileset_437: -1526776261
+      spr_grass_tileset_828: 64997165
+      spr_grass_tileset_674: 22685355
+      spr_grass_tileset_537: -1891199347
+      spr_grass_tileset_651: 693558090
+      spr_grass_tileset_504: -2047542175
+      bush_5: 1867298772
+      spr_grass_tileset_496: 1211399257
+      spr_grass_tileset_4: 1162884974
+      spr_grass_tileset_319: 1853572630
+      spr_grass_tileset_652: 953674484
+      spr_grass_tileset_141: -1211274758
+      crate_1: 1527787558
+      spr_grass_tileset_742: -1511615365
+      spr_grass_tileset_288: 1509030283
+      spr_grass_tileset_797: -2059639967
+      spr_grass_tileset_118: 272436168
+      spr_grass_tileset_509: -498351365
+      spr_grass_tileset_696: 1978035036
+      spr_grass_tileset_561: -898273867
+      spr_grass_tileset_514: -1677440397
+      bush_0: -384028538
+      crate_7: -363666992
+      spr_grass_tileset_711: -408116032
+      spr_grass_tileset_292: -717707395
+      rock_8: -327116790
+      spr_grass_tileset_484: 736053997
+      spr_grass_tileset_199: 1840694777
+      spr_grass_tileset_703: -977544999
+      spr_grass_tileset_822: 455622567
+      spr_grass_tileset_560: 361596898
+      spr_grass_tileset_603: -2103414481
+      spr_grass_tileset_519: 1100153821
+      spr_grass_tileset_801: -1244402151
+      spr_grass_tileset_551: -1706372616
+      spr_grass_tileset_586: 2131624170
+      spr_grass_tileset_113: -1509631377
+      spr_grass_tileset_75: 314789667
+      spr_grass_tileset_128: 465636644
+      spr_grass_tileset_457: -200589448
+      spr_grass_tileset_531: 2096356918
+      crate_10: 1821411493
+      spr_grass_tileset_627: -2081874432
+      spr_grass_tileset_325: -1306418948
+      spr_grass_tileset_677: 1084297142
+      spr_grass_tileset_265: 1297077055
+      spr_grass_tileset_722: -733072338
+      spr_grass_tileset_127: 957101224
+      spr_grass_tileset_322: 586350839
+      spr_grass_tileset_357: -452445420
+      spr_grass_tileset_191: 1271368435
+      spr_grass_tileset_326: 2014705157
+      spr_grass_tileset_764: 926598075
+      spr_grass_tileset_302: 1852426288
+      spr_grass_tileset_855: 1121278200
+      spr_grass_tileset_153: -244694483
+      spr_grass_tileset_119: 416114272
+      spr_grass_tileset_825: 462780244
+      spr_grass_tileset_243: -438714461
+      spr_grass_tileset_183: 1198349940
+      spr_grass_tileset_143: 1429106528
+      spr_grass_tileset_747: 244398372
+      spr_grass_tileset_212: -822247845
+      spr_grass_tileset_547: 905272205
+      spr_grass_tileset_760: 1544031014
+      spr_grass_tileset_231: 1632144223
+      spr_grass_tileset_15: 1026030279
+      spr_grass_tileset_433: -2057244893
+      spr_grass_tileset_831: 741488209
+      spr_grass_tileset_14: 30792787
+      spr_grass_tileset_20: 677730138
+      spr_grass_tileset_834: 1296703524
+      spr_grass_tileset_88: -1473147749
+      rock_9: 1068914644
+      spr_grass_tileset_558: 1485180677
+      spr_grass_tileset_279: -1888719750
+      spr_grass_tileset_315: 1873450731
+      spr_grass_tileset_224: 1114328853
+      spr_grass_tileset_810: 987422816
+      spr_grass_tileset_621: -344168372
+      spr_grass_tileset_646: -329462791
+      spr_grass_tileset_250: -2108264389
+      bush_7: 1764499164
+      spr_grass_tileset_658: 661774028
+      crate_8: 398453259
+      spr_grass_tileset_754: 822627434
+      spr_grass_tileset_727: 619306288
+      spr_grass_tileset_724: 1178976012
+      spr_grass_tileset_843: 1799783806
+      spr_grass_tileset_606: -1303284307
+      spr_grass_tileset_487: -49994497
+      spr_grass_tileset_12: 1120245883
+      spr_grass_tileset_278: -541457791
+      spr_grass_tileset_246: -1944318123
+      spr_grass_tileset_2: -1887213508
+      spr_grass_tileset_155: 587326426
+      spr_grass_tileset_515: 235120175
+      spr_grass_tileset_553: -1603386810
+      spr_grass_tileset_320: 1973484506
+      spr_grass_tileset_338: 302829394
+      spr_grass_tileset_591: 327303787
+      spr_grass_tileset_132: 1532747094
+      spr_grass_tileset_159: -489808529
+      spr_grass_tileset_478: -293998960
+      spr_grass_tileset_200: 1542458255
+      spr_grass_tileset_637: 162921236
+      spr_grass_tileset_708: -1846398020
+      spr_grass_tileset_244: -1305297805
+      spr_grass_tileset_710: 1842240288
+      spr_grass_tileset_610: -875497253
+      rock_13: -2028283361
+      rock_5: -1693376962
+      spr_grass_tileset_58: 1804909292
+      spr_grass_tileset_273: 1284379523
+      spr_grass_tileset_617: 401991287
+      spr_grass_tileset_602: 149284630
+      spr_grass_tileset_501: -1510818211
+      spr_grass_tileset_168: -1749052161
+      spr_grass_tileset_664: 1840824170
+      spr_grass_tileset_479: 683319398
+      spr_grass_tileset_844: 1319152657
+      spr_grass_tileset_829: 908628747
+      spr_grass_tileset_202: 828780901
+      spr_grass_tileset_62: 747847411
+      spr_grass_tileset_748: 674030024
+      spr_grass_tileset_255: -374148647
+      spr_grass_tileset_340: 1968735931
+      spr_grass_tileset_853: 1535236959
+      spr_grass_tileset_535: -1983761807
+      spr_grass_tileset_291: -1538461543
+      spr_grass_tileset_564: 1037520462
+      spr_grass_tileset_623: 2001593292
+      spr_grass_tileset_163: 248083960
+      spr_grass_tileset_266: -139175250
+      chest_5: 736903953
+      spr_grass_tileset_172: 1747508168
+      spr_grass_tileset_129: -686610061
+      spr_grass_tileset_543: 952166986
+      spr_grass_tileset_65: -195264174
+      spr_grass_tileset_285: 1208733767
+      spr_grass_tileset_17: -713654252
+      spr_grass_tileset_816: -1513449000
+      spr_grass_tileset_342: 1887288729
+      spr_grass_tileset_654: -982176733
+      spr_grass_tileset_139: -255474503
+      spr_grass_tileset_241: 1141067011
+      spr_grass_tileset_377: 1070523049
+      spr_grass_tileset_624: 1239945993
+      spr_grass_tileset_550: -885271450
+      spr_grass_tileset_588: 360830537
+      spr_grass_tileset_28: 699645873
+      spr_grass_tileset_314: -472586409
+      spr_grass_tileset_131: 1062745154
+      spr_grass_tileset_197: -1291611212
+      spr_grass_tileset_349: -437290542
+      spr_grass_tileset_611: -1095701285
+      spr_grass_tileset_600: 801635842
+      crate_0: -762972719
+      spr_grass_tileset_356: 1926223523
+      spr_grass_tileset_491: 615704697
+      spr_grass_tileset_53: -1030744407
+      spr_grass_tileset_594: -1035540535
+      tree_2: 339126460
+      spr_grass_tileset_857: 919615122
+      crate_6: 898886409
+      spr_grass_tileset_7: 1070439283
+      crate_4: 856750807
+      spr_grass_tileset_474: 309967839
+      grass_5: -518106950
+      spr_grass_tileset_723: 314151480
+      spr_grass_tileset_345: 272754537
+      spr_grass_tileset_744: 1597876357
+      rock_4: 478497033
+      spr_grass_tileset_417: 1406540498
+      spr_grass_tileset_290: -48078851
+      spr_grass_tileset_32: -1798135677
+      spr_grass_tileset_732: 537054517
+      spr_grass_tileset_498: 67927328
+      spr_grass_tileset_533: 35404620
+      spr_grass_tileset_220: -1682483121
+      spr_grass_tileset_375: -1012107877
+      spr_grass_tileset_473: -1896684004
+      spr_grass_tileset_393: -353965812
+      spr_grass_tileset_643: -412966836
+      spr_grass_tileset_601: 1789923324
+      grass_2: 511705443
+      spr_grass_tileset_102: -458084992
+      spr_grass_tileset_388: -1418938193
+      spr_grass_tileset_423: 973618105
+      spr_grass_tileset_459: 735444411
+      spr_grass_tileset_830: 568945899
+      spr_grass_tileset_23: 994794297
+      spr_grass_tileset_1: -221443466
+      spr_grass_tileset_420: 1847576703
+      spr_grass_tileset_669: -1817185459
+      spr_grass_tileset_836: -842022814
+      spr_grass_tileset_467: -507398000
+      spr_grass_tileset_89: -167914382
+      spr_grass_tileset_466: 1307737154
+      spr_grass_tileset_221: -1982044342
+      spr_grass_tileset_151: -1189345949
+      spr_grass_tileset_264: 7755473
+      spr_grass_tileset_61: -181049371
+      spr_grass_tileset_182: -298393799
+      spr_grass_tileset_605: 1656146274
+      spr_grass_tileset_458: 1043322979
+      spr_grass_tileset_149: -1105643572
+      spr_grass_tileset_9: -2109997458
+      spr_grass_tileset_239: -506085447
+      spr_grass_tileset_464: 1608516204
+      spr_grass_tileset_858: -1019437841
+      spr_grass_tileset_401: -1166281087
+      spr_grass_tileset_193: -300913032
+      spr_grass_tileset_604: 145550875
+      spr_grass_tileset_490: -1861490138
+      spr_grass_tileset_144: 1293489048
+      spr_grass_tileset_190: -662816687
+      spr_grass_tileset_648: -1778886675
+      spr_grass_tileset_3: 537815587
+      spr_grass_tileset_485: -1145713291
+      spr_grass_tileset_274: -739808800
+      spr_grass_tileset_333: 283745470
+      spr_grass_tileset_807: 1015221078
+      spr_grass_tileset_79: -1130640251
+      spr_grass_tileset_680: 1593067008
+      spr_grass_tileset_649: 1918305067
+      spr_grass_tileset_738: -1092276134
+      spr_grass_tileset_97: 456649017
+      spr_grass_tileset_572: -1845299391
+      spr_grass_tileset_475: -2027511915
+      spr_grass_tileset_728: -510556094
+      spr_grass_tileset_216: 1424533909
+      spr_grass_tileset_673: 486168620
+      spr_grass_tileset_208: 756001165
+      spr_grass_tileset_511: 1203538837
+      spr_grass_tileset_725: -216430900
+      spr_grass_tileset_850: 1164844720
+      spr_grass_tileset_348: 1479450143
+      spr_grass_tileset_702: 219007229
+      spr_grass_tileset_116: -641105159
+      spr_grass_tileset_824: 1134865615
+      spr_grass_tileset_169: -748286526
+      spr_grass_tileset_575: 145888619
+      spr_grass_tileset_769: -1746903167
+      spr_grass_tileset_82: -618310010
+      spr_grass_tileset_540: -1680744761
+      spr_grass_tileset_213: -230816779
+      spr_grass_tileset_252: 1953455026
+      spr_grass_tileset_13: 1175002026
+      spr_grass_tileset_184: -1100510656
+      spr_grass_tileset_164: -1120266246
+      fireplace_0: -1813010285
+      spr_grass_tileset_210: -409765681
+      spr_grass_tileset_626: 352532710
+      spr_grass_tileset_668: -1863888120
+      spr_grass_tileset_130: 1839434212
+      spr_grass_tileset_686: 1751337993
+      spr_grass_tileset_735: 236609913
+      spr_grass_tileset_469: -821136487
+      spr_grass_tileset_196: -1006092518
+      spr_grass_tileset_483: -157573629
+      spr_grass_tileset_736: 1413958395
+      spr_grass_tileset_262: 146789621
+      spr_grass_tileset_753: 878829950
+      spr_grass_tileset_205: 749832280
+      spr_grass_tileset_41: 632325265
+      spr_grass_tileset_242: -147157817
+      spr_grass_tileset_734: 380542996
+      spr_grass_tileset_835: -1869727686
+      spr_grass_tileset_50: -443074761
+      bush_1: -559786
+      spr_grass_tileset_81: -1527154269
+      spr_grass_tileset_206: 1618644086
+      spr_grass_tileset_277: 1297191426
+      spr_grass_tileset_429: 2073232763
+      spr_grass_tileset_608: 278638466
+      spr_grass_tileset_157: 595695803
+      spr_grass_tileset_666: 621411882
+      spr_grass_tileset_328: 1841582256
+      spr_grass_tileset_427: 566315459
+      spr_grass_tileset_284: 1984431626
+      spr_grass_tileset_595: -204149470
+      spr_grass_tileset_449: 1453428340
+      spr_grass_tileset_73: 1516710726
+      spr_grass_tileset_85: -56855947
+      spr_grass_tileset_625: -1930451400
+      spr_grass_tileset_706: 2082895759
+      spr_grass_tileset_140: -1044328914
+      spr_grass_tileset_368: 1878560551
+      spr_grass_tileset_198: 1503398418
+      spr_grass_tileset_443: 48770199
+      spr_grass_tileset_524: -1521435758
+      spr_grass_tileset_534: -1320105601
+      spr_grass_tileset_63: 1681815128
+      spr_grass_tileset_225: -1450156865
+      spr_grass_tileset_583: 236185103
+      spr_grass_tileset_404: 1537736522
+      spr_grass_tileset_763: 494053439
+      spr_grass_tileset_329: 1731677605
+      chest_1: 1835025075
+      spr_grass_tileset_366: 720441660
+      spr_grass_tileset_49: 1997710428
+      spr_grass_tileset_359: -1336549398
+      spr_grass_tileset_270: 70602566
+      spr_grass_tileset_463: -1740506159
+      chest_4: 472306147
+      spr_grass_tileset_103: -283548871
+      spr_grass_tileset_659: 152493796
+      spr_grass_tileset_690: -1279677693
+      spr_grass_tileset_768: 1770014823
+      spr_grass_tileset_838: 1390222234
+      spr_grass_tileset_181: 1763328887
+      spr_grass_tileset_312: -1276551248
+      spr_grass_tileset_378: 71414006
+      spr_grass_tileset_29: -418785290
+      spr_grass_tileset_714: -162660614
+      spr_grass_tileset_832: -1660071329
+      spr_grass_tileset_410: -462802749
+      spr_grass_tileset_316: 1661834943
+      spr_grass_tileset_439: -767908135
+      spr_grass_tileset_488: -873277546
+      spr_grass_tileset_827: -1773691124
+      spr_grass_tileset_165: -1334750526
+      spr_grass_tileset_422: -1758510460
+      spr_grass_tileset_161: 296612391
+      spr_grass_tileset_229: -398566996
+      spr_grass_tileset_774: 1901410858
+      spr_grass_tileset_860: -1692025741
+      spr_grass_tileset_599: -1463494612
+      spr_grass_tileset_330: -2029130784
+      spr_grass_tileset_94: 1653161259
+      spr_grass_tileset_440: -1757079648
+      spr_grass_tileset_112: -1310898300
+      spr_grass_tileset_295: 360163366
+      spr_grass_tileset_435: -82479321
+      spr_grass_tileset_370: 1297078373
+      spr_grass_tileset_25: -1613384078
+      spr_grass_tileset_667: 743714180
+      spr_grass_tileset_569: -1456576873
+      spr_grass_tileset_78: -2023783041
+      spr_grass_tileset_670: -1076894814
+      spr_grass_tileset_413: 1636664482
+      spr_grass_tileset_160: 1253488547
+      spr_grass_tileset_235: -588351320
+      spr_grass_tileset_281: -869279299
+      rock_11: 713975025
+      spr_grass_tileset_52: 1125331966
+      spr_grass_tileset_468: 1651104647
+      spr_grass_tileset_35: -468046178
+      spr_grass_tileset_10: -1289128757
+      spr_grass_tileset_43: 1342147771
+      spr_grass_tileset_296: -1348566006
+      spr_grass_tileset_150: -2059614450
+      spr_grass_tileset_528: -608052079
+      spr_grass_tileset_104: -691711052
+      bush_8: -1400425343
+      spr_grass_tileset_578: 1756226415
+      spr_grass_tileset_135: -327047663
+      spr_grass_tileset_391: 455291688
+      spr_grass_tileset_794: -1694197786
+      spr_grass_tileset_374: -1981082135
+      spr_grass_tileset_456: 1648018517
+      spr_grass_tileset_70: 545320265
+      spr_grass_tileset_80: -1478864137
+      spr_grass_tileset_412: -1534499045
+      spr_grass_tileset_576: 1459437761
+      spr_grass_tileset_115: -1805103934
+      spr_grass_tileset_707: 121294953
+      spr_grass_tileset_307: -922601087
+      spr_grass_tileset_693: 683177752
+      spr_grass_tileset_268: -2134925582
+      spr_grass_tileset_74: 1694022511
+      spr_grass_tileset_209: -308682195
+      spr_grass_tileset_512: 1391213053
+      spr_grass_tileset_386: 1887331616
+      spr_grass_tileset_194: -1236297532
+      spr_grass_tileset_446: -31044292
+      spr_grass_tileset_407: -1748942919
+      spr_grass_tileset_289: 626736410
+      spr_grass_tileset_450: 304900936
+      spr_grass_tileset_462: -1555464476
+      spr_grass_tileset_607: 1018239721
+      spr_grass_tileset_411: 539702257
+      spr_grass_tileset_820: 1196787790
+      spr_grass_tileset_363: -1296314238
+      spr_grass_tileset_282: 1182146544
+      spr_grass_tileset_177: 424091500
+      spr_grass_tileset_46: 1240051060
+      spr_grass_tileset_54: -627684528
+      spr_grass_tileset_683: -770558879
+      spr_grass_tileset_40: -416064016
+      bush_3: -1184889815
+      spr_grass_tileset_114: -1406678486
+      spr_grass_tileset_306: -1496976316
+      spr_grass_tileset_195: -1225973566
+      spr_grass_tileset_793: -103327622
+      spr_grass_tileset_477: -790813512
+      spr_grass_tileset_802: 1686119091
+      spr_grass_tileset_146: 1914500034
+      spr_grass_tileset_772: -909396987
+      spr_grass_tileset_398: -66980351
+      spr_grass_tileset_505: 722843863
+      spr_grass_tileset_548: 447871552
+      bush_2: -1918201853
+      spr_grass_tileset_593: 668127636
+      spr_grass_tileset_596: 363375541
+      spr_grass_tileset_863: 1939990651
+      spr_grass_tileset_692: 1028903425
+      spr_grass_tileset_729: -1429250542
+      rock_12: -295403785
+      spr_grass_tileset_712: 373987455
+      spr_grass_tileset_796: -1799039575
+      spr_grass_tileset_152: 1805126309
+      spr_grass_tileset_731: -1829651011
+      spr_grass_tileset_527: -2072394454
+      grass_6: -285173561
+      spr_grass_tileset_162: -552268128
+      spr_grass_tileset_500: 464790918
+      spr_grass_tileset_311: 1161852083
+      spr_grass_tileset_409: 1704910628
+      spr_grass_tileset_39: 608638179
+      spr_grass_tileset_376: -1679448547
+      spr_grass_tileset_577: 1917222557
+      spr_grass_tileset_615: 1803293284
+      spr_grass_tileset_767: 1065201201
+      spr_grass_tileset_823: 1712015802
+      chest_3: -703105484
+      spr_grass_tileset_259: 791279112
+      spr_grass_tileset_609: 895498767
+      spr_grass_tileset_675: 1991371587
+      spr_grass_tileset_495: -2104168890
+      spr_grass_tileset_694: -621241006
+      spr_grass_tileset_309: -1391902345
+      spr_grass_tileset_520: 1121672997
+      spr_grass_tileset_256: -395902428
+      spr_grass_tileset_436: 1572729891
+      spr_grass_tileset_6: -917979868
+      spr_grass_tileset_665: -2133384991
+      spr_grass_tileset_145: -82438897
+      spr_grass_tileset_337: 1081609588
+      spr_grass_tileset_672: 1351169593
+      spr_grass_tileset_142: -1007922214
+      spr_grass_tileset_263: -827838075
+      spr_grass_tileset_846: -1700640179
+      spr_grass_tileset_373: 1148008219
+      spr_grass_tileset_371: -1431350398
+      spr_grass_tileset_786: -803036354
+      spr_grass_tileset_438: -1943417510
+      spr_grass_tileset_563: 228949444
+      spr_grass_tileset_598: -65595606
+      spr_grass_tileset_778: -1782017157
+      spr_grass_tileset_99: -1172368827
+      spr_grass_tileset_790: 1810417113
+      spr_grass_tileset_47: 892127486
+      spr_grass_tileset_613: -1192103811
+      spr_grass_tileset_383: -571960066
+      spr_grass_tileset_791: -514327940
+      spr_grass_tileset_233: 1198406939
+      spr_grass_tileset_618: -1946682565
+      spr_grass_tileset_770: 219178423
+      spr_grass_tileset_777: 1769641920
+      spr_grass_tileset_806: -333622869
+      tree_0: 82114222
+      spr_grass_tileset_137: 1658373399
+      spr_grass_tileset_566: -1791626249
+      spr_grass_tileset_379: -1794237430
+      spr_grass_tileset_620: 399388457
+      rock_0: -659488190
+      spr_grass_tileset_730: -489347793
+      spr_grass_tileset_585: -1439014536
+      spr_grass_tileset_336: -1625704815
+      tree_1: 720267310
+      spr_grass_tileset_367: -292125100
+      spr_grass_tileset_180: 796863961
+      crate_9: -1129949721
+      crate_5: 1492006058
+      spr_grass_tileset_138: -1050139844
+      spr_grass_tileset_31: -406193135
+      spr_grass_tileset_68: 834075376
+      spr_grass_tileset_108: -311318612
+      spr_grass_tileset_110: 1346873708
+      spr_grass_tileset_517: 1811814342
+      grass_3: 655012172
+      spr_grass_tileset_766: -2138473332
+      grass_4: 1657199744
+      spr_grass_tileset_297: 524663954
+      spr_grass_tileset_254: 459498371
+      spr_grass_tileset_590: -2040245500
+      spr_grass_tileset_739: 1254438833
+      spr_grass_tileset_124: -953419283
+      spr_grass_tileset_323: 1017723986
+      spr_grass_tileset_632: 1399811623
+      spr_grass_tileset_211: -546971052
+      spr_grass_tileset_557: -1720624681
+      spr_grass_tileset_480: -642647597
+      spr_grass_tileset_773: 1015106735
+      spr_grass_tileset_571: -234206500
+      spr_grass_tileset_573: 1513859207
+      rock_14: 816874901
+      spr_grass_tileset_582: -1632055703
+      rock_3: -527172329
+      spr_grass_tileset_682: -2063954536
+      spr_grass_tileset_341: -2086007531
+      spr_grass_tileset_352: -2112174883
+      spr_grass_tileset_448: -867276131
+      spr_grass_tileset_655: -333214756
+      spr_grass_tileset_24: -316997335
+      spr_grass_tileset_136: 1421886161
+      spr_grass_tileset_630: -766868933
+      spr_grass_tileset_678: -527170770
+      spr_grass_tileset_16: 1473816857
+      spr_grass_tileset_11: -2062535307
+      spr_grass_tileset_170: 2116425905
+      spr_grass_tileset_679: 2127575149
+      spr_grass_tileset_636: -1979551734
+      spr_grass_tileset_399: -1864134356
+      spr_grass_tileset_849: -1323090020
+      spr_grass_tileset_253: 1630046099
+      spr_grass_tileset_705: -1776131111
+      spr_grass_tileset_431: -1769852806
+      spr_grass_tileset_635: -1267328612
+      spr_grass_tileset_173: -1291637858
+      spr_grass_tileset_765: 1973370652
+      spr_grass_tileset_837: 857556664
+      spr_grass_tileset_387: 253250349
+      spr_grass_tileset_805: -401758879
+      spr_grass_tileset_503: 996749146
+      spr_grass_tileset_133: -158987723
+      spr_grass_tileset_554: 1278348486
+      spr_grass_tileset_689: -1148505621
+      spr_grass_tileset_415: -1834434388
+      spr_grass_tileset_59: 674912213
+      spr_grass_tileset_66: 1446450776
+      spr_grass_tileset_539: 2142340790
+      spr_grass_tileset_331: 276343708
+      spr_grass_tileset_752: 807813577
+      spr_grass_tileset_380: -576754577
+      spr_grass_tileset_272: -699295005
+      spr_grass_tileset_418: -1572174231
+      spr_grass_tileset_335: -628893022
+      spr_grass_tileset_713: 1241082976
+      spr_grass_tileset_761: 889080763
+      spr_grass_tileset_361: 1511824213
+      grass_0: 1839987323
+      spr_grass_tileset_644: 130800614
+      spr_grass_tileset_166: 683193694
+      rock_1: 1685346171
+      spr_grass_tileset_156: -1961220504
+      spr_grass_tileset_497: -437832328
+      spr_grass_tileset_841: 1814236049
+      spr_grass_tileset_27: 1928799482
+      spr_grass_tileset_223: -1925314683
+      spr_grass_tileset_541: 124248395
+      spr_grass_tileset_44: -1486302596
+      spr_grass_tileset_406: 877846962
+      spr_grass_tileset_633: 1406996794
+      spr_grass_tileset_327: 1076568314
+      grass_1: 1978284811
+      spr_grass_tileset_532: 210285222
+      spr_grass_tileset_280: -1275351402
+      spr_grass_tileset_30: 573241160
+      barrel_1: -830449631
+      spr_grass_tileset_584: -242949531
+      spr_grass_tileset_26: 777058306
+      spr_grass_tileset_581: 2063823071
+      spr_grass_tileset_653: -894545647
+      spr_grass_tileset_471: 887714192
+      spr_grass_tileset_313: 950983974
+      spr_grass_tileset_204: -406078135
+      spr_grass_tileset_628: 798456768
+      spr_grass_tileset_522: -1151341286
+      spr_grass_tileset_726: -1509843711
+      spr_grass_tileset_332: -455743610
+      spr_grass_tileset_261: -1996377066
+      spr_grass_tileset_460: 958780110
+      spr_grass_tileset_98: -1032640096
+      spr_grass_tileset_275: -1966114405
+      spr_grass_tileset_640: -1068139954
+      crate_3: 1998460704
+      spr_grass_tileset_8: -834797080
+      spr_grass_tileset_737: -764171164
+      spr_grass_tileset_369: -321859916
+      spr_grass_tileset_568: -1918021187
+      spr_grass_tileset_287: -1720002178
+      spr_grass_tileset_147: -1013017451
+      spr_grass_tileset_362: -1907839363
+      spr_grass_tileset_592: 931827020
+      spr_grass_tileset_657: -1024152709
+      spr_grass_tileset_565: -2126915994
+      spr_grass_tileset_619: -523512479
+      spr_grass_tileset_733: -1593005531
+      rock_6: -1244596670
+      spr_grass_tileset_502: 1083870298
+      spr_grass_tileset_158: -890595625
+      spr_grass_tileset_317: -1974875715
+      spr_grass_tileset_72: -2017419414
+      spr_grass_tileset_339: 65854347
+      spr_grass_tileset_650: 755558728
+      spr_grass_tileset_48: -2028451045
+      spr_grass_tileset_203: 938643211
+      spr_grass_tileset_684: -294394549
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
