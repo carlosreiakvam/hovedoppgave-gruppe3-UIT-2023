@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class PlayerHealthBar : MonoBehaviour
+public class PlayerHealthBar : NetworkBehaviour
 {
     [Tooltip("Value to use as the current ")]
     public FloatReference Variable;
@@ -16,7 +17,7 @@ public class PlayerHealthBar : MonoBehaviour
 
     [Tooltip("Image to set the fill amount on.")]
     public Image Image;
-
+ 
     private void Update()
     {
         Image.fillAmount = Mathf.Clamp01(

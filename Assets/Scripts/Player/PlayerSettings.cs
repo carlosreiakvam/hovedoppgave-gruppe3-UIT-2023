@@ -11,7 +11,7 @@ public class PlayerSettings : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI playerName;
     private readonly NetworkVariable<FixedString128Bytes> networkPlayerName = new("Player: 0", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server );
 
-    public List<Color> colors = new();
+    //public List<Color> colors = new();
 
     private void Awake()
     {

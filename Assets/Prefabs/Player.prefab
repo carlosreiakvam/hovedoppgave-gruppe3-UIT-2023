@@ -252,7 +252,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7830091594258994000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,13 +334,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  HP: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
+  hitPoints: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
   lightDamageTaken: {fileID: 11400000, guid: baec012dc7222564aa9e75b204215672, type: 2}
-  ResetHP: 1
-  StartingHP:
+  resetHP: 1
+  startingHP:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 7cf6d7f20a6c94e468245839d788d5c1, type: 2}
+  healthBarVisual: {fileID: 1026990951046153725}
+  health:
+    m_InternalValue: 100
 --- !u!1 &3264219491054159882
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +357,6 @@ GameObject:
   - component: {fileID: 2698206568361068437}
   - component: {fileID: 4761797298897164113}
   - component: {fileID: 2833211894195378532}
-  - component: {fileID: 7101014460635485259}
   m_Layer: 0
   m_Name: PlayerHUD
   m_TagString: Untagged
@@ -459,32 +461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: {fileID: 1586414830794883133}
-  colors: []
---- !u!114 &7101014460635485259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3264219491054159882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c56473307af9a534ba7935add554b368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Variable:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
-  Min:
-    UseConstant: 1
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  Max:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: 7cf6d7f20a6c94e468245839d788d5c1, type: 2}
-  Image: {fileID: 1026990951046153725}
 --- !u!1 &3876833252100927596
 GameObject:
   m_ObjectHideFlags: 0
