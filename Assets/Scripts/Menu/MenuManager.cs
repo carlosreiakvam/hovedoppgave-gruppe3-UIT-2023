@@ -6,28 +6,24 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject beginButtonGO;
-    [SerializeField] GameObject startGameButtonGO;
-    [SerializeField] GameObject startMenu;
+    [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject lobbyMenu;
 
     private void Start()
     {
+        mainMenu.SetActive(true);
         lobbyMenu.SetActive(false);
-        Button beginButton = beginButtonGO.GetComponent<Button>();
-        Button startGameButton = startGameButtonGO.GetComponent<Button>();
+    }
 
+    public void OpenMainMenu()
+    {
+        mainMenu.SetActive(true);
+        lobbyMenu.SetActive(false);
 
-        beginButton.onClick.AddListener(() =>
-        {
-            startMenu.SetActive(false);
-            lobbyMenu.SetActive(true);
-        });
-
-        startGameButton.onClick.AddListener(() =>
-        {
-            SceneManager.LoadScene("Game");
-        });
-
+    }
+    public void OpenLobby()
+    {
+        mainMenu.SetActive(false);
+        lobbyMenu.SetActive(true);
     }
 }
