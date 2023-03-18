@@ -14,5 +14,4 @@ public class LobbyMenuManager : MonoBehaviour
                 SceneManager.LoadScene("Game");
             });
     }
-
 }
