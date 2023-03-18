@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject lobbyMenu;
+    [SerializeField] GameObject lobbyManagerGO;
     LobbyManager lobbyManager;
 
     private void Start()
@@ -16,7 +17,10 @@ public class MenuManager : MonoBehaviour
         mainMenu.SetActive(true);
         lobbyMenu.SetActive(false);
 
-        try { lobbyManager = lobbyMenu.GetComponent<LobbyManager>(); }
+        try
+        {
+            lobbyManager = lobbyManagerGO.GetComponent<LobbyManager>();
+        }
         catch (Exception e) { Debug.Log(e); }
 
     }
