@@ -1,6 +1,5 @@
 using QFSW.QC;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -11,7 +10,9 @@ using UnityEngine;
 public class LobbyManager : MonoBehaviour
 {
     private Lobby hostLobby;
+    private Lobby joinedLobby;
     private float heartbeatTimer;
+    private float lobbyUpdateTimer;
     private bool isActive;
     private string playerName;
 
@@ -44,8 +45,39 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
-        if (isActive) HandleLobbyHeartBeat();
+        if (isActive)
+        {
+            HandleLobbyHeartBeat();
+            HandlePollUpdate();
+        }
     }
+
+    private async void LeaveLobby()
+    {
+        try
+        {
+            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+
+    }
+
+    private async void KickPlayer()
+    {
+        try
+        {
+            await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, joinedLobby.Players[1].Id);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+
+    }
+
 
     private async void HandleLobbyHeartBeat()
     {
@@ -90,7 +122,7 @@ public class LobbyManager : MonoBehaviour
             hostLobby = lobby;
             PrintPlayers(hostLobby);
         }
-        catch (LobbyServiceException e)
+        catch (Exception e)
         {
             Debug.Log(e);
         }
@@ -118,6 +150,35 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+
+    private async void HandlePollUpdate()
+    {
+        float LobbyPollTimerMax = 1.1f; // rate limit of one request per second
+
+        if (joinedLobby != null)
+        {
+            lobbyUpdateTimer -= Time.deltaTime;
+            if (lobbyUpdateTimer < 0f)
+            {
+                try
+                {
+                    lobbyUpdateTimer = LobbyPollTimerMax;
+                    Debug.Log("sending heartbeat");
+                    Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
+                    joinedLobby = lobby;
+
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                }
+            }
+        }
+
+
+
+    }
+
     [Command]
     private async void JoinLobbyByCode(string lobbyCode)
     {
@@ -129,8 +190,10 @@ public class LobbyManager : MonoBehaviour
             };
 
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
-            Lobby clientLobby = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode);
-            Debug.Log("hostId of joined lobby" + clientLobby.HostId);
+            joinedLobby = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
+            Debug.Log("hostId of joined lobby" + joinedLobby.HostId);
+            Debug.Log("Joined lobby: " + playerName);
+            PrintPlayers(joinedLobby);
         }
         catch (LobbyServiceException e)
         {
@@ -150,6 +213,7 @@ public class LobbyManager : MonoBehaviour
             };
             Lobby quickLobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
             Debug.Log("hostId of joined lobby" + quickLobby.HostId);
+            PrintPlayers(quickLobby);
         }
         catch (LobbyServiceException e)
         { Debug.Log(e); }
@@ -158,10 +222,19 @@ public class LobbyManager : MonoBehaviour
 
     private void PrintPlayers(Lobby lobby)
     {
-        foreach (Player player in lobby.Players)
+        try
         {
-            Debug.Log("player in " + lobby.Name + ": " + player.Data["PlayerName"].Value);
+            Debug.Log("Listing players in " + lobby.Name);
 
+            foreach (Player player in lobby.Players)
+            {
+                Debug.Log(player.Data["PlayerName"].Value);
+
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
         }
 
     }
