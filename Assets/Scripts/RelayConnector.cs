@@ -25,7 +25,6 @@ public class RelayConnector : MonoBehaviour
         {
             Debug.Log("creating RelayConnector for the first time");
             _instance = this;
-            SignInToRelay();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -35,16 +34,6 @@ public class RelayConnector : MonoBehaviour
         }
     }
 
-
-    private static async void SignInToRelay()
-    {
-        await UnityServices.InitializeAsync();
-        AuthenticationService.Instance.SignedIn += () =>
-        {
-            Debug.Log("Signed In; player ID: " + AuthenticationService.Instance.PlayerId);
-        };
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
 
     [Command]
     public async Task CreateRelay() //preferably should be private
