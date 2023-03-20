@@ -9,13 +9,15 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject lobbyMenu;
+    [SerializeField] GameObject createMenu;
     [SerializeField] GameObject lobbyManagerGO;
     LobbyManager lobbyManager;
+    List<GameObject> pages;
 
     private void Start()
     {
-        mainMenu.SetActive(true);
-        lobbyMenu.SetActive(false);
+        pages = new List<GameObject> { mainMenu, lobbyMenu, createMenu };
+        openPage(mainMenu);
 
         try
         {
@@ -25,17 +27,18 @@ public class MenuManager : MonoBehaviour
 
     }
 
-    public void OpenMainMenu()
+    public void openPage(GameObject pageToOpen)
     {
-        mainMenu.SetActive(true);
-        lobbyMenu.SetActive(false);
-
+        foreach (GameObject page in pages)
+        {
+            page.SetActive(false);
+        }
+        pageToOpen.SetActive(true);
     }
-    public void OpenLobby()
-    {
-        mainMenu.SetActive(false);
-        lobbyMenu.SetActive(true);
 
+
+    public void OpenLobbyStartMenu()
+    {
         try { lobbyManager.OnOpenMenu(); }
         catch (Exception e) { Debug.Log(e); }
     }

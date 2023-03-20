@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuManger : MonoBehaviour
+public class StartMenu : MonoBehaviour
 {
 
     [SerializeField] GameObject beginButtonGO;
+    [SerializeField] GameObject lobbyStartMenu;
 
     void Start()
     {
@@ -17,7 +18,8 @@ public class MainMenuManger : MonoBehaviour
 
         beginButton.onClick.AddListener(() =>
         {
-            menuManager.OpenLobby();
+            Debug.Log("tjolla");
+            menuManager.openPage(lobbyStartMenu);
 
         });
     }
