@@ -21,7 +21,7 @@ public class LobbyManager : MonoBehaviour
         playerName = "ape_" + UnityEngine.Random.Range(10, 99);
     }
 
-    public async void OnOpenMenu()
+    public async void OnOpenLobbyStartMenu()
     {
         Debug.Log("player name: " + playerName);
         try
@@ -103,17 +103,15 @@ public class LobbyManager : MonoBehaviour
     }
 
     [Command]
-    private async void CreateLobby()
+    public async void CreateLobby(string lobbyName, bool isPrivate, string playerName)
     {
         try
         {
-            string lobbyName = "MyLobby";
             int maxPlayers = 4;
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
-
-                IsPrivate = false,
-                Player = GetPlayer()
+                IsPrivate = isPrivate,
+                Player = GetPlayer(playerName)
             };
 
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, createLobbyOptions);
@@ -180,13 +178,13 @@ public class LobbyManager : MonoBehaviour
     }
 
     [Command]
-    private async void JoinLobbyByCode(string lobbyCode)
+    private async void JoinLobbyByCode(string lobbyCode, string playerName)
     {
         try
         {
             JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions
             {
-                Player = GetPlayer()
+                Player = GetPlayer(playerName)
             };
 
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
@@ -203,13 +201,13 @@ public class LobbyManager : MonoBehaviour
     }
 
     [Command]
-    private async void QuickJoinLobby()
+    private async void QuickJoinLobby(string playerName)
     {
         try
         {
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions
             {
-                Player = GetPlayer()
+                Player = GetPlayer(playerName)
             };
             Lobby quickLobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
             Debug.Log("hostId of joined lobby" + quickLobby.HostId);
@@ -239,7 +237,7 @@ public class LobbyManager : MonoBehaviour
 
     }
 
-    private Player GetPlayer()
+    private Player GetPlayer(string playerName)
     {
         return new Player()
         {

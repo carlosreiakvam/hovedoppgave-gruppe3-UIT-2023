@@ -262,7 +262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &38579987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -309,12 +309,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd10aac3a5d9b14aaf01e76edace43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNameInputGO: {fileID: 1817201020}
-  lobbyNameInputGO: {fileID: 1677330064}
+  playerNameInput: {fileID: 1213106087}
+  lobbyNameInput: {fileID: 1158533722}
   scopeButtonGO: {fileID: 889336415}
   createButtonGO: {fileID: 1500708849}
   backButtonGO: {fileID: 19179516}
   lobbyMenu: {fileID: 294196835}
+  lobbyManagerGO: {fileID: 1174468464}
 --- !u!1 &74693204
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &294196836
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4032,6 +4033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beginButtonGO: {fileID: 154605760}
   lobbyStartMenu: {fileID: 294196835}
+  lobbyManagerGO: {fileID: 1174468464}
 --- !u!1 &1817201020
 GameObject:
   m_ObjectHideFlags: 0

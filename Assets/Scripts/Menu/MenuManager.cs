@@ -39,7 +39,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenLobbyStartMenu()
     {
-        try { lobbyManager.OnOpenMenu(); }
+        try { lobbyManager.OnOpenLobbyStartMenu(); }
         catch (Exception e) { Debug.Log(e); }
     }
 }
