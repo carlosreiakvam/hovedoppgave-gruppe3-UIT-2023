@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2900308808392852123}
   - component: {fileID: 2900308808392852120}
+  - component: {fileID: 5165631449363554744}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -160,6 +161,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5165631449363554744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900308808392852121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d189b3e552e7be9468380db7b006ad44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDeath: {fileID: 1936223278982883135}
 --- !u!1 &2900308809295077616
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +283,11 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: b8cfb2c8ff3d4fc4b9a359574d25c5c8, type: 2}
+  spawnPositionList:
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
 --- !u!114 &4077580835491857373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,21 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e831a7e31be3f4242aff0882306ef428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPlayerDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2900308809295077616}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   hitPoints: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
   lightDamageTaken: {fileID: 11400000, guid: baec012dc7222564aa9e75b204215672, type: 2}
   resetHP: 1

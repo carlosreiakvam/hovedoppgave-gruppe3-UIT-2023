@@ -9,6 +9,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private readonly float boundX = 0.35f;
     private readonly float boundY = 0.17f;
     [SerializeField] private FloatReference playerSpeed;
+    [SerializeField] private List<Vector2> spawnPositionList;
     private Camera mainCamera;
     private float horizontalInput;
     private float verticalInput;
@@ -19,6 +20,11 @@ public class PlayerBehaviour : NetworkBehaviour
     private void Awake()
     {
         mainCamera = Camera.main; //Locates the Main Camera with the MainCamera tag
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
     }
 
     private void LateUpdate()

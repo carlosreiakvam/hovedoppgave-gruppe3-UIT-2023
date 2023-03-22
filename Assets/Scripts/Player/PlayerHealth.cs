@@ -3,10 +3,11 @@ using UnityEngine.Events;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine.UI;
+using System;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    [SerializeField] private UnityEvent onPlayerDeath;
+    public event EventHandler OnPlayerDead; //Publisher of death!
     [SerializeField] private FloatVariable hitPoints;
     [SerializeField] private FloatVariable lightDamageTaken;
     [SerializeField] private bool resetHP;
@@ -21,6 +22,8 @@ public class PlayerHealth : NetworkBehaviour
     {
         if (resetHP)
             hitPoints.SetValue(startingHP);
+
+        //OnPlayerDead += Testing_OnDeath; //Really should be subscribed to from a subscriber, not the publisher itself
     }
 
 
@@ -36,7 +39,8 @@ public class PlayerHealth : NetworkBehaviour
     }
 
     /// <summary> 
-    /// The longer the object colliders are touching
+    /// The longer the object colliders 
+    /// for enemy and player are touching
     /// more damage is given.
     /// </summary>
     /// <param name="collision">Who or what is dealing damage</param>
@@ -49,10 +53,11 @@ public class PlayerHealth : NetworkBehaviour
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 ApplyDamage();
+                VisualizeDamageServerRpc(); //hmmm...inside if?
             }
         }
 
-        VisualizeDamageServerRpc();
+       
 
     }
     private void ApplyDamage()
@@ -61,29 +66,53 @@ public class PlayerHealth : NetworkBehaviour
         if (timer >= TIME_TO_DAMAGE)
         {
             hitPoints.ApplyChange(-lightDamageTaken.Value);
-            healthBarVisual.fillAmount = hitPoints.Value / startingHP;
-            health.Value = healthBarVisual.fillAmount; //set the networkvariable
+            //healthBarVisual.fillAmount = hitPoints.Value / startingHP;
+            //health.Value = healthBarVisual.fillAmount; //set the networkvariable
+            health.Value = hitPoints.Value / startingHP;
             timer = 0; //reset             
             Debug.Log($"Current hitpoints for player {OwnerClientId + 1}: " + hitPoints.Value);
             if (hitPoints.Value <= 0)
             {
                 Debug.Log("DEAD!");
-                onPlayerDeath.Invoke();
+                //onPlayerDeath.Invoke();
+                VizualizeDeathServerRpc();
+
             }
         }
     }
 
+    //private void Testing_OnDeath(object sender, EventArgs e)
+    //{
+    //    Debug.Log($"{OwnerClientId + 1} is dead");
+    //    gameObject.SetActive(false);
+    //}
+
+
 
     [ServerRpc(RequireOwnership = false)] //All clients may rpc the server
-    private void VisualizeDamageServerRpc()
+    private void VisualizeDamageServerRpc() //Hey Server, run this code!
     {
-        VisualizeDamageClientRpc(); //rpc damage taken to server
+        VisualizeDamageClientRpc();
     }
 
 
-    [ClientRpc]
-    private void VisualizeDamageClientRpc()
+    [ClientRpc] //Kun Host
+    private void VisualizeDamageClientRpc() //inform the other clients
     {
-        healthBarVisual.fillAmount = health.Value; //inform the other clients
+        healthBarVisual.fillAmount = health.Value; 
+
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void VizualizeDeathServerRpc()
+    {
+        VizualizeDeathClientRpc();
+    }
+
+    [ClientRpc]
+    private void VizualizeDeathClientRpc()
+    {
+        OnPlayerDead?.Invoke(this, EventArgs.Empty);
     }
 }
