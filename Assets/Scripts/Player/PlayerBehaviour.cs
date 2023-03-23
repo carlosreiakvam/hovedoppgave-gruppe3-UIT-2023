@@ -15,11 +15,18 @@ public class PlayerBehaviour : NetworkBehaviour
     private float verticalInput;
     private Vector2 lastInteractDir;
     private LayerMask enemyLayerMask;
+    private Animator animator;
 
 
     private void Awake()
     {
         mainCamera = Camera.main; //Locates the Main Camera with the MainCamera tag
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
     }
 
     public override void OnNetworkSpawn()
@@ -111,5 +118,9 @@ public class PlayerBehaviour : NetworkBehaviour
 
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * (playerSpeed.Value * Time.deltaTime);
         transform.position += (Vector3)movement;
+
+        animator.SetFloat("Horizontal", horizontalInput);
+        animator.SetFloat("Vertical", verticalInput);
+        animator.SetFloat("Speed", new Vector2(horizontalInput, verticalInput).normalized.sqrMagnitude);
     }
 }

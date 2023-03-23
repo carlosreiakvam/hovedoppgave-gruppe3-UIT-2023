@@ -67,10 +67,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4e0946b3ee37de4f96ee472ec9f0c89
-      internalID: -1843082632
+      spriteID: e9594b1610dc1fe4e8b7a6bfda00db0b
+      internalID: -90325636
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f08969d481623854fb903705b49ad956
-      internalID: 968412779
+      spriteID: 923e9d4a51610834b91df454bb7264e7
+      internalID: 1265836900
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e53f09121cedf01468bcffb6ea948bd1
-      internalID: 277806743
+      spriteID: 63a258a5957b29044a56e94ce04d534c
+      internalID: -1439726691
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4bcb710538e5ae4cb77ea51db5bc138
-      internalID: -1019463059
+      spriteID: 0a58ed3439a03644194306f2fac64c2b
+      internalID: -1983959583
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e756855fc3a98049bf3ed5d2deca805
-      internalID: 824007531
+      spriteID: 6028e127b3849624f9e2fb7607f9ae57
+      internalID: 2018405478
       vertices: []
       indices: 
       edges: []
@@ -236,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58d9027607c95e542bbec371f89be3c0
-      internalID: -511656436
+      spriteID: 546f28fdbe328904eb8e3546bf6d6d5f
+      internalID: -1147743145
       vertices: []
       indices: 
       edges: []
@@ -257,8 +257,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46111b2e035deac41b1da5fe1199e273
-      internalID: -1255202640
+      spriteID: e3ecc8570a72a774f9cb05738211da6b
+      internalID: 42794165
       vertices: []
       indices: 
       edges: []
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a975d0dbd8a17174b965211fc60d735b
-      internalID: 851255876
+      spriteID: 4ce769f96397909469e71e4b2ecdfc6d
+      internalID: 1920405310
       vertices: []
       indices: 
       edges: []
@@ -299,8 +299,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c2dc52526e8fb64cba9455754fb1040
-      internalID: -1782262017
+      spriteID: 6ba4a80ed25088447b32f3ab851af076
+      internalID: 1500026776
       vertices: []
       indices: 
       edges: []
@@ -320,8 +320,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 328438f17b3bac94ab1d1a684e1c6be6
-      internalID: -492809242
+      spriteID: 9828d136f59152a48a57d474fed28b79
+      internalID: 1215731437
       vertices: []
       indices: 
       edges: []
@@ -341,8 +341,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 224ad9a426ece29429eeecb12b2a0c98
-      internalID: 1478134992
+      spriteID: 43bb32d711c95724fb705674a711848f
+      internalID: 1506061516
       vertices: []
       indices: 
       edges: []
@@ -362,8 +362,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 877e16e7f78e8c94dbac12139b02309e
-      internalID: -800386057
+      spriteID: 8b8d37643b0e85f40aad1868361e2668
+      internalID: 577600864
       vertices: []
       indices: 
       edges: []
@@ -383,8 +383,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecacc77d612bdb644a795580505153b8
-      internalID: 713646193
+      spriteID: 0f6d1fd65c0ca1e46bec90718c28daaf
+      internalID: 572039123
       vertices: []
       indices: 
       edges: []
@@ -404,8 +404,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf00667218c5e534b9c166f78a9fc284
-      internalID: 1237897265
+      spriteID: f0f63a4b158ada54a98e5266638648ba
+      internalID: -2007572858
       vertices: []
       indices: 
       edges: []
@@ -425,8 +425,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff7602c76f1fdaf428d1a224c10125f3
-      internalID: -1694109061
+      spriteID: c954f2de2009fc643b3e0315ea4e7ca5
+      internalID: -1196031153
       vertices: []
       indices: 
       edges: []
@@ -446,8 +446,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bb97858d09b85640889690724552c76
-      internalID: 1891239005
+      spriteID: 23df5194264e231469d7bf566ff47769
+      internalID: 853168688
       vertices: []
       indices: 
       edges: []
@@ -467,8 +467,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc0057a5e9893674a9a5961068a7b1cb
-      internalID: 429395910
+      spriteID: be4bb779e0450bc43b71ccd96d8d1d25
+      internalID: 1723730320
       vertices: []
       indices: 
       edges: []
@@ -488,8 +488,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4124f91bd363c446a5e51d35f8a1e78
-      internalID: -887690126
+      spriteID: d40f9a6eb97b56b4da57ed0db15ef426
+      internalID: -2009524960
       vertices: []
       indices: 
       edges: []
@@ -509,8 +509,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0288b63f11a156540a00b5bc58ba8f90
-      internalID: 1472696380
+      spriteID: 1ab6665dbfd1f9e47a3d866d301c3c38
+      internalID: -502554074
       vertices: []
       indices: 
       edges: []
@@ -530,8 +530,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ab08dd45cbc9bb4cb991d87a5784992
-      internalID: 510413074
+      spriteID: 3a53936c00041544bafaab19c656fc4c
+      internalID: -1322462948
       vertices: []
       indices: 
       edges: []
@@ -551,8 +551,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46c6461b7a8e9574ab94c5d4b97b6c70
-      internalID: 791553362
+      spriteID: ffb81fabde4ccaa4a8cee2a7d5685723
+      internalID: 1922744897
       vertices: []
       indices: 
       edges: []
@@ -572,8 +572,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67a584d86a9eb2743b40f90f670d8ccd
-      internalID: 1635772345
+      spriteID: 4612301b4a0bddf40b6e8df1534bb8fa
+      internalID: 801009013
       vertices: []
       indices: 
       edges: []
@@ -593,8 +593,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55b3e6fb1623a2642acabb46d6703655
-      internalID: -1749042105
+      spriteID: f8a2e2bba33f6ec4e8043eddeb318afb
+      internalID: -1355490159
       vertices: []
       indices: 
       edges: []
@@ -614,8 +614,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14ecd0c6275ff2040809bfe7f66ea520
-      internalID: -458386696
+      spriteID: e3898996b9826b64dbc13c6e4d46cd8a
+      internalID: -208726144
       vertices: []
       indices: 
       edges: []
@@ -635,8 +635,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aec4a90c70a2fc84180d78ec76077016
-      internalID: -1747825849
+      spriteID: c4795d9259f51864cbc80fc1b84facf1
+      internalID: 335669502
       vertices: []
       indices: 
       edges: []
@@ -656,8 +656,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfc037c1f5d0d6044b5ec91c420c7bda
-      internalID: 1794272963
+      spriteID: 137f48a5bf604c347bca243c04d9a03e
+      internalID: 277982821
       vertices: []
       indices: 
       edges: []
@@ -677,8 +677,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57512cf1c52c50947a361be21b916cb7
-      internalID: 139486503
+      spriteID: c773062fda315bb40bfd61e20557ddf6
+      internalID: -1790006679
       vertices: []
       indices: 
       edges: []
@@ -698,8 +698,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b478dd0ae87bc7b4082edd7468447f65
-      internalID: 494513775
+      spriteID: 4f1a3b13bef151b4d8d8bd25938e4ab7
+      internalID: -108480305
       vertices: []
       indices: 
       edges: []
@@ -719,8 +719,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8305e0279097c0041b2bc23a3ec79f5a
-      internalID: -1562749089
+      spriteID: d8e079a30bdb1d249ae4f32e4fcc9f57
+      internalID: -1771726712
       vertices: []
       indices: 
       edges: []
@@ -740,8 +740,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3306a22ff1677d540a541f635094513b
-      internalID: 989279021
+      spriteID: 4c3f52d1f744430499fb244d81a53f3a
+      internalID: 1433862662
       vertices: []
       indices: 
       edges: []
@@ -761,8 +761,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b39ff94c5bc95844581385160863cfbb
-      internalID: 1028034075
+      spriteID: 116442f09ea1fea478025cb0006d8c25
+      internalID: 567500743
       vertices: []
       indices: 
       edges: []
@@ -782,8 +782,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45422ccefa4bfe5449f7ad9ba77104c0
-      internalID: 682155333
+      spriteID: b547128e6d1c057498de0ed365c8e476
+      internalID: -2146299046
       vertices: []
       indices: 
       edges: []
@@ -803,8 +803,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21e3c862560931747b5115d540052c5e
-      internalID: -520943904
+      spriteID: 1ecfc947e4618234f871449064144ac4
+      internalID: -1893473810
       vertices: []
       indices: 
       edges: []
@@ -824,8 +824,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72c9b6d1a7dce3143b5a07af4e338f6a
-      internalID: 715622594
+      spriteID: 51212a5891619fa4e9d354e87f04c24e
+      internalID: -2073354999
       vertices: []
       indices: 
       edges: []
@@ -845,8 +845,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f2a8da3cd2802a4a9652d5fdb8dbe79
-      internalID: 351669607
+      spriteID: ffaeab4b0872a9e41b2190b88fc74391
+      internalID: 757062358
       vertices: []
       indices: 
       edges: []
@@ -866,8 +866,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e651ad9fc710bbb418a076e5a47a2d96
-      internalID: 747327693
+      spriteID: 4b3e6014ffefdd7489d39c3511f8c9b6
+      internalID: 2078527434
       vertices: []
       indices: 
       edges: []
@@ -887,8 +887,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 685132c074cc6c147913793c2014bba8
-      internalID: 1329744504
+      spriteID: 6aa6486e6a287bb4b8a80ea9e8eef9cd
+      internalID: 571801417
       vertices: []
       indices: 
       edges: []
@@ -908,8 +908,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41a3b873ccaf46d4e9802c91ad3194cf
-      internalID: 194539748
+      spriteID: 0c4cc02ced94668409d078e23aaa3a29
+      internalID: -635387971
       vertices: []
       indices: 
       edges: []
@@ -929,8 +929,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40432248c7ecbf54d9684113e2601440
-      internalID: 413472031
+      spriteID: c117c95f5c00417468be053375f8421b
+      internalID: 1360350112
       vertices: []
       indices: 
       edges: []
@@ -950,8 +950,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ad551af0d5617b4faa6dc15c3d8f5f0
-      internalID: 414452169
+      spriteID: 46c2ff5509968b84dafb25a147f3b168
+      internalID: 537735345
       vertices: []
       indices: 
       edges: []
@@ -971,8 +971,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51ba57ef752a727428e2a055c6c862cc
-      internalID: 1384959856
+      spriteID: dd3835263b7286a4cabfc3c664cc53c5
+      internalID: -1465117424
       vertices: []
       indices: 
       edges: []
@@ -992,8 +992,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddb4002b3336620448c08c7779b20aba
-      internalID: 1904393305
+      spriteID: 259c2cb624540bc419fadd6b205aec4d
+      internalID: 1939482759
       vertices: []
       indices: 
       edges: []
@@ -1013,8 +1013,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0e27925453af744fbfbe7e33b073ed9
-      internalID: -1746719592
+      spriteID: bab59d23d255911418d871a9a62b0b4c
+      internalID: 1584545589
       vertices: []
       indices: 
       edges: []
@@ -1023,8 +1023,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_43
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 2752
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1034,8 +1034,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9101bababdc55e64883639f3a186a1a3
-      internalID: 1168491692
+      spriteID: e3925d0b2bdacc347959f02f1d109661
+      internalID: 2134983846
       vertices: []
       indices: 
       edges: []
@@ -1044,8 +1044,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_44
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
+        x: 2816
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1055,8 +1055,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd15e890667010e4eb8124436500bd80
-      internalID: -253492983
+      spriteID: ad023e12d81bafc4da6c96d93450225f
+      internalID: 1522154085
       vertices: []
       indices: 
       edges: []
@@ -1065,8 +1065,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_45
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 2880
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1076,8 +1076,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75d3ecc1167c0344ebb01c2e0b238530
-      internalID: 938972732
+      spriteID: 85aea14fef7a2734b85241b787bf426f
+      internalID: 501227385
       vertices: []
       indices: 
       edges: []
@@ -1086,8 +1086,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_46
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
+        x: 2944
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1097,8 +1097,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38c9b2c82dbd6984eaf24ea242aaa3ce
-      internalID: -1430249097
+      spriteID: 38178eccb7cb6b340874afcd59a38171
+      internalID: -1038151767
       vertices: []
       indices: 
       edges: []
@@ -1107,8 +1107,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_47
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
+        x: 3008
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1118,8 +1118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 436b5b1ff53ba694d923565aff00f4c0
-      internalID: -1513998395
+      spriteID: f6421e3e37e3013499d49c0676e654dd
+      internalID: 1791793426
       vertices: []
       indices: 
       edges: []
@@ -1128,8 +1128,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_48
       rect:
         serializedVersion: 2
-        x: 320
-        y: 128
+        x: 3072
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1139,8 +1139,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 106809c39e6667c47b888a0a52c6c238
-      internalID: -1165838110
+      spriteID: aca5cde53f10b004bb9f5122ab0f42cc
+      internalID: 270896308
       vertices: []
       indices: 
       edges: []
@@ -1149,8 +1149,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_49
       rect:
         serializedVersion: 2
-        x: 384
-        y: 128
+        x: 3136
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1160,8 +1160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9393e116d0adfc3429a83fec8b4947d2
-      internalID: 1853334698
+      spriteID: 5e330349d456be142ab2f2e2a63444f9
+      internalID: -1151961556
       vertices: []
       indices: 
       edges: []
@@ -1170,8 +1170,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_50
       rect:
         serializedVersion: 2
-        x: 448
-        y: 128
+        x: 3200
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1181,8 +1181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8637c8200c2a1e46853aacd3c3a008e
-      internalID: -1776886239
+      spriteID: e3023e0144c23924faf5e714ac9ce5d1
+      internalID: 567236123
       vertices: []
       indices: 
       edges: []
@@ -1191,8 +1191,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_51
       rect:
         serializedVersion: 2
-        x: 512
-        y: 128
+        x: 3264
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1202,8 +1202,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15e97c27559eff749a6cdea436c78ba0
-      internalID: 625734254
+      spriteID: 05bc92687194b0a4f8391ab83ab74755
+      internalID: -1263061273
       vertices: []
       indices: 
       edges: []
@@ -1212,8 +1212,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_52
       rect:
         serializedVersion: 2
-        x: 576
-        y: 128
+        x: 3328
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1223,8 +1223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d15f1ed55c7282498745f7ce80baeb0
-      internalID: -1607243442
+      spriteID: 0bc3198495ca3d946afa35dcadaecbd0
+      internalID: -97390515
       vertices: []
       indices: 
       edges: []
@@ -1233,8 +1233,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_53
       rect:
         serializedVersion: 2
-        x: 640
-        y: 128
+        x: 3392
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1244,8 +1244,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf65f780e2b7c97418562bfc59ee040b
-      internalID: -1400648007
+      spriteID: 2d8add6ca7e197f4689f1973df11ff6d
+      internalID: 1198502883
       vertices: []
       indices: 
       edges: []
@@ -1254,8 +1254,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_54
       rect:
         serializedVersion: 2
-        x: 704
-        y: 128
+        x: 3456
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1265,8 +1265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6597178e8e89b4e4b998ebac817957b6
-      internalID: -2117083143
+      spriteID: 3316570f655d76a448b1a3be24682521
+      internalID: -2092389001
       vertices: []
       indices: 
       edges: []
@@ -1275,8 +1275,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_55
       rect:
         serializedVersion: 2
-        x: 768
-        y: 128
+        x: 3520
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1286,8 +1286,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ce13c1a82ebe7140b075ee3a0a49236
-      internalID: 2136206193
+      spriteID: b4cd5458b15d8464e8c0f91c6c0a5b22
+      internalID: 1884621956
       vertices: []
       indices: 
       edges: []
@@ -1296,8 +1296,8 @@ TextureImporter:
       name: Bachelor_player_spritesheet_56
       rect:
         serializedVersion: 2
-        x: 832
-        y: 128
+        x: 3584
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -1307,8 +1307,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65bfb67044e94ef4b84f00441b0f45b6
-      internalID: 458077748
+      spriteID: c00090d286aead640b73f4a9e1d17fd9
+      internalID: -592726822
       vertices: []
       indices: 
       edges: []
@@ -1317,7 +1317,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_57
       rect:
         serializedVersion: 2
-        x: 896
+        x: 0
         y: 128
         width: 64
         height: 64
@@ -1328,8 +1328,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae536eca77f30ae4f8f9f3f3657cc344
-      internalID: -624259504
+      spriteID: a404899bb64ba4e4db23a0967cd410f4
+      internalID: -18251953
       vertices: []
       indices: 
       edges: []
@@ -1338,7 +1338,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_58
       rect:
         serializedVersion: 2
-        x: 960
+        x: 64
         y: 128
         width: 64
         height: 64
@@ -1349,8 +1349,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48c2497fd3cf003409057e1b7abac03e
-      internalID: 1476460678
+      spriteID: 6ea2536c999509f4c90b6f92efafae5f
+      internalID: 32702357
       vertices: []
       indices: 
       edges: []
@@ -1359,7 +1359,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_59
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 128
         y: 128
         width: 64
         height: 64
@@ -1370,8 +1370,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 048924bcef8701d4e8db876d1d730efd
-      internalID: -277268007
+      spriteID: e1eaf94f89b6f93429c67d871bb4b510
+      internalID: 1766126517
       vertices: []
       indices: 
       edges: []
@@ -1380,7 +1380,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_60
       rect:
         serializedVersion: 2
-        x: 1088
+        x: 192
         y: 128
         width: 64
         height: 64
@@ -1391,8 +1391,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01bd6eb3939a721448bc162f99e21c66
-      internalID: -12306812
+      spriteID: 945d4a37fe1e7b84bac2d22d04d86200
+      internalID: 153109157
       vertices: []
       indices: 
       edges: []
@@ -1401,7 +1401,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_61
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 256
         y: 128
         width: 64
         height: 64
@@ -1412,8 +1412,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02bc90a95fc925e42a0cef5c3847cde4
-      internalID: 203842004
+      spriteID: 6f6ed2b8da9e37b48b0222e49dda0474
+      internalID: 1239074586
       vertices: []
       indices: 
       edges: []
@@ -1422,7 +1422,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_62
       rect:
         serializedVersion: 2
-        x: 1216
+        x: 320
         y: 128
         width: 64
         height: 64
@@ -1433,8 +1433,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b46db4a4f9e82834cbe9abcf8efb8d7d
-      internalID: -50738220
+      spriteID: faae4980687bd314984cdb5a32700e09
+      internalID: -753585493
       vertices: []
       indices: 
       edges: []
@@ -1443,7 +1443,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_63
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 384
         y: 128
         width: 64
         height: 64
@@ -1454,8 +1454,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfe517ec25874d14eae1de232ab85472
-      internalID: -1964860145
+      spriteID: 155595b179c7adc4ba914e649b275fac
+      internalID: 2060700972
       vertices: []
       indices: 
       edges: []
@@ -1464,7 +1464,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_64
       rect:
         serializedVersion: 2
-        x: 1344
+        x: 448
         y: 128
         width: 64
         height: 64
@@ -1475,8 +1475,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5b2d70a5517e27439a0e34697714051
-      internalID: -1149203750
+      spriteID: f1749ba09ea6df44ba7b20ad00c42a83
+      internalID: -976138811
       vertices: []
       indices: 
       edges: []
@@ -1485,7 +1485,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_65
       rect:
         serializedVersion: 2
-        x: 1408
+        x: 512
         y: 128
         width: 64
         height: 64
@@ -1496,8 +1496,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c99bed78b684cd049a820ee097cb390b
-      internalID: -1259514317
+      spriteID: a754002092c27cb4eacc65da1094810e
+      internalID: 396643132
       vertices: []
       indices: 
       edges: []
@@ -1506,7 +1506,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_66
       rect:
         serializedVersion: 2
-        x: 1472
+        x: 576
         y: 128
         width: 64
         height: 64
@@ -1517,8 +1517,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4467bb3aed66b1419bdb77f0f08a696
-      internalID: 1702390709
+      spriteID: 7cf4ddf4370c45e469ceca2d13310084
+      internalID: 1767900407
       vertices: []
       indices: 
       edges: []
@@ -1527,7 +1527,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_67
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 640
         y: 128
         width: 64
         height: 64
@@ -1538,8 +1538,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cf96b0b82c7d4040aa1be74dc4be65b
-      internalID: -1038890688
+      spriteID: 8e40fb8f7eb0deb4a9cf07815e5db7d1
+      internalID: -956949952
       vertices: []
       indices: 
       edges: []
@@ -1548,7 +1548,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_68
       rect:
         serializedVersion: 2
-        x: 1600
+        x: 704
         y: 128
         width: 64
         height: 64
@@ -1559,8 +1559,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e945d2973767464fa0845ef2ec8f6d0
-      internalID: 1501507487
+      spriteID: f57ebefa9a08d12478dc8f27e8d724d6
+      internalID: 1542130623
       vertices: []
       indices: 
       edges: []
@@ -1569,7 +1569,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_69
       rect:
         serializedVersion: 2
-        x: 1664
+        x: 768
         y: 128
         width: 64
         height: 64
@@ -1580,8 +1580,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2948f9f290956f4db955bcc67d7e478
-      internalID: 137971267
+      spriteID: 977596b78dc3c544094b1646c640f5eb
+      internalID: 1613621337
       vertices: []
       indices: 
       edges: []
@@ -1590,7 +1590,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_70
       rect:
         serializedVersion: 2
-        x: 1728
+        x: 832
         y: 128
         width: 64
         height: 64
@@ -1601,8 +1601,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b21eb8a6be6e95e4a9799c9c47f668a8
-      internalID: 1559464290
+      spriteID: 76fff95818b433847b01768a613a7a95
+      internalID: -696139241
       vertices: []
       indices: 
       edges: []
@@ -1611,7 +1611,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_71
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 896
         y: 128
         width: 64
         height: 64
@@ -1622,8 +1622,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc9482139e5caa948a0094788941348d
-      internalID: -1420498086
+      spriteID: c8f4d7fd327e4554b8cfe812a33c4bc0
+      internalID: -149257758
       vertices: []
       indices: 
       edges: []
@@ -1632,7 +1632,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_72
       rect:
         serializedVersion: 2
-        x: 1856
+        x: 960
         y: 128
         width: 64
         height: 64
@@ -1643,8 +1643,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89cd878c0814e6d4fb0a054d40032ed2
-      internalID: 1234342847
+      spriteID: 78278e10ea1543247a759d825aeab0a8
+      internalID: 664193531
       vertices: []
       indices: 
       edges: []
@@ -1653,7 +1653,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_73
       rect:
         serializedVersion: 2
-        x: 1920
+        x: 1024
         y: 128
         width: 64
         height: 64
@@ -1664,8 +1664,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50834999b4d134146ba812b678fae31f
-      internalID: 1311549091
+      spriteID: 1003876a0bed1ea4f98d70322a65c0ca
+      internalID: -1053845268
       vertices: []
       indices: 
       edges: []
@@ -1674,7 +1674,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_74
       rect:
         serializedVersion: 2
-        x: 1984
+        x: 1088
         y: 128
         width: 64
         height: 64
@@ -1685,8 +1685,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd411e615bd045049809f8b10f703b12
-      internalID: 1003026399
+      spriteID: 14ad3bb5ae823d848a599ef3d337ed70
+      internalID: 1110049034
       vertices: []
       indices: 
       edges: []
@@ -1695,7 +1695,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_75
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 1152
         y: 128
         width: 64
         height: 64
@@ -1706,8 +1706,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13fec3fda6f03f74fa70d05776bd1efc
-      internalID: -1162639405
+      spriteID: 74049a37ff5aac54db625d53b51a7b9e
+      internalID: 881671374
       vertices: []
       indices: 
       edges: []
@@ -1716,7 +1716,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_76
       rect:
         serializedVersion: 2
-        x: 2112
+        x: 1216
         y: 128
         width: 64
         height: 64
@@ -1727,8 +1727,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f1c48f7fe5fe8b4dba31f3b2e251c5d
-      internalID: -985990398
+      spriteID: f3894f849aec14a49ad852d34c2e584c
+      internalID: 41347579
       vertices: []
       indices: 
       edges: []
@@ -1737,7 +1737,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_77
       rect:
         serializedVersion: 2
-        x: 2176
+        x: 1280
         y: 128
         width: 64
         height: 64
@@ -1748,8 +1748,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c3fa9c0f74858f40a6c53f31b3f5b19
-      internalID: 40624210
+      spriteID: 268983a3786b433428a263fdb12466d4
+      internalID: -1734956284
       vertices: []
       indices: 
       edges: []
@@ -1758,7 +1758,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_78
       rect:
         serializedVersion: 2
-        x: 2240
+        x: 1344
         y: 128
         width: 64
         height: 64
@@ -1769,8 +1769,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a6d5bbfb1a9f7445a41339566312b0b
-      internalID: -955739742
+      spriteID: 11eabcb502323bd4393f22356d1a7e23
+      internalID: 1281237012
       vertices: []
       indices: 
       edges: []
@@ -1779,7 +1779,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_79
       rect:
         serializedVersion: 2
-        x: 2304
+        x: 1408
         y: 128
         width: 64
         height: 64
@@ -1790,8 +1790,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12ed5886361910c409cdb9a9eb1db9b9
-      internalID: 1533696912
+      spriteID: 6ec913a5c70f7874b90feb1f99cdd7e6
+      internalID: -207323036
       vertices: []
       indices: 
       edges: []
@@ -1800,7 +1800,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_80
       rect:
         serializedVersion: 2
-        x: 2368
+        x: 1472
         y: 128
         width: 64
         height: 64
@@ -1811,8 +1811,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5fb085275107494994f338867b79387
-      internalID: -710147838
+      spriteID: 99883e0703e76b14e9bd15505f1a36fd
+      internalID: 1447330902
       vertices: []
       indices: 
       edges: []
@@ -1821,7 +1821,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_81
       rect:
         serializedVersion: 2
-        x: 2432
+        x: 1536
         y: 128
         width: 64
         height: 64
@@ -1832,8 +1832,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 521c1767baedec140b9aefdcec4511f1
-      internalID: -66389116
+      spriteID: 9c513de79fa38174cb5393d22af7ef42
+      internalID: -386733758
       vertices: []
       indices: 
       edges: []
@@ -1842,7 +1842,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_82
       rect:
         serializedVersion: 2
-        x: 2496
+        x: 1600
         y: 128
         width: 64
         height: 64
@@ -1853,8 +1853,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0aa42db2acdcd624d80e761b24898e95
-      internalID: 1681892705
+      spriteID: 58d6287bd426ec64e999b9abf7592975
+      internalID: 1133445221
       vertices: []
       indices: 
       edges: []
@@ -1863,7 +1863,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_83
       rect:
         serializedVersion: 2
-        x: 2560
+        x: 1664
         y: 128
         width: 64
         height: 64
@@ -1874,8 +1874,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc22e617c1aaf544f9b1bf322fb1cc7a
-      internalID: 489860334
+      spriteID: 839301cc2bdea524fbea5a59f9e762df
+      internalID: -1394906074
       vertices: []
       indices: 
       edges: []
@@ -1884,7 +1884,7 @@ TextureImporter:
       name: Bachelor_player_spritesheet_84
       rect:
         serializedVersion: 2
-        x: 2624
+        x: 1728
         y: 128
         width: 64
         height: 64
@@ -1895,8 +1895,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e815ca84dc5a554684ce2d34bb42e42
-      internalID: 1535817616
+      spriteID: c8c8379976cfa324bafcf18a4b721d2d
+      internalID: -1588441936
       vertices: []
       indices: 
       edges: []
@@ -1905,6 +1905,300 @@ TextureImporter:
       name: Bachelor_player_spritesheet_85
       rect:
         serializedVersion: 2
+        x: 1792
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cfcb3b42def9694eb4e6e5f45a8d9ec
+      internalID: -1990590441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_86
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daa8f30bfdcd5ff43a4358e4c8f2f3b7
+      internalID: -1699552491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_87
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f74bfd3605252c649816cf37c6ce5d96
+      internalID: 381507482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_88
+      rect:
+        serializedVersion: 2
+        x: 1984
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 412de3d5d11e9fd468c055d722562649
+      internalID: 1827423429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_89
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f6d81a03becb640b6c079b287d1fa9
+      internalID: -1441888527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_90
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce656a9fa4f45c843ab97e6e5e899950
+      internalID: 2144623772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_91
+      rect:
+        serializedVersion: 2
+        x: 2176
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afd6539398e7f364da2863ccd0862681
+      internalID: 1119135911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_92
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8605e10f3179972429dc6bffd7a29291
+      internalID: 132002516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_93
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a6b2a1164d4d1649b5b8f0e25b6d4f7
+      internalID: 432692338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_94
+      rect:
+        serializedVersion: 2
+        x: 2368
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 890639f681d8c744fa146dd2605ea655
+      internalID: 653172165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_95
+      rect:
+        serializedVersion: 2
+        x: 2432
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c7961ae30af666449caf8c4372fda84
+      internalID: 1212122821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_96
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f271c84652da744f9c07018908206aa
+      internalID: 1846646900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_97
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f82cabd32a7eba743b42efe0b2b6b30b
+      internalID: 489396589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_98
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 577b050da8e51084e9ba1c3e722dc744
+      internalID: -874509430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_99
+      rect:
+        serializedVersion: 2
         x: 2688
         y: 128
         width: 64
@@ -1916,302 +2210,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9e4fa97d6234a849b81864d82009c0c
-      internalID: 194075690
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_86
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c9af4d6d8f246144892e7118b64567f
-      internalID: -1261189095
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_87
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 17379919d76180b4b87d10192cc0d3c1
-      internalID: 1563935245
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_88
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e887cd5eade40eb4ba1bc139d09b2464
-      internalID: 1698735590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_89
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d46887c7159d334fa1721d9cbcf5d35
-      internalID: -1345624060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_90
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb42be2d1ac40184fa88a0c4729c0f13
-      internalID: 2017311427
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_91
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d65ac4aa4ce538419374e64f6069b29
-      internalID: 658395646
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_92
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e7d855889c178ac4bb5c5a23c7f4c055
-      internalID: -321488764
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_93
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ecbc3680c7288cb418fc17a0d0f4b56c
-      internalID: 217962410
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_94
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2cf9ef612a0ed2a46966e7981e4328c6
-      internalID: -1332019241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_95
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12146ed9b35c488478e45b608f5a15a8
-      internalID: -1483418691
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_96
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 369d8686a9b535c42a8f7aa4eaefecc0
-      internalID: -1795022671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_97
-      rect:
-        serializedVersion: 2
-        x: 704
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e65adc106d37d1247b6fe712a131e6ef
-      internalID: -175523055
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_98
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 728cdb04abf437448a401b0cc2fdabe9
-      internalID: 1753576973
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bachelor_player_spritesheet_99
-      rect:
-        serializedVersion: 2
-        x: 832
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78a16982c47b6bd45b94be168a23d500
-      internalID: -1048873426
+      spriteID: b307e984427cf53419d6ba8e040edc46
+      internalID: 2063626358
       vertices: []
       indices: 
       edges: []
@@ -2220,6 +2220,594 @@ TextureImporter:
       name: Bachelor_player_spritesheet_100
       rect:
         serializedVersion: 2
+        x: 2752
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7534543d9698b049a05ece349991d93
+      internalID: -1623596112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_101
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0567d9044b8a58f48a968526ceadc304
+      internalID: -1028454112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_102
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01a53b5316eabec45b86089cfc80f3d6
+      internalID: 1298892007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_103
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5911604afe7622c44a31deaba890dfd3
+      internalID: -1411332912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_104
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ae7718ab11f2824780ba15b49bf72ae
+      internalID: 574481718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_105
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f919487d30b5e9b4d99ce3751069c87b
+      internalID: -1076992536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_106
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda89b4a62d8d484e8cfcf2944dc0aa8
+      internalID: 86435517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_107
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bedf70e37da2a7e4685b670d258da8c6
+      internalID: 1643319572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_108
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbdceefef6cfbb84c9f0680f607fc678
+      internalID: -1408029188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_109
+      rect:
+        serializedVersion: 2
+        x: 3328
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bad82e8292628d46a548e6f2a91f4b2
+      internalID: 1789942123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_110
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60747da94a5bac2479e23a7542232e66
+      internalID: -491276203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_111
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12b87050c1b1d154e882642be97b502e
+      internalID: 712506825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_112
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 780f916dfa39be94cb3d134f3fd9a8d1
+      internalID: 1171850251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_113
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ae06ec45f6fc844dad98cf93454f76b
+      internalID: 2023104598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_114
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a95f01b42e3751b46b19b5028503188b
+      internalID: -1363448234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_115
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3ecf20fc2d46a14cbc137725af9af05
+      internalID: 1646498630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_116
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2577af7d6167efb499a49c282db4e989
+      internalID: -1828280893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_117
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6fa1fa433fac9d44afab7c20b8a295f
+      internalID: 747796052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_118
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 581c889289886a84ea8374e27481def9
+      internalID: -1214239256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_119
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: befd564553bbae946a841cd348888837
+      internalID: 525488928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_120
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4745fc8cbdcbeea42948a56596a5f971
+      internalID: 1076530500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_121
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79f3d4fb40b652849a6be59c31fa9d34
+      internalID: -598831663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_122
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f796b7e3fee019f488c1d0bf8cf11ff6
+      internalID: -215925668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_123
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03dfbd0f2d790d249ac680c3a6f36170
+      internalID: 1990952349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_124
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b6b95360c1eae14abc5af53849dabd1
+      internalID: -281713133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_125
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ece458ac84a629240816c5da5da6e6c1
+      internalID: 1279574459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_126
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d498b0819380b8444aaf8d2cb844b1f6
+      internalID: -936460881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_127
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 066e6a69d0d822149a2d3baa15b3243c
+      internalID: -392795407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_128
+      rect:
+        serializedVersion: 2
         x: 896
         y: 64
         width: 64
@@ -2231,14 +2819,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39461a9b5f920a849825d401c0763398
-      internalID: -738155013
+      spriteID: 637e4756e5027024d9e7c919fb7490d1
+      internalID: -166114074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_101
+      name: Bachelor_player_spritesheet_129
       rect:
         serializedVersion: 2
         x: 960
@@ -2252,14 +2840,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09a6c4e4fe2108947bbbf579c00596e8
-      internalID: 1817292984
+      spriteID: e470efa0a33e2e344948eb1c2ae160d5
+      internalID: 1817616522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_102
+      name: Bachelor_player_spritesheet_130
       rect:
         serializedVersion: 2
         x: 1024
@@ -2273,14 +2861,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c41fe3f8271a94479e688ecffe53349
-      internalID: 1617268475
+      spriteID: 9653258434f3d2841891547d406970ad
+      internalID: 830021399
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_103
+      name: Bachelor_player_spritesheet_131
       rect:
         serializedVersion: 2
         x: 1088
@@ -2294,14 +2882,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7fb7943015687f468a034854f3cd602
-      internalID: 1123972844
+      spriteID: 983c3596ae2c2e844a256719ed3d386d
+      internalID: 1094539669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_104
+      name: Bachelor_player_spritesheet_132
       rect:
         serializedVersion: 2
         x: 1152
@@ -2315,14 +2903,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99c173640ab4b664bb9fb810a41fd12a
-      internalID: -1892686952
+      spriteID: f944ee329b6bf5c4b9b7de8f4a8dbb86
+      internalID: 606069825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_105
+      name: Bachelor_player_spritesheet_133
       rect:
         serializedVersion: 2
         x: 1216
@@ -2336,14 +2924,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a22bdfa004db46b45afdb4b7a40b2e1a
-      internalID: 1576232217
+      spriteID: 3ee8cc49e1b63d84883f520ee2d4c7df
+      internalID: -182395321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_106
+      name: Bachelor_player_spritesheet_134
       rect:
         serializedVersion: 2
         x: 1280
@@ -2357,14 +2945,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d590b63cd3ba5294997c2d4fa8e4b947
-      internalID: -1327422013
+      spriteID: 53f8eba2fc8d48e4ab72a6297637ee25
+      internalID: 683355339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_107
+      name: Bachelor_player_spritesheet_135
       rect:
         serializedVersion: 2
         x: 1344
@@ -2378,14 +2966,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db090f359c28fbe4bb8684e58ba8be55
-      internalID: 411248919
+      spriteID: 6e99fdebf2bcc234eb05822f60ea2fa6
+      internalID: -2060791407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_108
+      name: Bachelor_player_spritesheet_136
       rect:
         serializedVersion: 2
         x: 1408
@@ -2399,14 +2987,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c6369671afec7a4a813b2ccab4ed995
-      internalID: -527973943
+      spriteID: a8d9aeb290c685a4794874df4cb56375
+      internalID: -164410244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_109
+      name: Bachelor_player_spritesheet_137
       rect:
         serializedVersion: 2
         x: 1472
@@ -2420,14 +3008,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b40f221cb5de1046abd046584b9213d
-      internalID: 1433012775
+      spriteID: 9e8e86b73129a6548845ce75e2c30189
+      internalID: 962590816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_110
+      name: Bachelor_player_spritesheet_138
       rect:
         serializedVersion: 2
         x: 1536
@@ -2441,14 +3029,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c26bb89ca5ac79b40a203cb1cb50f11e
-      internalID: 337925514
+      spriteID: 9bac4973d351b8e4faf8ff3634e251bf
+      internalID: -392701784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_111
+      name: Bachelor_player_spritesheet_139
       rect:
         serializedVersion: 2
         x: 1600
@@ -2462,14 +3050,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ae28b8be47fd3c449d6b9f468a602b6
-      internalID: 757702153
+      spriteID: 5b8f3b6544856d24690e01d580260e1e
+      internalID: -1042283341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_112
+      name: Bachelor_player_spritesheet_140
       rect:
         serializedVersion: 2
         x: 1664
@@ -2483,14 +3071,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36d52a2438815af4da1e199881d3c3ce
-      internalID: -791920803
+      spriteID: dc65c7c157e682642aedaeb4c3759e5d
+      internalID: 968414154
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_113
+      name: Bachelor_player_spritesheet_141
       rect:
         serializedVersion: 2
         x: 1728
@@ -2504,14 +3092,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df4299d39da08084c8e65fb037489298
-      internalID: 344346863
+      spriteID: 2959fcd8a349d5a40a90c4e2d9832863
+      internalID: 274599533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_114
+      name: Bachelor_player_spritesheet_142
       rect:
         serializedVersion: 2
         x: 1792
@@ -2525,14 +3113,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 888295219d6266a488cbefbb09d25fa5
-      internalID: -1731016223
+      spriteID: 4546ab13dfe31414697befb795499307
+      internalID: 1243061006
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_115
+      name: Bachelor_player_spritesheet_143
       rect:
         serializedVersion: 2
         x: 1856
@@ -2546,14 +3134,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3c4292308face64f9d7b2d2bce56725
-      internalID: 327739510
+      spriteID: aeb21608c70f8334abfe8e849cc3db68
+      internalID: -353290171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_116
+      name: Bachelor_player_spritesheet_144
       rect:
         serializedVersion: 2
         x: 1920
@@ -2567,14 +3155,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dba12a7e11040940b081abc1bc36716
-      internalID: -1563351782
+      spriteID: 16e65eef38c0722448f8d22a25e18b51
+      internalID: 1979774520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_117
+      name: Bachelor_player_spritesheet_145
       rect:
         serializedVersion: 2
         x: 1984
@@ -2588,14 +3176,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95c6ab90e13e2cb4ebf0f71cb60945d3
-      internalID: -580188410
+      spriteID: 09144b516f055aa4ea20955e8c18a139
+      internalID: 286174472
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_118
+      name: Bachelor_player_spritesheet_146
       rect:
         serializedVersion: 2
         x: 2048
@@ -2609,14 +3197,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e3845a6271874d4b9cafdfb0de1f8df
-      internalID: -1075146064
+      spriteID: c10fb53079ec2c347b47ad0d1e3fcff2
+      internalID: 2135867145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_119
+      name: Bachelor_player_spritesheet_147
       rect:
         serializedVersion: 2
         x: 2112
@@ -2630,14 +3218,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c64c449d9054a7499f47fe6b0b44ef5
-      internalID: 1613993873
+      spriteID: 34e1475d1a09e2e448e27b1abbe1c031
+      internalID: -163127239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_120
+      name: Bachelor_player_spritesheet_148
       rect:
         serializedVersion: 2
         x: 2176
@@ -2651,14 +3239,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd4b055ac170f8c4697ed15ccc6e1140
-      internalID: 22980962
+      spriteID: e5082ef58922aea44b4533e25a1ea0a4
+      internalID: 1912249711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_121
+      name: Bachelor_player_spritesheet_149
       rect:
         serializedVersion: 2
         x: 2240
@@ -2672,14 +3260,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0a43f2c64b16d741bd39078877f9595
-      internalID: -995318155
+      spriteID: af88d5cf7b7469141b797eb6488ef5a3
+      internalID: -1880975052
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_122
+      name: Bachelor_player_spritesheet_150
       rect:
         serializedVersion: 2
         x: 2304
@@ -2693,14 +3281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 939ef96d7811594468f9850b11ff4a4d
-      internalID: -1094252323
+      spriteID: 8056b484e1ce68c4990e8cca664dacd5
+      internalID: -826084643
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_123
+      name: Bachelor_player_spritesheet_151
       rect:
         serializedVersion: 2
         x: 2368
@@ -2714,14 +3302,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eefe08936b95b84489fa32022cbb1e77
-      internalID: 1309223066
+      spriteID: a5e7c8d8fdf980d45a0fbbf2f8544a7a
+      internalID: -730410797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_124
+      name: Bachelor_player_spritesheet_152
       rect:
         serializedVersion: 2
         x: 2432
@@ -2735,14 +3323,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f06b9f466eb18cc45b0040d396ccf211
-      internalID: 533970733
+      spriteID: d67f93fe2c3ed2949974cb44123d15b4
+      internalID: 1525984383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_125
+      name: Bachelor_player_spritesheet_153
       rect:
         serializedVersion: 2
         x: 2496
@@ -2756,14 +3344,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f734a524afa7fa9469904b015f4fade4
-      internalID: -667347854
+      spriteID: 564c3c626e878f141b5906ea4bee86d0
+      internalID: 1963204630
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_126
+      name: Bachelor_player_spritesheet_154
       rect:
         serializedVersion: 2
         x: 2560
@@ -2777,14 +3365,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f16444a36f4cdb34784d25d010f51acf
-      internalID: 2112328047
+      spriteID: 3fb6d1bece09c2e45bd4163fa06565d3
+      internalID: 866369096
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_127
+      name: Bachelor_player_spritesheet_155
       rect:
         serializedVersion: 2
         x: 2624
@@ -2798,14 +3386,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3ada7fe023e4d24a8b7520df4c8c2b6
-      internalID: -1452727109
+      spriteID: 1fe898ad4f72ffe40a615ab5d98ddf68
+      internalID: -240017780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_128
+      name: Bachelor_player_spritesheet_156
       rect:
         serializedVersion: 2
         x: 2688
@@ -2819,14 +3407,308 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a56766f112a5d343b8d62a9a4b3d3fd
-      internalID: -1242867268
+      spriteID: feff90d66dabbd94dbd127a68e2c6b78
+      internalID: -288157772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_129
+      name: Bachelor_player_spritesheet_157
+      rect:
+        serializedVersion: 2
+        x: 2752
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ecc0ee7e4afd9e46b594ee493918d0c
+      internalID: 946523884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_158
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3faa4863367ebd4e998c002b7147ca1
+      internalID: 1909355261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_159
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c32913469fea7e349a3d221c7f5514b8
+      internalID: 1859189391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_160
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1752a51243c04d4f8e4ed8ecb7d5f5d
+      internalID: 1638832834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_161
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad45f765f7052eb48bbb3af2adec2aff
+      internalID: 1404395687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_162
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4511b7ce74d35034f8a8d149f1958228
+      internalID: 210631447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_163
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9477e94e8783aeb439a48e6a89fdfa3b
+      internalID: -2104529110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_164
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6c0d9a5f58cef342baf828d900642d5
+      internalID: -875081227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_165
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f555b7ec0bfe9342b9792dacaf96434
+      internalID: -1860693565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_166
+      rect:
+        serializedVersion: 2
+        x: 3328
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44bb3a1e25da3c046967282af1000530
+      internalID: -804543737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_167
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db7de5395fa7fcb41bd00712ee548750
+      internalID: -480406393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_168
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd5f7cb40c57cc442a3d4195a3559022
+      internalID: 1829479531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_169
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8335e3ab27036644e9d40ff9b5946ab1
+      internalID: -172118185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_170
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0730e3a20534e94489c5f963170ae037
+      internalID: 852275945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_171
       rect:
         serializedVersion: 2
         x: 0
@@ -2840,14 +3722,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30537a21b2af2284b842ae1b69bb3314
-      internalID: -779863619
+      spriteID: 8eb052448ead7a34dad36b64807e94ac
+      internalID: 1242776353
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_130
+      name: Bachelor_player_spritesheet_172
       rect:
         serializedVersion: 2
         x: 64
@@ -2861,14 +3743,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cbb84195d4add3438432c95ce6eecae
-      internalID: 1155349867
+      spriteID: 86987cd12d2ca0943b335cbf27eeba99
+      internalID: 1489325343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_131
+      name: Bachelor_player_spritesheet_173
       rect:
         serializedVersion: 2
         x: 128
@@ -2882,14 +3764,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f293e062703946d42a58a523fac8bd75
-      internalID: 194240785
+      spriteID: ebea45c4411d7bc4e99b70758aeeeeb0
+      internalID: 898963244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_132
+      name: Bachelor_player_spritesheet_174
       rect:
         serializedVersion: 2
         x: 192
@@ -2903,14 +3785,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73a084436bb8c9c489a8fcb85853dd34
-      internalID: 764077256
+      spriteID: 25eb74f905af7f84fa86ff4eb0aa2817
+      internalID: 577184114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_133
+      name: Bachelor_player_spritesheet_175
       rect:
         serializedVersion: 2
         x: 256
@@ -2924,14 +3806,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0f888379616b6846bf0e77e1ed91cf1
-      internalID: -1662114822
+      spriteID: b06b890d24890ed42bfed61354c1fcb8
+      internalID: -649568038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_134
+      name: Bachelor_player_spritesheet_176
       rect:
         serializedVersion: 2
         x: 320
@@ -2945,14 +3827,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee86038f0193efe4f8409422832e5a91
-      internalID: -254855563
+      spriteID: b9d4ef49f2013d34fb6b068d0f4f6344
+      internalID: -310202445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_135
+      name: Bachelor_player_spritesheet_177
       rect:
         serializedVersion: 2
         x: 384
@@ -2966,14 +3848,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67c45cf5e92978e4888eb2de5b9c3818
-      internalID: -1969478403
+      spriteID: d07b0fa96b31cef4183db4fb969e48b6
+      internalID: -2120498813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_136
+      name: Bachelor_player_spritesheet_178
       rect:
         serializedVersion: 2
         x: 448
@@ -2987,14 +3869,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d933f0e57f2cc894c9c3dbaabc91bc9d
-      internalID: 1269417577
+      spriteID: 516926a173dd96246bedeae07e0ae66f
+      internalID: -1852896225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_137
+      name: Bachelor_player_spritesheet_179
       rect:
         serializedVersion: 2
         x: 512
@@ -3008,14 +3890,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c75be3bea9b135f4d8fb9cd371bcb293
-      internalID: -1932549728
+      spriteID: 6e4d916b7d0352b4db2fe0ebfc3f38a5
+      internalID: -810204681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_138
+      name: Bachelor_player_spritesheet_180
       rect:
         serializedVersion: 2
         x: 576
@@ -3029,14 +3911,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fed1d4bb467f6e49a062599a0551bb1
-      internalID: -1776073461
+      spriteID: 8ec0cb3f3eec85c4b89e6b8ec35870cb
+      internalID: 1024103656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_139
+      name: Bachelor_player_spritesheet_181
       rect:
         serializedVersion: 2
         x: 640
@@ -3050,14 +3932,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b943ce9452ed7f4ea175de0b6a823fe
-      internalID: -426335689
+      spriteID: 3c02957f6947bfb498ddfe5af95c3d3c
+      internalID: 320309051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_140
+      name: Bachelor_player_spritesheet_182
       rect:
         serializedVersion: 2
         x: 704
@@ -3071,14 +3953,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8bd5fc8b89b33c4281a0544f4ca6b19
-      internalID: -1077513619
+      spriteID: 96f483f5d2d9d28409de19f4700ac2f2
+      internalID: 1926208879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_141
+      name: Bachelor_player_spritesheet_183
       rect:
         serializedVersion: 2
         x: 768
@@ -3092,14 +3974,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d57c31b7b4a03c54f8ddec52fe3bccf8
-      internalID: 930404590
+      spriteID: fc3315de2859a5346970b1a9c836a8e8
+      internalID: 1603227091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_142
+      name: Bachelor_player_spritesheet_184
       rect:
         serializedVersion: 2
         x: 832
@@ -3113,14 +3995,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7219b49aab0b9d042855f83905479643
-      internalID: -835606957
+      spriteID: 38740432a01e8b9489b0287468bed32f
+      internalID: 1833944859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_143
+      name: Bachelor_player_spritesheet_185
       rect:
         serializedVersion: 2
         x: 896
@@ -3134,14 +4016,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74b27367d91981d418db47bb5e8256a3
-      internalID: -213258138
+      spriteID: 286106c134d6dc645a2e8d6af222b5c1
+      internalID: -1435499633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_144
+      name: Bachelor_player_spritesheet_186
       rect:
         serializedVersion: 2
         x: 960
@@ -3155,14 +4037,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06ceab3963a4f384381b1332e55e7950
-      internalID: -930191001
+      spriteID: 94b1643255e0896418c9dc5444b53bc7
+      internalID: -971636951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_145
+      name: Bachelor_player_spritesheet_187
       rect:
         serializedVersion: 2
         x: 1024
@@ -3176,14 +4058,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1be8ca13e7a0a274ebee43962ea4de77
-      internalID: -2111087577
+      spriteID: 28715bb5fe51d764c90d3e4e054b127d
+      internalID: 560270809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_146
+      name: Bachelor_player_spritesheet_188
       rect:
         serializedVersion: 2
         x: 1088
@@ -3197,14 +4079,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89643dc0a954e4b41ae60e4d66ffe1d5
-      internalID: -2012970823
+      spriteID: c76e62645d11f084b8a0fef24aadf1c2
+      internalID: 1752038354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_147
+      name: Bachelor_player_spritesheet_189
       rect:
         serializedVersion: 2
         x: 1152
@@ -3218,14 +4100,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 887ee11748df6e14d8d4204b8a1c08bb
-      internalID: 1350403605
+      spriteID: 13e7c76cb5dea0f4fb4836bb5ec2dfb3
+      internalID: 1571485176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_148
+      name: Bachelor_player_spritesheet_190
       rect:
         serializedVersion: 2
         x: 1216
@@ -3239,14 +4121,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5642ea69251c0b34a8ba6320c30193de
-      internalID: -345225723
+      spriteID: 412ededa98739fc43abc2a80fc6d8d1a
+      internalID: -39577523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_149
+      name: Bachelor_player_spritesheet_191
       rect:
         serializedVersion: 2
         x: 1280
@@ -3260,14 +4142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db5f8ad5f3ddebc40aced9c14c02de47
-      internalID: 1186183474
+      spriteID: cb93d54aa18e0e446b15311b3ccdbe58
+      internalID: -752721973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_150
+      name: Bachelor_player_spritesheet_192
       rect:
         serializedVersion: 2
         x: 1344
@@ -3281,14 +4163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1af2bb0ad6cd8a4aae1a1d8a251e185
-      internalID: 1818508997
+      spriteID: ac9dfea517577d2488ea6ca30d2a84e4
+      internalID: -53656509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_151
+      name: Bachelor_player_spritesheet_193
       rect:
         serializedVersion: 2
         x: 1408
@@ -3302,14 +4184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c7f5c22248764a4aa7377973a22663e
-      internalID: -1354764761
+      spriteID: 02bff0faa88abae4b80bcf6520053e03
+      internalID: -1978389737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_152
+      name: Bachelor_player_spritesheet_194
       rect:
         serializedVersion: 2
         x: 1472
@@ -3323,14 +4205,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 539ad64b3c4df0f4b80dfa8db713c5cd
-      internalID: 552419382
+      spriteID: 6215a2bb96851ba47aa18db069cee7f9
+      internalID: 614944858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_153
+      name: Bachelor_player_spritesheet_195
       rect:
         serializedVersion: 2
         x: 1536
@@ -3344,14 +4226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6ce8907f2602d349a60ec4de15ea832
-      internalID: -2082165755
+      spriteID: a791f907f779116499c73c4b63d5b5e8
+      internalID: 334955782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_154
+      name: Bachelor_player_spritesheet_196
       rect:
         serializedVersion: 2
         x: 1600
@@ -3365,14 +4247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffabb87cf8ccfa94ba385c0dad055556
-      internalID: 750047073
+      spriteID: d0f1caabb54e8a74a8f2b9f77aec0ef2
+      internalID: -623905305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_155
+      name: Bachelor_player_spritesheet_197
       rect:
         serializedVersion: 2
         x: 1664
@@ -3386,14 +4268,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9682b451eb88d54f93a3d092e7577e2
-      internalID: -1250382116
+      spriteID: 044af93ef6014604a90dc4d34b29e880
+      internalID: 967974929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_156
+      name: Bachelor_player_spritesheet_198
       rect:
         serializedVersion: 2
         x: 1728
@@ -3407,14 +4289,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd5002dc838d6d742888a063479c545e
-      internalID: -255128137
+      spriteID: e47874056a6032d4fb6a3974a022b886
+      internalID: -1234707351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_157
+      name: Bachelor_player_spritesheet_199
       rect:
         serializedVersion: 2
         x: 1792
@@ -3428,14 +4310,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14f55b0fb33d5e7459c326c557ea3389
-      internalID: -1483793638
+      spriteID: 6de144433e07dac4a9bf23707e32eae3
+      internalID: 1637881664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_158
+      name: Bachelor_player_spritesheet_200
       rect:
         serializedVersion: 2
         x: 1856
@@ -3449,14 +4331,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67e78d7a5550ba743b17407f5d0b7791
-      internalID: 1433441337
+      spriteID: baa8ed4928f814a409f74b1f62ecdabe
+      internalID: 1707036067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_159
+      name: Bachelor_player_spritesheet_201
       rect:
         serializedVersion: 2
         x: 1920
@@ -3470,14 +4352,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28176ad48d6761c42b23166c1ffe4aef
-      internalID: 1348523065
+      spriteID: a4d73fb01e97937408bcd0ebddd7b6ec
+      internalID: 1536769606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_160
+      name: Bachelor_player_spritesheet_202
       rect:
         serializedVersion: 2
         x: 1984
@@ -3491,14 +4373,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ab8c49d02d7e324990c152304440b53
-      internalID: 1254486789
+      spriteID: c6685c9861815254ab420d435b6ae3e6
+      internalID: -1926208179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_161
+      name: Bachelor_player_spritesheet_203
       rect:
         serializedVersion: 2
         x: 2048
@@ -3512,14 +4394,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9e3abc657b26cb46924c5cf30d3a26d
-      internalID: -2082969471
+      spriteID: b688d61de59bfd64da77c91e79188537
+      internalID: 1310199303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_162
+      name: Bachelor_player_spritesheet_204
       rect:
         serializedVersion: 2
         x: 2112
@@ -3533,14 +4415,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7933c65250ba8c0479f4bd05c761b24e
-      internalID: 726241073
+      spriteID: 0447aecd067de4a43a11ef640be84198
+      internalID: -1084171753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_163
+      name: Bachelor_player_spritesheet_205
       rect:
         serializedVersion: 2
         x: 2176
@@ -3554,14 +4436,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ef7c89d23995bd4bb0a35c7ad3063cf
-      internalID: 277659526
+      spriteID: 215f7d1aee2fa6843b54c5b437c10b74
+      internalID: -1003685336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_164
+      name: Bachelor_player_spritesheet_206
       rect:
         serializedVersion: 2
         x: 2240
@@ -3575,14 +4457,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0afffb84e20b3b74593b1f6758fb0ab3
-      internalID: -231625022
+      spriteID: efd3b35db57fbd14cbf529256fe7b9d6
+      internalID: 609413655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_165
+      name: Bachelor_player_spritesheet_207
       rect:
         serializedVersion: 2
         x: 2304
@@ -3596,14 +4478,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7819c6ae8f7ce5a4c9ef91fec9f7cbd4
-      internalID: -289665149
+      spriteID: 406848ea9bc1bff48b03dba50cf55a5d
+      internalID: -718079075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_166
+      name: Bachelor_player_spritesheet_208
       rect:
         serializedVersion: 2
         x: 2368
@@ -3617,14 +4499,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2f202e40b63b8a41998fae756095b25
-      internalID: -179636522
+      spriteID: e30ec6a93e660d34b9194a4e63c72ce7
+      internalID: 1098424932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_167
+      name: Bachelor_player_spritesheet_209
       rect:
         serializedVersion: 2
         x: 2432
@@ -3638,14 +4520,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 647fbc34d3b6b344f9ec9d94c42ad4be
-      internalID: 631450916
+      spriteID: f4454e71ea833f246a8b64f3b1b42d60
+      internalID: -1492742088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_168
+      name: Bachelor_player_spritesheet_210
       rect:
         serializedVersion: 2
         x: 2496
@@ -3659,14 +4541,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 116315a9cd6c7934eb5a3708216179d7
-      internalID: -1876585851
+      spriteID: 20c0359cf6179ff4aa3f1d59b02668c4
+      internalID: 1582188948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_169
+      name: Bachelor_player_spritesheet_211
       rect:
         serializedVersion: 2
         x: 2560
@@ -3680,14 +4562,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d750382515cc1a949a5999489e790af0
-      internalID: 1609435684
+      spriteID: 8966da5602493254b8bf458c17f21ac1
+      internalID: 1160994150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_170
+      name: Bachelor_player_spritesheet_212
       rect:
         serializedVersion: 2
         x: 2624
@@ -3701,14 +4583,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 242c1ac36d2fd6b4ab63835f48454e96
-      internalID: 2120353514
+      spriteID: 5b1c54783d097d04394369fff70c45e4
+      internalID: 2133388970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bachelor_player_spritesheet_171
+      name: Bachelor_player_spritesheet_213
       rect:
         serializedVersion: 2
         x: 2688
@@ -3722,8 +4604,302 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cbbe8ec53db4564f8721b2377e33651
-      internalID: -1210322039
+      spriteID: cc919a1d12f60dd42b027ba3aae118d0
+      internalID: -631165371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_214
+      rect:
+        serializedVersion: 2
+        x: 2752
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12be183b6744d1b42a075345f4759a01
+      internalID: -1711791274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_215
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86880a2d839bb814db599480842ff791
+      internalID: -276099487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_216
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06782b2d850f73a4493a04439fac00bb
+      internalID: -319882843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_217
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0226417afb923e44cb2738936b331382
+      internalID: 1694094549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_218
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8bbe7aab07cf5743a8204b8a0320cf8
+      internalID: -1626492574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_219
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35752afd5152d3d479b6a3dab1442b2a
+      internalID: -833578414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_220
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1915873cbc07f946bbb212c0ba8770b
+      internalID: 1954514043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_221
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b71d8b0ef8fb5d748b0528ed60553537
+      internalID: -1810646738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_222
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 938cb9c54051807429a00cff7f023e7f
+      internalID: -372312956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_223
+      rect:
+        serializedVersion: 2
+        x: 3328
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e08afe29eea0974fb5e3fef3e25c082
+      internalID: 1591564908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_224
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e9602882e8ec8419c960d5a02c835e
+      internalID: -1997857390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_225
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe0c05b00dca88d48bf6e2fb3cc0a0cc
+      internalID: -461188768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_226
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23a7cc49241bb264996ddc93016d42d1
+      internalID: 1186828909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bachelor_player_spritesheet_227
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff04e15b630139046b7995e0f0bff6c6
+      internalID: -1434751036
       vertices: []
       indices: 
       edges: []
@@ -3731,7 +4907,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8a6856144ce5d8c48982e9c616615ff4
+    spriteID: 83b281067e5953546959d18ebd7e2267
     internalID: 0
     vertices: []
     indices: 
@@ -3739,178 +4915,234 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bachelor_player_spritesheet_125: -667347854
-      Bachelor_player_spritesheet_4: 824007531
-      Bachelor_player_spritesheet_39: 414452169
-      Bachelor_player_spritesheet_138: -1776073461
-      Bachelor_player_spritesheet_115: 327739510
-      Bachelor_player_spritesheet_112: -791920803
-      Bachelor_player_spritesheet_93: 217962410
-      Bachelor_player_spritesheet_158: 1433441337
-      Bachelor_player_spritesheet_117: -580188410
-      Bachelor_player_spritesheet_147: 1350403605
-      Bachelor_player_spritesheet_24: -1747825849
-      Bachelor_player_spritesheet_25: 1794272963
-      Bachelor_player_spritesheet_54: -2117083143
-      Bachelor_player_spritesheet_6: -1255202640
-      Bachelor_player_spritesheet_37: 194539748
-      Bachelor_player_spritesheet_73: 1311549091
-      Bachelor_player_spritesheet_114: -1731016223
-      Bachelor_player_spritesheet_110: 337925514
-      Bachelor_player_spritesheet_155: -1250382116
-      Bachelor_player_spritesheet_48: -1165838110
-      Bachelor_player_spritesheet_75: -1162639405
-      Bachelor_player_spritesheet_68: 1501507487
-      Bachelor_player_spritesheet_145: -2111087577
-      Bachelor_player_spritesheet_3: -1019463059
-      Bachelor_player_spritesheet_59: -277268007
-      Bachelor_player_spritesheet_137: -1932549728
-      Bachelor_player_spritesheet_55: 2136206193
-      Bachelor_player_spritesheet_89: -1345624060
-      Bachelor_player_spritesheet_88: 1698735590
-      Bachelor_player_spritesheet_123: 1309223066
-      Bachelor_player_spritesheet_50: -1776886239
-      Bachelor_player_spritesheet_99: -1048873426
-      Bachelor_player_spritesheet_143: -213258138
-      Bachelor_player_spritesheet_121: -995318155
-      Bachelor_player_spritesheet_146: -2012970823
-      Bachelor_player_spritesheet_19: 510413074
-      Bachelor_player_spritesheet_61: 203842004
-      Bachelor_player_spritesheet_128: -1242867268
-      Bachelor_player_spritesheet_79: 1533696912
-      Bachelor_player_spritesheet_70: 1559464290
-      Bachelor_player_spritesheet_28: -1562749089
-      Bachelor_player_spritesheet_150: 1818508997
-      Bachelor_player_spritesheet_58: 1476460678
-      Bachelor_player_spritesheet_159: 1348523065
-      Bachelor_player_spritesheet_90: 2017311427
-      Bachelor_player_spritesheet_9: -492809242
-      Bachelor_player_spritesheet_154: 750047073
-      Bachelor_player_spritesheet_87: 1563935245
-      Bachelor_player_spritesheet_130: 1155349867
-      Bachelor_player_spritesheet_57: -624259504
-      Bachelor_player_spritesheet_64: -1149203750
-      Bachelor_player_spritesheet_22: -1749042105
-      Bachelor_player_spritesheet_20: 791553362
-      Bachelor_player_spritesheet_157: -1483793638
-      Bachelor_player_spritesheet_82: 1681892705
-      Bachelor_player_spritesheet_45: 938972732
-      Bachelor_player_spritesheet_144: -930191001
-      Bachelor_player_spritesheet_108: -527973943
-      Bachelor_player_spritesheet_152: 552419382
-      Bachelor_player_spritesheet_29: 989279021
-      Bachelor_player_spritesheet_109: 1433012775
-      Bachelor_player_spritesheet_49: 1853334698
-      Bachelor_player_spritesheet_104: -1892686952
-      Bachelor_player_spritesheet_140: -1077513619
-      Bachelor_player_spritesheet_149: 1186183474
-      Bachelor_player_spritesheet_156: -255128137
-      Bachelor_player_spritesheet_141: 930404590
-      Bachelor_player_spritesheet_12: 713646193
-      Bachelor_player_spritesheet_30: 1028034075
-      Bachelor_player_spritesheet_131: 194240785
-      Bachelor_player_spritesheet_40: 1384959856
-      Bachelor_player_spritesheet_74: 1003026399
-      Bachelor_player_spritesheet_91: 658395646
-      Bachelor_player_spritesheet_105: 1576232217
-      Bachelor_player_spritesheet_60: -12306812
-      Bachelor_player_spritesheet_7: 851255876
-      Bachelor_player_spritesheet_165: -289665149
-      Bachelor_player_spritesheet_0: -1843082632
-      Bachelor_player_spritesheet_133: -1662114822
-      Bachelor_player_spritesheet_96: -1795022671
-      Bachelor_player_spritesheet_47: -1513998395
-      Bachelor_player_spritesheet_129: -779863619
-      Bachelor_player_spritesheet_52: -1607243442
-      Bachelor_player_spritesheet_169: 1609435684
-      Bachelor_player_spritesheet_8: -1782262017
-      Bachelor_player_spritesheet_36: 1329744504
-      Bachelor_player_spritesheet_142: -835606957
-      Bachelor_player_spritesheet_164: -231625022
-      Bachelor_player_spritesheet_13: 1237897265
-      Bachelor_player_spritesheet_170: 2120353514
-      Bachelor_player_spritesheet_116: -1563351782
-      Bachelor_player_spritesheet_66: 1702390709
-      Bachelor_player_spritesheet_77: 40624210
-      Bachelor_player_spritesheet_51: 625734254
-      Bachelor_player_spritesheet_5: -511656436
-      Bachelor_player_spritesheet_43: 1168491692
-      Bachelor_player_spritesheet_161: -2082969471
-      Bachelor_player_spritesheet_16: 429395910
-      Bachelor_player_spritesheet_139: -426335689
-      Bachelor_player_spritesheet_31: 682155333
-      Bachelor_player_spritesheet_86: -1261189095
-      Bachelor_player_spritesheet_162: 726241073
-      Bachelor_player_spritesheet_122: -1094252323
-      Bachelor_player_spritesheet_18: 1472696380
-      Bachelor_player_spritesheet_84: 1535817616
-      Bachelor_player_spritesheet_107: 411248919
-      Bachelor_player_spritesheet_119: 1613993873
-      Bachelor_player_spritesheet_113: 344346863
-      Bachelor_player_spritesheet_80: -710147838
-      Bachelor_player_spritesheet_41: 1904393305
-      Bachelor_player_spritesheet_27: 494513775
-      Bachelor_player_spritesheet_168: -1876585851
-      Bachelor_player_spritesheet_17: -887690126
-      Bachelor_player_spritesheet_136: 1269417577
-      Bachelor_player_spritesheet_1: 968412779
-      Bachelor_player_spritesheet_124: 533970733
-      Bachelor_player_spritesheet_85: 194075690
-      Bachelor_player_spritesheet_94: -1332019241
-      Bachelor_player_spritesheet_69: 137971267
-      Bachelor_player_spritesheet_132: 764077256
-      Bachelor_player_spritesheet_134: -254855563
-      Bachelor_player_spritesheet_11: -800386057
-      Bachelor_player_spritesheet_56: 458077748
-      Bachelor_player_spritesheet_135: -1969478403
-      Bachelor_player_spritesheet_102: 1617268475
-      Bachelor_player_spritesheet_167: 631450916
-      Bachelor_player_spritesheet_26: 139486503
-      Bachelor_player_spritesheet_111: 757702153
-      Bachelor_player_spritesheet_78: -955739742
-      Bachelor_player_spritesheet_14: -1694109061
-      Bachelor_player_spritesheet_2: 277806743
-      Bachelor_player_spritesheet_163: 277659526
-      Bachelor_player_spritesheet_53: -1400648007
-      Bachelor_player_spritesheet_118: -1075146064
-      Bachelor_player_spritesheet_166: -179636522
-      Bachelor_player_spritesheet_63: -1964860145
-      Bachelor_player_spritesheet_42: -1746719592
-      Bachelor_player_spritesheet_62: -50738220
-      Bachelor_player_spritesheet_46: -1430249097
-      Bachelor_player_spritesheet_97: -175523055
-      Bachelor_player_spritesheet_10: 1478134992
-      Bachelor_player_spritesheet_103: 1123972844
-      Bachelor_player_spritesheet_160: 1254486789
-      Bachelor_player_spritesheet_35: 747327693
-      Bachelor_player_spritesheet_65: -1259514317
-      Bachelor_player_spritesheet_72: 1234342847
-      Bachelor_player_spritesheet_21: 1635772345
-      Bachelor_player_spritesheet_44: -253492983
-      Bachelor_player_spritesheet_106: -1327422013
-      Bachelor_player_spritesheet_153: -2082165755
-      Bachelor_player_spritesheet_101: 1817292984
-      Bachelor_player_spritesheet_95: -1483418691
-      Bachelor_player_spritesheet_98: 1753576973
-      Bachelor_player_spritesheet_34: 351669607
-      Bachelor_player_spritesheet_151: -1354764761
-      Bachelor_player_spritesheet_81: -66389116
-      Bachelor_player_spritesheet_127: -1452727109
-      Bachelor_player_spritesheet_33: 715622594
-      Bachelor_player_spritesheet_126: 2112328047
-      Bachelor_player_spritesheet_23: -458386696
-      Bachelor_player_spritesheet_15: 1891239005
-      Bachelor_player_spritesheet_67: -1038890688
-      Bachelor_player_spritesheet_32: -520943904
-      Bachelor_player_spritesheet_71: -1420498086
-      Bachelor_player_spritesheet_38: 413472031
-      Bachelor_player_spritesheet_171: -1210322039
-      Bachelor_player_spritesheet_76: -985990398
-      Bachelor_player_spritesheet_148: -345225723
-      Bachelor_player_spritesheet_92: -321488764
-      Bachelor_player_spritesheet_83: 489860334
-      Bachelor_player_spritesheet_120: 22980962
-      Bachelor_player_spritesheet_100: -738155013
+      Bachelor_player_spritesheet_125: 1279574459
+      Bachelor_player_spritesheet_4: 2018405478
+      Bachelor_player_spritesheet_39: 537735345
+      Bachelor_player_spritesheet_138: -392701784
+      Bachelor_player_spritesheet_189: 1571485176
+      Bachelor_player_spritesheet_115: 1646498630
+      Bachelor_player_spritesheet_112: 1171850251
+      Bachelor_player_spritesheet_93: 432692338
+      Bachelor_player_spritesheet_158: 1909355261
+      Bachelor_player_spritesheet_211: 1160994150
+      Bachelor_player_spritesheet_117: 747796052
+      Bachelor_player_spritesheet_207: -718079075
+      Bachelor_player_spritesheet_213: -631165371
+      Bachelor_player_spritesheet_147: -163127239
+      Bachelor_player_spritesheet_194: 614944858
+      Bachelor_player_spritesheet_24: 335669502
+      Bachelor_player_spritesheet_25: 277982821
+      Bachelor_player_spritesheet_190: -39577523
+      Bachelor_player_spritesheet_182: 1926208879
+      Bachelor_player_spritesheet_54: -2092389001
+      Bachelor_player_spritesheet_6: 42794165
+      Bachelor_player_spritesheet_37: -635387971
+      Bachelor_player_spritesheet_73: -1053845268
+      Bachelor_player_spritesheet_114: -1363448234
+      Bachelor_player_spritesheet_110: -491276203
+      Bachelor_player_spritesheet_155: -240017780
+      Bachelor_player_spritesheet_48: 270896308
+      Bachelor_player_spritesheet_175: -649568038
+      Bachelor_player_spritesheet_75: 881671374
+      Bachelor_player_spritesheet_68: 1542130623
+      Bachelor_player_spritesheet_191: -752721973
+      Bachelor_player_spritesheet_145: 286174472
+      Bachelor_player_spritesheet_3: -1983959583
+      Bachelor_player_spritesheet_59: 1766126517
+      Bachelor_player_spritesheet_137: 962590816
+      Bachelor_player_spritesheet_55: 1884621956
+      Bachelor_player_spritesheet_89: -1441888527
+      Bachelor_player_spritesheet_88: 1827423429
+      Bachelor_player_spritesheet_123: 1990952349
+      Bachelor_player_spritesheet_50: 567236123
+      Bachelor_player_spritesheet_99: 2063626358
+      Bachelor_player_spritesheet_121: -598831663
+      Bachelor_player_spritesheet_224: -1997857390
+      Bachelor_player_spritesheet_143: -353290171
+      Bachelor_player_spritesheet_146: 2135867145
+      Bachelor_player_spritesheet_19: -1322462948
+      Bachelor_player_spritesheet_61: 1239074586
+      Bachelor_player_spritesheet_187: 560270809
+      Bachelor_player_spritesheet_183: 1603227091
+      Bachelor_player_spritesheet_128: -166114074
+      Bachelor_player_spritesheet_216: -319882843
+      Bachelor_player_spritesheet_79: -207323036
+      Bachelor_player_spritesheet_70: -696139241
+      Bachelor_player_spritesheet_28: -1771726712
+      Bachelor_player_spritesheet_150: -826084643
+      Bachelor_player_spritesheet_58: 32702357
+      Bachelor_player_spritesheet_159: 1859189391
+      Bachelor_player_spritesheet_90: 2144623772
+      Bachelor_player_spritesheet_181: 320309051
+      Bachelor_player_spritesheet_9: 1215731437
+      Bachelor_player_spritesheet_154: 866369096
+      Bachelor_player_spritesheet_87: 381507482
+      Bachelor_player_spritesheet_130: 830021399
+      Bachelor_player_spritesheet_57: -18251953
+      Bachelor_player_spritesheet_64: -976138811
+      Bachelor_player_spritesheet_205: -1003685336
+      Bachelor_player_spritesheet_22: -1355490159
+      Bachelor_player_spritesheet_20: 1922744897
+      Bachelor_player_spritesheet_157: 946523884
+      Bachelor_player_spritesheet_82: 1133445221
+      Bachelor_player_spritesheet_45: 501227385
+      Bachelor_player_spritesheet_144: 1979774520
+      Bachelor_player_spritesheet_108: -1408029188
+      Bachelor_player_spritesheet_173: 898963244
+      Bachelor_player_spritesheet_193: -1978389737
+      Bachelor_player_spritesheet_152: 1525984383
+      Bachelor_player_spritesheet_208: 1098424932
+      Bachelor_player_spritesheet_29: 1433862662
+      Bachelor_player_spritesheet_209: -1492742088
+      Bachelor_player_spritesheet_109: 1789942123
+      Bachelor_player_spritesheet_49: -1151961556
+      Bachelor_player_spritesheet_104: 574481718
+      Bachelor_player_spritesheet_140: 968414154
+      Bachelor_player_spritesheet_149: -1880975052
+      Bachelor_player_spritesheet_141: 274599533
+      Bachelor_player_spritesheet_156: -288157772
+      Bachelor_player_spritesheet_12: 572039123
+      Bachelor_player_spritesheet_30: 567500743
+      Bachelor_player_spritesheet_196: -623905305
+      Bachelor_player_spritesheet_202: -1926208179
+      Bachelor_player_spritesheet_131: 1094539669
+      Bachelor_player_spritesheet_40: -1465117424
+      Bachelor_player_spritesheet_74: 1110049034
+      Bachelor_player_spritesheet_217: 1694094549
+      Bachelor_player_spritesheet_91: 1119135911
+      Bachelor_player_spritesheet_105: -1076992536
+      Bachelor_player_spritesheet_60: 153109157
+      Bachelor_player_spritesheet_7: 1920405310
+      Bachelor_player_spritesheet_165: -1860693565
+      Bachelor_player_spritesheet_0: -90325636
+      Bachelor_player_spritesheet_186: -971636951
+      Bachelor_player_spritesheet_133: -182395321
+      Bachelor_player_spritesheet_96: 1846646900
+      Bachelor_player_spritesheet_47: 1791793426
+      Bachelor_player_spritesheet_129: 1817616522
+      Bachelor_player_spritesheet_52: -97390515
+      Bachelor_player_spritesheet_169: -172118185
+      Bachelor_player_spritesheet_8: 1500026776
+      Bachelor_player_spritesheet_36: 571801417
+      Bachelor_player_spritesheet_142: 1243061006
+      Bachelor_player_spritesheet_164: -875081227
+      Bachelor_player_spritesheet_13: -2007572858
+      Bachelor_player_spritesheet_172: 1489325343
+      Bachelor_player_spritesheet_116: -1828280893
+      Bachelor_player_spritesheet_66: 1767900407
+      Bachelor_player_spritesheet_206: 609413655
+      Bachelor_player_spritesheet_170: 852275945
+      Bachelor_player_spritesheet_77: -1734956284
+      Bachelor_player_spritesheet_214: -1711791274
+      Bachelor_player_spritesheet_51: -1263061273
+      Bachelor_player_spritesheet_5: -1147743145
+      Bachelor_player_spritesheet_185: -1435499633
+      Bachelor_player_spritesheet_43: 2134983846
+      Bachelor_player_spritesheet_161: 1404395687
+      Bachelor_player_spritesheet_16: 1723730320
+      Bachelor_player_spritesheet_139: -1042283341
+      Bachelor_player_spritesheet_31: -2146299046
+      Bachelor_player_spritesheet_86: -1699552491
+      Bachelor_player_spritesheet_204: -1084171753
+      Bachelor_player_spritesheet_162: 210631447
+      Bachelor_player_spritesheet_179: -810204681
+      Bachelor_player_spritesheet_122: -215925668
+      Bachelor_player_spritesheet_18: -502554074
+      Bachelor_player_spritesheet_220: 1954514043
+      Bachelor_player_spritesheet_84: -1588441936
+      Bachelor_player_spritesheet_107: 1643319572
+      Bachelor_player_spritesheet_113: 2023104598
+      Bachelor_player_spritesheet_119: 525488928
+      Bachelor_player_spritesheet_219: -833578414
+      Bachelor_player_spritesheet_223: 1591564908
+      Bachelor_player_spritesheet_80: 1447330902
+      Bachelor_player_spritesheet_41: 1939482759
+      Bachelor_player_spritesheet_27: -108480305
+      Bachelor_player_spritesheet_168: 1829479531
+      Bachelor_player_spritesheet_17: -2009524960
+      Bachelor_player_spritesheet_136: -164410244
+      Bachelor_player_spritesheet_1: 1265836900
+      Bachelor_player_spritesheet_176: -310202445
+      Bachelor_player_spritesheet_124: -281713133
+      Bachelor_player_spritesheet_212: 2133388970
+      Bachelor_player_spritesheet_85: -1990590441
+      Bachelor_player_spritesheet_94: 653172165
+      Bachelor_player_spritesheet_69: 1613621337
+      Bachelor_player_spritesheet_200: 1707036067
+      Bachelor_player_spritesheet_132: 606069825
+      Bachelor_player_spritesheet_134: 683355339
+      Bachelor_player_spritesheet_11: 577600864
+      Bachelor_player_spritesheet_184: 1833944859
+      Bachelor_player_spritesheet_56: -592726822
+      Bachelor_player_spritesheet_218: -1626492574
+      Bachelor_player_spritesheet_135: -2060791407
+      Bachelor_player_spritesheet_102: 1298892007
+      Bachelor_player_spritesheet_167: -480406393
+      Bachelor_player_spritesheet_26: -1790006679
+      Bachelor_player_spritesheet_221: -1810646738
+      Bachelor_player_spritesheet_111: 712506825
+      Bachelor_player_spritesheet_78: 1281237012
+      Bachelor_player_spritesheet_14: -1196031153
+      Bachelor_player_spritesheet_195: 334955782
+      Bachelor_player_spritesheet_226: 1186828909
+      Bachelor_player_spritesheet_2: -1439726691
+      Bachelor_player_spritesheet_163: -2104529110
+      Bachelor_player_spritesheet_53: 1198502883
+      Bachelor_player_spritesheet_174: 577184114
+      Bachelor_player_spritesheet_180: 1024103656
+      Bachelor_player_spritesheet_198: -1234707351
+      Bachelor_player_spritesheet_177: -2120498813
+      Bachelor_player_spritesheet_118: -1214239256
+      Bachelor_player_spritesheet_166: -804543737
+      Bachelor_player_spritesheet_63: 2060700972
+      Bachelor_player_spritesheet_227: -1434751036
+      Bachelor_player_spritesheet_42: 1584545589
+      Bachelor_player_spritesheet_62: -753585493
+      Bachelor_player_spritesheet_46: -1038151767
+      Bachelor_player_spritesheet_97: 489396589
+      Bachelor_player_spritesheet_210: 1582188948
+      Bachelor_player_spritesheet_10: 1506061516
+      Bachelor_player_spritesheet_192: -53656509
+      Bachelor_player_spritesheet_103: -1411332912
+      Bachelor_player_spritesheet_199: 1637881664
+      Bachelor_player_spritesheet_225: -461188768
+      Bachelor_player_spritesheet_160: 1638832834
+      Bachelor_player_spritesheet_35: 2078527434
+      Bachelor_player_spritesheet_65: 396643132
+      Bachelor_player_spritesheet_72: 664193531
+      Bachelor_player_spritesheet_21: 801009013
+      Bachelor_player_spritesheet_44: 1522154085
+      Bachelor_player_spritesheet_106: 86435517
+      Bachelor_player_spritesheet_153: 1963204630
+      Bachelor_player_spritesheet_197: 967974929
+      Bachelor_player_spritesheet_101: -1028454112
+      Bachelor_player_spritesheet_203: 1310199303
+      Bachelor_player_spritesheet_95: 1212122821
+      Bachelor_player_spritesheet_98: -874509430
+      Bachelor_player_spritesheet_34: 757062358
+      Bachelor_player_spritesheet_151: -730410797
+      Bachelor_player_spritesheet_81: -386733758
+      Bachelor_player_spritesheet_127: -392795407
+      Bachelor_player_spritesheet_33: -2073354999
+      Bachelor_player_spritesheet_126: -936460881
+      Bachelor_player_spritesheet_215: -276099487
+      Bachelor_player_spritesheet_23: -208726144
+      Bachelor_player_spritesheet_188: 1752038354
+      Bachelor_player_spritesheet_15: 853168688
+      Bachelor_player_spritesheet_67: -956949952
+      Bachelor_player_spritesheet_32: -1893473810
+      Bachelor_player_spritesheet_71: -149257758
+      Bachelor_player_spritesheet_38: 1360350112
+      Bachelor_player_spritesheet_178: -1852896225
+      Bachelor_player_spritesheet_171: 1242776353
+      Bachelor_player_spritesheet_76: 41347579
+      Bachelor_player_spritesheet_148: 1912249711
+      Bachelor_player_spritesheet_201: 1536769606
+      Bachelor_player_spritesheet_92: 132002516
+      Bachelor_player_spritesheet_222: -372312956
+      Bachelor_player_spritesheet_83: -1394906074
+      Bachelor_player_spritesheet_120: 1076530500
+      Bachelor_player_spritesheet_100: -1623596112
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
