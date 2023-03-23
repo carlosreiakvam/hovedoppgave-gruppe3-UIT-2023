@@ -29,11 +29,6 @@ public class PlayerBehaviour : NetworkBehaviour
         transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
     }
 
-    public override void OnNetworkSpawn()
-    {
-        transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
-    }
-
     private void LateUpdate()
     {
         if(IsLocalPlayer)

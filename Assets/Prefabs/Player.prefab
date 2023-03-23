@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6506928400759082724}
   - component: {fileID: 3652268753205044349}
   - component: {fileID: 8739179420634378625}
+  - component: {fileID: 6910107880961678592}
   m_Layer: 0
   m_Name: PlayerAnimation
   m_TagString: Untagged
@@ -120,6 +121,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 3652268753205044349}
+--- !u!114 &6910107880961678592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405672945398536863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d189b3e552e7be9468380db7b006ad44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2759338577622681735
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,32 +501,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 1586414830794883133}
   animator: {fileID: 3652268753205044349}
-  colors: []
---- !u!114 &7101014460635485259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3264219491054159882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c56473307af9a534ba7935add554b368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Variable:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
-  Min:
-    UseConstant: 1
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  Max:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: 7cf6d7f20a6c94e468245839d788d5c1, type: 2}
-  Image: {fileID: 1026990951046153725}
 --- !u!1 &3876833252100927596
 GameObject:
   m_ObjectHideFlags: 0
