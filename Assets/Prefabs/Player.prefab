@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6506928400759082724}
   - component: {fileID: 3652268753205044349}
   - component: {fileID: 8739179420634378625}
+  - component: {fileID: 5634196781880440896}
   - component: {fileID: 6910107880961678592}
   m_Layer: 0
   m_Name: PlayerAnimation
@@ -121,6 +122,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 3652268753205044349}
+--- !u!114 &5634196781880440896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405672945398536863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc533431819c356479f23d9c962906f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3652268753205044349}
 --- !u!114 &6910107880961678592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,7 +514,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: {fileID: 1586414830794883133}
-  animator: {fileID: 3652268753205044349}
 --- !u!1 &3876833252100927596
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,8 +22,6 @@ public class PlayerHealth : NetworkBehaviour
     {
         if (resetHP)
             hitPoints.SetValue(startingHP);
-
-        //OnPlayerDead += Testing_OnDeath; //Really should be subscribed to from a subscriber, not the publisher itself
     }
 
 
@@ -53,55 +51,36 @@ public class PlayerHealth : NetworkBehaviour
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 ApplyDamage();
-                VisualizeDamageServerRpc(); //hmmm...inside if?
+                VisualizeDamageServerRpc();
             }
         }
-
-       
-
     }
     private void ApplyDamage()
     {
-
         if (timer >= TIME_TO_DAMAGE)
         {
             hitPoints.ApplyChange(-lightDamageTaken.Value);
-            //healthBarVisual.fillAmount = hitPoints.Value / startingHP;
-            //health.Value = healthBarVisual.fillAmount; //set the networkvariable
             health.Value = hitPoints.Value / startingHP;
-            timer = 0; //reset             
+            timer = 0;           
             Debug.Log($"Current hitpoints for player {OwnerClientId + 1}: " + hitPoints.Value);
             if (hitPoints.Value <= 0)
             {
                 Debug.Log("DEAD!");
-                //onPlayerDeath.Invoke();
                 VizualizeDeathServerRpc();
-
             }
         }
     }
 
-    //private void Testing_OnDeath(object sender, EventArgs e)
-    //{
-    //    Debug.Log($"{OwnerClientId + 1} is dead");
-    //    gameObject.SetActive(false);
-    //}
-
-
-
-    [ServerRpc(RequireOwnership = false)] //All clients may rpc the server
+    [ServerRpc(RequireOwnership = false)] //false = All clients may rpc the server
     private void VisualizeDamageServerRpc() //Hey Server, run this code!
     {
         VisualizeDamageClientRpc();
     }
 
-
     [ClientRpc] //Kun Host
     private void VisualizeDamageClientRpc() //inform the other clients
     {
         healthBarVisual.fillAmount = health.Value; 
-
-
     }
 
     [ServerRpc(RequireOwnership = false)]
