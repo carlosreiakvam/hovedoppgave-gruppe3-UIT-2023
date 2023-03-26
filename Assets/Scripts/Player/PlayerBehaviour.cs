@@ -27,6 +27,13 @@ public class PlayerBehaviour : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
+        NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnClientDisconnectCallback;
+    }
+
+    private void Singleton_OnClientDisconnectCallback(ulong clientId)
+    {
+        if (clientId == OwnerClientId)
+            NetworkObject.Despawn();
     }
 
     private void LateUpdate()
