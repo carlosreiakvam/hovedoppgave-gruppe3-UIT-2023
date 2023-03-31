@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,47 +12,46 @@ public class CreateLobby : MonoBehaviour
     [SerializeField] GameObject scopeButtonGO;
     [SerializeField] GameObject createButtonGO;
     [SerializeField] GameObject backButtonGO;
-    [SerializeField] GameObject lobbyMenu;
+    [SerializeField] GameObject lobbyPreGameGO;
     [SerializeField] GameObject lobbyManagerGO;
-
+    [SerializeField] GameObject menuManagerGO;
+    LobbyManager lobbyManager;
+    MenuManager menuManager;
+    bool isPrivate = true;
 
     private void Start()
     {
-        GameObject parent = this.transform.parent.gameObject;
-        MenuManager menuManager = parent.GetComponent<MenuManager>();
-        LobbyManager lobbyManager = lobbyManagerGO.GetComponent<LobbyManager>();
+        menuManager = menuManagerGO.GetComponent<MenuManager>();
+        lobbyManager = lobbyManagerGO.GetComponent<LobbyManager>();
+
 
         Button scopeButton = scopeButtonGO.GetComponent<Button>();
         Button createButton = createButtonGO.GetComponent<Button>();
         Button backButton = backButtonGO.GetComponent<Button>();
         TextMeshProUGUI scopeText = scopeButton.GetComponentInChildren<TextMeshProUGUI>();
-        bool isPrivate = true;
-
 
         backButton.onClick.AddListener(() =>
         {
-            menuManager.openPage(lobbyMenu);
+            menuManager.OpenPage(MenuEnums.LobbyStart);
         });
 
-        createButton.onClick.AddListener(() =>
+        createButton.onClick.AddListener(async () =>
         {
-            lobbyManager.CreateLobby(lobbyNameInput.text, isPrivate, playerNameInput.text);
+            if (lobbyNameInput.text.Length <= 1 || playerNameInput.text.Length <= 1)
+            { menuManager.OpenAlert("Fill out all fields"); }
+            else if (playerNameInput.text.Length > 15)
+            { menuManager.OpenAlert("Enter a name less than 15 characters"); }
+            else if (lobbyNameInput.text.Length > 15)
+            { menuManager.OpenAlert("Enter a lobby name less than 15 characters"); }
+            else
+            { await lobbyManager.CreateLobby(lobbyNameInput.text, isPrivate, playerNameInput.text); }
+
         });
 
         scopeButton.onClick.AddListener(() =>
         {
-            if (isPrivate)
-            {
-                scopeText.text = "Public";
-                isPrivate = false;
-            }
-            else
-            {
-                isPrivate = true;
-                scopeText.text = "Private";
-            }
-
+            isPrivate = !isPrivate;
+            scopeText.text = isPrivate ? "Private" : "Public";
         });
     }
-
 }

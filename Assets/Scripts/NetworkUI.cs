@@ -36,7 +36,7 @@ public class NetworkUI : NetworkBehaviour
         
         if (!IsServer) return; //count only clients connected
 
-        playersNum.Value = NetworkManager.Singleton.ConnectedClients.Count;
+        playersNum.Value = Unity.Netcode.NetworkManager.Singleton.ConnectedClients.Count;
         
     }
 

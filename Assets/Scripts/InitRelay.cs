@@ -7,14 +7,14 @@ using UnityEngine;
 public class InitRelay : MonoBehaviour
 {
     Allocation allocation;
-    RelayConnector relayConnector;
+    NetworkManager relayConnector;
 
     void Start()
     {
-        relayConnector = FindObjectOfType<RelayConnector>();
+        relayConnector = FindObjectOfType<NetworkManager>();
         allocation = relayConnector.allocation;
         RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
-        NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-        NetworkManager.Singleton.StartHost();
+        Unity.Netcode.NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+        Unity.Netcode.NetworkManager.Singleton.StartHost();
     }
 }
