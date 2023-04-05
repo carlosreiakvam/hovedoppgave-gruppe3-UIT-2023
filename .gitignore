@@ -62,6 +62,8 @@ sysinfo.txt
 #ProjectSettings/EditorSettings.asset
 #UserSettings/
 #ProjectSettings/
+Assets/Parrelsync/
+Assets/ParrelSync.meta
 
 
 # IGNORES BELOW ARE FROM https://www.youtube.com/watch?v=_ewoEQFEURg
