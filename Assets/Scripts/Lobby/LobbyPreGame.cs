@@ -8,9 +8,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.Netcode;
 
-public class LobbyPreGame : MonoBehaviour
+using Unity.Services.Authentication;
+using System.Threading.Tasks;
+
+public class LobbyPreGame : MonoBehaviour //NetworkBehaviour
 {
-    [SerializeField] GameObject networkManagerGO;
+    //[SerializeField] GameObject networkManagerGO;
+
     [SerializeField] GameObject menuManagerGO;
     [SerializeField] LobbyManager lobbyManager;
     [SerializeField] GameObject leaveButtonGO;
@@ -30,9 +34,12 @@ public class LobbyPreGame : MonoBehaviour
     [SerializeField] GameObject p2ToggleGO;
     [SerializeField] GameObject p3ToggleGO;
     [SerializeField] GameObject p4ToggleGO;
+    
+    //[SerializeField] private GameObject playerPrefab;
     bool isReady = false;
     bool isGameReady = false;
-    NetworkManager relayConnector;
+    //NetworkManager relayConnector;
+
 
     Button readyButton;
     MenuManager menuManager;
@@ -43,13 +50,27 @@ public class LobbyPreGame : MonoBehaviour
     List<TextMeshProUGUI> pNames;
     GameObject[] pNamesGO;
 
+
+    /* Tore experimentation*/
+    //public event EventHandler OnPlayerDataNetworkListChanged;
+    //private NetworkList<PlayerData> playerDataNetworkList;
+    //private const string PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER = "PlayerNameMultiplayer";
+    //private string playerName;
+    //private Dictionary<ulong, bool> playerReadyDictionary;
+    //public static LobbyPreGame Instance { get; private set; }
+    //public event EventHandler OnReadyChanged;
+    /*--------------------*/
+
+
     void Start()
     {
         GameObject parent = this.transform.parent.gameObject;
         menuManager = menuManagerGO.GetComponent<MenuManager>();
 
         // Relay connector
-        relayConnector = networkManagerGO.GetComponent<NetworkManager>();
+
+        //relayConnector = networkManagerGO.GetComponent<HeroNetworkManager.NetworkManager>();
+
 
         // Handle toggles
         Toggle p1Toggle = p1ToggleGO.GetComponent<Toggle>();
@@ -83,6 +104,29 @@ public class LobbyPreGame : MonoBehaviour
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() => { lobbyManager.RequestLeaveLobby(); });
     }
+
+
+
+    /* Tore experimentation*/
+    //private void Awake()
+    //{
+    //    Instance = this;
+
+    //    playerReadyDictionary = new Dictionary<ulong, bool>();
+
+    //    playerName = PlayerPrefs.GetString(PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER, "PlayerName" + UnityEngine.Random.Range(100, 1000));
+
+    //    playerDataNetworkList = new NetworkList<PlayerData>();
+    //    playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
+    //}
+
+    //private void PlayerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
+    //{
+    //    OnPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
+    //}
+
+    /*--------------------*/
+
 
 
     public void OnEnable()
@@ -132,38 +176,98 @@ public class LobbyPreGame : MonoBehaviour
         if (authenticatedIsHost) { startGameButtonGO.SetActive(true); }
         if (isGameReady) { startGameButton.interactable = true; }
         if (lobby.Data["IsGameReady"].Value == true.ToString())
-        { 
-        //if (StartGame(authenticatedIsHost)) 
-        //{
-        //    StartGame(authenticatedIsHost);
-        //}
+        {
+            //if (StartGame(authenticatedIsHost)) 
+            //{
+            //    StartGame(authenticatedIsHost);
+            //}
 
             LoadNetwork(authenticatedIsHost);
         }
     }
 
-    private bool StartGame(bool isHost)
-    {
-        bool connected;
-        if (isHost) { connected = relayConnector.StartHost(); }
-        else { connected = relayConnector.StartClient(); }
-        return connected;
-    }
+
+    //public void SetPlayerReady()
+    //{
+    //    SetPlayerReadyServerRpc();
+    //}
+
+    //[ServerRpc(RequireOwnership = false)]
+    //private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
+    //{
+    //    SetPlayerReadyClientRpc(serverRpcParams.Receive.SenderClientId);
+
+    //    playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
+
+    //    bool allClientsReady = true;
+    //    foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
+    //    {
+    //        if (!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
+    //        {
+    //            // This player is NOT ready
+    //            allClientsReady = false;
+    //            break;
+    //        }
+    //    }
+
+    //    if (allClientsReady)
+    //    {
+    //        //KitchenGameLobby.Instance.DeleteLobby();
+    //        LoadNetwork(true);
+    //    }
+    //}
+
+    //[ClientRpc]
+    //private void SetPlayerReadyClientRpc(ulong clientId)
+    //{
+    //    playerReadyDictionary[clientId] = true;
+
+    //    OnReadyChanged?.Invoke(this, EventArgs.Empty);
+    //}
+
+    //private bool StartGame(bool isHost)
+    //{
+    //    bool connected;
+    //    if (isHost) { connected = relayConnector.StartHost(); }
+    //    else { connected = relayConnector.StartClient(); }
+    //    return connected;
+    //}
+
+
+
+
 
     private void LoadNetwork(bool isHost)
     {
         if (isHost)
         {
-            NetworkManager.Instance.StartHost();
-        }
-        else
-        {
-            NetworkManager.Instance.StartClient();
-        }
 
-        Unity.Netcode.NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
-
+            Unity.Netcode.NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+            Unity.Netcode.NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        }
     }
+
+    private void NetworkManager_ConnectionApprovalCallback(Unity.Netcode.NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, Unity.Netcode.NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
+    {
+        //    if (SceneManager.GetActiveScene().name != Loader.Scene.CharacterSelectScene.ToString())
+        //    {
+        //        connectionApprovalResponse.Approved = false;
+        //        connectionApprovalResponse.Reason = "Game has already started";
+        //        return;
+        //    }
+
+        //    if (NetworkManager.Singleton.ConnectedClientsIds.Count >= MAX_PLAYER_AMOUNT)
+        //    {
+        //        connectionApprovalResponse.Approved = false;
+        //        connectionApprovalResponse.Reason = "Game is full";
+        //        return;
+        //    }
+
+        connectionApprovalResponse.Approved = true;
+    }
+
+
+
 
     public void OnLobbyLeft()
     {

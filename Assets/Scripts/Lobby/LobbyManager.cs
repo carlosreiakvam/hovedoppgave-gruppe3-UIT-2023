@@ -9,12 +9,13 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.Events;
+using HeroNetworkManager;
 
 public class LobbyManager : MonoBehaviour
 {
     [SerializeField] private GameObject menuManagerGO;
     [SerializeField] GameObject lobbyPreGameGO;
-    [SerializeField] GameObject networkManagerGO;
+    //[SerializeField] GameObject networkManagerGO;
     MenuManager menuManager;
     LobbyPreGame lobbyPreGame;
 
@@ -28,7 +29,8 @@ public class LobbyManager : MonoBehaviour
     private string profileName;
     public string lobbyName;
     public string lobbyCode;
-    private NetworkManager networkManager;
+    //private NetworkManager networkManager;
+    //public static string OfficialRelayJoinCode;
 
     public bool isHost = false;
     private bool isLobbyActive = false;
@@ -38,7 +40,7 @@ public class LobbyManager : MonoBehaviour
         playerName = "player";
         menuManager = menuManagerGO.GetComponent<MenuManager>();
         lobbyPreGame = lobbyPreGameGO.GetComponent<LobbyPreGame>();
-        networkManager = networkManagerGO.GetComponent<NetworkManager>();
+        //networkManager = networkManagerGO.GetComponent<NetworkManager>();
     }
 
     private void Update()
@@ -162,8 +164,10 @@ public class LobbyManager : MonoBehaviour
         try
         {
 
-            Dictionary<string, string> relayValues = await networkManager.CreateRelay();
+            //Dictionary<string, string> relayValues = await networkManager.CreateRelay();
+            Dictionary<string, string> relayValues = await NetworkManager.Instance.CreateRelay();
             UpdateJoinCode(lobby, relayValues[LobbyEnums.RelayJoinCode.ToString()]);
+            Debug.Log($"CreateLobby..RelayJoinCode: { relayValues[LobbyEnums.RelayJoinCode.ToString()]}");
         }
         catch (Exception e) { Debug.Log("Relay Connector error: " + e); }
     }
@@ -179,6 +183,7 @@ public class LobbyManager : MonoBehaviour
                         value: joinCode)
                 },
             };
+
 
         this.lobby = await LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
     }
@@ -230,8 +235,11 @@ public class LobbyManager : MonoBehaviour
 
             // Connect to relay
             string relayCode = lobby.Data[LobbyEnums.RelayJoinCode.ToString()].Value;
-            networkManager.JoinRelay(relayCode);
-        }
+            Debug.Log($"QuickJoin..RelayJoinCode: { relayCode}");
+            HeroNetworkManager.NetworkManager.Instance.JoinRelay(relayCode);
+            //OfficialRelayJoinCode = relayCode;
+
+}
         catch (Exception e) { Debug.Log(e); }
 
     }

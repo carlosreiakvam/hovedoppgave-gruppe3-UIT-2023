@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using HeroNetworkManager;
 
 public class MenuManager : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class MenuManager : MonoBehaviour
         pages = new List<GameObject> { menuStartGO, lobbyStartMenuGO, lobbyCreateGO, lobbyPreGameGO, lobbyQuickJoinGO, lobbyJoinByCodeGO, alertMessageGO };
         OpenPage(MenuEnums.MenuStart);
         alertMessage = alertMessageGO.GetComponentInChildren<TextMeshProUGUI>();
+
+        HeroNetworkManager.NetworkManager OpenPreGame = HeroNetworkManager.NetworkManager.Instance.GetComponent<NetworkManager>();
+        OpenPreGame.OnRelayCreated += OpenLobbyPreGame;
+
     }
 
     public void OpenPage(MenuEnums pageToOpen)
@@ -49,6 +54,10 @@ public class MenuManager : MonoBehaviour
         alertMessage.text = message;
     }
     public void CloseAlert() { alertMessageGO.SetActive(false); }
-    public void OpenLobbyPreGame() { OpenPage(MenuEnums.LobbyPreGame); }
+    public void OpenLobbyPreGame(object sender, System.EventArgs e) 
+    { 
+        OpenPage
+            (MenuEnums.LobbyPreGame); }
+
 
 }
