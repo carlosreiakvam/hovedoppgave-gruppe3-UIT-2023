@@ -11,20 +11,24 @@ public class LobbyJoinByCodeMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI lobbyCodeInput;
     [SerializeField] GameObject goButtonGO;
     [SerializeField] GameObject backButtonGO;
-    [SerializeField] GameObject lobbyManagerGO;
-    [SerializeField] GameObject menuManagerGO;
+    MenuManager menuManager;
+    LobbyManager lobbyManager;
 
 
     // Start is called before the first frame update
+    private void Start()
+    {
+        menuManager = GetComponentInParent<MenuManager>();
+        lobbyManager = GetComponentInParent<LobbyManager>();
+
+    }
     void OnEnable()
     {
         Button goButton = goButtonGO.GetComponent<Button>();
         Button backButton = backButtonGO.GetComponent<Button>();
-        LobbyManager lobbyManager = lobbyManagerGO.GetComponent<LobbyManager>();
-        MenuManager menuManager = menuManagerGO.GetComponent<MenuManager>();
 
         goButton.onClick.AddListener(() => { lobbyManager.JoinLobbyByCode(lobbyCodeInput.text, playerNameInput.text); });
-        backButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyStart); });
+        backButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
 
     }
 

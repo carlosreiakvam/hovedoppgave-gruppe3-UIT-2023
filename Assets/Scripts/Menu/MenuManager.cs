@@ -1,63 +1,74 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using HeroNetworkManager;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject menuStartGO;
-    [SerializeField] GameObject lobbyStartMenuGO;
-    [SerializeField] GameObject lobbyCreateGO;
-    [SerializeField] GameObject lobbyPreGameGO;
-    [SerializeField] GameObject lobbyQuickJoinGO;
-    [SerializeField] GameObject lobbyJoinByCodeGO;
-    [SerializeField] GameObject alertMessageGO;
-    [SerializeField] GameObject lobbyManagerGO;
-    TextMeshProUGUI alertMessage;
-
     List<GameObject> pages;
+    Transform parentTransform;
+    GameObject alertMessageContainerGO;
+    TextMeshProUGUI alertMessage;
 
     private void Start()
     {
-        pages = new List<GameObject> { menuStartGO, lobbyStartMenuGO, lobbyCreateGO, lobbyPreGameGO, lobbyQuickJoinGO, lobbyJoinByCodeGO, alertMessageGO };
-        OpenPage(MenuEnums.MenuStart);
-        alertMessage = alertMessageGO.GetComponentInChildren<TextMeshProUGUI>();
+        try
+        {
+            alertMessageContainerGO = gameObject.transform.Find("AlertMessage").gameObject;
+            alertMessage = alertMessageContainerGO.GetComponentInChildren<TextMeshProUGUI>();
+        } catch (Exception e)
+        {
+            Debug.LogWarning("Alerts not working. Check MenuManager Start method");
+            Debug.Log(e);
+        }
 
-        HeroNetworkManager.NetworkManager OpenPreGame = HeroNetworkManager.NetworkManager.Instance.GetComponent<NetworkManager>();
-        OpenPreGame.OnRelayCreated += OpenLobbyPreGame;
+
+        RelayManager relayManager = GetComponentInParent<RelayManager>();
+        relayManager.OnRelayCreated += OpenLobbyRoom;
+
+        parentTransform = gameObject.transform;
+        pages = new List<GameObject>();
+
+        // Get menupage gameobjects
+        for (int i = 0; i < parentTransform.childCount; i++)
+        {
+            GameObject child = parentTransform.GetChild(i).gameObject;
+
+            if (child.name == "BG") child.SetActive(true); // Exclude background gameobject
+            else pages.Add(child);
+        }
+
+        OpenPage(MenuEnums.StartMenu);
 
     }
+
+
 
     public void OpenPage(MenuEnums pageToOpen)
     {
-        foreach (GameObject page in pages) { page.SetActive(false); }
-
-        switch (pageToOpen)
+        foreach (GameObject page in pages)
         {
-            case MenuEnums.MenuStart: { menuStartGO.SetActive(true); break; };
-            case MenuEnums.LobbyStart: { lobbyStartMenuGO.SetActive(true); break; };
-            case MenuEnums.LobbyCreate: { lobbyCreateGO.SetActive(true); break; };
-            case MenuEnums.LobbyQuickJoin: { lobbyQuickJoinGO.SetActive(true); break; };
-            case MenuEnums.LobbyPreGame: { lobbyPreGameGO.SetActive(true); break; };
-            case MenuEnums.LobbyJoinByCode: { lobbyJoinByCodeGO.SetActive(true); break; };
-            default: break;
+            page.SetActive(false);
+            if (page.name == pageToOpen.ToString()) page.SetActive(true);
         }
     }
 
+    public void DestroyMenus()
+    { Destroy(gameObject); }
+
+
     public void OpenAlert(string message)
     {
-        alertMessageGO.SetActive(true);
+        alertMessageContainerGO.SetActive(true);
         alertMessage.text = message;
-    }
-    public void CloseAlert() { alertMessageGO.SetActive(false); }
-    public void OpenLobbyPreGame(object sender, System.EventArgs e) 
-    { 
-        OpenPage
-            (MenuEnums.LobbyPreGame); }
 
+    }
+    public void CloseAlert()
+    {
+        alertMessageContainerGO.SetActive(false);
+    }
+    public void OpenLobbyRoom(object sender, System.EventArgs e)
+    { OpenPage(MenuEnums.LobbyRoom); }
 
 }

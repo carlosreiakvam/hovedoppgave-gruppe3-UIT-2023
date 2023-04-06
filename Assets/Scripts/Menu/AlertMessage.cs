@@ -8,16 +8,19 @@ public class AlertMessage : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI alertMessage;
     [SerializeField] GameObject alertCloseButtonGO;
-    [SerializeField] GameObject menuManagerGO;
     Button alertCloseButton;
     MenuManager menuManager;
 
+    private void Start()
+    {
+        menuManager = GetComponentInParent<MenuManager>();
+
+    }
 
     private void OnEnable()
     {
         Debug.Log("alert OnEnable");
         alertCloseButton = alertCloseButtonGO.GetComponent<Button>();
-        menuManager = menuManagerGO.GetComponent<MenuManager>();
         alertCloseButton.onClick.AddListener(() => { menuManager.CloseAlert(); });
     }
 

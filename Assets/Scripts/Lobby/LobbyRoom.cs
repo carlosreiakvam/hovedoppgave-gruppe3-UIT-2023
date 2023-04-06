@@ -8,15 +8,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.Netcode;
 
-using Unity.Services.Authentication;
-using System.Threading.Tasks;
-
-public class LobbyPreGame : MonoBehaviour //NetworkBehaviour
+public class LobbyRoom : MonoBehaviour //NetworkBehaviour
 {
-    //[SerializeField] GameObject networkManagerGO;
 
-    [SerializeField] GameObject menuManagerGO;
-    [SerializeField] LobbyManager lobbyManager;
     [SerializeField] GameObject leaveButtonGO;
     [SerializeField] GameObject readyButtonGO;
     [SerializeField] GameObject startGameButtonGO;
@@ -34,12 +28,12 @@ public class LobbyPreGame : MonoBehaviour //NetworkBehaviour
     [SerializeField] GameObject p2ToggleGO;
     [SerializeField] GameObject p3ToggleGO;
     [SerializeField] GameObject p4ToggleGO;
-    
-    //[SerializeField] private GameObject playerPrefab;
+
     bool isReady = false;
     bool isGameReady = false;
-    //NetworkManager relayConnector;
+    bool isGameInitiated = false;
 
+    private LobbyManager lobbyManager;
 
     Button readyButton;
     MenuManager menuManager;
@@ -51,26 +45,14 @@ public class LobbyPreGame : MonoBehaviour //NetworkBehaviour
     GameObject[] pNamesGO;
 
 
-    /* Tore experimentation*/
-    //public event EventHandler OnPlayerDataNetworkListChanged;
-    //private NetworkList<PlayerData> playerDataNetworkList;
-    //private const string PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER = "PlayerNameMultiplayer";
-    //private string playerName;
-    //private Dictionary<ulong, bool> playerReadyDictionary;
-    //public static LobbyPreGame Instance { get; private set; }
-    //public event EventHandler OnReadyChanged;
-    /*--------------------*/
-
-
     void Start()
     {
-        GameObject parent = this.transform.parent.gameObject;
-        menuManager = menuManagerGO.GetComponent<MenuManager>();
 
-        // Relay connector
-
-        //relayConnector = networkManagerGO.GetComponent<HeroNetworkManager.NetworkManager>();
-
+        // Connect with managers
+        menuManager = GetComponentInParent<MenuManager>();
+        lobbyManager = GetComponentInParent<LobbyManager>();
+        lobbyManager.OnHandlePollUpdate += HandlePollUpdate;
+        lobbyManager.OnLobbyLeft += OnLobbyLeft;
 
         // Handle toggles
         Toggle p1Toggle = p1ToggleGO.GetComponent<Toggle>();
@@ -103,47 +85,31 @@ public class LobbyPreGame : MonoBehaviour //NetworkBehaviour
         // Leave button
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() => { lobbyManager.RequestLeaveLobby(); });
+
+        lobbyNameText.text = lobbyManager.lobbyName;
+        lobbyCodeText.text = lobbyManager.lobbyCode;
+
+    }
+
+    public void HandlePollUpdate(object sender, EventArgs e)
+    {
+        // Get remote lobby as event argument. This happens every second.
+        var lobbyEventArgs = e as LobbyEventArgs;
+        var lobby = lobbyEventArgs.Lobby;
+        UpdateLocalLobby(lobby);
     }
 
 
-
-    /* Tore experimentation*/
-    //private void Awake()
-    //{
-    //    Instance = this;
-
-    //    playerReadyDictionary = new Dictionary<ulong, bool>();
-
-    //    playerName = PlayerPrefs.GetString(PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER, "PlayerName" + UnityEngine.Random.Range(100, 1000));
-
-    //    playerDataNetworkList = new NetworkList<PlayerData>();
-    //    playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
-    //}
-
-    //private void PlayerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
-    //{
-    //    OnPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
-    //}
-
-    /*--------------------*/
-
-
-
-    public void OnEnable()
+    public void UpdateLocalLobby(Lobby lobby)
     {
-        if (lobbyManager.isActiveAndEnabled)
-        {
-            lobbyNameText.text = lobbyManager.lobbyName;
-            lobbyCodeText.text = lobbyManager.lobby.LobbyCode;
-        }
-    }
-
-    public void UpdateFromRemoteLobby(Lobby lobby)
-    {
-        isGameReady = true;
+        isGameReady = true; // will be false if any player is not ready
         bool authenticatedIsHost = false;
         string thisPlayerId = "";
         string lobbyHostId = lobby.Data[LobbyEnums.HostId.ToString()].Value;
+
+        for (int j = 0; j < 4; j++)
+        { pNamesGO[j].SetActive(false); }
+
         int i = 0;
         foreach (Player player in lobby.Players)
         {
@@ -177,63 +143,14 @@ public class LobbyPreGame : MonoBehaviour //NetworkBehaviour
         if (isGameReady) { startGameButton.interactable = true; }
         if (lobby.Data["IsGameReady"].Value == true.ToString())
         {
-            //if (StartGame(authenticatedIsHost)) 
-            //{
-            //    StartGame(authenticatedIsHost);
-            //}
-
-            LoadNetwork(authenticatedIsHost);
+            if (!isGameInitiated)
+            {
+                isGameInitiated = true;
+                LoadNetwork(authenticatedIsHost);
+                //menuManager.DestroyMenus();
+            }
         }
     }
-
-
-    //public void SetPlayerReady()
-    //{
-    //    SetPlayerReadyServerRpc();
-    //}
-
-    //[ServerRpc(RequireOwnership = false)]
-    //private void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
-    //{
-    //    SetPlayerReadyClientRpc(serverRpcParams.Receive.SenderClientId);
-
-    //    playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
-
-    //    bool allClientsReady = true;
-    //    foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
-    //    {
-    //        if (!playerReadyDictionary.ContainsKey(clientId) || !playerReadyDictionary[clientId])
-    //        {
-    //            // This player is NOT ready
-    //            allClientsReady = false;
-    //            break;
-    //        }
-    //    }
-
-    //    if (allClientsReady)
-    //    {
-    //        //KitchenGameLobby.Instance.DeleteLobby();
-    //        LoadNetwork(true);
-    //    }
-    //}
-
-    //[ClientRpc]
-    //private void SetPlayerReadyClientRpc(ulong clientId)
-    //{
-    //    playerReadyDictionary[clientId] = true;
-
-    //    OnReadyChanged?.Invoke(this, EventArgs.Empty);
-    //}
-
-    //private bool StartGame(bool isHost)
-    //{
-    //    bool connected;
-    //    if (isHost) { connected = relayConnector.StartHost(); }
-    //    else { connected = relayConnector.StartClient(); }
-    //    return connected;
-    //}
-
-
 
 
 
@@ -241,41 +158,20 @@ public class LobbyPreGame : MonoBehaviour //NetworkBehaviour
     {
         if (isHost)
         {
-
-            Unity.Netcode.NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-            Unity.Netcode.NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+            NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
         }
     }
 
     private void NetworkManager_ConnectionApprovalCallback(Unity.Netcode.NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, Unity.Netcode.NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
     {
-        //    if (SceneManager.GetActiveScene().name != Loader.Scene.CharacterSelectScene.ToString())
-        //    {
-        //        connectionApprovalResponse.Approved = false;
-        //        connectionApprovalResponse.Reason = "Game has already started";
-        //        return;
-        //    }
-
-        //    if (NetworkManager.Singleton.ConnectedClientsIds.Count >= MAX_PLAYER_AMOUNT)
-        //    {
-        //        connectionApprovalResponse.Approved = false;
-        //        connectionApprovalResponse.Reason = "Game is full";
-        //        return;
-        //    }
 
         connectionApprovalResponse.Approved = true;
     }
 
 
-
-
-    public void OnLobbyLeft()
+    public void OnLobbyLeft(object sender, EventArgs e)
     {
-        if (menuManager == null)
-        {
-            Debug.LogWarning("SomeObject is not initialized in OnLobbyLeft");
-            return;
-        }
-        menuManager.OpenPage(MenuEnums.LobbyStart);
+        menuManager.OpenPage(MenuEnums.LobbyMenu);
     }
 }

@@ -8,18 +8,16 @@ using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
-using UnityEngine.Events;
-using HeroNetworkManager;
+
+public class LobbyEventArgs : EventArgs
+{
+    public Lobby Lobby { get; set; }
+}
+
 
 public class LobbyManager : MonoBehaviour
 {
-    [SerializeField] private GameObject menuManagerGO;
-    [SerializeField] GameObject lobbyPreGameGO;
-    //[SerializeField] GameObject networkManagerGO;
     MenuManager menuManager;
-    LobbyPreGame lobbyPreGame;
-
-    public Lobby lobby;
 
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
@@ -27,69 +25,77 @@ public class LobbyManager : MonoBehaviour
 
     private string playerName;
     private string profileName;
+
     public string lobbyName;
     public string lobbyCode;
-    //private NetworkManager networkManager;
-    //public static string OfficialRelayJoinCode;
+    public string lobbyId;
 
     public bool isHost = false;
     private bool isLobbyActive = false;
 
+    public event EventHandler OnHandlePollUpdate;  // lets LobbyRoom know when lobby is created
+    public event EventHandler OnLobbyLeft;
     private void Start()
     {
         playerName = "player";
-        menuManager = menuManagerGO.GetComponent<MenuManager>();
-        lobbyPreGame = lobbyPreGameGO.GetComponent<LobbyPreGame>();
-        //networkManager = networkManagerGO.GetComponent<NetworkManager>();
+        menuManager = GetComponent<MenuManager>();
     }
 
     private void Update()
     {
+
         if (isLobbyActive)
         {
             HandlePollUpdate();
-            if (isHost) { HandleLobbyHeartBeat(); }
+            if (isHost)
+            {
+                HandleLobbyHeartBeat();
+            }
         }
     }
 
     public async Task InitAsyncWithProfile()
     {
         var options = new InitializationOptions();
-        profileName = playerName + "_" + UnityEngine.Random.Range(10, 100);
+        profileName = GenerateProfileName();
         playerName = profileName;
         options.SetProfile(profileName);
         await UnityServices.InitializeAsync(options);
     }
+    private string GenerateProfileName()
+    {
+        return playerName + "_" + UnityEngine.Random.Range(10, 100);
+    }
 
     private async Task InitAndAuthorize()
     {
-        await InitAsyncWithProfile();
-        try { if (!AuthenticationService.Instance.IsSignedIn) { await AuthenticationService.Instance.SignInAnonymouslyAsync(); } }
-        catch (Exception e) { Debug.Log(e); }
+        try
+        {
+            await InitAsyncWithProfile();
+
+            if (!AuthenticationService.Instance.IsSignedIn) { await AuthenticationService.Instance.SignInAnonymouslyAsync(); }
+        }
+        catch (Exception e) { Debug.LogWarning(e); }
     }
 
 
 
     private async void HandlePollUpdate()
     {
+        Lobby lobby;
         float LobbyPollTimerMax = 1.1f; // rate limit of one request per 1.1 second
 
-        if (lobby != null)
+        lobbyUpdateTimer -= Time.deltaTime;
+        if (lobbyUpdateTimer < 0f)
         {
-            lobbyUpdateTimer -= Time.deltaTime;
-            if (lobbyUpdateTimer < 0f)
+            lobbyUpdateTimer = LobbyPollTimerMax;
+            Debug.Log("Handle Poll Update");
+            try
             {
-                try
-                {
-                    lobbyUpdateTimer = LobbyPollTimerMax;
-                    lobby = await LobbyService.Instance.GetLobbyAsync(lobby.Id);
-
-                    // Probably expensive. Consider changing interval or create conditionals.
-                    Debug.Log("update lobby");
-                    lobbyPreGame.UpdateFromRemoteLobby(lobby);
-                }
-                catch (Exception e) { Debug.Log(e); }
+                lobby = await LobbyService.Instance.GetLobbyAsync(lobbyId);
+                if (lobby != null) OnHandlePollUpdate.Invoke(this, new LobbyEventArgs { Lobby = lobby });
             }
+            catch { Debug.Log("Lobby not located. Trying again next PollUpdate"); }
         }
     }
 
@@ -99,13 +105,13 @@ public class LobbyManager : MonoBehaviour
         options.Data = new Dictionary<string, DataObject>()
             {
                 {
-                    "IsGameReady", new DataObject(
+                     "IsGameReady",  new DataObject(
                         visibility: DataObject.VisibilityOptions.Public,
                         value: true.ToString())
                 },
             };
 
-        lobby = await LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
+        await LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
 
     }
 
@@ -113,7 +119,7 @@ public class LobbyManager : MonoBehaviour
     {
         float heartbeatTimerMax = 15;
 
-        if (lobby != null)
+        if (isLobbyActive)
         {
             heartbeatTimer -= Time.deltaTime;
             if (heartbeatTimer < 0f)
@@ -122,7 +128,7 @@ public class LobbyManager : MonoBehaviour
                 {
                     heartbeatTimer = heartbeatTimerMax;
                     Debug.Log("sending heartbeat");
-                    await LobbyService.Instance.SendHeartbeatPingAsync(lobby.Id);
+                    await LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
                 }
                 catch (Exception e)
                 {
@@ -134,9 +140,10 @@ public class LobbyManager : MonoBehaviour
 
     public async Task CreateLobby(string lobbyName, bool isPrivate, string playerName)
     {
-        await InitAndAuthorize();
+        Lobby lobby;
         try
         {
+            await InitAndAuthorize();
             this.lobbyName = lobbyName;
             this.playerName = playerName;
             CreateLobbyOptions options = new CreateLobbyOptions
@@ -154,25 +161,25 @@ public class LobbyManager : MonoBehaviour
             };
 
             lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-            SetHostId(AuthenticationService.Instance.PlayerId);
+            lobbyId = lobby.Id;
             isLobbyActive = true;
             isHost = true;
             lobbyCode = lobby.LobbyCode;
+            SetHostId(AuthenticationService.Instance.PlayerId);
         }
-        catch (Exception e) { Debug.Log("Unable to create lobby"); Debug.Log(e); }
+        catch (Exception e) { Debug.LogWarning("Unable to create lobby"); Debug.LogError(e); }
 
         try
         {
-
-            //Dictionary<string, string> relayValues = await networkManager.CreateRelay();
-            Dictionary<string, string> relayValues = await NetworkManager.Instance.CreateRelay();
-            UpdateJoinCode(lobby, relayValues[LobbyEnums.RelayJoinCode.ToString()]);
-            Debug.Log($"CreateLobby..RelayJoinCode: { relayValues[LobbyEnums.RelayJoinCode.ToString()]}");
+            // Connect to relay
+            Dictionary<string, string> relayValues = await RelayManager.Instance.CreateRelay();
+            UpdateJoinCode(relayValues[LobbyEnums.RelayJoinCode.ToString()]);
+            Debug.Log($"CreateLobby RelayJoinCode: { relayValues[LobbyEnums.RelayJoinCode.ToString()]}");
         }
         catch (Exception e) { Debug.Log("Relay Connector error: " + e); }
     }
 
-    public async void UpdateJoinCode(Lobby lobby, string joinCode)
+    public async void UpdateJoinCode(string joinCode)
     {
         UpdateLobbyOptions options = new UpdateLobbyOptions();
         options.Data = new Dictionary<string, DataObject>()
@@ -185,14 +192,10 @@ public class LobbyManager : MonoBehaviour
             };
 
 
-        this.lobby = await LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
+        await LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
     }
 
 
-
-
-
-    [Command]
     public async void JoinLobbyByCode(string lobbyCode, string playerName)
     {
         await InitAndAuthorize();
@@ -200,15 +203,14 @@ public class LobbyManager : MonoBehaviour
 
         try
         {
-            Lobby remoteLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
+            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
 
-            if (remoteLobby != null)
+            if (lobby != null)
             {
-                lobby = remoteLobby;
                 isLobbyActive = true;
                 lobbyName = lobby.Name;
                 lobbyCode = lobby.LobbyCode;
-                menuManager.OpenPage(MenuEnums.LobbyPreGame);
+                menuManager.OpenPage(MenuEnums.LobbyRoom);
             }
         }
         catch (Exception e)
@@ -216,31 +218,35 @@ public class LobbyManager : MonoBehaviour
             Debug.Log(e);
             menuManager.OpenAlert("Lobby not found");
         }
-
-
-
     }
+
+
 
     public async void QuickJoinLobby(string playerName)
     {
+        Lobby lobby;
         try
         {
+            // Attempt to get lobby
             await InitAndAuthorize();
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions { Player = GetNewPlayer(playerName) };
             lobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
+
             isLobbyActive = true;
             lobbyName = lobby.Name;
             lobbyCode = lobby.LobbyCode;
-            menuManager.OpenPage(MenuEnums.LobbyPreGame);
+            lobbyId = lobby.Id;
 
             // Connect to relay
             string relayCode = lobby.Data[LobbyEnums.RelayJoinCode.ToString()].Value;
-            Debug.Log($"QuickJoin..RelayJoinCode: { relayCode}");
-            HeroNetworkManager.NetworkManager.Instance.JoinRelay(relayCode);
-            //OfficialRelayJoinCode = relayCode;
+            Debug.Log($"QuickJoin RelayJoinCode: { relayCode}");
+            RelayManager.Instance.JoinRelay(relayCode);
 
-}
-        catch (Exception e) { Debug.Log(e); }
+
+            // Open LobbyRoom
+            menuManager.OpenPage(MenuEnums.LobbyRoom);
+        }
+        catch (Exception e) { Debug.LogError(e); }
 
     }
 
@@ -291,7 +297,7 @@ public class LobbyManager : MonoBehaviour
                 },
             };
 
-        lobby = await LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
+        await LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
     }
 
 
@@ -307,7 +313,7 @@ public class LobbyManager : MonoBehaviour
                 }
             };
 
-        await LobbyService.Instance.UpdatePlayerAsync(lobby.Id, AuthenticationService.Instance.PlayerId, options);
+        await LobbyService.Instance.UpdatePlayerAsync(lobbyId, AuthenticationService.Instance.PlayerId, options);
     }
 
 
@@ -318,10 +324,10 @@ public class LobbyManager : MonoBehaviour
         {
             isLobbyActive = false;
             string playerId = AuthenticationService.Instance.PlayerId;
-            await LobbyService.Instance.RemovePlayerAsync(lobby.Id, playerId);
+            await LobbyService.Instance.RemovePlayerAsync(lobbyId, playerId);
             lobbyName = "";
-            playerName = "ape";
-            lobbyPreGame.OnLobbyLeft();
+            playerName = "player";
+            OnLobbyLeft.Invoke(this, EventArgs.Empty); // tells LobbyRoom that the lobby is left
         }
         catch (Exception e)
         {
@@ -330,18 +336,6 @@ public class LobbyManager : MonoBehaviour
 
     }
 
-
-    private async void KickPlayer()
-    {
-        try
-        {
-            await LobbyService.Instance.RemovePlayerAsync(lobby.Id, lobby.Players[1].Id);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
-    }
 
     public void StartGame()
     {
@@ -355,7 +349,7 @@ public class LobbyManager : MonoBehaviour
                 },
             };
 
-        LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
+        LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
     }
 
     public string GetThisPlayerId()

@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public enum MenuEnums
 { 
-    MenuStart,
-    LobbyStart,
+    StartMenu,
+    LobbyMenu,
     LobbyCreate,
-    LobbyPreGame,
+    LobbyRoom,
     LobbyQuickJoin,
     LobbyJoinByCode,
     AlertMessage

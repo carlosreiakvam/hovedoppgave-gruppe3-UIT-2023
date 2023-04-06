@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CreateLobby : MonoBehaviour
+public class LobbyCreator : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI playerNameInput;
     [SerializeField] TextMeshProUGUI lobbyNameInput;
@@ -13,16 +13,14 @@ public class CreateLobby : MonoBehaviour
     [SerializeField] GameObject createButtonGO;
     [SerializeField] GameObject backButtonGO;
     [SerializeField] GameObject lobbyPreGameGO;
-    [SerializeField] GameObject lobbyManagerGO;
-    [SerializeField] GameObject menuManagerGO;
     LobbyManager lobbyManager;
     MenuManager menuManager;
-    bool isPrivate = true;
+    bool isPrivate = false;
 
     private void Start()
     {
-        menuManager = menuManagerGO.GetComponent<MenuManager>();
-        lobbyManager = lobbyManagerGO.GetComponent<LobbyManager>();
+        menuManager = GetComponentInParent<MenuManager>();
+        lobbyManager = GetComponentInParent<LobbyManager>();
 
 
         Button scopeButton = scopeButtonGO.GetComponent<Button>();
@@ -32,7 +30,7 @@ public class CreateLobby : MonoBehaviour
 
         backButton.onClick.AddListener(() =>
         {
-            menuManager.OpenPage(MenuEnums.LobbyStart);
+            menuManager.OpenPage(MenuEnums.LobbyMenu);
         });
 
         createButton.onClick.AddListener(async () =>

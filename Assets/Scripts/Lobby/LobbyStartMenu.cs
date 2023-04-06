@@ -8,8 +8,6 @@ public class LobbyStartMenu : MonoBehaviour
     [SerializeField] GameObject quickJoinButtonGO;
     [SerializeField] GameObject joinByCodeButtonGO;
     [SerializeField] GameObject CreateButtonGO;
-    [SerializeField] GameObject menuManagerGO;
-    [SerializeField] GameObject lobbyManagerGO;
     [SerializeField] GameObject backButtonGO;
     [SerializeField] GameObject quickJoinBackGO;
     [SerializeField] GameObject createLobbyPageGO;
@@ -20,15 +18,15 @@ public class LobbyStartMenu : MonoBehaviour
 
     private void Start()
     {
+        menuManager = GetComponentInParent<MenuManager>();
+        lobbyManager = GetComponentInParent<LobbyManager>();
+
+
         Button quickJoinButton = quickJoinButtonGO.GetComponent<Button>();
         Button joinByCodeButton = joinByCodeButtonGO.GetComponent<Button>();
         Button createButton = CreateButtonGO.GetComponent<Button>();
         Button quickJoinBack = quickJoinBackGO.GetComponent<Button>();
         Button backButton = backButtonGO.GetComponent<Button>();
-        lobbyManager = lobbyManagerGO.GetComponent<LobbyManager>();
-
-        GameObject parent = this.transform.parent.gameObject;
-        menuManager = menuManagerGO.GetComponent<MenuManager>();
 
 
         // CREATE LOBBY
@@ -41,10 +39,10 @@ public class LobbyStartMenu : MonoBehaviour
         joinByCodeButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyJoinByCode); });
 
         // QUICK JOIN BACK
-        quickJoinBack.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.LobbyStart));
+        quickJoinBack.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.LobbyMenu));
 
         // BackButton
-        backButton.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.MenuStart));
+        backButton.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.StartMenu));
     }
 
 }
