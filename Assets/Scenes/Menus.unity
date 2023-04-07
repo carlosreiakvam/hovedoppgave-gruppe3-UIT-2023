@@ -8555,7 +8555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845276930943762971, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4845637959249703711, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchorMax.y
@@ -9341,7 +9341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d809cc5735f2424d96466c8490d31ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relayManagerGO: {fileID: 311260573}
 --- !u!114 &1604825180
 MonoBehaviour:
   m_ObjectHideFlags: 0
