@@ -40,7 +40,7 @@ public class RelayManager : MonoBehaviour
                 await UnityServices.InitializeAsync(options);
                 success = true;
             }
-            catch (Exception ) { retries++; Debug.Log("retrying another profilename"); }
+            catch (Exception) { retries++; Debug.Log("retrying another profilename"); }
         }
 
         // Authorize
@@ -120,7 +120,7 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    public async Task<Dictionary<string, string>> CreateRelayShortcut()
+    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
     {
         try
         {
@@ -137,10 +137,10 @@ public class RelayManager : MonoBehaviour
         {
             Debug.Log("Create Relay Error: " + e);
         }
-        Dictionary<string, string> relayDict = new()
+        Dictionary<LobbyEnums, string> relayDict = new()
         {
-            { LobbyEnums.RelayJoinCode.ToString(), relayJoinCode },
-            { LobbyEnums.AllocationId.ToString(), allocation.AllocationId.ToString() }
+            { LobbyEnums.RelayJoinCode, relayJoinCode },
+            { LobbyEnums.AllocationId, allocation.AllocationId.ToString() }
         };
         return relayDict;
     }
@@ -149,13 +149,12 @@ public class RelayManager : MonoBehaviour
     {
         try
         {
-            Debug.Log("Joining Realy with " + joinCode);
+            joinCode = joinCode.Substring(0, 6); // ensure 6 characters only
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             Debug.Log("Success on JoinRelay");
-            NetworkManager.Singleton.StartClient();
         }
 
         catch (RelayServiceException e)
@@ -163,6 +162,7 @@ public class RelayManager : MonoBehaviour
             Debug.Log("RelayServiceException: Fail on JoinRelay");
             Debug.Log(e);
         }
+        NetworkManager.Singleton.StartClient();
     }
 
 
