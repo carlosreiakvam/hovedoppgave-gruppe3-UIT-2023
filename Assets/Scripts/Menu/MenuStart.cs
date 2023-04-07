@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +18,5 @@ public class MenuStart : MonoBehaviour
 
         Button beginButton = beginButtonGO.GetComponent<Button>();
         beginButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
-
     }
-
-
 }

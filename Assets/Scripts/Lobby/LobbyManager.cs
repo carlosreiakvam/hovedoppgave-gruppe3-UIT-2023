@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
-using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
@@ -18,13 +17,12 @@ public class LobbyEventArgs : EventArgs
 public class LobbyManager : MonoBehaviour
 {
     MenuManager menuManager;
+    [SerializeField] GameObject relayManagerGO;
+    RelayManager relayManager;
 
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
     private int maxPlayers = 4;
-
-    private string playerName;
-    private string profileName;
 
     public string lobbyName;
     public string lobbyCode;
@@ -35,10 +33,12 @@ public class LobbyManager : MonoBehaviour
 
     public event EventHandler OnHandlePollUpdate;  // lets LobbyRoom know when lobby is created
     public event EventHandler OnLobbyLeft;
+
+
     private void Start()
     {
-        playerName = "player";
         menuManager = GetComponent<MenuManager>();
+        relayManager = relayManagerGO.GetComponent<RelayManager>();
     }
 
     private void Update()
@@ -53,31 +53,6 @@ public class LobbyManager : MonoBehaviour
             }
         }
     }
-
-    public async Task InitAsyncWithProfile()
-    {
-        var options = new InitializationOptions();
-        profileName = GenerateProfileName();
-        playerName = profileName;
-        options.SetProfile(profileName);
-        await UnityServices.InitializeAsync(options);
-    }
-    private string GenerateProfileName()
-    {
-        return playerName + "_" + UnityEngine.Random.Range(10, 100);
-    }
-
-    private async Task InitAndAuthorize()
-    {
-        try
-        {
-            await InitAsyncWithProfile();
-
-            if (!AuthenticationService.Instance.IsSignedIn) { await AuthenticationService.Instance.SignInAnonymouslyAsync(); }
-        }
-        catch (Exception e) { Debug.LogWarning(e); }
-    }
-
 
 
     private async void HandlePollUpdate()
@@ -143,9 +118,8 @@ public class LobbyManager : MonoBehaviour
         Lobby lobby;
         try
         {
-            await InitAndAuthorize();
+            await relayManager.InitAndAuthorize();
             this.lobbyName = lobbyName;
-            this.playerName = playerName;
             CreateLobbyOptions options = new CreateLobbyOptions
             {
                 IsPrivate = isPrivate,
@@ -198,7 +172,8 @@ public class LobbyManager : MonoBehaviour
 
     public async void JoinLobbyByCode(string lobbyCode, string playerName)
     {
-        await InitAndAuthorize();
+        //playerName = GetSemiUniqueName(playerName);
+        await relayManager.InitAndAuthorize();
         JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions { Player = GetNewPlayer(playerName) };
 
         try
@@ -228,7 +203,9 @@ public class LobbyManager : MonoBehaviour
         try
         {
             // Attempt to get lobby
-            await InitAndAuthorize();
+            //playerName = GetSemiUniqueName(playerName);
+            await relayManager.InitAndAuthorize();
+
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions { Player = GetNewPlayer(playerName) };
             lobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
 
@@ -326,7 +303,6 @@ public class LobbyManager : MonoBehaviour
             string playerId = AuthenticationService.Instance.PlayerId;
             await LobbyService.Instance.RemovePlayerAsync(lobbyId, playerId);
             lobbyName = "";
-            playerName = "player";
             OnLobbyLeft.Invoke(this, EventArgs.Empty); // tells LobbyRoom that the lobby is left
         }
         catch (Exception e)

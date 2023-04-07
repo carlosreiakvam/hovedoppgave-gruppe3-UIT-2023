@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Netcode;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
@@ -24,8 +23,7 @@ public class MenuManager : MonoBehaviour
         }
 
 
-        RelayManager relayManager = GetComponentInParent<RelayManager>();
-        relayManager.OnRelayCreated += OpenLobbyRoom;
+        RelayManager.Instance.OnRelayCreated += OpenLobbyRoom;
 
         parentTransform = gameObject.transform;
         pages = new List<GameObject>();

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyStartMenu : MonoBehaviour
@@ -14,12 +13,10 @@ public class LobbyStartMenu : MonoBehaviour
     [SerializeField] GameObject lobbyPreGameGO;
 
     MenuManager menuManager;
-    LobbyManager lobbyManager;
 
     private void Start()
     {
         menuManager = GetComponentInParent<MenuManager>();
-        lobbyManager = GetComponentInParent<LobbyManager>();
 
 
         Button quickJoinButton = quickJoinButtonGO.GetComponent<Button>();

@@ -163,9 +163,10 @@ public class LobbyRoom : MonoBehaviour //NetworkBehaviour
         }
     }
 
-    private void NetworkManager_ConnectionApprovalCallback(Unity.Netcode.NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, Unity.Netcode.NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
+    private void NetworkManager_ConnectionApprovalCallback(
+        NetworkManager.ConnectionApprovalRequest connectionApprovalRequest,
+        NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
     {
-
         connectionApprovalResponse.Approved = true;
     }
 

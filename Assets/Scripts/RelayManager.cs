@@ -11,7 +11,6 @@ using QFSW.QC;
 using System;
 using System.Collections.Generic;
 
-
 public class RelayManager : MonoBehaviour
 {
     public event EventHandler OnRelayCreated;  // lets LobbyRoom know when lobby is created
@@ -21,6 +20,36 @@ public class RelayManager : MonoBehaviour
 
     //Singleton pattern: https://www.youtube.com/watch?v=2pCkInvkwZ0&t=125s
     public static RelayManager Instance;
+
+
+
+    public async Task InitAndAuthorize()
+    {
+        int maxRetries = 5;
+        int retries = 0;
+        bool success = false;
+
+        while (!success && retries < maxRetries)
+        {
+            // Init async with profile. Attempts to get a unique profilename
+            try
+            {
+                var options = new InitializationOptions();
+                string profileName = "profilename" + UnityEngine.Random.Range(0, 10000);
+                options.SetProfile(profileName);
+                await UnityServices.InitializeAsync(options);
+                success = true;
+            }
+            catch (Exception ) { retries++; Debug.Log("retrying another profilename"); }
+        }
+
+        // Authorize
+        try
+        {
+            if (!AuthenticationService.Instance.IsSignedIn) await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+        catch (Exception e) { Debug.LogWarning(e); }
+    }
 
 
     private void Awake()
@@ -44,7 +73,6 @@ public class RelayManager : MonoBehaviour
     [Command]
     public async Task<Dictionary<string, string>> CreateRelay()
     {
-        Debug.Log("CreateRelay in RelayManager");
         try
         {
             allocation = await RelayService.Instance.CreateAllocationAsync(3);
@@ -75,13 +103,11 @@ public class RelayManager : MonoBehaviour
     {
         try
         {
-            //relayJoinCode = joinCode; Just for testing
             Debug.Log("Joining Realy with " + joinCode);
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-            //relayCreated.Invoke();
             OnRelayCreated?.Invoke(this, EventArgs.Empty);
             Debug.Log("Success on JoinRelay");
             NetworkManager.Singleton.StartClient();
@@ -93,5 +119,51 @@ public class RelayManager : MonoBehaviour
             Debug.Log(e);
         }
     }
+
+    public async Task<Dictionary<string, string>> CreateRelayShortcut()
+    {
+        try
+        {
+            allocation = await RelayService.Instance.CreateAllocationAsync(3);
+            relayJoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+
+            RelayServerData relayServerData = new(allocation, "dtls");
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+            Debug.Log("; JoinCode: " + relayJoinCode);
+            NetworkManager.Singleton.StartHost();
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Create Relay Error: " + e);
+        }
+        Dictionary<string, string> relayDict = new()
+        {
+            { LobbyEnums.RelayJoinCode.ToString(), relayJoinCode },
+            { LobbyEnums.AllocationId.ToString(), allocation.AllocationId.ToString() }
+        };
+        return relayDict;
+    }
+
+    public async Task JoinRelayShortcut(string joinCode)
+    {
+        try
+        {
+            Debug.Log("Joining Realy with " + joinCode);
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+
+            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+            Debug.Log("Success on JoinRelay");
+            NetworkManager.Singleton.StartClient();
+        }
+
+        catch (RelayServiceException e)
+        {
+            Debug.Log("RelayServiceException: Fail on JoinRelay");
+            Debug.Log(e);
+        }
+    }
+
 
 }
