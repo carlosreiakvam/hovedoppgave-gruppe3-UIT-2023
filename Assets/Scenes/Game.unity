@@ -8059,6 +8059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkManagerPrefab: {fileID: 1058304873128893468, guid: d673910399952ef4db3188980caf0e18, type: 3}
+  chatVisualPrefab: {fileID: 6487342670067395704, guid: b7fe7dd233c404a438a706083ae6571b, type: 3}
   playerPrefab: {fileID: 2900308809295077618, guid: 030c8e3040f08c048a5600e084c6be23, type: 3}
   relayManagerGO: {fileID: 4823967718271041210, guid: cf92a8fea4f1b374eab620dea57d0395, type: 3}
   startHostButtonGO: {fileID: 722793845}

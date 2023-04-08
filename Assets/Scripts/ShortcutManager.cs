@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class ShortcutManager : NetworkBehaviour
 {
     [SerializeField] NetworkManager NetworkManagerPrefab;
+    [SerializeField] GameObject chatVisualPrefab;
     [SerializeField] Transform playerPrefab;
     [SerializeField] GameObject relayManagerGO;
     [SerializeField] GameObject startHostButtonGO;
@@ -18,6 +19,7 @@ public class ShortcutManager : NetworkBehaviour
     [SerializeField] GameObject joinCodeDisplayGO;
     [SerializeField] TextMeshProUGUI joinCodeText;
     TextMeshProUGUI joinCodeDisplay;
+    ChatManager chatManager;
 
     private void Start()
     {
@@ -26,14 +28,18 @@ public class ShortcutManager : NetworkBehaviour
         Button startHostButton = startHostButtonGO.GetComponent<Button>();
         Button startClientButton = startClientButtonGO.GetComponent<Button>();
 
-        if (NetworkManager != null)
+        bool isGameStartedFromLobby = NetworkManager != null;
+        if (isGameStartedFromLobby)
         {
             joinCodeInput.interactable = false;
             startHostButton.interactable = false;
             startClientButton.interactable = false;
             return; // OPT OUT IF COMMING FROM LOBBY
         }
+
         Instantiate(NetworkManagerPrefab);
+        Instantiate(chatVisualPrefab);
+
 
         startHostButton.onClick.AddListener(() =>
         {
