@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - DefaultEnemy
-  - 
+  - Player
   - 
   - 
   - 
@@ -53,4 +53,7 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 1926903315
+    locked: 0
+  - name: Pickups
+    uniqueID: 4005772915
     locked: 0
