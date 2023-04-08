@@ -2028,7 +2028,7 @@ MonoBehaviour:
   joinByCodeButtonGO: {fileID: 681579798}
   CreateButtonGO: {fileID: 1454971935}
   backButtonGO: {fileID: 1944959358}
-  quickJoinBackGO: {fileID: 19179518}
+  quickJoinBackGO: {fileID: 810196704}
   createLobbyPageGO: {fileID: 1500708851}
   lobbyPreGameGO: {fileID: 428201334}
 --- !u!1 &305527034
@@ -4723,7 +4723,7 @@ GameObject:
   - component: {fileID: 810196705}
   - component: {fileID: 810196704}
   m_Layer: 5
-  m_Name: Back Button
+  m_Name: QuickJoinBackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8363,7 +8363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4845276930943762971, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: -0.000091552734
       objectReference: {fileID: 0}
     - target: {fileID: 4845637959249703711, guid: 2da3dcc22749e7f4280737786d898334, type: 3}
       propertyPath: m_AnchorMax.y
@@ -11250,6 +11250,10 @@ PrefabInstance:
     - target: {fileID: 1058304873128893469, guid: d673910399952ef4db3188980caf0e18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058304873128893471, guid: d673910399952ef4db3188980caf0e18, type: 3}
+      propertyPath: m_ProtocolType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d673910399952ef4db3188980caf0e18, type: 3}
