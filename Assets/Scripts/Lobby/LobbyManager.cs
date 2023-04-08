@@ -64,7 +64,6 @@ public class LobbyManager : MonoBehaviour
         if (lobbyUpdateTimer < 0f)
         {
             lobbyUpdateTimer = LobbyPollTimerMax;
-            Debug.Log("Handle Poll Update");
             try
             {
                 lobby = await LobbyService.Instance.GetLobbyAsync(lobbyId);
@@ -102,7 +101,6 @@ public class LobbyManager : MonoBehaviour
                 try
                 {
                     heartbeatTimer = heartbeatTimerMax;
-                    Debug.Log("sending heartbeat");
                     await LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
                 }
                 catch (Exception e)

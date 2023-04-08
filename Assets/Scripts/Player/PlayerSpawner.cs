@@ -10,16 +10,25 @@ public class PlayerSpawner : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
 
-        if(IsServer) {
+        if (IsServer)
+        {
             NetworkManager.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
-
-            //Transform playerTransform = Instantiate(playerPrefab);
-            //playerTransform.GetComponent<NetworkObject>().Spawn(true);
+            NetworkManager.OnClientConnectedCallback += OnClientConnected; 
         }
     }
 
-    private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+    private void OnClientConnected(ulong clientId)
     {
+        Debug.Log("Spawning player");
+        Transform playerTransform = Instantiate(playerPrefab);
+        playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+    }
+
+
+    private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+        
+    {
+        Debug.Log("OnLoadEventCompleted");
         foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
         {
             Transform playerTransform = Instantiate(playerPrefab);

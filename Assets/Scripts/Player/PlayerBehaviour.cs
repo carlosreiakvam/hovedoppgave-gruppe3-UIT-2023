@@ -10,18 +10,35 @@ public class PlayerBehaviour : NetworkBehaviour
     private readonly float boundY = 0.17f;
     [SerializeField] private FloatReference playerSpeed;
     [SerializeField] private List<Vector2> spawnPositionList;
+
     private Camera mainCamera;
     private float horizontalInput;
     private float verticalInput;
     private Vector2 lastInteractDir;
     private LayerMask enemyLayerMask;
     private Animator animator;
+    private bool gameInFocus;
+    
 
 
     private void Awake()
     {
         mainCamera = Camera.main; //Locates the Main Camera with the MainCamera tag
         animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Start()
+    {
+        ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
+    }
+
+    private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
+    {
+        //Debug.Log("Game in focus? " + e.IsChatActive);
+
+        gameInFocus = e.IsChatActive;
+
+
     }
 
     public override void OnNetworkSpawn()
@@ -84,7 +101,8 @@ public class PlayerBehaviour : NetworkBehaviour
 
     void Update()
     {
-        HandleMovement();
+        if (!gameInFocus)
+            HandleMovement();
         
     }
 

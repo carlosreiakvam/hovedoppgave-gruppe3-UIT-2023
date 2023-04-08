@@ -10,7 +10,6 @@ public class NetworkUI : NetworkBehaviour
 {
     [SerializeField] private Button hostButton;
     [SerializeField] private Button clientButton;
-    [SerializeField] private TextMeshProUGUI playersCountText;
     private NetworkVariable<int> playersNum = new(0, NetworkVariableReadPermission.Everyone);
 
 
@@ -32,12 +31,10 @@ public class NetworkUI : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
-        playersCountText.text = "Players: " + playersNum.Value.ToString();
-        
-        if (!IsServer) return; //count only clients connected
+/*        if (!IsServer) return; //count only clients connected
 
         playersNum.Value = Unity.Netcode.NetworkManager.Singleton.ConnectedClients.Count;
-        
+*/        
     }
 
     [ClientRpc]

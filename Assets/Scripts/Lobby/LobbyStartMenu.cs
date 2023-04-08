@@ -4,13 +4,13 @@ using UnityEngine.UI;
 public class LobbyStartMenu : MonoBehaviour
 {
     // GameObjects
-    [SerializeField] GameObject quickJoinButtonGO;
-    [SerializeField] GameObject joinByCodeButtonGO;
-    [SerializeField] GameObject CreateButtonGO;
-    [SerializeField] GameObject backButtonGO;
-    [SerializeField] GameObject quickJoinBackGO;
-    [SerializeField] GameObject createLobbyPageGO;
-    [SerializeField] GameObject lobbyPreGameGO;
+    [SerializeField] private Button quickJoinButtonGO;
+    [SerializeField] private Button joinByCodeButtonGO;
+    [SerializeField] private Button CreateButtonGO;
+    [SerializeField] private Button backButtonGO;
+    [SerializeField] private Button quickJoinBackGO;
+    [SerializeField] private Button createLobbyPageGO;
+    [SerializeField] private Button lobbyPreGameGO;
 
     MenuManager menuManager;
 
@@ -18,28 +18,20 @@ public class LobbyStartMenu : MonoBehaviour
     {
         menuManager = GetComponentInParent<MenuManager>();
 
-
-        Button quickJoinButton = quickJoinButtonGO.GetComponent<Button>();
-        Button joinByCodeButton = joinByCodeButtonGO.GetComponent<Button>();
-        Button createButton = CreateButtonGO.GetComponent<Button>();
-        Button quickJoinBack = quickJoinBackGO.GetComponent<Button>();
-        Button backButton = backButtonGO.GetComponent<Button>();
-
-
         // CREATE LOBBY
-        createButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyCreate); });
+        CreateButtonGO.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyCreate); });
 
         // LOBBY QUICK JOIN
-        quickJoinButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyQuickJoin); });
+        quickJoinButtonGO.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyQuickJoin); });
 
         // JOIN BY CODE
-        joinByCodeButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyJoinByCode); });
+        joinByCodeButtonGO.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyJoinByCode); });
 
         // QUICK JOIN BACK
-        quickJoinBack.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.LobbyMenu));
+        quickJoinBackGO.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.LobbyMenu));
 
         // BackButton
-        backButton.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.StartMenu));
+        backButtonGO.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.StartMenu));
     }
 
 }

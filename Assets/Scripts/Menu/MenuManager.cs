@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     Transform parentTransform;
     GameObject alertMessageContainerGO;
     TextMeshProUGUI alertMessage;
+    [SerializeField] private GameObject chatVisual;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class MenuManager : MonoBehaviour
         }
 
         OpenPage(MenuEnums.StartMenu);
+        chatVisual.SetActive(false);
 
     }
 
@@ -45,6 +47,10 @@ public class MenuManager : MonoBehaviour
 
     public void OpenPage(MenuEnums pageToOpen)
     {
+        if (pageToOpen == MenuEnums.LobbyRoom)
+            chatVisual.SetActive(true);
+
+
         foreach (GameObject page in pages)
         {
             page.SetActive(false);
