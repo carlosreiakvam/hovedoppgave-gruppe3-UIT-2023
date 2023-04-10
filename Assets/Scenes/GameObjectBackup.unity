@@ -1319,6 +1319,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5be063053b2784fa398f8c724083b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pName:
+  - {fileID: 11400000, guid: 4596cce412c47d64ca68edd844dcf047, type: 2}
+  - {fileID: 11400000, guid: 65cbb3c329c92b14aa26a30f5f26d08c, type: 2}
+  - {fileID: 11400000, guid: bb39958c836be044f9f44476e9934732, type: 2}
+  - {fileID: 11400000, guid: 36aa7bc4bd6a8e44fa42365d1210b08c, type: 2}
   chatInput: {fileID: 1137983306}
   chatContent: {fileID: 1851164492}
 --- !u!1 &2075191743

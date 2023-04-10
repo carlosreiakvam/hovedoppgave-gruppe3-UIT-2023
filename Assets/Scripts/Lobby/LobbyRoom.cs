@@ -10,7 +10,7 @@ using Unity.Netcode;
 
 public class LobbyRoom : MonoBehaviour //NetworkBehaviour
 {
-
+    public const string PLAYER_NAME = "PlayerName";
     [SerializeField] GameObject leaveButtonGO;
     [SerializeField] GameObject readyButtonGO;
     [SerializeField] GameObject startGameButtonGO;
@@ -28,6 +28,7 @@ public class LobbyRoom : MonoBehaviour //NetworkBehaviour
     [SerializeField] GameObject p2ToggleGO;
     [SerializeField] GameObject p3ToggleGO;
     [SerializeField] GameObject p4ToggleGO;
+    [SerializeField] List<PlayerNameSO> playerNameList = new(4);
 
     bool isReady = false;
     bool isGameReady = false;
@@ -131,12 +132,23 @@ public class LobbyRoom : MonoBehaviour //NetworkBehaviour
 
             // if player of current iteration is host
             if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(lobbyHostId))
-            { pNames[i].text = player.Data["PlayerName"].Value + " [host]"; }
-            else { pNames[i].text = player.Data["PlayerName"].Value; }
+            { 
+                pNames[i].text = player.Data[PLAYER_NAME].Value + " [host]"; 
+            }
+            else 
+            { 
+                pNames[i].text = player.Data[PLAYER_NAME].Value; 
+            }
 
             // Game is not ready if any one of the ready states are false
             if (!isReadyStates[i].isOn) { isGameReady = false; }
+
+
+            //playerNameList[i].PlayerName = player.Data[PLAYER_NAME].Value;
+            playerNameList[i].SetValue(player.Data[PLAYER_NAME].Value);
+
             i++;
+
         }
 
         if (authenticatedIsHost) { startGameButtonGO.SetActive(true); }
