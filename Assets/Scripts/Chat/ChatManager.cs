@@ -13,6 +13,7 @@ public class ChatManager : NetworkBehaviour
 {
     public static ChatManager Instance;
     public event EventHandler<OnChangeFocusEventArgs> OnChangeFocus;
+    [SerializeField] private List<PlayerNameSO> pName;
     public class OnChangeFocusEventArgs : EventArgs
     {
         public bool IsChatActive;
@@ -98,8 +99,7 @@ public class ChatManager : NetworkBehaviour
 
     private void AddMsg(string message , ulong senderPlayerId)
     {
-        
-        _messages.Add($"Player {senderPlayerId}: { message }");
+        _messages.Add($"{pName[(int)senderPlayerId].Value}  : {message} ");
 
         if (_messages.Count > maximumMessages)
             _messages.RemoveAt(0);
