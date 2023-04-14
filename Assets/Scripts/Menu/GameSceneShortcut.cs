@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameSceneShortcut : MonoBehaviour
 {
     [SerializeField] Button gameSceneButtonGO;
-    public bool isShortcutUsed = false;
+    [HideInInspector] public bool isShortcutUsed = false;
 
     // Start is called before the first frame update
     void Start()

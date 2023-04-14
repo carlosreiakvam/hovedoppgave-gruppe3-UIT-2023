@@ -24,11 +24,10 @@ public class LobbyManager : MonoBehaviour
     private float lobbyUpdateTimer;
     private int maxPlayers = 4;
 
-    public string lobbyName;
-    public string lobbyCode;
-    public string lobbyId;
-
-    public bool isHost = false;
+    [HideInInspector] public string lobbyName;
+    [HideInInspector] public string lobbyCode;
+    [HideInInspector] public string lobbyId;
+    [HideInInspector] public bool isHost = false;
     private bool isLobbyActive = false;
 
     public event EventHandler OnHandlePollUpdate;  // lets LobbyRoom know when lobby is created
@@ -146,7 +145,7 @@ public class LobbyManager : MonoBehaviour
             // Connect to relay
             Dictionary<string, string> relayValues = await RelayManager.Instance.CreateRelay();
             UpdateJoinCode(relayValues[LobbyEnums.RelayJoinCode.ToString()]);
-            Debug.Log($"CreateLobby RelayJoinCode: { relayValues[LobbyEnums.RelayJoinCode.ToString()]}");
+            Debug.Log($"CreateLobby RelayJoinCode: {relayValues[LobbyEnums.RelayJoinCode.ToString()]}");
         }
         catch (Exception e) { Debug.Log("Relay Connector error: " + e); }
     }
@@ -214,7 +213,7 @@ public class LobbyManager : MonoBehaviour
 
             // Connect to relay
             string relayCode = lobby.Data[LobbyEnums.RelayJoinCode.ToString()].Value;
-            Debug.Log($"QuickJoin RelayJoinCode: { relayCode}");
+            Debug.Log($"QuickJoin RelayJoinCode: {relayCode}");
             RelayManager.Instance.JoinRelay(relayCode);
 
 
