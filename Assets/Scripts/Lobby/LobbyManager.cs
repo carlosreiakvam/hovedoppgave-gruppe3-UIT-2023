@@ -116,7 +116,7 @@ public class LobbyManager : MonoBehaviour
         Lobby lobby;
         try
         {
-            await relayManager.InitAndAuthorize();
+            await relayManager.Authorize();
             this.lobbyName = lobbyName;
             CreateLobbyOptions options = new CreateLobbyOptions
             {
@@ -171,7 +171,7 @@ public class LobbyManager : MonoBehaviour
     public async void JoinLobbyByCode(string lobbyCode, string playerName)
     {
         //playerName = GetSemiUniqueName(playerName);
-        await relayManager.InitAndAuthorize();
+        await relayManager.Authorize();
         JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions { Player = GetNewPlayer(playerName) };
 
         try
@@ -202,7 +202,7 @@ public class LobbyManager : MonoBehaviour
         {
             // Attempt to get lobby
             //playerName = GetSemiUniqueName(playerName);
-            await relayManager.InitAndAuthorize();
+            await relayManager.Authorize();
 
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions { Player = GetNewPlayer(playerName) };
             lobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);

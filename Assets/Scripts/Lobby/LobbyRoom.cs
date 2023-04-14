@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.Netcode;
 
-public class LobbyRoom : MonoBehaviour //NetworkBehaviour
+public class LobbyRoom : MonoBehaviour
 {
     public const string PLAYER_NAME = "PlayerName";
     [SerializeField] GameObject leaveButtonGO;
@@ -45,29 +45,43 @@ public class LobbyRoom : MonoBehaviour //NetworkBehaviour
     List<TextMeshProUGUI> pNames;
     GameObject[] pNamesGO;
 
-
     void Start()
     {
+        ConnectWithManagers();
+        GetToggles();
+        InitPlayerNames();
+        HandleReadyButton();
+        HandleStartGameButton();
+        HandleLeaveButton();
+        SetLobbyText();
+    }
 
-        // Connect with managers
+
+    private void ConnectWithManagers()
+    {
         menuManager = GetComponentInParent<MenuManager>();
         lobbyManager = GetComponentInParent<LobbyManager>();
         lobbyManager.OnHandlePollUpdate += HandlePollUpdate;
         lobbyManager.OnLobbyLeft += OnLobbyLeft;
-
-        // Handle toggles
+    }
+    private void GetToggles()
+    {
         Toggle p1Toggle = p1ToggleGO.GetComponent<Toggle>();
         Toggle p2Toggle = p2ToggleGO.GetComponent<Toggle>();
         Toggle p3Toggle = p3ToggleGO.GetComponent<Toggle>();
         Toggle p4Toggle = p4ToggleGO.GetComponent<Toggle>();
         isReadyStates = new List<Toggle> { p1Toggle, p2Toggle, p3Toggle, p4Toggle };
+    }
 
-        // Player names
+    private void InitPlayerNames()
+    {
         pNames = new List<TextMeshProUGUI> { p1Name, p2Name, p3Name, p4Name };
         pNamesGO = new GameObject[] { p1, p2, p3, p4 };
         foreach (GameObject playerName in pNamesGO) { playerName.SetActive(false); }
+    }
 
-        // Ready button
+    private void HandleReadyButton()
+    {
         readyButton = readyButtonGO.GetComponent<Button>();
         readyButtonText = readyButton.GetComponentInChildren<TextMeshProUGUI>();
         readyButton.onClick.AddListener(() =>
@@ -76,21 +90,28 @@ public class LobbyRoom : MonoBehaviour //NetworkBehaviour
             lobbyManager.SetPlayerReady(isReady);
             readyButtonText.text = isReady ? "Not ready" : "Ready";
         });
+    }
 
-        // Start game button
+    private void HandleStartGameButton()
+    {
         startGameButton = startGameButtonGO.GetComponent<Button>();
         startGameButton.interactable = false;
         startGameButtonGO.SetActive(false);
         startGameButton.onClick.AddListener(() => { lobbyManager.QueGameStart(); });
-
-        // Leave button
+    }
+    private void HandleLeaveButton()
+    {
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() => { lobbyManager.RequestLeaveLobby(); });
+    }
 
+    private void SetLobbyText()
+    {
         lobbyNameText.text = lobbyManager.lobbyName;
         lobbyCodeText.text = lobbyManager.lobbyCode;
-
     }
+
+
 
     public void HandlePollUpdate(object sender, EventArgs e)
     {
@@ -128,7 +149,6 @@ public class LobbyRoom : MonoBehaviour //NetworkBehaviour
 
             // Check if authenticated player is host of this lobby
             authenticatedIsHost = thisPlayerId.Equals(lobbyHostId);
-            //thisPlayerIsHost = player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(lobbyHostId)
 
             // if player of current iteration is host
             if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(lobbyHostId))
@@ -159,7 +179,6 @@ public class LobbyRoom : MonoBehaviour //NetworkBehaviour
             {
                 isGameInitiated = true;
                 LoadNetwork(authenticatedIsHost);
-                //menuManager.DestroyMenus();
             }
         }
     }

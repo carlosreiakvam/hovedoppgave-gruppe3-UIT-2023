@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuStart : MonoBehaviour
@@ -18,5 +20,8 @@ public class MenuStart : MonoBehaviour
 
         Button beginButton = beginButtonGO.GetComponent<Button>();
         beginButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
+
+        // TODO: Delete on launch
+        
     }
 }

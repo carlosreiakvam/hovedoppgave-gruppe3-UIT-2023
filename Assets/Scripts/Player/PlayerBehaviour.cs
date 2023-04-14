@@ -18,7 +18,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private LayerMask enemyLayerMask;
     private Animator animator;
     private bool gameInFocus;
-    
+
 
 
     private void Awake()
@@ -29,6 +29,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void Start()
     {
+        if (!ChatManager.Instance) return;
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
     }
 
@@ -56,7 +57,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if(IsLocalPlayer)
+        if (IsLocalPlayer)
         {
             //Vector3 pos = transform.position;
             //pos.z = -10;
@@ -103,7 +104,7 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (!gameInFocus)
             HandleMovement();
-        
+
     }
 
     //void FixedUpdate()
@@ -114,7 +115,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private void HandleInteractions()
     {
         if (!IsLocalPlayer) return;
-        
+
         Vector2 inputVector = new Vector2(horizontalInput, verticalInput).normalized;
         Vector2 moveDir = new(inputVector.x, inputVector.y);
 
@@ -123,8 +124,8 @@ public class PlayerBehaviour : NetworkBehaviour
 
         float interactDistance = 0f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDir, interactDistance);
-        
-        if(hit.transform.TryGetComponent(out Enemy en))
+
+        if (hit.transform.TryGetComponent(out Enemy en))
             Debug.Log("Hit Something: " + en.tag);
 
 
