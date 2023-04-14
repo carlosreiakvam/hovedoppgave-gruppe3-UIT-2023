@@ -10016,7 +10016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d809cc5735f2424d96466c8490d31ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatVisual: {fileID: 2015618075}
+  chatVisual: {fileID: 1108963878}
 --- !u!114 &1604825180
 MonoBehaviour:
   m_ObjectHideFlags: 0
