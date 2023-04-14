@@ -97,7 +97,7 @@ public class ChatManager : NetworkBehaviour
         chatInput.text = "";
     }
 
-    private void AddMsg(string message , ulong senderPlayerId)
+    private void AddMsg(string message, ulong senderPlayerId)
     {
         _messages.Add($"{pName[(int)senderPlayerId].Value}  : {message} ");
 
@@ -111,13 +111,13 @@ public class ChatManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SendChatMessageServerRpc(string message , ServerRpcParams serverRpcParams = default)
+    private void SendChatMessageServerRpc(string message, ServerRpcParams serverRpcParams = default)
     {
-        ReceiveChatMessageClientRpc(message , serverRpcParams.Receive.SenderClientId);
+        ReceiveChatMessageClientRpc(message, serverRpcParams.Receive.SenderClientId);
     }
 
     [ClientRpc]
-    private void ReceiveChatMessageClientRpc(string message , ulong senderPlayerId)
+    private void ReceiveChatMessageClientRpc(string message, ulong senderPlayerId)
     {
         AddMsg(message, senderPlayerId);
     }
@@ -133,5 +133,5 @@ public class ChatManager : NetworkBehaviour
         chatContent.text = newContent;
     }
 
- 
+
 }

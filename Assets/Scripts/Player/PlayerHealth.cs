@@ -77,7 +77,7 @@ public class PlayerHealth : NetworkBehaviour
         VisualizeDamageClientRpc();
     }
 
-    [ClientRpc] //Kun Host
+    [ClientRpc] //only server
     private void VisualizeDamageClientRpc() //inform the other clients
     {
         healthBarVisual.fillAmount = health.Value; 

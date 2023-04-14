@@ -3,9 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : NetworkBehaviour
 {
+    /*TouchControls*/
+    private CharacterController controller;
+    private PlayerInput playerInput;
+    private InputAction movementAction; //touchpress
+
     private readonly float boundX = 0.35f;
     private readonly float boundY = 0.17f;
     [SerializeField] private FloatReference playerSpeed;
@@ -17,13 +23,41 @@ public class PlayerBehaviour : NetworkBehaviour
     private Vector2 lastInteractDir;
     private LayerMask enemyLayerMask;
     private Animator animator;
-    private bool gameInFocus;
 
+    private bool chatInFocus = false;
 
+    private bool isRunningAndroid = false;
+    private bool isRunningWindows = false;
+
+    private const string TOUCH_UI_TAG = "TouchUI";
 
     private void Awake()
     {
-        mainCamera = Camera.main; //Locates the Main Camera with the MainCamera tag
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Debug.Log("Current platform is Android.");
+            isRunningAndroid = true;
+        }
+        else if (Application.platform == RuntimePlatform.WindowsEditor ||
+                 Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            Debug.Log("Current platform is Windows.");
+            isRunningWindows = true;
+            GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Current platform is not supported.");
+        }
+
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+
+    private void Initialize()
+    {
+        if (!IsOwner) return;
+        mainCamera = Camera.main;
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -31,13 +65,16 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (!ChatManager.Instance) return;
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
+        controller = gameObject.GetComponent<CharacterController>();
+
+
     }
 
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
     {
         //Debug.Log("Game in focus? " + e.IsChatActive);
 
-        gameInFocus = e.IsChatActive;
+        chatInFocus = e.IsChatActive;
 
 
     }
@@ -45,14 +82,15 @@ public class PlayerBehaviour : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
+        Initialize();
         // TODO: merge bug on line bellow
-        //NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnClientDisconnectCallback;
     }
 
-    private void Singleton_OnClientDisconnectCallback(ulong clientId)
+    private void Singleton_OnClientDisconnectCallback(ulong clientId) //worst practices? Use ServerRpcParams
     {
-        if (clientId == OwnerClientId)
-            NetworkObject.Despawn();
+        if (clientId == OwnerClientId) //will warn that only server can despawn if server is shut down first.
+            NetworkObject.Despawn(); 
     }
 
     private void LateUpdate()
@@ -102,9 +140,14 @@ public class PlayerBehaviour : NetworkBehaviour
 
     void Update()
     {
-        if (!gameInFocus)
-            HandleMovement();
-
+        if (!chatInFocus)
+        { 
+            if(isRunningAndroid)
+                HandleTouchInput();
+            
+            if(isRunningWindows)
+                HandleMovement();
+        }
     }
 
     //void FixedUpdate()
@@ -145,4 +188,41 @@ public class PlayerBehaviour : NetworkBehaviour
         animator.SetFloat("Vertical", verticalInput);
         animator.SetFloat("Speed", new Vector2(horizontalInput, verticalInput).normalized.sqrMagnitude);
     }
+
+
+    public void HandleTouchInput()
+    {
+        if (!IsOwner) return;
+        
+        Vector2 input = playerInput.actions["PlayerMovement"].ReadValue<Vector2>();
+        Vector3 move = new(input.x, input.y);
+        move = move.x * mainCamera.transform.right + move.y * mainCamera.transform.up;
+        controller.Move(playerSpeed.Value * Time.deltaTime * move);
+
+        animator.SetFloat("Horizontal", input.x);
+        animator.SetFloat("Vertical", input.y);
+        animator.SetFloat("Speed", new Vector2(input.x, input.y).normalized.sqrMagnitude);
+
+    }
+
+    public void HandleTouchInput(PlayerInput playerInput, CharacterController controller)
+    {
+        if (!IsOwner) return;
+        Vector2 input = playerInput.actions["PlayerMovement"].ReadValue<Vector2>();
+        Vector3 move = new Vector3(input.x, input.y);
+        controller.Move(playerSpeed.Value * Time.deltaTime * move);
+        //transform.position += (Vector3)movementAction;
+
+        Debug.Log("transform.position called from the new Input Manager with joystick: " + transform.position);
+
+
+        animator.SetFloat("Horizontal", input.x);
+        animator.SetFloat("Vertical", input.y);
+        animator.SetFloat("Speed", new Vector2(input.x, input.y).normalized.sqrMagnitude);
+
+        //Vector2 movement = new Vector2(move2d.x, move2d.y) * (playerSpeed.Value * Time.deltaTime);
+        //transform.position += (Vector3)movement;
+
+    }
+
 }

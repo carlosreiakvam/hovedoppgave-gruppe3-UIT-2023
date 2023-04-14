@@ -1,0 +1,43 @@
+{
+    "name": "TouchControls",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "41807d6d-9569-4364-8d9b-694f6a9ad8fb",
+            "actions": [
+                {
+                    "name": "PlayerMovement",
+                    "type": "Value",
+                    "id": "e7382a85-21b3-441a-9c2c-ad765232f536",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PlayerAttack",
+                    "type": "Button",
+                    "id": "7a392c96-cfbc-4f41-84f4-d844d838a1aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "85509f5f-fee5-4c85-ac37-eb7d81a8fc75",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

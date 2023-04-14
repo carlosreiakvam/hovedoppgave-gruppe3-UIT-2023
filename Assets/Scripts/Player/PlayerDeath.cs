@@ -6,7 +6,7 @@ public class PlayerDeath : MonoBehaviour
 {
     void Start()
     {
-        PlayerHealth playerDeath = GetComponentInParent<PlayerHealth>();
+        PlayerHealth playerDeath = GetComponent<PlayerHealth>();
         playerDeath.OnPlayerDead += PlayerDeath_OnPlayerDead; //subscribe
     }
 

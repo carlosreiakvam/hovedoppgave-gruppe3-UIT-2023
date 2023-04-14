@@ -57,6 +57,8 @@ public class PlayerSpawner : NetworkBehaviour
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
         
     {
+        if (!IsServer) return;
+
         Debug.Log("OnLoadEventCompleted");
         foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
         {
