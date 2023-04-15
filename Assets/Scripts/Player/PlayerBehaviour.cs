@@ -30,9 +30,20 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool isRunningWindows = false;
 
     private const string TOUCH_UI_TAG = "TouchUI";
-
-    private void Awake()
+    private void Initialize()
     {
+        if (!IsOwner) return;
+        mainCamera = Camera.main;
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Start()
+    {
+        if (!ChatManager.Instance) return; //mulig det har med bypass å gjøre at denne er her. Fjern ved innlevering.
+            ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
+
+        if (!IsOwner) return;
+
         if (Application.platform == RuntimePlatform.Android)
         {
             Debug.Log("Current platform is Android.");
@@ -53,22 +64,6 @@ public class PlayerBehaviour : NetworkBehaviour
             Debug.Log("Current platform is not supported.");
         }
 
-        
-    }
-
-
-    private void Initialize()
-    {
-        if (!IsOwner) return;
-        mainCamera = Camera.main;
-        animator = GetComponentInChildren<Animator>();
-    }
-
-    private void Start()
-    {
-        if (!ChatManager.Instance) return; //mulig det har med bypass å gjøre at denne er her. Fjern ved innlevering.
-            ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
-        
     }
 
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
@@ -205,25 +200,4 @@ public class PlayerBehaviour : NetworkBehaviour
         animator.SetFloat("Speed", new Vector2(input.x, input.y).normalized.sqrMagnitude);
 
     }
-
-    public void HandleTouchInput(PlayerInput playerInput, CharacterController controller)
-    {
-        if (!IsOwner) return;
-        Vector2 input = playerInput.actions["PlayerMovement"].ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, input.y);
-        controller.Move(playerSpeed.Value * Time.deltaTime * move);
-        //transform.position += (Vector3)movementAction;
-
-        Debug.Log("transform.position called from the new Input Manager with joystick: " + transform.position);
-
-
-        animator.SetFloat("Horizontal", input.x);
-        animator.SetFloat("Vertical", input.y);
-        animator.SetFloat("Speed", new Vector2(input.x, input.y).normalized.sqrMagnitude);
-
-        //Vector2 movement = new Vector2(move2d.x, move2d.y) * (playerSpeed.Value * Time.deltaTime);
-        //transform.position += (Vector3)movement;
-
-    }
-
 }
