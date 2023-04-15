@@ -37,6 +37,8 @@ public class PlayerBehaviour : NetworkBehaviour
         {
             Debug.Log("Current platform is Android.");
             isRunningAndroid = true;
+            controller = gameObject.GetComponent<CharacterController>();
+            playerInput = GetComponent<PlayerInput>();
         }
         else if (Application.platform == RuntimePlatform.WindowsEditor ||
                  Application.platform == RuntimePlatform.WindowsPlayer)
@@ -44,13 +46,14 @@ public class PlayerBehaviour : NetworkBehaviour
             Debug.Log("Current platform is Windows.");
             isRunningWindows = true;
             GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
+
         }
         else
         {
             Debug.Log("Current platform is not supported.");
         }
 
-        playerInput = GetComponent<PlayerInput>();
+        
     }
 
 
@@ -63,11 +66,9 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void Start()
     {
-        if (!ChatManager.Instance) return;
-        ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
-        controller = gameObject.GetComponent<CharacterController>();
-
-
+        if (!ChatManager.Instance) return; //mulig det har med bypass å gjøre at denne er her. Fjern ved innlevering.
+            ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
+        
     }
 
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)

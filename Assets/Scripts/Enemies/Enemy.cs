@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Transform target;
-    private readonly float speed = 1f;
+    private Transform target;
+    private const float SPEED_VALUE = 2f;
+    private const string HORIZONTAL = "Horizontal";
+    private const string VERTICAL = "Vertical";
+    private const string SPEED = "Speed";
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -14,18 +15,18 @@ public class Enemy : MonoBehaviour
         if (target)
         {
             Vector2 moveDirection = (target.transform.position - transform.position).normalized;
-            transform.Translate(speed * Time.fixedDeltaTime * moveDirection);
+            transform.Translate(SPEED_VALUE * Time.fixedDeltaTime * moveDirection);
             //transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
 
-            animator.SetFloat("Horizontal", moveDirection.x);
-            animator.SetFloat("Vertical", moveDirection.y);
-            animator.SetFloat("Speed", moveDirection.sqrMagnitude);
+            animator.SetFloat(HORIZONTAL, moveDirection.x);
+            animator.SetFloat(VERTICAL, moveDirection.y);
+            animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            if (collision.GetComponent<PlayerBehaviour>())
+        if (collision.GetComponent<CapsuleCollider2D>())
         {
             target = collision.transform;
         }
