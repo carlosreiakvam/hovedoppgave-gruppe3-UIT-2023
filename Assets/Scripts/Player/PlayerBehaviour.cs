@@ -24,6 +24,10 @@ public class PlayerBehaviour : NetworkBehaviour
     private LayerMask enemyLayerMask;
     private Animator animator;
 
+    private const string HORIZONTAL = "Horizontal";
+    private const string VERTICAL = "Vertical";
+    private const string SPEED = "Speed";
+
     private bool chatInFocus = false;
 
     private bool isRunningAndroid = false;
@@ -174,15 +178,15 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis(HORIZONTAL);
+        verticalInput = Input.GetAxis(VERTICAL);
 
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * (playerSpeed.Value * Time.deltaTime);
         transform.position += (Vector3)movement;
 
-        animator.SetFloat("Horizontal", horizontalInput);
-        animator.SetFloat("Vertical", verticalInput);
-        animator.SetFloat("Speed", new Vector2(horizontalInput, verticalInput).normalized.sqrMagnitude);
+        animator.SetFloat(HORIZONTAL, horizontalInput);
+        animator.SetFloat(VERTICAL, verticalInput);
+        animator.SetFloat(SPEED, new Vector2(horizontalInput, verticalInput).normalized.sqrMagnitude);
     }
 
 
@@ -195,9 +199,9 @@ public class PlayerBehaviour : NetworkBehaviour
         move = move.x * mainCamera.transform.right + move.y * mainCamera.transform.up;
         controller.Move(playerSpeed.Value * Time.deltaTime * move);
 
-        animator.SetFloat("Horizontal", input.x);
-        animator.SetFloat("Vertical", input.y);
-        animator.SetFloat("Speed", new Vector2(input.x, input.y).normalized.sqrMagnitude);
+        animator.SetFloat(HORIZONTAL, input.x);
+        animator.SetFloat(VERTICAL, input.y);
+        animator.SetFloat(SPEED, new Vector2(input.x, input.y).normalized.sqrMagnitude);
 
     }
 }

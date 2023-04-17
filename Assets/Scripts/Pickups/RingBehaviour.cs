@@ -5,11 +5,10 @@ public class RingBehaviour : NetworkBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!NetworkManager.Singleton.IsServer) return;
+        if (!IsServer) return;
         if (!collision.CompareTag("Player")) return;
 
-        NetworkObject obj = collision.attachedRigidbody.gameObject.GetComponent<NetworkObject>();
-        int id = obj.GetInstanceID();
+        int id = GetComponent<NetworkObject>().GetInstanceID();
         Debug.Log("Player with instance id " + id + " collided with ring");
         NetworkObject.Despawn(true);
     }

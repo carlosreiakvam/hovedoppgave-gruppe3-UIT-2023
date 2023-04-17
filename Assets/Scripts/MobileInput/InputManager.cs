@@ -9,15 +9,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private GameObject player;
     //[SerializeField] private FloatReference playerSpeed;
     private TouchControls touchControls;
-    private float playerSpeed = 4;
-    //private CharacterController controller;
-    //private PlayerInput playerInput;
     //private InputAction attackAction; //touchposition
     //private InputAction movementAction; //touchpress
-    //private const string HORIZONTAL_INPUT = "Horizontal";
-    //private const string VERTICAL_INPUT = "Vertical";
-    //private const string SPEED = "Speed";
-    //PlayerBehaviour playerBehaviour;
 
     private void Awake()
     {
@@ -74,7 +67,7 @@ public class InputManager : MonoBehaviour
         Debug.Log(context);
         //Debug.Log("player.transform.position: " + player.transform.position);
         Vector2 move = new Vector2(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y);
-        player.transform.position += (Vector3) move * playerSpeed;
+        //player.transform.position += (Vector3) move * playerSpeed;
     }
 
     private void OnEnable() //alternative to using update function, using events
@@ -102,31 +95,30 @@ public class InputManager : MonoBehaviour
     //    Debug.Log("Touch ended");
     //}
 
-    //private void TouchPressed(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("TouchPressed");
+    private void TouchPressed(InputAction.CallbackContext context)
+    {
+        Debug.Log("TouchPressed");
 
-    //   playerBehaviour.HandleTouchInput(playerInput, controller);
-    //    //Vector2 position = Camera.main.ScreenToWorldPoint(attackAction.ReadValue<Vector2>());  //Convert screen space to world space
-    //    //player.transform.position = position;
-    //    //position.z = player.transform.position.z;
+        //Vector2 position = Camera.main.ScreenToWorldPoint(attackAction.ReadValue<Vector2>());  //Convert screen space to world space
+        //player.transform.position = position;
+        //position.z = player.transform.position.z;
 
-    //    //xPos = context.ReadValue<Vector2>().x;
-    //    //yPos = context.ReadValue<Vector2>().y;
+        //xPos = context.ReadValue<Vector2>().x;
+        //yPos = context.ReadValue<Vector2>().y;
 
-    //    //Vector2 movement = new Vector2(xPos, yPos).normalized * (/*playerSpeed.Value*/4 * Time.deltaTime); ;
-    //    //player.transform.position += (Vector3)movement;
+        //Vector2 movement = new Vector2(xPos, yPos).normalized * (/*playerSpeed.Value*/4 * Time.deltaTime); ;
+        //player.transform.position += (Vector3)movement;
 
-    //    //Debug.Log("TouchPressed" + context.ReadValue<Vector2>());
-    //    //Vector2 position = Camera.main.ScreenToWorldPoint(movementAction.ReadValue<Vector2>());  //Convert screen space to world space
-    //    //player.transform.position = position;
-    //    //player.transform.position = position;
-    //    Debug.Log("MovementAction: " + movementAction.ReadValue<Vector2>().normalized);
+        //Debug.Log("TouchPressed" + context.ReadValue<Vector2>());
+        //Vector2 position = Camera.main.ScreenToWorldPoint(movementAction.ReadValue<Vector2>());  //Convert screen space to world space
+        //player.transform.position = position;
+        //player.transform.position = position;
+        //Debug.Log("MovementAction: " + movementAction.ReadValue<Vector2>().normalized);
 
 
-    //    //Debug.Log("Touch started " + touchControls.Touch.PlayerAttack.ReadValue<Vector2>());
+        //Debug.Log("Touch started " + touchControls.Touch.PlayerAttack.ReadValue<Vector2>());
 
-    //}
+    }
 
 
 }

@@ -11,7 +11,8 @@ public class PlayerDeath : MonoBehaviour
     }
 
     private void PlayerDeath_OnPlayerDead(object sender, System.EventArgs e)
-    {  
+    {
+        //TODO: connect animation of player going down
         gameObject.SetActive(false); //hide sprite
         
         PlayerHealth playerDeath = GetComponentInParent<PlayerHealth>();
@@ -20,6 +21,7 @@ public class PlayerDeath : MonoBehaviour
 
         //TODO: if player not saved within a certain amount of time:
         playerDeath.OnPlayerDead -= PlayerDeath_OnPlayerDead; //unsubscribe. 
+        //TODO: if saved, raise player backup and increase health via SO
 
         Destroy(gameObject); //I assume the HUD is destroyed along with it
         
