@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
 {
+    private PlayerHealth playerDeath;
     void Start()
     {
-        PlayerHealth playerDeath = GetComponent<PlayerHealth>();
+        playerDeath = GetComponent<PlayerHealth>();
         playerDeath.OnPlayerDead += PlayerDeath_OnPlayerDead; //subscribe
     }
 
     private void PlayerDeath_OnPlayerDead(object sender, System.EventArgs e)
     {
         //TODO: connect animation of player going down
-        gameObject.SetActive(false); //hide sprite
-        
-        PlayerHealth playerDeath = GetComponentInParent<PlayerHealth>();
-        GameObject gameObjectHUD = GetComponentInParent<PlayerHealth>().gameObject;
-        gameObjectHUD.SetActive(false); //hide HUD
-
+        gameObject.SetActive(false); //hide sprite        
+      
         //TODO: if player not saved within a certain amount of time:
         playerDeath.OnPlayerDead -= PlayerDeath_OnPlayerDead; //unsubscribe. 
         //TODO: if saved, raise player backup and increase health via SO
 
-        Destroy(gameObject); //I assume the HUD is destroyed along with it
+        Destroy(gameObject);
         
     }
 }

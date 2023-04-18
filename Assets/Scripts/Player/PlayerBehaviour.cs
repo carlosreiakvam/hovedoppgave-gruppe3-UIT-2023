@@ -10,7 +10,8 @@ public class PlayerBehaviour : NetworkBehaviour
     /*TouchControls*/
     private CharacterController controller;
     private PlayerInput playerInput;
-    private InputAction movementAction; //touchpress
+
+    [SerializeField] private GameObject playerAnimation;
 
     private readonly float boundX = 0.35f;
     private readonly float boundY = 0.17f;
@@ -97,44 +98,44 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (IsLocalPlayer)
         {
-            //Vector3 pos = transform.position;
-            //pos.z = -10;
-            //mainCamera.transform.position = pos;
+            Vector3 pos = playerAnimation.transform.position;
+            pos.z = -10;
+            mainCamera.transform.position = pos;
 
-            Vector3 delta = Vector3.zero;
+            //Vector3 delta = Vector3.zero;
 
-            //check if we're inside the bounds of the x axis
-            float deltaX = transform.position.x - mainCamera.transform.position.x;
+            ////check if we're inside the bounds of the x axis
+            //float deltaX = transform.position.x - mainCamera.transform.position.x;
 
 
-            if (deltaX > boundX || deltaX < -boundX)
-            {
-                if (mainCamera.transform.position.x < transform.position.x)
-                {
-                    delta.x = deltaX - boundX;
-                }
-                else
-                {
-                    delta.x = deltaX + boundX;
-                }
-            }
+            //if (deltaX > boundX || deltaX < -boundX)
+            //{
+            //    if (mainCamera.transform.position.x < transform.position.x)
+            //    {
+            //        delta.x = deltaX - boundX;
+            //    }
+            //    else
+            //    {
+            //        delta.x = deltaX + boundX;
+            //    }
+            //}
 
-            //check if we're inside the bounds of the x axis
-            float deltaY = transform.position.y - mainCamera.transform.position.y;
+            ////check if we're inside the bounds of the x axis
+            //float deltaY = transform.position.y - mainCamera.transform.position.y;
 
-            if (deltaY > boundY || deltaY < -boundY)
-            {
-                if (mainCamera.transform.position.y < transform.position.y)
-                {
-                    delta.y = deltaY - boundY;
-                }
-                else
-                {
-                    delta.y = deltaY + boundY;
-                }
-            }
+            //if (deltaY > boundY || deltaY < -boundY)
+            //{
+            //    if (mainCamera.transform.position.y < transform.position.y)
+            //    {
+            //        delta.y = deltaY - boundY;
+            //    }
+            //    else
+            //    {
+            //        delta.y = deltaY + boundY;
+            //    }
+            //}
 
-            mainCamera.transform.position += new Vector3(delta.x, delta.y);
+            //mainCamera.transform.position += new Vector3(delta.x, delta.y);
         }
     }
 

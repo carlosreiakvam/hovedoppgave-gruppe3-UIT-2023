@@ -390,6 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b98ec11841a6246831d68dd07b01a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimation: {fileID: 405672945398536863}
   playerSpeed:
     UseConstant: 0
     ConstantValue: 4
