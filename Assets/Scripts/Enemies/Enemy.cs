@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<CapsuleCollider2D>())
+        if (collision.GetComponentInParent<PlayerBehaviour>())
         {
             target = collision.transform;
         }
