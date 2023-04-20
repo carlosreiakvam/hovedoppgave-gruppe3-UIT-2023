@@ -7,7 +7,7 @@ using System;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    public event EventHandler OnPlayerDead; //Publisher of death!
+    public event EventHandler OnPlayerKnockdown; //Publisher of death!
     [SerializeField] private FloatVariable hitPoints;
     [SerializeField] private FloatVariable lightDamageTaken;
     [SerializeField] private bool resetHP;
@@ -92,6 +92,6 @@ public class PlayerHealth : NetworkBehaviour
     [ClientRpc]
     private void VizualizeDeathClientRpc()
     {
-        OnPlayerDead?.Invoke(this, EventArgs.Empty);
+        OnPlayerKnockdown?.Invoke(this, EventArgs.Empty);
     }
 }
