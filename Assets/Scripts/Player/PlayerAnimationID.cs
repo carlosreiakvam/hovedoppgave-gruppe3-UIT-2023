@@ -4,7 +4,11 @@ using Unity.Netcode;
 public class PlayerAnimationID : NetworkBehaviour
 {
     [SerializeField] private Animator animator;
-    private readonly string PLAYER_ID_STRING = "Player_Id";
+    //private readonly string PLAYER_ID_STRING = "Player_Id";
+    public string PLAYER_ID_STRING = "Player_Id";
+    /// <summary>
+    //public string playerName = "someName";
+    /// </summary>
     public override void OnNetworkSpawn()
     {
         if (IsLocalPlayer)

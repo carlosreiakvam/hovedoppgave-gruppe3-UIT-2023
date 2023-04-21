@@ -20,5 +20,6 @@ public class EnemySpawner : NetworkBehaviour
         if (!IsServer) return;
         Transform enemyTransform = Instantiate(enemyPrefab);
         enemyTransform.GetComponent<NetworkObject>().Spawn(true);
+        enemyTransform.SetParent(transform); // Set correct placement in hirearchy
     }
 }

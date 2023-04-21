@@ -32,7 +32,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool chatInFocus = false;
 
     private bool isRunningAndroid = false;
-    private bool isRunningWindows = false;
+    private bool isRunningWindows = true; // set to false when testing on android
 
     private const string TOUCH_UI_TAG = "TouchUI";
     private void Initialize()
@@ -45,7 +45,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private void Start()
     {
         if (!ChatManager.Instance) return; //mulig det har med bypass å gjøre at denne er her. Fjern ved innlevering.
-            ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
+        ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
 
         if (!IsOwner) return;
 
@@ -91,7 +91,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private void Singleton_OnClientDisconnectCallback(ulong clientId) //worst practices? Use ServerRpcParams
     {
         if (clientId == OwnerClientId) //will warn that only server can despawn if server is shut down first.
-            NetworkObject.Despawn(); 
+            NetworkObject.Despawn();
     }
 
     private void LateUpdate()
@@ -142,11 +142,11 @@ public class PlayerBehaviour : NetworkBehaviour
     void Update()
     {
         if (!chatInFocus)
-        { 
-            if(isRunningAndroid)
+        {
+            if (isRunningAndroid)
                 HandleTouchInput();
-            
-            if(isRunningWindows)
+
+            if (isRunningWindows)
                 HandleMovement();
         }
     }
@@ -194,7 +194,7 @@ public class PlayerBehaviour : NetworkBehaviour
     public void HandleTouchInput()
     {
         if (!IsOwner) return;
-        
+
         Vector2 input = playerInput.actions["PlayerMovement"].ReadValue<Vector2>();
         Vector3 move = new(input.x, input.y);
         move = move.x * mainCamera.transform.right + move.y * mainCamera.transform.up;

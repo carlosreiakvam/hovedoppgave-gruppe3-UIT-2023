@@ -10,14 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 7331719382352998386}
   - component: {fileID: 2795077753505054409}
-  - component: {fileID: 1199379538008839271}
   - component: {fileID: -4016885696548875299}
   - component: {fileID: 3481015349202185829}
+  - component: {fileID: 4852244640497007348}
   - component: {fileID: 628698394880259110}
   - component: {fileID: -6593909594893669767}
+  - component: {fileID: 1540981329760762906}
   m_Layer: 0
   m_Name: ring
-  m_TagString: Untagged
+  m_TagString: Ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,18 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1199379538008839271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3142841806820012232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f26885d353ad7324eaba2475387ed1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-4016885696548875299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SyncPositionX: 1
   SyncPositionY: 1
-  SyncPositionZ: 1
+  SyncPositionZ: 0
   SyncRotAngleX: 0
   SyncRotAngleY: 0
   SyncRotAngleZ: 0
@@ -143,6 +132,19 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &4852244640497007348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142841806820012232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26885d353ad7324eaba2475387ed1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 3347886318929195822, guid: dfdccc990c68d4d43bcfbe1e33cb4d5f, type: 3}
 --- !u!58 &628698394880259110
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -180,3 +182,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &1540981329760762906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142841806820012232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

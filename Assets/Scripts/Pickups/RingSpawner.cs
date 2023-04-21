@@ -15,10 +15,10 @@ public class RingSpawner : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log("OnNetworkSpawn");
         if (!IsServer) return;
         Vector3 randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        GameObject ring = Instantiate(prefab, randomSpawnPoint, prefab.transform.rotation);
+        GameObject ring = Instantiate(prefab, randomSpawnPoint, Quaternion.identity);
         ring.GetComponent<NetworkObject>().Spawn();
+        ring.transform.SetParent(transform);
     }
 }

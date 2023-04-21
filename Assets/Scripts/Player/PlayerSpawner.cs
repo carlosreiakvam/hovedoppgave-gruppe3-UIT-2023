@@ -64,6 +64,7 @@ public class PlayerSpawner : NetworkBehaviour
         {
             Transform playerTransform = Instantiate(playerPrefab);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true); //NB! Not Spawn(true). It is for single player
+            playerTransform.SetParent(transform); // Place correctly as child in hierarchy
         }
 
     }

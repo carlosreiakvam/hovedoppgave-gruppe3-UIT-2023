@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - TouchUI
+  - Ring
+  - Manager
   layers:
   - Default
   - TransparentFX
