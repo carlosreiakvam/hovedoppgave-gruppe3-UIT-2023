@@ -3,9 +3,23 @@ using UnityEngine;
 
 class GameManager : MonoBehaviour
 {
+
+    public static GameManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public int playerIdHasRing { get; private set; }
     [SerializeField] GameObject inGameMenu;
-    TextMeshProUGUI gameWonText; 
+    TextMeshProUGUI gameWonText;
 
     private void Start()
     {
@@ -19,7 +33,8 @@ class GameManager : MonoBehaviour
     }
 
 
-    public void OnGameWon() { 
+    public void OnGameWon()
+    {
         inGameMenu.SetActive(true);
         gameWonText.text = "Player with id: " + playerIdHasRing + " won the game";
     }

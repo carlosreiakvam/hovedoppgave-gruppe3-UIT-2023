@@ -11,7 +11,8 @@ public class Town : MonoBehaviour
     GameObject gameUIGO;
     private void Start()
     {
-        gameManager = GetComponentInParent<GameManager>();
+        //gameManager = GetComponentInParent<GameManager>();
+        gameManager = GameManager.Instance;
         //GameObject parent = transform.parent.gameObject;    
         //wonText = gameObject.GetComponentInParent<TextMeshPro>();
         Transform parent = transform.parent;
