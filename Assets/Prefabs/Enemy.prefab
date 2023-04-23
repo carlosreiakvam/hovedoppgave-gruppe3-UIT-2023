@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4129416394867447215}
   - component: {fileID: 4129416394867447214}
   - component: {fileID: 1816999819}
-  - component: {fileID: 1816999818}
+  - component: {fileID: 8569080270946591259}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -105,9 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23270b96d624d6043beaa45e6f0022a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 2900308809295077618, guid: 030c8e3040f08c048a5600e084c6be23, type: 3}
   animator: {fileID: 1816999819}
-  spriteRenderer: {fileID: 4129416394867447208}
 --- !u!114 &4129416394867447210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +233,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1816999818
+--- !u!114 &8569080270946591259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

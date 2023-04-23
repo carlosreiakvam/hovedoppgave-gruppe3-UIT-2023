@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : NetworkBehaviour
 {
+    public static PlayerBehaviour LocalInstance { get; private set; }
     /*TouchControls*/
     private CharacterController controller;
     private PlayerInput playerInput;
@@ -32,7 +33,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool chatInFocus = false;
 
     private bool isRunningAndroid = false;
-    private bool isRunningWindows = true; // set to false when testing on android
+    private bool isRunningWindows = false; //Set to true when using shortcut to game or starting from Game scene
 
     private const string TOUCH_UI_TAG = "TouchUI";
     private void Initialize()
@@ -42,9 +43,9 @@ public class PlayerBehaviour : NetworkBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    private void Start()
-    {
-        if (!ChatManager.Instance) return; //mulig det har med bypass å gjøre at denne er her. Fjern ved innlevering.
+    private void Start() 
+    {//All the next stuff might be better off inside OnNetworkSpawn
+        if (!ChatManager.Instance) return; //mulig det har med bypass Ã¥ gjÃ¸re at denne er her. Fjern ved innlevering.
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
 
         if (!IsOwner) return;
@@ -82,8 +83,9 @@ public class PlayerBehaviour : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
-        Initialize();
+        Initialize(); //Running this is start might cause variables to not be initialized
         // TODO: merge bug on line bellow
         NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnClientDisconnectCallback;
     }

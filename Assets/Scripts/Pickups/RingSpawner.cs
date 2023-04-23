@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections.Generic;
 
-public class RingSpawner : NetworkBehaviour
+public class RingSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     readonly Vector2[] spawnPoints = {
@@ -12,10 +12,16 @@ public class RingSpawner : NetworkBehaviour
         new Vector2(5f,-5f)
     };
 
-
-    public override void OnNetworkSpawn()
+    private void Start()
     {
-        if (!IsServer) return;
+        SpawnRing();
+    }
+
+
+    private void SpawnRing()
+    {
+        if (!NetworkManager.Singleton.IsServer) return;
+
         Vector3 randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject ring = Instantiate(prefab, randomSpawnPoint, Quaternion.identity);
         ring.GetComponent<NetworkObject>().Spawn();

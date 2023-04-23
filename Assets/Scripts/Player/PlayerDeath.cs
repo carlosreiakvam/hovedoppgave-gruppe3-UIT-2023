@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class PlayerDeath : MonoBehaviour
 {
@@ -14,29 +15,26 @@ public class PlayerDeath : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    private void OnPlayerKnockdown(object sender, System.EventArgs e)
+    private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
-        animator.SetBool("Knockdown", true);
+        bool test = e.isKnockedDown;
+        animator.SetBool("Knockdown", true); //Todo: Notify other players and make enemy uninterested as well
+        //StartCoroutine(KnockdownRoutine());
         //TODO: connect animation of player going down
-        //gameObject.SetActive(false); //hide sprite        
-      
+        //hide sprite        
+
+        //run CoRoutine with countdown
         //TODO: if player not saved within a certain amount of time:
-        //p 
+        //playerDeath.OnPlayerDead -= PlayerDeath_OnPlayerDead; //unsubscribe. 
         //TODO: if saved, raise player backup and increase health via SO
 
-        //Destroy(gameObject);
-        
     }
 
-    //In the future we will only unsubscribe after a certain amount of time has passed 
-    //such that players have time to help the person up again
-    private IEnumerator CountToDeathRoutine()
+    private IEnumerator KnockdownRoutine()
     {
         yield return waitForSeconds;
         Debug.Log(waitForSeconds.ToString());
         gameObject.SetActive(false);
-        playerHealth.OnPlayerKnockdown -= OnPlayerKnockdown; //unsubscribe.
+        gameObject.GetComponentInParent<NetworkObject>().Despawn(true);
     }
 }
-
-
