@@ -12,6 +12,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private PlayerInput playerInput;
 
     [SerializeField] private GameObject playerAnimation;
+    [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
 
     private readonly float boundX = 0.35f;
     private readonly float boundY = 0.17f;
@@ -237,8 +238,8 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void Attack()
     {
-        if (woodenSword) { animator.SetTrigger(WOODENATTACK); }
-        else animator.SetTrigger(STEELATTACK);
+        if (woodenSword) { ownerNetworkAnimator.SetTrigger(WOODENATTACK); }
+        else ownerNetworkAnimator.SetTrigger(STEELATTACK);
     }
 
     public void SetNewSword()
