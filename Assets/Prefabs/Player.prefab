@@ -130,7 +130,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b13dbf8714aa042954b875ce0fa5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - Layer: 0
+    OriginatingState: 1111912944
+    DestinationState: 390586414
+    TransitionDuration: 0
+    TriggerNameHash: 1666549902
+    TransitionIndex: 2
+  - Layer: 0
+    OriginatingState: -2111515647
+    DestinationState: 411263398
+    TransitionDuration: 0
+    TriggerNameHash: 1666549902
+    TransitionIndex: 2
   m_Animator: {fileID: 3652268753205044349}
 --- !u!114 &5634196781880440896
 MonoBehaviour:
@@ -265,6 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5355796548693873997}
   - component: {fileID: 7611677494853719829}
+  - component: {fileID: 9044245489806903717}
   m_Layer: 0
   m_Name: LeftAttack
   m_TagString: Untagged
@@ -297,7 +310,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -322,6 +335,18 @@ PolygonCollider2D:
       - {x: -0.36192167, y: -0.94964194}
       - {x: -0.08520508, y: -0.5090332}
       - {x: -0.71984196, y: 0.05096048}
+--- !u!114 &9044245489806903717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669562833166217992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2e7e13c4d7cbf4b9bf112cc4f529ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2090646333591190164
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7020063316794959802}
   - component: {fileID: 3107128429339529634}
+  - component: {fileID: 8681470619830706875}
   m_Layer: 0
   m_Name: UpAttack
   m_TagString: Untagged
@@ -387,6 +413,18 @@ PolygonCollider2D:
       - {x: 0.43566895, y: -0.011230469}
       - {x: 0.896135, y: 0.26007485}
       - {x: 0.89856625, y: 0.4139976}
+--- !u!114 &8681470619830706875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090646333591190164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2e7e13c4d7cbf4b9bf112cc4f529ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2759338577622681735
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1505474292364585149}
   - component: {fileID: 3396834273290302878}
+  - component: {fileID: 9051949595405582078}
   m_Layer: 0
   m_Name: RightAttack
   m_TagString: Untagged
@@ -648,7 +687,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -673,6 +712,18 @@ PolygonCollider2D:
       - {x: 0.5234543, y: -0.9432943}
       - {x: 1.0002441, y: -0.64941406}
       - {x: 1.1926336, y: -0.3191567}
+--- !u!114 &9051949595405582078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039771764181640465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2e7e13c4d7cbf4b9bf112cc4f529ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3264219491054159882
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1458328748698038080
 RectTransform:
   m_ObjectHideFlags: 0
@@ -940,6 +991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5226807699079910211}
   - component: {fileID: 126620746676789003}
+  - component: {fileID: 8861188113946733658}
   m_Layer: 0
   m_Name: DownAttack
   m_TagString: Untagged
@@ -972,7 +1024,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -996,6 +1048,18 @@ PolygonCollider2D:
       - {x: 0.1505127, y: -0.87890625}
       - {x: 0.72230685, y: -0.5785482}
       - {x: 0.61817074, y: -1.0737953}
+--- !u!114 &8861188113946733658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4498360252721170478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2e7e13c4d7cbf4b9bf112cc4f529ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5444153986937381773
 GameObject:
   m_ObjectHideFlags: 0
