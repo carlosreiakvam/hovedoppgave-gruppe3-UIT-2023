@@ -254,6 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d189b3e552e7be9468380db7b006ad44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 4129416394867447205, guid: 46a228878be1c7d4ca858649563bf82e, type: 3}
+  enemyAnimator: {fileID: 1816999819, guid: 46a228878be1c7d4ca858649563bf82e, type: 3}
 --- !u!70 &5629118550783752198
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

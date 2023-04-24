@@ -4,20 +4,22 @@ using UnityEngine;
 using QFSW.QC;
 using Unity.Netcode;
 
-public class EnemySpawner : NetworkBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform enemyPrefab;
-    [Command]
-    private void spawnEnemy()
+
+    private void Start()
     {
-        if (!IsServer) return;
-        Transform enemyTransform = Instantiate(enemyPrefab);
-        enemyTransform.GetComponent<NetworkObject>().Spawn(true);
+        SpawnEnemy();
     }
 
-    public override void OnNetworkSpawn()
+    
+
+    //[Command]
+    private void SpawnEnemy()
     {
-        if (!IsServer) return;
+        if (!NetworkManager.Singleton.IsServer) return;
+
         Transform enemyTransform = Instantiate(enemyPrefab);
         enemyTransform.GetComponent<NetworkObject>().Spawn(true);
         enemyTransform.SetParent(transform); // Set correct placement in hirearchy

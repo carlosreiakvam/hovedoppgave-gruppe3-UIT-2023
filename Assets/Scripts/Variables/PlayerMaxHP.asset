@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerMaxHP
   m_EditorClassIdentifier: 
   DeveloperDescription: max hp that the player can have
-  Value: 100
+  Value: 40

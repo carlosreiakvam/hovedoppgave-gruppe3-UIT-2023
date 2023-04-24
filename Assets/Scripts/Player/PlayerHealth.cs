@@ -7,17 +7,30 @@ using System;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    public event EventHandler OnPlayerKnockdown; //Publisher of death!
+    public event EventHandler<OnPlayerKnockdownEventArgs> OnPlayerKnockdown; //Publisher of death!
+
+    public class OnPlayerKnockdownEventArgs : EventArgs
+    {
+        public bool isKnockedDown = false;
+    }
     [SerializeField] private FloatVariable hitPoints;
     [SerializeField] private FloatVariable lightDamageTaken;
     [SerializeField] private bool resetHP;
     [SerializeField] private FloatReference startingHP;
     [SerializeField] private Image healthBarVisual;
     [SerializeField] private NetworkVariable<float> health = new(100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public bool IsKnockedDown { get; private set;} =  false;
+
+   
+
+    //public NetworkVariable<bool>  IsKnockedDown { get; private set; } = new(false,
+    //    NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     private float timer = 0;
     private readonly float TIME_TO_DAMAGE = 1;
 
+    
+    
     private void Start()
     {
         if (resetHP)
@@ -62,11 +75,11 @@ public class PlayerHealth : NetworkBehaviour
             hitPoints.ApplyChange(-lightDamageTaken.Value);
             health.Value = hitPoints.Value / startingHP;
             timer = 0;           
-            Debug.Log($"Current hitpoints for player {OwnerClientId + 1}: " + hitPoints.Value);
             if (hitPoints.Value <= 0)
             {
-                Debug.Log("DEAD!");
+                IsKnockedDown = true;
                 VizualizeDeathServerRpc();
+                //ToggleKnockDownServerRpc();
             }
         }
     }
@@ -92,6 +105,22 @@ public class PlayerHealth : NetworkBehaviour
     [ClientRpc]
     private void VizualizeDeathClientRpc()
     {
-        OnPlayerKnockdown?.Invoke(this, EventArgs.Empty);
+        OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true});
     }
+
+    //[ServerRpc(RequireOwnership = false)]
+    //public void ToggleKnockDownServerRpc()
+    //{
+    //    // this will cause a replication over the network
+    //    // and ultimately invoke `OnValueChanged` on receivers
+    //    ToggleKnockDownClientRpc();
+    //    //OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true });
+    //}
+
+    //[ClientRpc]
+    //private void ToggleKnockDownClientRpc()
+    //{
+    //    IsKnockedDown.Value = !IsKnockedDown.Value;
+    //}
+
 }
