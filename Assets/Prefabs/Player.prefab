@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimation: {fileID: 405672945398536863}
-  ona: {fileID: 8739179420634378625}
+  ownerNetworkAnimator: {fileID: 8739179420634378625}
   playerSpeed:
     UseConstant: 0
     ConstantValue: 4
