@@ -52,21 +52,21 @@ public class Enemy : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
+        if (collision.GetComponentInParent<PlayerBehaviour>())
         {
             playerDown = false;
             target = collision.transform;
             playerID = (int) collision.GetComponentInParent<PlayerBehaviour>().OwnerClientId;
             Debug.Log($"New Target, With ID: " + playerID);
-            target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            try
+            {
+                target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            }
+            catch (Exception e)
+            {
+                target.GetComponentInParent<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            }
         }
-        //else the enemy is hit by a weapon attack. Do stuff to the enemy when it is hit by sword
-
-        
     }
-
-    //private void OnCollisionExit2D(Collision collision)
-    //{
-        
-    //}
 }
