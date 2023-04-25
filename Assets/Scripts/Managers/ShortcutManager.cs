@@ -10,108 +10,95 @@ using UnityEngine.UI;
 
 public class ShortcutManager : NetworkBehaviour
 {
-    [SerializeField] NetworkManager NetworkManagerPrefab;
-    [SerializeField] GameObject chatVisualPrefab;
-    [SerializeField] Transform playerPrefab;
-    [SerializeField] GameObject relayManagerGO;
+    [SerializeField] ShortcutMenu shortcutMenu;
+    [SerializeField] GameStatusSO gamestatus;
     [SerializeField] GameObject startHostButtonGO;
     [SerializeField] GameObject startClientButtonGO;
-    [SerializeField] GameObject joinCodeGO;
+    [SerializeField] TextMeshProUGUI joinCodeInput;
     [SerializeField] GameObject joinCodeDisplayGO;
-    [SerializeField] TextMeshProUGUI joinCodeText;
-    TextMeshProUGUI joinCodeDisplay;
-    ChatManager chatManager;
+    TMP_InputField joinCodeDisplayText;
     private int screenHeight;
 
-
-    //  Move to center on screen resize
-    private void Update()
+    public static ShortcutManager Singleton;
+    private void Awake()
     {
-        if (Screen.height != screenHeight)
-        {
-            screenHeight = Screen.height;
-            transform.position = new Vector3(Screen.width / 2, screenHeight / 2, 0f);
-            joinCodeDisplayGO.transform.position = new Vector3(Screen.width / 2, screenHeight - screenHeight * 0.2f, 0f);
-        }
-
+        if (Singleton == null) Singleton = this;
+        else Destroy(gameObject);
+    }
+    private void Start()
+    {
+        joinCodeDisplayText = joinCodeDisplayGO.GetComponent<TMP_InputField>();
     }
 
 
-    private void Start()
+    private void OnEnable()
     {
-        joinCodeDisplay = joinCodeDisplayGO.GetComponent<TextMeshProUGUI>();
-        TMP_InputField joinCodeInput = joinCodeGO.GetComponent<TMP_InputField>();
+        if (!IsShortcutManagerRelevant()) return;
+        Debug.LogWarning("SHORTCUT IN USE");
+        NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnectedCallback;
+        AddButtonListeners();
+    }
+
+    private void AddButtonListeners()
+    {
         Button startHostButton = startHostButtonGO.GetComponent<Button>();
         Button startClientButton = startClientButtonGO.GetComponent<Button>();
-        try
-        {
-            GameSceneShortcut gameSceneShortcut = GameObject.Find("GameSceneShortcut").GetComponent<GameSceneShortcut>();
-            bool isCommingFromLobby = !gameSceneShortcut.isShortcutUsed;
-            if (isCommingFromLobby)
-            {
-                transform.localScale = Vector3.zero;
-                return;
-            }
-        }
-        catch { Debug.Log("Not comming from lobby"); }
-
-        Instantiate(NetworkManagerPrefab);
-        //Instantiate(chatVisualPrefab);
-
 
         startHostButton.onClick.AddListener(() =>
         {
-            StartHost();
-            transform.localScale = Vector3.zero;
+            StartHostShortcut();
+            shortcutMenu.closeMenu();
         });
 
         startClientButton.onClick.AddListener(() =>
         {
-            StartClient(joinCodeText.text);
-            transform.localScale = Vector3.zero;
+            Debug.Log(joinCodeInput.text);
+            StartClientShortcut(joinCodeInput.text);
+            shortcutMenu.closeMenu();
         });
-
     }
 
 
-    [Command]
-    public async void StartHost()
+    private void NetworkManager_OnClientConnectedCallback(ulong obj)
     {
-        RelayManager RelayManager = relayManagerGO.GetComponent<RelayManager>();
+        Debug.Log("ONCLIENTCONNECTEDALLBACK");
+        SpawnManager.Singleton.SpawnAllPlayers();
+    }
+
+
+    public async void StartHostShortcut()
+    {
         try
         {
-            await RelayManager.Authorize();
-            Dictionary<LobbyEnums, string> relaydict = await RelayManager.CreateRelayShortcut();
+            await RelayManager.Singleton.Authorize();
+            Dictionary<LobbyEnums, string> relaydict = await RelayManager.Singleton.CreateRelayShortcut();
             string joincode = relaydict[LobbyEnums.RelayJoinCode];
-            joinCodeDisplay.text = joincode;
+            joinCodeDisplayText.text = joincode;
         }
-        catch (Exception e) { Debug.Log("RelayManager Connection error\n" + e); }
-        try
-        {
-            NetworkManager.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-        }
-        catch (Exception e)
-        { Debug.LogWarning("NetworkManager Connection error: " + e); }
+        catch (Exception e) { Debug.Log(e); }
+
+        SpawnManager.Singleton.SpawnAllPrefabs();
+
     }
 
-    [Command]
-    public async void StartClient(string joincode)
+    public async void StartClientShortcut(string joincode)
     {
-        RelayManager RelayManager = relayManagerGO.GetComponent<RelayManager>();
 
         try
         {
-            await RelayManager.Authorize();
-            await RelayManager.JoinRelayShortcut(joincode);
+            await RelayManager.Singleton.Authorize();
+            await RelayManager.Singleton.JoinRelayShortcut(joincode);
+            joinCodeDisplayGO.SetActive(false);
+
         }
         catch (Exception e) { Debug.LogError(e); }
 
         try
         {
-            NetworkManager.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
+            NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
         }
         catch (Exception e)
-        { Debug.LogWarning("NetworkManager Connection error: " + e); }
+        { Debug.LogWarning("CustomNetworkManager Connection error: " + e); }
 
     }
 
@@ -121,6 +108,17 @@ public class ShortcutManager : NetworkBehaviour
     NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
     {
         connectionApprovalResponse.Approved = true;
+    }
+
+    private bool IsShortcutManagerRelevant()
+    {
+        // return if shortcut not used or networkmanager not initialized
+        if (NetworkManager.Singleton == null)
+        {
+            Debug.LogWarning("Do not attempt to start game from game scene. NetworkManager is not initialized");
+            return false;
+        }
+        return true;
     }
 
 

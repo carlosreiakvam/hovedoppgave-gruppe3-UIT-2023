@@ -1,42 +1,92 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-class GameManager : MonoBehaviour
+class GameManager : NetworkBehaviour
 {
 
-    public static GameManager Instance;
+    [SerializeField] ShortcutManager shortcutManager;
+    [SerializeField] GameStatusSO gamestatus;
+    [SerializeField] GameObject infoTextGO;
+    [SerializeField] TextMeshProUGUI infoText;
+
+    public static GameManager Singleton;
+    public NetworkVariable<int> networkedPlayerIdHasRing = new NetworkVariable<int>(-1);
+    public NetworkVariable<bool> networkedGameWon = new NetworkVariable<bool>(false);
+
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Singleton == null) Singleton = this;
+        else Destroy(gameObject);
     }
-    public int playerIdHasRing { get; private set; }
-    [SerializeField] GameObject inGameMenu;
-    TextMeshProUGUI gameWonText;
+
 
     private void Start()
     {
-        playerIdHasRing = -1;
-        gameWonText = inGameMenu.GetComponentInChildren<TextMeshProUGUI>();
+        if (gamestatus.isShortcutUsed)
+        {
+            try
+            {
+
+                ShortcutManager.Singleton.gameObject.SetActive(true);
+            }
+            catch { }
+        }
+
+        else
+        {
+            try
+            {
+
+                ShortcutManager.Singleton.gameObject.SetActive(false);
+            }
+            catch { }
+
+            SpawnAll();
+        }
+
+        networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChanged;
+        networkedGameWon.OnValueChanged += OnGameWonChanged;
     }
 
-    public void OnPlayerCollectedRing(int playerId)
+    private void OnGameWonChanged(bool previousValue, bool newValue)
     {
-        playerIdHasRing = playerId;
+        infoTextGO.SetActive(true);
+        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.Value.ToString();
+    }
+
+    private void OnPlayerIdHasRingChanged(int previousValue, int newValue)
+    {
+        infoText.text = "A player has collected the ring!";
+        infoTextGO.SetActive(true);
+    }
+
+    private void SpawnAll()
+    {
+        Debug.Log("SPAWNALL");
+        SpawnManager.Singleton.SpawnAllPrefabs();
+        SpawnManager.Singleton.SpawnAllPlayers();
     }
 
 
-    public void OnGameWon()
+    [ServerRpc]
+    public void OnPlayerCollectedRingServerRpc(int playerId)
     {
-        inGameMenu.SetActive(true);
-        gameWonText.text = "Player with id: " + playerIdHasRing + " won the game";
+        networkedPlayerIdHasRing.Value = playerId;
+    }
+
+
+
+
+    [ServerRpc]
+    public void OnGameWonServerRpc()
+    {
+        networkedGameWon.Value = true;
     }
 
 

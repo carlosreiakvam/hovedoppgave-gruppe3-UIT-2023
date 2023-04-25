@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
         }
 
 
-        RelayManager.Instance.OnRelayCreated += OpenLobbyRoom;
+        RelayManager.Singleton.OnRelayCreated += OpenLobbyRoom;
 
         parentTransform = gameObject.transform;
         pages = new List<GameObject>();

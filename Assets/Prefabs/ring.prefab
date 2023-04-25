@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6593909594893669767}
   - component: {fileID: 1540981329760762906}
   m_Layer: 0
-  m_Name: ring
+  m_Name: Ring
   m_TagString: Ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
