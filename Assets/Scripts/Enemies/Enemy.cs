@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Unity.Netcode.Components;
 
 public class Enemy : NetworkBehaviour
 {
@@ -12,9 +13,11 @@ public class Enemy : NetworkBehaviour
     private const string VERTICAL = "Vertical";
     private const string SPEED = "Speed";
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     private Vector2 moveDirection = new(0, 0);
     private bool playerDown = false;
     private int playerID;
+    private const string STEELATTACK = "SteelAttack";
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
@@ -68,5 +71,10 @@ public class Enemy : NetworkBehaviour
                 target.GetComponentInParent<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
             }
         }
+    }
+
+    private void Attack()
+    {
+        networkAnimator.SetTrigger(STEELATTACK);
     }
 }
