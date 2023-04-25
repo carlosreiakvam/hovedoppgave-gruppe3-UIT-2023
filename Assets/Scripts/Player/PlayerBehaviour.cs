@@ -13,6 +13,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private PlayerInput playerInput;
 
     [SerializeField] private GameObject playerAnimation;
+    [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
 
     private readonly float boundX = 0.35f;
     private readonly float boundY = 0.17f;
@@ -29,8 +30,13 @@ public class PlayerBehaviour : NetworkBehaviour
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
     private const string SPEED = "Speed";
+    private const string PREVHORIZONTAL = "PrevHorizontal";
+    private const string PREVVERTICAL = "PrevVertical";
+    private const string WOODENATTACK = "WoodenAttack";
+    private const string STEELATTACK = "SteelAttack";
 
     private bool chatInFocus = false;
+    private bool woodenSword = true;
 
     private bool isRunningAndroid = false;
     private bool isRunningWindows = false; //Set to true when using shortcut to game or starting from Game scene
@@ -41,6 +47,12 @@ public class PlayerBehaviour : NetworkBehaviour
         if (!IsOwner) return;
         mainCamera = Camera.main;
         animator = GetComponentInChildren<Animator>();
+        animator.SetFloat(PREVHORIZONTAL, 0);
+        animator.SetFloat(PREVVERTICAL, -1);
+        //transform.GetChild(1).gameObject.SetActive(false);
+        //transform.GetChild(2).gameObject.SetActive(false);
+        //transform.GetChild(3).gameObject.SetActive(false);
+        //transform.GetChild(4).gameObject.SetActive(false);
     }
 
     private void Start() 
@@ -181,8 +193,11 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        horizontalInput = Input.GetAxis(HORIZONTAL);
-        verticalInput = Input.GetAxis(VERTICAL);
+        horizontalInput = Input.GetAxisRaw(HORIZONTAL);
+        verticalInput = Input.GetAxisRaw(VERTICAL);
+
+        //print("horizontalInput: " + horizontalInput.ToString());
+        //print("verticalInput: " + verticalInput.ToString());
 
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * (playerSpeed.Value * Time.deltaTime);
         transform.position += (Vector3)movement;
@@ -190,6 +205,21 @@ public class PlayerBehaviour : NetworkBehaviour
         animator.SetFloat(HORIZONTAL, horizontalInput);
         animator.SetFloat(VERTICAL, verticalInput);
         animator.SetFloat(SPEED, new Vector2(horizontalInput, verticalInput).normalized.sqrMagnitude);
+
+        // if player is walking, update last horizontal and vertical values for animator
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            animator.SetFloat(PREVHORIZONTAL, horizontalInput);
+            animator.SetFloat(PREVVERTICAL, verticalInput);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            print("E pressed");
+            print("PREVHORIZONTAL: " + animator.GetFloat(PREVHORIZONTAL).ToString());
+            print("PREVVERTICAL: " + animator.GetFloat(PREVVERTICAL).ToString());
+            Attack();
+        }
     }
 
 
@@ -206,5 +236,16 @@ public class PlayerBehaviour : NetworkBehaviour
         animator.SetFloat(VERTICAL, input.y);
         animator.SetFloat(SPEED, new Vector2(input.x, input.y).normalized.sqrMagnitude);
 
+    }
+
+    private void Attack()
+    {
+        if (woodenSword) { ownerNetworkAnimator.SetTrigger(WOODENATTACK); }
+        else ownerNetworkAnimator.SetTrigger(STEELATTACK);
+    }
+
+    public void SetNewSword()
+    {
+        woodenSword = false;
     }
 }
