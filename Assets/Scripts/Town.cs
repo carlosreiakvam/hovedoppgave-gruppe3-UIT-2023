@@ -9,16 +9,6 @@ public class Town : MonoBehaviour
     GameManager gameManager;
     TextMeshPro wonText;
     GameObject gameUIGO;
-    private void Start()
-    {
-        //gameManager = GetComponentInParent<GameManager>();
-        gameManager = GameManager.Instance;
-        //GameObject parent = transform.parent.gameObject;    
-        //wonText = gameObject.GetComponentInParent<TextMeshPro>();
-        Transform parent = transform.parent;
-        Transform grandfather = parent?.parent;
-        if (grandfather == null) Debug.Log("no grandfather");
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,9 +17,9 @@ public class Town : MonoBehaviour
         int playerId = collision.GetInstanceID();
         Debug.Log("Player with instance playerId " + playerId + " collided with town");
 
-        if (playerId == gameManager.playerIdHasRing)
+        if (playerId == GameManager.Singleton.networkedPlayerIdHasRing.Value)
         {
-            gameManager.OnGameWon();
+            GameManager.Singleton.OnGameWonServerRpc();
         }
     }
 }

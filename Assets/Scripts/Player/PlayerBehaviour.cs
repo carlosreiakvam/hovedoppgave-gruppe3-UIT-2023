@@ -55,7 +55,7 @@ public class PlayerBehaviour : NetworkBehaviour
         //transform.GetChild(4).gameObject.SetActive(false);
     }
 
-    private void Start() 
+    private void Start()
     {//All the next stuff might be better off inside OnNetworkSpawn
         if (!ChatManager.Instance) return; //mulig det har med bypass å gjøre at denne er her. Fjern ved innlevering.
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
@@ -104,7 +104,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void Singleton_OnClientDisconnectCallback(ulong clientId) //worst practices? Use ServerRpcParams
     {
-        if (clientId == OwnerClientId) //will warn that only server can despawn if server is shut down first.
+        if (clientId == OwnerClientId && IsServer) //will warn that only server can despawn if server is shut down first.
             NetworkObject.Despawn();
     }
 

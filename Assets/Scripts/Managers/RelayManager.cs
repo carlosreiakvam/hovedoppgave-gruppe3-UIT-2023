@@ -18,8 +18,13 @@ public class RelayManager : MonoBehaviour
     public Allocation allocation;
 
 
-    //Singleton pattern: https://www.youtube.com/watch?v=2pCkInvkwZ0&t=125s
-    public static RelayManager Instance;
+    public static RelayManager Singleton;
+    private void Awake()
+    {
+        if (Singleton == null) Singleton = this;
+        else Destroy(gameObject);
+    }
+
 
     public async Task Authorize()
     {
@@ -54,21 +59,6 @@ public class RelayManager : MonoBehaviour
     }
 
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Debug.Log("destroying RelayManager as it is already initialized");
-            Destroy(gameObject);
-
-        }
-        else
-        {
-            Debug.Log("creating RelayManager for the first time");
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
 
 
 
@@ -125,7 +115,27 @@ public class RelayManager : MonoBehaviour
 
     // TODO: DEVELOPER SHORTCUTS BELOW. REMOVE AT LAUNCH!
 
-    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
+/*    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
+    {
+        try
+        {
+            allocation = await RelayService.Instance.CreateAllocationAsync(3);
+            relayJoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            RelayServerData relayServerData = new(allocation, "dtls");
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+        }
+        catch (Exception e)
+        { Debug.Log("Create Relay Error: " + e); }
+
+        Dictionary<LobbyEnums, string> relayDict = new()
+        {
+            { LobbyEnums.RelayJoinCode, relayJoinCode },
+            { LobbyEnums.AllocationId, allocation.AllocationId.ToString() }
+        };
+
+        return relayDict;
+    }
+*/    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
     {
         try
         {

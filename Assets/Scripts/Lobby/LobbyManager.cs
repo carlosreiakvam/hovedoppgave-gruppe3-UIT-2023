@@ -143,7 +143,7 @@ public class LobbyManager : MonoBehaviour
         try
         {
             // Connect to relay
-            Dictionary<string, string> relayValues = await RelayManager.Instance.CreateRelay();
+            Dictionary<string, string> relayValues = await RelayManager.Singleton.CreateRelay();
             UpdateJoinCode(relayValues[LobbyEnums.RelayJoinCode.ToString()]);
             Debug.Log($"CreateLobby RelayJoinCode: {relayValues[LobbyEnums.RelayJoinCode.ToString()]}");
         }
@@ -214,7 +214,7 @@ public class LobbyManager : MonoBehaviour
             // Connect to relay
             string relayCode = lobby.Data[LobbyEnums.RelayJoinCode.ToString()].Value;
             Debug.Log($"QuickJoin RelayJoinCode: {relayCode}");
-            RelayManager.Instance.JoinRelay(relayCode);
+            RelayManager.Singleton.JoinRelay(relayCode);
 
 
             // Open LobbyRoom
