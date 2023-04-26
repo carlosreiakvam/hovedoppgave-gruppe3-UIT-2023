@@ -54,6 +54,7 @@ public class Enemy : NetworkBehaviour
 
     private void StopAnimation()
     {
+        size = Vector2.zero;
         animator.SetFloat(SPEED, 0);
         playerDown = true;
     }
@@ -74,15 +75,7 @@ public class Enemy : NetworkBehaviour
             target = collision.transform;
             playerID = (int) collision.GetComponentInParent<PlayerBehaviour>().OwnerClientId;
             Debug.Log($"New Target, With ID: " + playerID);
-            //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
-            try
-            {
-                target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
-            }
-            catch (Exception e)
-            {
-                target.GetComponentInParent<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
-            }
+            target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
         }
     }
 

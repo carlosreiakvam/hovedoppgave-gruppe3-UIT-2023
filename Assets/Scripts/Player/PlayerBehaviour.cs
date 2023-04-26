@@ -16,8 +16,8 @@ public class PlayerBehaviour : NetworkBehaviour
     [SerializeField] private GameObject playerAnimation;
     [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
 
-    private readonly float boundX = 0.35f;
-    private readonly float boundY = 0.17f;
+    //private readonly float boundX = 0.35f;
+    //private readonly float boundY = 0.17f;
     [SerializeField] private FloatReference playerSpeed;
     [SerializeField] private List<Vector2> spawnPositionList;
 
@@ -37,9 +37,11 @@ public class PlayerBehaviour : NetworkBehaviour
     private const string STEELATTACK = "SteelAttack";
 
     private bool chatInFocus = false;
+    private bool playerIsKnockedOut = false;
     private bool woodenSword = true;
 
     private const string TOUCH_UI_TAG = "TouchUI";
+    private PlayerHealth playerHealth;
     private void Initialize()
     {
         if (!IsOwner) return;
@@ -47,6 +49,14 @@ public class PlayerBehaviour : NetworkBehaviour
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat(PREVHORIZONTAL, 0);
         animator.SetFloat(PREVVERTICAL, -1);
+
+        playerHealth = GetComponentInChildren<PlayerHealth>();
+        playerHealth.OnPlayerKnockdown += OnPlayerKnockdown; //subscribe
+    }
+
+    private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
+    {
+        playerIsKnockedOut = !playerIsKnockedOut;
     }
 
     private void Start()
@@ -93,6 +103,8 @@ public class PlayerBehaviour : NetworkBehaviour
 
     void Update()
     {
+        if (playerIsKnockedOut) return;
+
         if (!chatInFocus)
         {
             if (gamestatusSO.isAndroid)
