@@ -17,7 +17,8 @@ public class RingBehaviour : NetworkBehaviour
 
         Debug.Log("Player with instance playerId " + playerId + " collided with ring");
 
-        NetworkObject.Despawn(true);
+        SpawnManager.Singleton.DespawnObject(NetworkObject, gameObject);
+        Destroy(gameObject);
     }
 }
 

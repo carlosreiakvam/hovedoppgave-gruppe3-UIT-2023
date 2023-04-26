@@ -2,14 +2,16 @@ using QFSW.QC;
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : NetworkBehaviour
 {
-    [SerializeField] GameStatusSO gamestatus;
     [SerializeField] Transform playerPrefab = null;
     [SerializeField] Transform[] prefabs = null;
     public static SpawnManager Singleton;
+    private Transform playerTransform;
     private HashSet<ulong> spawnedClientIds = new HashSet<ulong>(); // keeps track of which clients have been spawned
 
 
@@ -18,8 +20,11 @@ public class SpawnManager : NetworkBehaviour
         if (Singleton == null) Singleton = this;
         else Destroy(gameObject);
     }
-
-
+    /*    private void Start()
+        {
+            if (IsServer) NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+        }
+    */
     public void SpawnAllPrefabs()
     {
         if (!IsServer) return;
@@ -33,31 +38,41 @@ public class SpawnManager : NetworkBehaviour
         prefabTransform.GetComponent<NetworkObject>().Spawn(true);
     }
 
-    /*    public void SpawnPlayer(ulong obj)
-        {
-            Debug.Log("Spawn player");
-            if (!IsServer) return;
-            Transform playerTransform = Instantiate(playerPrefab);
-            NetworkObject networkObject = playerTransform.GetComponent<NetworkObject>();
-            NetworkObject.SpawnAsPlayerObject(obj, true);
-        }
-    */
-    internal void SpawnAllPlayers()
+    public void SpawnAllPlayers()
     {
-        if (!IsServer) return;
         foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
         {
-            if (spawnedClientIds.Contains(clientId))
-            {
-                continue; // Skip spawning if the player object is already spawned
-            }
-
-            Transform playerTransform = Instantiate(playerPrefab);
-            playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
-
-            // Add the clientId to the spawnedClientIds HashSet
-            spawnedClientIds.Add(clientId);
+            playerTransform = Instantiate(playerPrefab);
+            NetworkObject playerNetworkObject = playerTransform.GetComponent<NetworkObject>();
+            playerNetworkObject.SpawnAsPlayerObject(clientId, true);
         }
+    }
 
+    internal void DespawnObject(NetworkObject nObj, GameObject obj)
+    {
+        if (!IsServer) return;
+        nObj.Despawn();
+        Destroy(obj);
+    }
+
+
+    /*    private void OnDestroy()
+        {
+            if (IsServer)
+            {
+                NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
+            }
+        }
+    */
+    [ClientRpc]
+    public void DisconnectClientRpc(ulong clientId)
+    {
+        NetworkObject playerNetworkObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+        if (playerNetworkObject != null && playerNetworkObject.IsSpawned)
+        {
+            playerNetworkObject.Despawn();
+            Destroy(playerNetworkObject.gameObject);
+            NetworkManager.Singleton.DisconnectClient(clientId);
+        }
     }
 }

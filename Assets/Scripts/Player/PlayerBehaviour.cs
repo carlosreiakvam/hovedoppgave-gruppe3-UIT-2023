@@ -248,4 +248,10 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         woodenSword = false;
     }
-}
+
+/*    public void DespawnPlayer()
+    {
+        SpawnManager.Singleton.DespawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+
+    }
+*/}

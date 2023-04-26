@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 class GameManager : NetworkBehaviour
 {
 
-    [SerializeField] ShortcutManager shortcutManager;
     [SerializeField] GameStatusSO gamestatus;
     [SerializeField] GameObject infoTextGO;
     [SerializeField] TextMeshProUGUI infoText;
@@ -28,31 +27,19 @@ class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        if (gamestatus.isShortcutUsed)
-        {
-            try
-            {
-
-                ShortcutManager.Singleton.gameObject.SetActive(true);
-            }
-            catch { }
-        }
-
-        else
-        {
-            try
-            {
-
-                ShortcutManager.Singleton.gameObject.SetActive(false);
-            }
-            catch { }
-
-            SpawnAll();
-        }
-
+        SpawnAll();
         networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChanged;
         networkedGameWon.OnValueChanged += OnGameWonChanged;
     }
+
+    private void SpawnAll()
+    {
+        if (!IsServer) return;
+        Debug.Log("SPAWNALL");
+        SpawnManager.Singleton.SpawnAllPrefabs();
+        SpawnManager.Singleton.SpawnAllPlayers();
+    }
+
 
     private void OnGameWonChanged(bool previousValue, bool newValue)
     {
@@ -62,16 +49,11 @@ class GameManager : NetworkBehaviour
 
     private void OnPlayerIdHasRingChanged(int previousValue, int newValue)
     {
-        infoText.text = "A player has collected the ring!";
+        Debug.LogWarning("ONPLAYERIDHASRINGCHANGED");
         infoTextGO.SetActive(true);
+        infoText.text = "A player has collected the ring!";
     }
 
-    private void SpawnAll()
-    {
-        Debug.Log("SPAWNALL");
-        SpawnManager.Singleton.SpawnAllPrefabs();
-        SpawnManager.Singleton.SpawnAllPlayers();
-    }
 
 
     [ServerRpc]
