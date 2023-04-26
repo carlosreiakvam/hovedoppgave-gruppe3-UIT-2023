@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1337797118624796465}
   - component: {fileID: 922750897208936478}
   - component: {fileID: 4661443438253710524}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftAttack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,9 +91,9 @@ GameObject:
   - component: {fileID: 1946758437197598581}
   - component: {fileID: 6503508207198567480}
   - component: {fileID: 6550144398708958830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpAttack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,9 +169,9 @@ GameObject:
   - component: {fileID: 9088449680303693288}
   - component: {fileID: 2365830160522508628}
   - component: {fileID: 8594018259971717582}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightAttack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -488,7 +488,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - Layer: 0
+    OriginatingState: 229373857
+    DestinationState: -1353737641
+    TransitionDuration: 0
+    TriggerNameHash: 1178528288
+    TransitionIndex: 1
   m_Animator: {fileID: 1816999819}
 --- !u!1 &7757684737758330745
 GameObject:
@@ -501,9 +507,9 @@ GameObject:
   - component: {fileID: 561614538870089931}
   - component: {fileID: 4586773445320063135}
   - component: {fileID: 5540055444432805876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DownAttack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

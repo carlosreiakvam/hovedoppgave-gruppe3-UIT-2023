@@ -40,6 +40,7 @@ public class PlayerHealth : NetworkBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        print("enter: " + collision.gameObject.name);
         if (IsLocalPlayer)
         {
             if (collision.gameObject.CompareTag("Enemy"))
@@ -57,6 +58,7 @@ public class PlayerHealth : NetworkBehaviour
     /// <param name="collision">Who or what is dealing damage</param>
     void OnCollisionStay2D(Collision2D collision)
     {
+        print("stay: " + collision.gameObject.name);
         if (IsLocalPlayer)
         {
             timer += Time.deltaTime; //deltatime is the time passed since previous frame
@@ -68,8 +70,17 @@ public class PlayerHealth : NetworkBehaviour
             }
         }
     }
+
+    public void SwordCollision()
+    {
+        timer = TIME_TO_DAMAGE;
+        timer += Time.deltaTime; //deltatime is the time passed since previous frame
+        ApplyDamage();
+        VisualizeDamageServerRpc();
+    }
     private void ApplyDamage()
     {
+        print("applying damage to: " + gameObject.name);
         if (timer >= TIME_TO_DAMAGE)
         {
             hitPoints.ApplyChange(-lightDamageTaken.Value);
