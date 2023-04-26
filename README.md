@@ -11,16 +11,17 @@ The goal of Journey of the Heroes is to find the ring and deliver it to the vill
 
 ## Gameplay
 
-Players will spawn in a village and will need to explore the surrounding area to find clues that will lead them to the location of the ring. The ring is spawning close to the players for testing purposes. Once the ring is found, the player must bring it to the village gate while avoiding the enemies. The player who delivers the ring to the village gate first wins the game.
+Players will spawn in a village and will need to explore the surrounding area to find clues that will lead them to the location of the ring. The ring is spawning close to the players for testing purposes. Once the ring is found, the player must bring it to the village gate while avoiding the enemy with a sword. The player who delivers the ring to the village gate first wins the game.
 
 ## Controls
 
 - Use the WASD keys to move your character.
 - Press the E key to attack the enemy.
+- For Android: use the on-screen joystick to move your character, and tap the attack button to attack the enemy.
 
 ## Multiplayer
 
-Journey of the Heroes is a multiplayer game, so you will be playing against other players online. The game only supports public lobbies with quick join.
+Journey of the Heroes is a multiplayer game, so you will be playing against other players online. The game only supports public lobbies with quick join, and private lobbies are not available at this time.
 
 ## Feedback
 
