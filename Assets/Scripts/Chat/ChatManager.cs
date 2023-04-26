@@ -29,13 +29,11 @@ public class ChatManager : NetworkBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Debug.Log("destroying RelayManager as it is already initialized");
             Destroy(gameObject);
 
         }
         else
         {
-            Debug.Log("creating RelayManager for the first time");
             Instance = this;
             DontDestroyOnLoad(gameObject.transform.parent);
         }
@@ -53,7 +51,7 @@ public class ChatManager : NetworkBehaviour
 
     void Update()
     {
-        //if (NetworkManager.Singleton.IsConnectedClient)
+        //if (CustomNetworkManager.Singleton.IsConnectedClient)
         //{
 
 

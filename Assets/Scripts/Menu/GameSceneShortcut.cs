@@ -4,21 +4,16 @@ using UnityEngine.UI;
 
 public class GameSceneShortcut : MonoBehaviour
 {
+    [SerializeField] GameStatusSO gamestatus;
     [SerializeField] Button gameSceneButtonGO;
-    [HideInInspector] public bool isShortcutUsed = false;
 
-    // Start is called before the first frame update
     void Start()
     {
 
-        DontDestroyOnLoad(gameObject);
         gameSceneButtonGO.onClick.AddListener(() =>
         {
             SceneManager.LoadScene("Game");
-            isShortcutUsed = true;
-
+            gamestatus.isShortcutUsed = true;
         });
-
     }
-
 }

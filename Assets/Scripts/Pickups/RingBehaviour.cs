@@ -6,11 +6,6 @@ using UnityEngine;
 
 public class RingBehaviour : NetworkBehaviour
 {
-    GameManager gameManager;
-    private void Start()
-    {
-        gameManager = GetComponentInParent<GameManager>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,13 +13,12 @@ public class RingBehaviour : NetworkBehaviour
         if (!collision.CompareTag("Player")) return;
 
         int playerId = collision.GetInstanceID();
-        gameManager.OnPlayerCollectedRing(playerId);
+        GameManager.Singleton.OnPlayerCollectedRingServerRpc(playerId);
 
         Debug.Log("Player with instance playerId " + playerId + " collided with ring");
-        Debug.Log("playerIdHasRing is: " + gameManager.playerIdHasRing);
 
-        NetworkObject.Despawn(true);
+        SpawnManager.Singleton.DespawnObject(NetworkObject, gameObject);
+        Destroy(gameObject);
     }
-
 }
 

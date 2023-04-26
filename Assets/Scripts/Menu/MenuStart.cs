@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class MenuStart : MonoBehaviour
 {
 
+    [SerializeField] GameStatusSO gamestatus;
     [SerializeField] GameObject beginButtonGO;
     [SerializeField] GameObject lobbyStartMenu;
 
@@ -19,9 +20,12 @@ public class MenuStart : MonoBehaviour
         LobbyManager lobbyManager = GetComponentInParent<LobbyManager>();
 
         Button beginButton = beginButtonGO.GetComponent<Button>();
-        beginButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
+        beginButton.onClick.AddListener(() =>
+        {
+            gamestatus.isShortcutUsed = false;
+            menuManager.OpenPage(MenuEnums.LobbyMenu);
+        });
 
-        // TODO: Delete on launch
-        
+
     }
 }
