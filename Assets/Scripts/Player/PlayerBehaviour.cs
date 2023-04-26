@@ -49,15 +49,10 @@ public class PlayerBehaviour : NetworkBehaviour
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat(PREVHORIZONTAL, 0);
         animator.SetFloat(PREVVERTICAL, -1);
-        //transform.GetChild(1).gameObject.SetActive(false);
-        //transform.GetChild(2).gameObject.SetActive(false);
-        //transform.GetChild(3).gameObject.SetActive(false);
-        //transform.GetChild(4).gameObject.SetActive(false);
     }
 
     private void Start()
     {//All the next stuff might be better off inside OnNetworkSpawn
-        if (!ChatManager.Instance) return; //mulig det har med bypass å gjøre at denne er her. Fjern ved innlevering.
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
 
         if (!IsOwner) return;
@@ -74,7 +69,7 @@ public class PlayerBehaviour : NetworkBehaviour
         {
             Debug.Log("Current platform is Windows.");
             isRunningWindows = true;
-            GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
+            //GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
 
         }
         else
@@ -98,58 +93,16 @@ public class PlayerBehaviour : NetworkBehaviour
         base.OnNetworkSpawn();
         transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
         Initialize(); //Running this is start might cause variables to not be initialized
-        // TODO: merge bug on line bellow
-        NetworkManager.Singleton.OnClientDisconnectCallback += Singleton_OnClientDisconnectCallback;
-    }
-
-    private void Singleton_OnClientDisconnectCallback(ulong clientId) //worst practices? Use ServerRpcParams
-    {
-        if (clientId == OwnerClientId && IsServer) //will warn that only server can despawn if server is shut down first.
-            NetworkObject.Despawn();
     }
 
     private void LateUpdate()
     {
         if (IsLocalPlayer)
         {
+            Debug.Log("Player behaviour late update");
             Vector3 pos = playerAnimation.transform.position;
             pos.z = -10;
-            mainCamera.transform.position = pos;
-
-            //Vector3 delta = Vector3.zero;
-
-            ////check if we're inside the bounds of the x axis
-            //float deltaX = transform.position.x - mainCamera.transform.position.x;
-
-
-            //if (deltaX > boundX || deltaX < -boundX)
-            //{
-            //    if (mainCamera.transform.position.x < transform.position.x)
-            //    {
-            //        delta.x = deltaX - boundX;
-            //    }
-            //    else
-            //    {
-            //        delta.x = deltaX + boundX;
-            //    }
-            //}
-
-            ////check if we're inside the bounds of the x axis
-            //float deltaY = transform.position.y - mainCamera.transform.position.y;
-
-            //if (deltaY > boundY || deltaY < -boundY)
-            //{
-            //    if (mainCamera.transform.position.y < transform.position.y)
-            //    {
-            //        delta.y = deltaY - boundY;
-            //    }
-            //    else
-            //    {
-            //        delta.y = deltaY + boundY;
-            //    }
-            //}
-
-            //mainCamera.transform.position += new Vector3(delta.x, delta.y);
+            Camera.main.transform.position = pos;
         }
     }
 
@@ -165,10 +118,6 @@ public class PlayerBehaviour : NetworkBehaviour
         }
     }
 
-    //void FixedUpdate()
-    //{
-    //    HandleInteractions();
-    //}
 
     private void HandleInteractions()
     {
@@ -183,9 +132,9 @@ public class PlayerBehaviour : NetworkBehaviour
         float interactDistance = 0f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDir, interactDistance);
 
-        if (hit.transform.TryGetComponent(out Enemy en))
-            Debug.Log("Hit Something: " + en.tag);
-
+        /*        if (hit.transform.TryGetComponent(out Enemy en))
+                    Debug.Log("Hit Something: " + en.tag);
+        */
 
     }
 
@@ -249,9 +198,10 @@ public class PlayerBehaviour : NetworkBehaviour
         woodenSword = false;
     }
 
-/*    public void DespawnPlayer()
-    {
-        SpawnManager.Singleton.DespawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
+    /*    public void DespawnPlayer()
+        {
+            SpawnManager.Singleton.DespawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
 
-    }
-*/}
+        }
+    */
+}

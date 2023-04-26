@@ -21,7 +21,10 @@ public class RelayManager : MonoBehaviour
     public static RelayManager Singleton;
     private void Awake()
     {
-        if (Singleton == null) Singleton = this;
+        if (Singleton == null)
+        {
+            Singleton = this;
+        }
         else Destroy(gameObject);
     }
 
@@ -115,27 +118,28 @@ public class RelayManager : MonoBehaviour
 
     // TODO: DEVELOPER SHORTCUTS BELOW. REMOVE AT LAUNCH!
 
-/*    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
-    {
-        try
+    /*    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
         {
-            allocation = await RelayService.Instance.CreateAllocationAsync(3);
-            relayJoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            RelayServerData relayServerData = new(allocation, "dtls");
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+            try
+            {
+                allocation = await RelayService.Instance.CreateAllocationAsync(3);
+                relayJoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+                RelayServerData relayServerData = new(allocation, "dtls");
+                NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+            }
+            catch (Exception e)
+            { Debug.Log("Create Relay Error: " + e); }
+
+            Dictionary<LobbyEnums, string> relayDict = new()
+            {
+                { LobbyEnums.RelayJoinCode, relayJoinCode },
+                { LobbyEnums.AllocationId, allocation.AllocationId.ToString() }
+            };
+
+            return relayDict;
         }
-        catch (Exception e)
-        { Debug.Log("Create Relay Error: " + e); }
-
-        Dictionary<LobbyEnums, string> relayDict = new()
-        {
-            { LobbyEnums.RelayJoinCode, relayJoinCode },
-            { LobbyEnums.AllocationId, allocation.AllocationId.ToString() }
-        };
-
-        return relayDict;
-    }
-*/    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
+    */
+    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
     {
         try
         {

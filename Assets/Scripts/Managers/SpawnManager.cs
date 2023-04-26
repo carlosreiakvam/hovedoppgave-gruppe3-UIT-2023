@@ -20,14 +20,9 @@ public class SpawnManager : NetworkBehaviour
         if (Singleton == null) Singleton = this;
         else Destroy(gameObject);
     }
-    /*    private void Start()
-        {
-            if (IsServer) NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-        }
-    */
+
     public void SpawnAllPrefabs()
     {
-        if (!IsServer) return;
         foreach (Transform prefab in prefabs) { SpawnObject(prefab); }
     }
 
@@ -38,10 +33,12 @@ public class SpawnManager : NetworkBehaviour
         prefabTransform.GetComponent<NetworkObject>().Spawn(true);
     }
 
+
     public void SpawnAllPlayers()
     {
         foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
         {
+            Debug.Log("Spawnin player");
             playerTransform = Instantiate(playerPrefab);
             NetworkObject playerNetworkObject = playerTransform.GetComponent<NetworkObject>();
             playerNetworkObject.SpawnAsPlayerObject(clientId, true);
@@ -56,14 +53,7 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-    /*    private void OnDestroy()
-        {
-            if (IsServer)
-            {
-                NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
-            }
-        }
-    */
+
     [ClientRpc]
     public void DisconnectClientRpc(ulong clientId)
     {
@@ -75,4 +65,5 @@ public class SpawnManager : NetworkBehaviour
             NetworkManager.Singleton.DisconnectClient(clientId);
         }
     }
+
 }

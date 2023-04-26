@@ -25,11 +25,12 @@ class GameManager : NetworkBehaviour
     }
 
 
+
     private void Start()
     {
+        networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChangedClientRpc;
+        networkedGameWon.OnValueChanged += OnGameWonChangedClientRpc;
         SpawnAll();
-        networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChanged;
-        networkedGameWon.OnValueChanged += OnGameWonChanged;
     }
 
     private void SpawnAll()
@@ -41,13 +42,16 @@ class GameManager : NetworkBehaviour
     }
 
 
-    private void OnGameWonChanged(bool previousValue, bool newValue)
+    [ClientRpc]
+    private void OnGameWonChangedClientRpc(bool previousValue, bool newValue)
     {
+        Debug.LogWarning("OngameWonChangedClientRpc");
         infoTextGO.SetActive(true);
         infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.Value.ToString();
     }
 
-    private void OnPlayerIdHasRingChanged(int previousValue, int newValue)
+    [ClientRpc]
+    private void OnPlayerIdHasRingChangedClientRpc(int previousValue, int newValue)
     {
         Debug.LogWarning("ONPLAYERIDHASRINGCHANGED");
         infoTextGO.SetActive(true);
