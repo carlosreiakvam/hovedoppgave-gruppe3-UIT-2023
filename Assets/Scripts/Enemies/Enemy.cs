@@ -46,7 +46,6 @@ public class Enemy : NetworkBehaviour
             {
                 if (raycastHit2D.collider.name == "PlayerAnimation")
                 {
-                    print(raycastHit2D.collider.name);
                     Attack();
                 }
             }
