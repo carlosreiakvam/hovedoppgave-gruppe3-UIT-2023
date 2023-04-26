@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameStatusSO : ScriptableObject
 {
     public bool gameIsOver = false;
-    public bool isShortcutUsed = true;
     public int playerIdHasRing = -1;
+    public bool isAndroid = false;
+    public bool isWindows = false;
 }

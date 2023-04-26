@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class SpawnManager : NetworkBehaviour
 {
     [SerializeField] Transform playerPrefab = null;
+    [SerializeField] private GameObject ringPrefab;
     [SerializeField] Transform[] prefabs = null;
     public static SpawnManager Singleton;
     private Transform playerTransform;
@@ -19,6 +20,13 @@ public class SpawnManager : NetworkBehaviour
     {
         if (Singleton == null) Singleton = this;
         else Destroy(gameObject);
+    }
+
+    public void SpawnAll()
+    {
+        SpawnAllPrefabs();
+        SpawnRing();
+        SpawnAllPlayers();
     }
 
     public void SpawnAllPrefabs()
@@ -31,6 +39,22 @@ public class SpawnManager : NetworkBehaviour
     {
         Transform prefabTransform = Instantiate(prefab);
         prefabTransform.GetComponent<NetworkObject>().Spawn(true);
+    }
+
+
+    /*        new Vector3(5f,5f,0f),
+            new Vector3(10f,15f,0f),
+            new Vector3(5f,15f,0f),
+    */
+    private void SpawnRing()
+    {
+        Vector3[] spawnPoints = {
+        new Vector3(0f,0f,0f),
+    };
+        Vector3 randomSpawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+        GameObject ring = Instantiate(ringPrefab, randomSpawnPoint, Quaternion.identity);
+        ring.GetComponent<NetworkObject>().Spawn();
+        Debug.Log("SPAWNING RING");
     }
 
 

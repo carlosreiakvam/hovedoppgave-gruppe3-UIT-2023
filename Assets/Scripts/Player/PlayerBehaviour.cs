@@ -12,6 +12,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private CharacterController controller;
     private PlayerInput playerInput;
 
+    [SerializeField] GameStatusSO gamestatusSO;
     [SerializeField] private GameObject playerAnimation;
     [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
 
@@ -38,9 +39,6 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool chatInFocus = false;
     private bool woodenSword = true;
 
-    private bool isRunningAndroid = false;
-    private bool isRunningWindows = false; //Set to true when using shortcut to game or starting from Game scene
-
     private const string TOUCH_UI_TAG = "TouchUI";
     private void Initialize()
     {
@@ -52,31 +50,19 @@ public class PlayerBehaviour : NetworkBehaviour
     }
 
     private void Start()
-    {//All the next stuff might be better off inside OnNetworkSpawn
+    {
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
 
-        if (!IsOwner) return;
-
-        if (Application.platform == RuntimePlatform.Android)
+        if (gamestatusSO.isAndroid)
         {
-            Debug.Log("Current platform is Android.");
-            isRunningAndroid = true;
             controller = gameObject.GetComponent<CharacterController>();
             playerInput = GetComponent<PlayerInput>();
         }
-        else if (Application.platform == RuntimePlatform.WindowsEditor ||
-                 Application.platform == RuntimePlatform.WindowsPlayer)
+        else if (gamestatusSO.isWindows)
         {
-            Debug.Log("Current platform is Windows.");
-            isRunningWindows = true;
-            //GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
-
+            try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
+            catch { Debug.LogWarning("CANNOT FIND TouchUI"); }
         }
-        else
-        {
-            Debug.Log("Current platform is not supported.");
-        }
-
     }
 
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
@@ -99,7 +85,6 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (IsLocalPlayer)
         {
-            Debug.Log("Player behaviour late update");
             Vector3 pos = playerAnimation.transform.position;
             pos.z = -10;
             Camera.main.transform.position = pos;
@@ -110,10 +95,10 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (!chatInFocus)
         {
-            if (isRunningAndroid)
+            if (gamestatusSO.isAndroid)
                 HandleTouchInput();
 
-            if (isRunningWindows)
+            if (gamestatusSO.isWindows)
                 HandleMovement();
         }
     }
@@ -191,11 +176,4 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         woodenSword = false;
     }
-
-    /*    public void DespawnPlayer()
-        {
-            SpawnManager.Singleton.DespawnPlayerServerRpc(NetworkManager.Singleton.LocalClientId);
-
-        }
-    */
 }

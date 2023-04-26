@@ -4,7 +4,7 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Town : MonoBehaviour
+public class OpeningPort : MonoBehaviour
 {
     GameManager gameManager;
     TextMeshPro wonText;
@@ -15,7 +15,7 @@ public class Town : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
 
         int playerId = collision.GetInstanceID();
-        Debug.Log("Player with instance playerId " + playerId + " collided with town");
+        Debug.Log("Player with instance playerId " + playerId + " collided with opening port");
 
         if (playerId == GameManager.Singleton.networkedPlayerIdHasRing.Value)
         {

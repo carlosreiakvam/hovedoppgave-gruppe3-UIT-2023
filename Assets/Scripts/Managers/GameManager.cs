@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 class GameManager : NetworkBehaviour
 {
 
-    [SerializeField] GameStatusSO gamestatus;
     [SerializeField] GameObject infoTextGO;
     [SerializeField] TextMeshProUGUI infoText;
 
@@ -36,8 +35,7 @@ class GameManager : NetworkBehaviour
     {
         networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChangedClientRpc;
         networkedGameWon.OnValueChanged += OnGameWonChangedClientRpc;
-        SpawnManager.Singleton.SpawnAllPrefabs();
-        SpawnManager.Singleton.SpawnAllPlayers();
+        SpawnManager.Singleton.SpawnAll();
     }
 
 
@@ -54,7 +52,6 @@ class GameManager : NetworkBehaviour
     [ClientRpc]
     private void OnPlayerIdHasRingChangedClientRpc(int previousValue, int newValue)
     {
-        Debug.LogWarning("ONPLAYERIDHASRINGCHANGED");
         infoTextGO.SetActive(true);
         infoText.text = "A player has collected the ring!";
     }

@@ -22,7 +22,6 @@ public class MenuStart : MonoBehaviour
         Button beginButton = beginButtonGO.GetComponent<Button>();
         beginButton.onClick.AddListener(() =>
         {
-            gamestatus.isShortcutUsed = false;
             menuManager.OpenPage(MenuEnums.LobbyMenu);
         });
 

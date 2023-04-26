@@ -254,8 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d189b3e552e7be9468380db7b006ad44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4129416394867447205, guid: 46a228878be1c7d4ca858649563bf82e, type: 3}
-  enemyAnimator: {fileID: 1816999819, guid: 46a228878be1c7d4ca858649563bf82e, type: 3}
 --- !u!70 &5629118550783752198
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -600,7 +598,6 @@ GameObject:
   - component: {fileID: 7830091594258994000}
   - component: {fileID: 6921163870223798263}
   - component: {fileID: 5101261058239119033}
-  - component: {fileID: -8548249750432877161}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -652,6 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b98ec11841a6246831d68dd07b01a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamestatusSO: {fileID: 11400000, guid: b9a2a7bd2ec600346808442b5d09cd0f, type: 2}
   playerAnimation: {fileID: 405672945398536863}
   ownerNetworkAnimator: {fileID: 8739179420634378625}
   playerSpeed:
@@ -719,18 +717,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8548249750432877161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2900308809295077616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3717aac83bb614e86d6c97af24657b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3039771764181640465
 GameObject:
   m_ObjectHideFlags: 0

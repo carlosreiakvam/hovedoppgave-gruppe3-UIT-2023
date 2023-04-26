@@ -13,7 +13,6 @@ public class GameSceneShortcut : MonoBehaviour
         gameSceneButtonGO.onClick.AddListener(() =>
         {
             SceneManager.LoadScene("Game");
-            gamestatus.isShortcutUsed = true;
         });
     }
 }
