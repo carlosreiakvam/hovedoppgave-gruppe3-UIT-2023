@@ -21,11 +21,18 @@ public class RelayManager : MonoBehaviour
     public static RelayManager Singleton;
     private void Awake()
     {
-        if (Singleton == null)
+        if (Singleton != null && Singleton != this)
         {
-            Singleton = this;
+            Debug.Log("destroying RelayManager as it is already initialized");
+            Destroy(gameObject);
+
         }
-        else Destroy(gameObject);
+        else
+        {
+            Debug.Log("creating RelayManager for the first time");
+            Singleton = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
 
