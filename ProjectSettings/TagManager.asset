@@ -8,6 +8,7 @@ TagManager:
   - TouchUI
   - Ring
   - Manager
+  - TouchUIAttack
   layers:
   - Default
   - TransparentFX

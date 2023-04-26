@@ -11,6 +11,7 @@ public class PlayerBehaviour : NetworkBehaviour
     /*TouchControls*/
     private CharacterController controller;
     private PlayerInput playerInput;
+    private InputAction attackAction;
 
     [SerializeField] GameStatusSO gamestatusSO;
     [SerializeField] private GameObject playerAnimation;
@@ -169,7 +170,7 @@ public class PlayerBehaviour : NetworkBehaviour
         }
     }
 
-
+    public bool isAttackBtn;
     public void HandleTouchInput()
     {
         if (!IsOwner) return;
@@ -188,6 +189,10 @@ public class PlayerBehaviour : NetworkBehaviour
             animator.SetFloat(PREVHORIZONTAL, horizontalInput);
             animator.SetFloat(PREVVERTICAL, verticalInput);
         }
+
+        bool attack = Convert.ToBoolean(playerInput.actions["PlayerAttack"].ReadValue<float>());
+        if (attack)
+            Attack();
 
     }
 

@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private GameObject player;
     //[SerializeField] private FloatReference playerSpeed;
     private TouchControls touchControls;
-    //private InputAction attackAction; //touchposition
+    private InputAction attackAction; //touchposition
     //private InputAction movementAction; //touchpress
 
     private void Awake()
@@ -38,8 +38,8 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         //    subscribe when pressing down and pass context to StartTouch()
-        //    touchControls.Touch.PlayerAttack.started += ctx => StartTouch(ctx);
-        //    touchControls.Touch.PlayerAttack.canceled += ctx => EndTouch(ctx);
+            touchControls.Touch.PlayerAttack.started += ctx => StartTouch(ctx);
+            touchControls.Touch.PlayerAttack.canceled += ctx => EndTouch(ctx);
         //controller = gameObject.GetComponent<CharacterController>();
     }
 
@@ -83,17 +83,17 @@ public class InputManager : MonoBehaviour
     }
 
     //context returns info about the touch
-    //private void StartTouch(InputAction.CallbackContext context) //pressed down on screen
-    //{
+    private void StartTouch(InputAction.CallbackContext context) //pressed down on screen
+    {
 
-    //    Debug.Log("Touch started " + touchControls.Touch.PlayerAttack.ReadValue<float>());
+        Debug.Log("Touch started " + touchControls.Touch.PlayerAttack.ReadValue<float>());
 
-    //}
+    }
 
-    //private void EndTouch(InputAction.CallbackContext context) //when stop pressing on screen.
-    //{
-    //    Debug.Log("Touch ended");
-    //}
+    private void EndTouch(InputAction.CallbackContext context) //when stop pressing on screen.
+    {
+        Debug.Log("Touch ended");
+    }
 
     private void TouchPressed(InputAction.CallbackContext context)
     {
