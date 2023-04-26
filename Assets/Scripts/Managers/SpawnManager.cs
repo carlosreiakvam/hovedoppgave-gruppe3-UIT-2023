@@ -11,7 +11,6 @@ public class SpawnManager : NetworkBehaviour
 {
     [SerializeField] Transform playerPrefab = null;
     [SerializeField] private GameObject ringPrefab;
-    [SerializeField] private GameObject ringPrefab;
     [SerializeField] Transform[] prefabs = null;
     public static SpawnManager Singleton;
     private Transform playerTransform;
