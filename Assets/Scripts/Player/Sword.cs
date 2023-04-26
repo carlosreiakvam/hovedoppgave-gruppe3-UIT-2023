@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
+    PlayerHealth playerHealth;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GetComponent<Enemy>())
+        if (GetComponentInParent<Enemy>())
         {
-            if (collision.GetComponent<PlayerBehaviour>() && collision.GetType().Name == "CapsuleCollider2D")
+            if (collision.GetComponentInParent<PlayerBehaviour>() && collision.GetType().Name == "CapsuleCollider2D")
             {
                 print("Player hit!");
+                playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
+                playerHealth.SwordCollision();
             }
         }
-        else if (GetComponent<PlayerBehaviour>())
+        else if (GetComponentInParent<PlayerBehaviour>())
         {
-            if (collision.GetComponent<Enemy>() && collision.GetType().Name == "CapsuleCollider2D")
+            if (collision.GetComponentInParent<Enemy>() && collision.GetType().Name == "CapsuleCollider2D")
             {
                 print("Enemy hit! ");
             }
