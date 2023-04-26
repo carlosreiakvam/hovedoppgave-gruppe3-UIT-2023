@@ -6,9 +6,19 @@ public class Sword : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-/*        if (collision.GetComponent<Enemy>() && collision.GetType().Name == "CapsuleCollider2D")
+        if (GetComponent<Enemy>())
         {
-            print("Enemy hit! " + gameObject.name);
+            if (collision.GetComponent<PlayerBehaviour>() && collision.GetType().Name == "CapsuleCollider2D")
+            {
+                print("Player hit!");
+            }
         }
-*/    }
+        else if (GetComponent<PlayerBehaviour>())
+        {
+            if (collision.GetComponent<Enemy>() && collision.GetType().Name == "CapsuleCollider2D")
+            {
+                print("Enemy hit! ");
+            }
+        }
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Unity.Netcode.Components;
 
 public class Enemy : NetworkBehaviour
 {
@@ -12,9 +13,14 @@ public class Enemy : NetworkBehaviour
     private const string VERTICAL = "Vertical";
     private const string SPEED = "Speed";
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     private Vector2 moveDirection = new(0, 0);
     private bool playerDown = false;
     private int playerID;
+    private Vector2 size = new Vector2(0.5087228f * 2.2f, 0.9851828f * 1.2f);
+    private const string STEELATTACK = "SteelAttack";
+
+    RaycastHit2D[] hits;
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
@@ -33,6 +39,16 @@ public class Enemy : NetworkBehaviour
             animator.SetFloat(HORIZONTAL, moveDirection.x);
             animator.SetFloat(VERTICAL, moveDirection.y);
             animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
+
+            // Physics2D.RaycastAll(transform.position, Vector2.up, 0.5f)
+            hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
+            foreach (RaycastHit2D raycastHit2D in hits)
+            {
+                if (raycastHit2D.collider.name == "PlayerAnimation")
+                {
+                    Attack();
+                }
+            }
         }
     }
 
@@ -58,15 +74,20 @@ public class Enemy : NetworkBehaviour
             target = collision.transform;
             playerID = (int) collision.GetComponentInParent<PlayerBehaviour>().OwnerClientId;
             Debug.Log($"New Target, With ID: " + playerID);
-            target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            try
+            {
+                target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            }
+            catch (Exception e)
+            {
+                target.GetComponentInParent<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            }
         }
-        //else the enemy is hit by a weapon attack. Do stuff to the enemy when it is hit by sword
-
-        
     }
 
-    //private void OnCollisionExit2D(Collision collision)
-    //{
-        
-    //}
+    private void Attack()
+    {
+        animator.SetTrigger(STEELATTACK);
+    }
 }
