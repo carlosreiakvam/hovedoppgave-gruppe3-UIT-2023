@@ -80,6 +80,6 @@ public class Enemy : NetworkBehaviour
 
     private void Attack()
     {
-        networkAnimator.SetTrigger(STEELATTACK);
+        animator.SetTrigger(STEELATTACK);
     }
 }
