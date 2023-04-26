@@ -17,7 +17,10 @@ public class Enemy : NetworkBehaviour
     private Vector2 moveDirection = new(0, 0);
     private bool playerDown = false;
     private int playerID;
+    private Vector2 size = new Vector2(0.5087228f * 2.2f, 0.9851828f * 1.2f);
     private const string STEELATTACK = "SteelAttack";
+
+    RaycastHit2D[] hits;
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
@@ -36,6 +39,17 @@ public class Enemy : NetworkBehaviour
             animator.SetFloat(HORIZONTAL, moveDirection.x);
             animator.SetFloat(VERTICAL, moveDirection.y);
             animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
+
+            // Physics2D.RaycastAll(transform.position, Vector2.up, 0.5f)
+            hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
+            foreach (RaycastHit2D raycastHit2D in hits)
+            {
+                if (raycastHit2D.collider.name == "PlayerAnimation")
+                {
+                    print(raycastHit2D.collider.name);
+                    Attack();
+                }
+            }
         }
     }
 
@@ -55,7 +69,7 @@ public class Enemy : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        if (collision.GetComponentInParent<PlayerBehaviour>())
+        if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
         {
             playerDown = false;
             target = collision.transform;
@@ -75,6 +89,6 @@ public class Enemy : NetworkBehaviour
 
     private void Attack()
     {
-        networkAnimator.SetTrigger(STEELATTACK);
+        animator.SetTrigger(STEELATTACK);
     }
 }

@@ -49,10 +49,6 @@ public class PlayerBehaviour : NetworkBehaviour
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat(PREVHORIZONTAL, 0);
         animator.SetFloat(PREVVERTICAL, -1);
-        //transform.GetChild(1).gameObject.SetActive(false);
-        //transform.GetChild(2).gameObject.SetActive(false);
-        //transform.GetChild(3).gameObject.SetActive(false);
-        //transform.GetChild(4).gameObject.SetActive(false);
     }
 
     private void Start() 
@@ -196,9 +192,6 @@ public class PlayerBehaviour : NetworkBehaviour
         horizontalInput = Input.GetAxisRaw(HORIZONTAL);
         verticalInput = Input.GetAxisRaw(VERTICAL);
 
-        //print("horizontalInput: " + horizontalInput.ToString());
-        //print("verticalInput: " + verticalInput.ToString());
-
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * (playerSpeed.Value * Time.deltaTime);
         transform.position += (Vector3)movement;
 
@@ -215,9 +208,6 @@ public class PlayerBehaviour : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            print("E pressed");
-            print("PREVHORIZONTAL: " + animator.GetFloat(PREVHORIZONTAL).ToString());
-            print("PREVVERTICAL: " + animator.GetFloat(PREVVERTICAL).ToString());
             Attack();
         }
     }
