@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6593909594893669767}
   - component: {fileID: 1540981329760762906}
   m_Layer: 0
-  m_Name: Ring
+  m_Name: ring
   m_TagString: Ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26885d353ad7324eaba2475387ed1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 3347886318929195822, guid: dfdccc990c68d4d43bcfbe1e33cb4d5f, type: 3}
 --- !u!58 &628698394880259110
 CircleCollider2D:
   m_ObjectHideFlags: 0

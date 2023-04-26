@@ -11,10 +11,10 @@ public class SpawnManager : NetworkBehaviour
 {
     [SerializeField] Transform playerPrefab = null;
     [SerializeField] private GameObject ringPrefab;
+    [SerializeField] private GameObject ringPrefab;
     [SerializeField] Transform[] prefabs = null;
     public static SpawnManager Singleton;
     private Transform playerTransform;
-    private HashSet<ulong> spawnedClientIds = new HashSet<ulong>(); // keeps track of which clients have been spawned
 
     private void Awake()
     {
@@ -42,14 +42,13 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-    /*        new Vector3(5f,5f,0f),
-            new Vector3(10f,15f,0f),
-            new Vector3(5f,15f,0f),
-    */
     private void SpawnRing()
     {
         Vector3[] spawnPoints = {
         new Vector3(0f,0f,0f),
+        new Vector3(5f,5f,0f),
+        new Vector3(0f,5f,0f),
+        new Vector3(3f,5f,0f),
     };
         Vector3 randomSpawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
         GameObject ring = Instantiate(ringPrefab, randomSpawnPoint, Quaternion.identity);
@@ -72,21 +71,38 @@ public class SpawnManager : NetworkBehaviour
     internal void DespawnObject(NetworkObject nObj, GameObject obj)
     {
         if (!IsServer) return;
-        nObj.Despawn();
+
+        // Call the server RPC method to despawn and destroy the network object
+        DisconnectObjectServerRpc(nObj.NetworkObjectId);
+
+        // Destroy the game object locally
         Destroy(obj);
     }
 
 
 
-    [ClientRpc]
-    public void DisconnectClientRpc(ulong clientId)
+    [ServerRpc(RequireOwnership = false)]
+    public void DisconnectObjectServerRpc(ulong clientId)
     {
-        NetworkObject playerNetworkObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
-        if (playerNetworkObject != null && playerNetworkObject.IsSpawned)
+        if (!IsServer) return;
+
+        try
         {
-            playerNetworkObject.Despawn();
-            Destroy(playerNetworkObject.gameObject);
-            NetworkManager.Singleton.DisconnectClient(clientId);
+            // Get the player's network object
+            NetworkObject playerNetworkObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+
+            // If the player's network object exists and is spawned
+            if (playerNetworkObject != null && playerNetworkObject.IsSpawned)
+            {
+                // Despawn the player's network object
+                playerNetworkObject.Despawn();
+
+                // Disconnect the player's client
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Failed to disconnect client: {e}");
         }
     }
 

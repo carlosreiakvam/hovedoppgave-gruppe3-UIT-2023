@@ -91,6 +91,13 @@ public class PlayerBehaviour : NetworkBehaviour
         Initialize(); //Running this is start might cause variables to not be initialized
     }
 
+    public override void OnNetworkDespawn()
+    {
+        Debug.LogWarning("OnNetworkDespawn i playerbehaviour");
+        base.OnNetworkDespawn();
+        Destroy(gameObject);
+    }
+
     private void LateUpdate()
     {
         if (IsLocalPlayer)

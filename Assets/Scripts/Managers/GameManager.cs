@@ -38,6 +38,15 @@ class GameManager : NetworkBehaviour
         SpawnManager.Singleton.SpawnAll();
     }
 
+    public void EndGameScene()
+    {
+        if (IsClient)
+        {
+            Debug.Log("Loading menus");
+            SceneManager.LoadScene("Menus");
+        }
+    }
+
 
 
 

@@ -16,8 +16,8 @@ public class InGameMenu : MonoBehaviour
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() =>
         {
-            SpawnManager.Singleton.DisconnectClientRpc(NetworkManager.Singleton.LocalClientId);
-            SceneManager.LoadScene("Menus");
+            NetworkManager.Singleton.Shutdown();
+            GameManager.Singleton.EndGameScene();
         });
 
     }
