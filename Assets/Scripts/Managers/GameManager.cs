@@ -24,22 +24,23 @@ class GameManager : NetworkBehaviour
         else Destroy(gameObject);
     }
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
+        }
+    }
 
-
-    private void Start()
+    private void OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChangedClientRpc;
         networkedGameWon.OnValueChanged += OnGameWonChangedClientRpc;
-        SpawnAll();
-    }
-
-    private void SpawnAll()
-    {
-        if (!IsServer) return;
-        Debug.Log("SPAWNALL");
         SpawnManager.Singleton.SpawnAllPrefabs();
         SpawnManager.Singleton.SpawnAllPlayers();
     }
+
+
 
 
     [ClientRpc]
