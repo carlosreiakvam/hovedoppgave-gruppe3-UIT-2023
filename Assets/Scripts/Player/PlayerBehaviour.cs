@@ -176,6 +176,12 @@ public class PlayerBehaviour : NetworkBehaviour
         animator.SetFloat(VERTICAL, input.y);
         animator.SetFloat(SPEED, new Vector2(input.x, input.y).normalized.sqrMagnitude);
 
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            animator.SetFloat(PREVHORIZONTAL, horizontalInput);
+            animator.SetFloat(PREVVERTICAL, verticalInput);
+        }
+
     }
 
     private void Attack()
