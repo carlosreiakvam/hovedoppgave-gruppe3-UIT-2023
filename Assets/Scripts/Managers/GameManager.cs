@@ -42,8 +42,22 @@ class GameManager : NetworkBehaviour
     {
         if (IsClient)
         {
-            Debug.Log("Loading menus");
+            NetworkManager.Singleton.Shutdown();
+            DestroyObjectsTaggedWithDontDestroy();
             SceneManager.LoadScene("Menus");
+        }
+    }
+
+    private void DestroyObjectsTaggedWithDontDestroy()
+    {
+        GameObject[] objs = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in objs)
+        {
+            if (obj.transform.parent == null && obj.transform != transform && obj.scene.name != null)
+            {
+                if (obj.CompareTag("DontDestroy")) Destroy(obj);
+                Debug.LogWarning("Destroyed: " + obj.name);
+            }
         }
     }
 
@@ -71,6 +85,11 @@ class GameManager : NetworkBehaviour
     public void OnPlayerCollectedRingServerRpc(int playerId)
     {
         networkedPlayerIdHasRing.Value = playerId;
+    }
+
+    public void EndGameSession()
+    {
+
     }
 
 

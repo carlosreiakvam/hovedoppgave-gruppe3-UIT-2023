@@ -9,6 +9,7 @@ TagManager:
   - Ring
   - Manager
   - TouchUIAttack
+  - DontDestroy
   layers:
   - Default
   - TransparentFX

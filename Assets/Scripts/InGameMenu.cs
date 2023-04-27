@@ -16,7 +16,6 @@ public class InGameMenu : MonoBehaviour
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.Shutdown();
             GameManager.Singleton.EndGameScene();
         });
 
@@ -26,7 +25,6 @@ public class InGameMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             // Toggle inGameMenu's active state
-            Debug.Log("MENU?");
             inGameMenu.SetActive(!inGameMenu.activeSelf);
         }
     }
