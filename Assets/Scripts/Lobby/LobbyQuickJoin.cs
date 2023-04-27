@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,13 +19,33 @@ public class LobbyQuickJoin : MonoBehaviour
         lobbyManager = GetComponentInParent<LobbyManager>();
     }
 
+    private bool ValidateInput()
+    {
+        bool isInputValid = false;
+        if (playerNameInput.text.Length <= 1 || playerNameInput.text.Length <= 1)
+        {
+            menuManager.OpenAlert("Fill out all fields");
+        }
+        else if (playerNameInput.text.Length > 15)
+        { menuManager.OpenAlert("Enter a name less than 15 characters"); }
+        else { isInputValid = true; }
+        return isInputValid;
+    }
 
-    void OnEnable()
+
+    private void OnEnable()
     {
         Button goButton = goButtonGO.GetComponent<Button>();
         Button backButton = backButtonGO.GetComponent<Button>();
 
-        goButton.onClick.AddListener(() => { lobbyManager.QuickJoinLobby(playerNameInput.text); });
+        goButton.onClick.AddListener(async () =>
+        {
+            if (!ValidateInput()) return;
+            bool isLobbyFound = await lobbyManager.QuickJoinLobby(playerNameInput.text);
+            if (isLobbyFound) menuManager.OpenPage(MenuEnums.LobbyRoom);
+            else menuManager.OpenAlert("No open lobbies available!");
+        });
+
         backButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
     }
 

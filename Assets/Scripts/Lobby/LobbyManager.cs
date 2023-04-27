@@ -194,7 +194,7 @@ public class LobbyManager : MonoBehaviour
 
 
 
-    public async void QuickJoinLobby(string playerName)
+    public async Task<bool> QuickJoinLobby(string playerName)
     {
         Lobby lobby;
         try
@@ -216,11 +216,9 @@ public class LobbyManager : MonoBehaviour
             Debug.Log($"QuickJoin RelayJoinCode: {relayCode}");
             RelayManager.Singleton.JoinRelay(relayCode);
 
-
-            // Open LobbyRoom
-            menuManager.OpenPage(MenuEnums.LobbyRoom);
+            return true;
         }
-        catch (Exception e) { Debug.LogError(e); }
+        catch { return false; }
 
     }
 
