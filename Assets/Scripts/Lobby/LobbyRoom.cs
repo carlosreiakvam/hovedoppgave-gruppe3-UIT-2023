@@ -152,12 +152,12 @@ public class LobbyRoom : MonoBehaviour
 
             // if player of current iteration is host
             if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(lobbyHostId))
-            { 
-                pNames[i].text = player.Data[PLAYER_NAME].Value + " [host]"; 
+            {
+                pNames[i].text = player.Data[PLAYER_NAME].Value + " [host]";
             }
-            else 
-            { 
-                pNames[i].text = player.Data[PLAYER_NAME].Value; 
+            else
+            {
+                pNames[i].text = player.Data[PLAYER_NAME].Value;
             }
 
             // Game is not ready if any one of the ready states are false
@@ -179,6 +179,7 @@ public class LobbyRoom : MonoBehaviour
             {
                 isGameInitiated = true;
                 LoadNetwork(authenticatedIsHost);
+                menuManager.OpenPage(MenuEnums.Instructions);
             }
         }
     }
@@ -190,7 +191,6 @@ public class LobbyRoom : MonoBehaviour
         if (isHost)
         {
             NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
-            NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
         }
     }
 
