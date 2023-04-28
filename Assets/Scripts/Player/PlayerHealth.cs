@@ -4,6 +4,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine.UI;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 public class PlayerHealth : NetworkBehaviour
 {
@@ -15,13 +16,14 @@ public class PlayerHealth : NetworkBehaviour
     }
     [SerializeField] private FloatVariable hitPoints;
     [SerializeField] private FloatVariable lightDamageTaken;
+    [SerializeField] private FloatVariable healthPowerUpAmount;
     [SerializeField] private bool resetHP;
     [SerializeField] private FloatReference startingHP;
     [SerializeField] private Image healthBarVisual;
     [SerializeField] private NetworkVariable<float> health = new(100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public bool IsKnockedDown { get; private set;} =  false;
+    public bool IsKnockedDown { get; private set; } = false;
 
-   
+
 
     //public NetworkVariable<bool>  IsKnockedDown { get; private set; } = new(false,
     //    NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -29,8 +31,8 @@ public class PlayerHealth : NetworkBehaviour
     private float timer = 0;
     private readonly float TIME_TO_DAMAGE = 1;
 
-    
-    
+
+
     private void Start()
     {
         if (resetHP)
@@ -71,6 +73,7 @@ public class PlayerHealth : NetworkBehaviour
         }
     }
 
+
     public void SwordCollision()
     {
         timer = TIME_TO_DAMAGE;
@@ -85,7 +88,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             hitPoints.ApplyChange(-lightDamageTaken.Value);
             health.Value = hitPoints.Value / startingHP;
-            timer = 0;           
+            timer = 0;
             if (hitPoints.Value <= 0)
             {
                 IsKnockedDown = true;
@@ -93,6 +96,18 @@ public class PlayerHealth : NetworkBehaviour
                 //ToggleKnockDownServerRpc();
             }
         }
+    }
+    public void AddHealth()
+    {
+        if (hitPoints.Value == startingHP.Value) return;
+
+        float newHP = hitPoints.Value + healthPowerUpAmount.Value;
+        if (newHP >= startingHP) newHP = startingHP;
+        hitPoints.Value = newHP;
+
+        health.Value = hitPoints.Value / startingHP;
+        VisualizeDamageServerRpc();
+        Debug.LogWarning("HP IS NOW: " + health.Value);
     }
 
     [ServerRpc(RequireOwnership = false)] //false = All clients may rpc the server
@@ -104,7 +119,7 @@ public class PlayerHealth : NetworkBehaviour
     [ClientRpc] //only server
     private void VisualizeDamageClientRpc() //inform the other clients
     {
-        healthBarVisual.fillAmount = health.Value; 
+        healthBarVisual.fillAmount = health.Value;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -116,7 +131,7 @@ public class PlayerHealth : NetworkBehaviour
     [ClientRpc]
     private void VizualizeDeathClientRpc()
     {
-        OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true});
+        OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true });
     }
 
     //[ServerRpc(RequireOwnership = false)]

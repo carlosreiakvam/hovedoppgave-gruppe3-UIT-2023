@@ -6,11 +6,13 @@ using Unity.VisualScripting;
 //using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class SpawnManager : NetworkBehaviour
 {
     [SerializeField] Transform playerPrefab = null;
     [SerializeField] private GameObject ringPrefab;
+    [SerializeField] private GameObject healthPowerUp;
     [SerializeField] Transform[] prefabs = null;
     public static SpawnManager Singleton;
     private Transform playerTransform;
@@ -26,6 +28,7 @@ public class SpawnManager : NetworkBehaviour
         SpawnAllPrefabs();
         SpawnRing();
         SpawnAllPlayers();
+        SpawnHealthPowerUps();
     }
 
     public void SpawnAllPrefabs()
@@ -43,17 +46,52 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnRing()
     {
-        Vector3[] spawnPoints = {
-        new Vector3(0f,0f,0f),
-        new Vector3(5f,5f,0f),
-        new Vector3(0f,5f,0f),
-        new Vector3(3f,5f,0f),
+        Vector2[] spawnPoints = {
+        new Vector2(0f,0f),
+        new Vector2(5f,5f),
+        new Vector2(0f,5f),
+        new Vector2(3f,5f),
     };
         Vector3 randomSpawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
         GameObject ring = Instantiate(ringPrefab, randomSpawnPoint, Quaternion.identity);
         ring.GetComponent<NetworkObject>().Spawn();
         Debug.Log("SPAWNING RING");
     }
+    public void SpawnHealthPowerUps()
+    {
+        Vector2[] spawnPoints = {
+        new Vector2(2f,2f),
+        new Vector2(3f,4f),
+        new Vector2(-2f,5f),
+        new Vector2(4f,1f),
+        new Vector2(1f,2f),
+        new Vector2(1f,2f),
+        new Vector2(-1f,2f),
+        new Vector2(1f,-2f),
+    };
+        foreach (Vector2 spawnpoint in spawnPoints)
+        {
+            {
+                GameObject hp = Instantiate(healthPowerUp, spawnpoint, Quaternion.identity);
+                hp.SetActive(true);
+                hp.GetComponent<NetworkObject>().Spawn();
+            }
+        }
+        Debug.Log("Spawned HP Powerups");
+    }
+
+
+    private void RespawnRingOnPlayerDeath()
+    {
+        // get player
+        // get player position
+        // spawn ring at player position
+        /*        GameObject ring = Instantiate(ringPrefab, randomSpawnPoint, Quaternion.identity);
+                ring.GetComponent<NetworkObject>().Spawn();
+                Debug.Log("RESPAWNING RING");
+        */
+    }
+
 
 
     public void SpawnAllPlayers()

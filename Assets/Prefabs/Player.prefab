@@ -284,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
   lightDamageTaken: {fileID: 11400000, guid: baec012dc7222564aa9e75b204215672, type: 2}
+  healthPowerUpAmount: {fileID: 11400000, guid: 851019526be9e6c4ca92b8b834e4d81c, type: 2}
   resetHP: 1
   startingHP:
     UseConstant: 0
@@ -661,6 +662,7 @@ MonoBehaviour:
   - {x: -1, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: -1}
+  isAttackBtn: 0
 --- !u!114 &6921163870223798263
 MonoBehaviour:
   m_ObjectHideFlags: 0
