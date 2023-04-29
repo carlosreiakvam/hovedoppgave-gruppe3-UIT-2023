@@ -23,11 +23,6 @@ public class PlayerHealth : NetworkBehaviour
     [SerializeField] private NetworkVariable<float> health = new(100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public bool IsKnockedDown { get; private set; } = false;
 
-
-
-    //public NetworkVariable<bool>  IsKnockedDown { get; private set; } = new(false,
-    //    NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-
     private float timer = 0;
     private readonly float TIME_TO_DAMAGE = 1;
 
@@ -133,20 +128,4 @@ public class PlayerHealth : NetworkBehaviour
     {
         OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true });
     }
-
-    //[ServerRpc(RequireOwnership = false)]
-    //public void ToggleKnockDownServerRpc()
-    //{
-    //    // this will cause a replication over the network
-    //    // and ultimately invoke `OnValueChanged` on receivers
-    //    ToggleKnockDownClientRpc();
-    //    //OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true });
-    //}
-
-    //[ClientRpc]
-    //private void ToggleKnockDownClientRpc()
-    //{
-    //    IsKnockedDown.Value = !IsKnockedDown.Value;
-    //}
-
 }

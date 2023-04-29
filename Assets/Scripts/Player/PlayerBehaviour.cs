@@ -94,7 +94,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        Debug.LogWarning("OnNetworkDespawn i playerbehaviour");
+        Debug.Log("OnNetworkDespawn i playerbehaviour");
         base.OnNetworkDespawn();
         Destroy(gameObject);
     }

@@ -13,16 +13,16 @@ public class HandleReEnterScene : MonoBehaviour
 
     private void DestroyNetworkManagerMultiples()
     {
-        List<GameObject> objs = GameObject.FindObjectsOfType<GameObject>().ToList<GameObject>();
-        List<GameObject> nms = new List<GameObject>();
-        foreach (GameObject obj in objs)
+        List<GameObject> objects = GameObject.FindObjectsOfType<GameObject>().ToList<GameObject>();
+        List<GameObject> networkManagers = new List<GameObject>();
+        foreach (GameObject obj in objects)
         {
-            if (obj.name.Equals("NetworkManager")) nms.Add(obj);
+            if (obj.name.Equals("NetworkManager")) networkManagers.Add(obj);
         }
-        while (nms.Count > 1)
+        while (networkManagers.Count > 1)
         {
-            nms.Remove(nms.First());
-            Destroy(nms.First());
+            networkManagers.Remove(networkManagers.First());
+            Destroy(networkManagers.First());
             Debug.LogWarning("Destroyed a NetworkManager Multiple");
         }
     }

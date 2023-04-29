@@ -7,7 +7,6 @@ using UnityEngine.Pool;
 
 public class HealthPowerup : NetworkBehaviour
 {
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsServer) return;
