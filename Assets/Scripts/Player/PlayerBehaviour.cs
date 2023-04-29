@@ -164,7 +164,7 @@ public class PlayerBehaviour : NetworkBehaviour
             animator.SetFloat(PREVVERTICAL, verticalInput);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Attack();
         }
