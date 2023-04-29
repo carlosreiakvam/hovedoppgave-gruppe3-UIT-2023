@@ -11,6 +11,8 @@ using Unity.Netcode;
 public class LobbyRoom : MonoBehaviour
 {
     public const string PLAYER_NAME = "PlayerName";
+    [SerializeField] PlayersSO playersSO;
+    [SerializeField] GameObject LoadingScreenCanvas;
     [SerializeField] GameObject leaveButtonGO;
     [SerializeField] GameObject readyButtonGO;
     [SerializeField] GameObject startGameButtonGO;
@@ -177,9 +179,11 @@ public class LobbyRoom : MonoBehaviour
         {
             if (!isGameInitiated)
             {
+                playersSO.nPlayers = lobby.Players.Count;
+                LoadingScreenCanvas.SetActive(true);
                 isGameInitiated = true;
                 LoadNetwork(authenticatedIsHost);
-                menuManager.OpenPage(MenuEnums.Instructions);
+                NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
             }
         }
     }

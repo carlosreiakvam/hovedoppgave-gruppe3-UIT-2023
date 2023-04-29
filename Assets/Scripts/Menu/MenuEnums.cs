@@ -6,6 +6,6 @@ public enum MenuEnums
     LobbyRoom,
     LobbyQuickJoin,
     LobbyJoinByCode,
-    Instructions,
+    LoadingScreen,
     AlertMessage
 }

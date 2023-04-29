@@ -10,7 +10,11 @@ public class DebugManager : NetworkBehaviour
     public static DebugManager Singleton;
     private void Awake()
     {
-        if (Singleton == null) Singleton = this;
+        if (Singleton == null)
+        {
+            Singleton = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else Destroy(gameObject);
     }
 
@@ -18,6 +22,7 @@ public class DebugManager : NetworkBehaviour
     public void WhoAmI()
     {
         Debug.LogWarning("WHO AM I?");
+
         Debug.Log("IsServer:" + IsServer);
         Debug.Log("IsClient:" + IsClient);
         Debug.Log("IsLocalPlayer:" + IsLocalPlayer);
