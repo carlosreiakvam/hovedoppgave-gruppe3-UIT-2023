@@ -20,7 +20,6 @@ public class LoadingScreen : NetworkBehaviour
     }
     private void OnEnable()
     {
-        Debug.Log(gameStatusSO.isWindows);
         windowsLoadingScreen.SetActive(gameStatusSO.isWindows);
         androidLoadingScreen.SetActive(!gameStatusSO.isWindows);
     }

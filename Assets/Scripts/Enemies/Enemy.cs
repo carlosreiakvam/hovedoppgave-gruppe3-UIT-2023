@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Unity.Netcode.Components;
 
-public class Enemy : NetworkBehaviour
+public class Enemy :  NetworkBehaviour
 {
     private Transform target = null;
     private const float SPEED_VALUE = 2f;
@@ -67,6 +67,7 @@ public class Enemy : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
     {
         if (!IsServer) return;
+        if (!collision.CompareTag("Player")) return;
 
         if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
         {

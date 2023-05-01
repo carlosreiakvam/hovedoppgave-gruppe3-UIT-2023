@@ -282,17 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e831a7e31be3f4242aff0882306ef428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
   lightDamageTaken: {fileID: 11400000, guid: baec012dc7222564aa9e75b204215672, type: 2}
   healthPowerUpAmount: {fileID: 11400000, guid: 851019526be9e6c4ca92b8b834e4d81c, type: 2}
   resetHP: 1
-  startingHP:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: 7cf6d7f20a6c94e468245839d788d5c1, type: 2}
   healthBarVisual: {fileID: 1026990951046153725}
-  health:
-    m_InternalValue: 100
 --- !u!114 &3175092351913287390
 MonoBehaviour:
   m_ObjectHideFlags: 0

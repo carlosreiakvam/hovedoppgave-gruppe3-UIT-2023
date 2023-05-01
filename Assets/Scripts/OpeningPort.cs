@@ -14,12 +14,31 @@ public class OpeningPort : MonoBehaviour
     {
         if (!collision.CompareTag("Player")) return;
 
-        int playerId = collision.GetInstanceID();
-        Debug.Log("Player with instance playerId " + playerId + " collided with opening port");
+        NetworkObject playerNetworkObject = collision.gameObject.GetComponentInParent<NetworkObject>();
+        ulong playerNetworkObjectId = playerNetworkObject.NetworkObjectId;
 
-        if (playerId == GameManager.Singleton.networkedPlayerIdHasRing.Value)
+        Debug.Log("Player with instance playerNetworkObjectId " + playerNetworkObjectId + " collided with opening port");
+
+        Debug.Log("gamemanager says this person has ring: " + GameManager.Singleton.networkedPlayerIdHasRing);
+        if (playerNetworkObjectId == GameManager.Singleton.networkedPlayerIdHasRing)
         {
-            GameManager.Singleton.OnGameWonServerRpc();
+            OnGameWonServerRpc(playerNetworkObjectId);
         }
     }
+
+    [ServerRpc]
+    public void OnGameWonServerRpc(ulong playerNetworkObjectId)
+    {
+        OnGameWonChangedClientRpc(playerNetworkObjectId);
+    }
+
+    [ClientRpc]
+    private void OnGameWonChangedClientRpc(ulong playerNetworkObjectId)
+    {
+        GameObject gameUI = GameObject.Find("GameUI");
+        TextMeshProUGUI infoText = gameUI.GetComponentInChildren<TextMeshProUGUI>();
+        infoText.text = "GAME WON BY PLAYER with network id: " + playerNetworkObjectId;
+    }
+
+
 }

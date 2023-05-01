@@ -1,24 +1,53 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class RingBehaviour : NetworkBehaviour
 {
+    public NetworkVariable<ulong> networkedPlayerIdHasRing = new NetworkVariable<ulong>(0);
+
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChangedClientRpc;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsServer) return;
         if (!collision.CompareTag("Player")) return;
 
-        int playerId = collision.GetInstanceID();
-        GameManager.Singleton.OnPlayerCollectedRingServerRpc(playerId);
+        GameObject player = collision.gameObject;
+        NetworkObject playerNetworkObject = player.GetComponentInParent<NetworkObject>();
+        ulong playerNetworkObjectId = playerNetworkObject.NetworkObjectId;
 
-        Debug.Log("Player with instance playerId " + playerId + " collided with ring");
+        Debug.LogWarning("Player with networkObjectId " + playerNetworkObjectId + " collided with ring");
 
-        SpawnManager.Singleton.DespawnObject(NetworkObject, gameObject);
-        Destroy(gameObject);
+        Debug.Log("IsClient: " + IsClient);
+        if (IsClient) OnPlayerCollectedRingServerRpc(playerNetworkObjectId);
+        SpawnManager.Singleton.DespawnObjectServerRpc(NetworkObject.NetworkObjectId); // networkobject id is 10
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    internal void OnPlayerCollectedRingServerRpc(ulong playerNetworkObjectId)
+    {
+        networkedPlayerIdHasRing.Value = playerNetworkObjectId;
+    }
+
+    [ClientRpc]
+    private void OnPlayerIdHasRingChangedClientRpc(ulong previousValue, ulong newValue)
+    {
+        Debug.Log("RING IS NOW POSSESSED BY: " + newValue);
+        GameManager.Singleton.networkedPlayerIdHasRing = newValue;
+        GameObject gameUI = GameObject.Find("GameUI");
+        TextMeshProUGUI infoAlert = gameUI.GetComponentInChildren<TextMeshProUGUI>();
+        infoAlert.text = "A new player has collected the ring!";
+    }
+
 }
 

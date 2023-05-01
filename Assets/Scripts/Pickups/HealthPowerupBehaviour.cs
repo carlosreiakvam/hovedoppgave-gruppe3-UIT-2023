@@ -5,17 +5,20 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class HealthPowerup : NetworkBehaviour
+public class HealthPowerupBehaviour : NetworkBehaviour
 {
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsServer) return;
         if (!collision.CompareTag("Player")) return;
 
-        gameObject.SetActive(false);
+        SpawnManager.Singleton.DespawnObjectServerRpc(NetworkObject.NetworkObjectId);
+
+        // Get and return corresponding playerHealth
         GameObject player = collision.gameObject;
         PlayerHealth playerHealth = player.GetComponentInChildren<PlayerHealth>();
-        playerHealth.AddHealth();
-        Debug.Log("HP PowerUp Collided with player: " + collision.gameObject.GetInstanceID());
+
+        if (playerHealth != null) playerHealth.AddHealth();
     }
+
 }

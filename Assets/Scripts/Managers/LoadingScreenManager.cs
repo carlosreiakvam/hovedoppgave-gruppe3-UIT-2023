@@ -7,49 +7,61 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadingManager : NetworkBehaviour
+public class LoadingScreenManager : NetworkBehaviour
 {
 
     [SerializeField] PlayersSO playersSO;
     TextMeshProUGUI countdownText;
     GameObject loadingScreen;
-    public NetworkVariable<bool> networkedGameReadyToStart = new NetworkVariable<bool>(false);
+    public NetworkVariable<bool> networkedGameReady = new NetworkVariable<bool>(false);
 
-    void Start()
+
+    private void ServerStart()
     {
-        Debug.Log("LOADING SCRIPT:");
-        Debug.Log("IsServer:" + IsServer);
-        Debug.Log("IsClient:" + IsClient);
-        Debug.Log("IsLocalPlayer:" + IsLocalPlayer);
-        Debug.Log("IsSpawned:" + IsSpawned);
-        Debug.Log("IsHost:" + IsHost);
-        Debug.Log("IsOwner:" + IsOwner);
-        Debug.Log("IsOwnedByServer:" + IsOwnedByServer);
+        StartCoroutine(WaitForPlayersReady());
+    }
 
+    public void Start()
+    {
+        if (IsServer) ServerStart();
         loadingScreen = GameObject.Find("LoadingScreenCanvas");
         GameObject countdownTextGO = GameObject.FindWithTag("CountdownText");
         countdownText = countdownTextGO.GetComponent<TextMeshProUGUI>();
 
-        networkedGameReadyToStart.OnValueChanged += OnGameReadyToStartChangedClientRpc;
-        if (IsServer) StartCoroutine(WaitForPlayersReady());
+        networkedGameReady.OnValueChanged += OnGameReady;
+    }
+
+
+    private void OnGameReady(bool prev, bool neww)
+    {
+        OnGameReadyChangedClientRpc(prev, neww);
+
     }
 
     [ClientRpc]
-    private void OnGameReadyToStartChangedClientRpc(bool previousValue, bool newValue)
+    private void OnGameReadyChangedClientRpc(bool previousValue, bool newValue)
     {
-        StartCoroutine(StartCountdown());
+        if (newValue == true)
+        {
+            StartCoroutine(StartCountdown());
+
+            // unsubscribing from networkedGameReady
+            networkedGameReady.OnValueChanged -= OnGameReadyChangedClientRpc;
+        }
     }
 
     public IEnumerator WaitForPlayersReady()
     {
-        Debug.LogWarning("METHOD: WAIT FOR PLAYERS READY");
-        yield return new WaitForSeconds(1f); // Wait for 5 seconds to make sure all players have time to read the loading screen
+        yield return new WaitForSeconds(1f); // Wait for 1 seconds to make sure all players have time to read the loading screen
 
+        Debug.LogWarning("WAITING FOR PLAYERS TO CONNECT");
         while (NetworkManager.Singleton.ConnectedClientsList.Count != playersSO.nPlayers)
         {
             yield return new WaitForSeconds(1f);
         }
-        networkedGameReadyToStart.Value = true;
+        Debug.LogWarning("ALL PLAYERS CONNECTED");
+
+        if (GameManager.Singleton.StartGameManager()) networkedGameReady.Value = true;
     }
 
 
@@ -70,6 +82,7 @@ public class LoadingManager : NetworkBehaviour
 
     private void StartGame()
     {
+        Debug.LogWarning("REVEALING GAME SCENE");
         loadingScreen.SetActive(false);
     }
 

@@ -12,10 +12,12 @@ public class SpawnManager : NetworkBehaviour
 {
     [SerializeField] Transform playerPrefab = null;
     [SerializeField] private GameObject ringPrefab;
-    [SerializeField] private GameObject healthPowerUp;
-    [SerializeField] Transform[] prefabs = null;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject hpPrefab;
     public static SpawnManager Singleton;
     private Transform playerTransform;
+    private Dictionary<ulong, NetworkObject> spawnedObjects = new Dictionary<ulong, NetworkObject>();
+
 
     private void Awake()
     {
@@ -23,24 +25,47 @@ public class SpawnManager : NetworkBehaviour
         else Destroy(gameObject);
     }
 
-    public void SpawnAll()
+    public bool SpawnAll()
     {
-        SpawnAllPrefabs();
-        SpawnRing();
-        SpawnAllPlayers();
-        SpawnHealthPowerUps();
+        if (IsServer)
+        {
+            try
+            {
+                Debug.LogWarning("STARTING SPAWNMANAGER");
+                SpawnAllPlayers();
+                SpawnEnemy();
+                SpawnRing();
+                SpawnHealthPowerUps();
+                Debug.LogWarning("SPAWNMANAGER SPAWNED ALL");
+            }
+            catch { return false; }
+        }
+        return true;
     }
 
-    public void SpawnAllPrefabs()
+    public void SpawnEnemy()
     {
-        foreach (Transform prefab in prefabs) { SpawnObject(prefab); }
+        for (int i = 0; i < 3; i++)
+        {
+            SpawnObject(SpawnEnums.Enemy, new Vector2(4f + i * 2, 3f));
+        }
     }
 
 
-    private void SpawnObject(Transform prefab)
+    private void SpawnObject(SpawnEnums spawnenum, Vector2 spawnPoint)
     {
-        Transform prefabTransform = Instantiate(prefab);
-        prefabTransform.GetComponent<NetworkObject>().Spawn(true);
+        GameObject prefab = spawnenum switch
+        {
+            SpawnEnums.Enemy => enemyPrefab,
+            SpawnEnums.Ring => ringPrefab,
+            SpawnEnums.HealthPowerUp => hpPrefab,
+            _ => null
+        };
+
+        GameObject instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
+        NetworkObject networkObject = instance.GetComponent<NetworkObject>();
+        networkObject.Spawn();
+        spawnedObjects.Add(networkObject.NetworkObjectId, networkObject);
     }
 
 
@@ -53,9 +78,7 @@ public class SpawnManager : NetworkBehaviour
         new Vector2(3f,5f),
     };
         Vector3 randomSpawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-        GameObject ring = Instantiate(ringPrefab, randomSpawnPoint, Quaternion.identity);
-        ring.GetComponent<NetworkObject>().Spawn();
-        Debug.Log("SPAWNING RING");
+        SpawnObject(SpawnEnums.Ring, randomSpawnPoint);
     }
     public void SpawnHealthPowerUps()
     {
@@ -71,15 +94,9 @@ public class SpawnManager : NetworkBehaviour
     };
         foreach (Vector2 spawnpoint in spawnPoints)
         {
-            {
-                GameObject hp = Instantiate(healthPowerUp, spawnpoint, Quaternion.identity);
-                hp.SetActive(true);
-                hp.GetComponent<NetworkObject>().Spawn();
-            }
+            SpawnObject(SpawnEnums.HealthPowerUp, spawnpoint);
         }
-        Debug.Log("Spawned HP Powerups");
     }
-
 
     private void RespawnRingOnPlayerDeath()
     {
@@ -93,33 +110,34 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-
     public void SpawnAllPlayers()
     {
         foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Debug.Log("Spawnin player");
+            Debug.LogWarning("Spawning player with id: " + clientId);
             Transform playerTransform = Instantiate(playerPrefab);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
         }
     }
 
-
-    internal void DespawnObject(NetworkObject nObj, GameObject obj)
+    [ServerRpc(RequireOwnership = false)]
+    internal void DespawnObjectServerRpc(ulong networkObjectId)
     {
-        if (!IsServer) return;
-
-        // Call the server RPC method to despawn and destroy the network object
-        DisconnectObjectServerRpc(nObj.NetworkObjectId);
-
-        // Destroy the game object locally
-        Destroy(obj);
+        NetworkObject networkObject;
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out networkObject))
+        {
+            networkObject.Despawn();
+            spawnedObjects.Remove(networkObjectId);
+        }
+        else
+        {
+            Debug.LogWarning($"NetworkObject with ID {networkObjectId} not found.");
+        }
     }
 
 
-
     [ServerRpc(RequireOwnership = false)]
-    public void DisconnectObjectServerRpc(ulong clientId)
+    public void DisconnectPlayerServerRpc(ulong clientId)
     {
         if (!IsServer) return;
 
@@ -131,10 +149,7 @@ public class SpawnManager : NetworkBehaviour
             // If the player's network object exists and is spawned
             if (playerNetworkObject != null && playerNetworkObject.IsSpawned)
             {
-                // Despawn the player's network object
                 playerNetworkObject.Despawn();
-
-                // Disconnect the player's client
             }
         }
         catch (Exception e)

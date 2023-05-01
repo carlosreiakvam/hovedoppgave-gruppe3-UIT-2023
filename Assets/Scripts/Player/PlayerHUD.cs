@@ -20,11 +20,11 @@ public class PlayerHUD : NetworkBehaviour
     {
        foreach(PlayerNameSO p in pName)
         {
-            Debug.Log("playersearch:" + p.Value);
+            //Debug.Log("playersearch:" + p.Value);
         }
-        Debug.Log("playerName:" + (pName[(int)OwnerClientId]).Value);
+        //Debug.Log("playerName:" + (pName[(int)OwnerClientId]).Value);
         networkPlayerName.Value = (pName[(int)OwnerClientId]).Value;
-        Debug.Log("networkName: " + networkPlayerName.Value);
+        //Debug.Log("networkName: " + networkPlayerName.Value);
         //networkPlayerName.Value = "Player: " + (OwnerClientId + 1);
         playerName.text = networkPlayerName.Value.ToString();
     //    animator.SetInteger("Player_Id", (int) OwnerClientId);

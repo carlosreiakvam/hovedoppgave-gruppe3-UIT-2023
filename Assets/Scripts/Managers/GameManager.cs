@@ -2,41 +2,55 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-class GameManager : NetworkBehaviour
+public class GameManager : NetworkBehaviour
 {
 
     [SerializeField] GameObject infoTextGO;
     [SerializeField] TextMeshProUGUI infoText;
 
     public static GameManager Singleton;
-    public NetworkVariable<int> networkedPlayerIdHasRing = new NetworkVariable<int>(-1);
+    public ulong networkedPlayerIdHasRing { get; set; }
     public NetworkVariable<bool> networkedGameWon = new NetworkVariable<bool>(false);
 
 
     private void Awake()
     {
-        if (Singleton == null) Singleton = this;
+        if (Singleton == null) { Singleton = this; DontDestroyOnLoad(gameObject); }
         else Destroy(gameObject);
     }
 
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
-        {
-            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
-        }
+        base.OnNetworkSpawn();
+        Debug.Log("GAMEMANAGER SPAWNED");
     }
 
-    private void OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+    public bool StartGameManager()
     {
-        networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChangedClientRpc;
+        //networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChangedClientRpc;
         networkedGameWon.OnValueChanged += OnGameWonChangedClientRpc;
-        SpawnManager.Singleton.SpawnAll();
+
+        try
+        {
+            Debug.LogWarning("GAMEMANAGER STARTED");
+            SubscribeToNetworkVariables();
+            bool spawnSuccess = SpawnManager.Singleton.SpawnAll();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            return false;
+        }
+        return true;
     }
+
+    private void SubscribeToNetworkVariables()
+    {
+    }
+
 
     public void EndGameScene()
     {
@@ -48,6 +62,7 @@ class GameManager : NetworkBehaviour
         }
     }
 
+    // Might be redundant
     private void DestroyObjectsTaggedWithDontDestroy()
     {
         GameObject[] objs = GameObject.FindObjectsOfType<GameObject>();
@@ -62,34 +77,27 @@ class GameManager : NetworkBehaviour
     }
 
 
-
-
     [ClientRpc]
     private void OnGameWonChangedClientRpc(bool previousValue, bool newValue)
     {
         Debug.LogWarning("OngameWonChangedClientRpc");
         infoTextGO.SetActive(true);
-        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.Value.ToString();
+        //        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.Value.ToString();
     }
 
     [ClientRpc]
-    private void OnPlayerIdHasRingChangedClientRpc(int previousValue, int newValue)
+    private void OnPlayerIdHasRingChangedClientRpc()
     {
+        Debug.LogWarning("CLIENT KNOWS THAT RING HAS CHANGED");
         infoTextGO.SetActive(true);
         infoText.text = "A player has collected the ring!";
     }
 
 
-
-    [ServerRpc]
-    public void OnPlayerCollectedRingServerRpc(int playerId)
-    {
-        networkedPlayerIdHasRing.Value = playerId;
-    }
-
-    public void EndGameSession()
+    internal void OnPlayerCollectedRing(ulong playerNetworkObjectId)
     {
 
+        //networkedPlayerIdHasRing.Value = playerNetworkObjectId;
     }
 
 
@@ -100,11 +108,5 @@ class GameManager : NetworkBehaviour
     {
         networkedGameWon.Value = true;
     }
-
-
-    public void OnPlayerDown() { }
-    public void OnPlayerDead() { }
-
-
 
 }

@@ -26,7 +26,7 @@ public class PlayerDeath : MonoBehaviour
         //run CoRoutine with countdown
         //TODO: if player not saved within a certain amount of time:
         //playerDeath.OnPlayerDead -= PlayerDeath_OnPlayerDead; //unsubscribe. 
-        //TODO: if saved, raise player backup and increase health via SO
+        //TODO: if saved, raise player backup and increase networkHP via SO
 
     }
 

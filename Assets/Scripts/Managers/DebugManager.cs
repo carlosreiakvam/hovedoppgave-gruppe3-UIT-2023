@@ -13,7 +13,6 @@ public class DebugManager : NetworkBehaviour
         if (Singleton == null)
         {
             Singleton = this;
-            DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
     }
