@@ -16,11 +16,11 @@ public class PlayerBehaviour : NetworkBehaviour
     [SerializeField] GameStatusSO gamestatusSO;
     [SerializeField] private GameObject playerAnimation;
     [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
-
-    //private readonly float boundX = 0.35f;
-    //private readonly float boundY = 0.17f;
-    [SerializeField] private FloatReference playerSpeed;
     [SerializeField] private List<Vector2> spawnPositionList;
+
+    private const float PLAYER_BASE_SPEED = 3;
+    private const float PLAYER_INCREASED_SPEED = 10;
+    private float playerSpeed = PLAYER_BASE_SPEED;
 
     private Camera mainCamera;
     private float horizontalInput;
@@ -72,17 +72,13 @@ public class PlayerBehaviour : NetworkBehaviour
         else if (gamestatusSO.isWindows)
         {
             try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
-            catch { Debug.LogWarning("CANNOT FIND TouchUI"); }
+            catch { Debug.LogWarning("TRYING TO DEACTIVATE TOUCH_UI BUT CANNOT FIND IT"); }
         }
     }
 
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
     {
-        //Debug.Log("Game in focus? " + e.IsChatActive);
-
         chatInFocus = e.IsChatActive;
-
-
     }
 
     public override void OnNetworkSpawn()
@@ -146,11 +142,12 @@ public class PlayerBehaviour : NetworkBehaviour
     private void HandleMovement()
     {
         if (!IsOwner) return;
+        Debug.Log("playerspeed = " + playerSpeed);
 
         horizontalInput = Input.GetAxisRaw(HORIZONTAL);
         verticalInput = Input.GetAxisRaw(VERTICAL);
 
-        Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * (playerSpeed.Value * Time.deltaTime);
+        Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized * (playerSpeed * Time.deltaTime);
         transform.position += (Vector3)movement;
 
         animator.SetFloat(HORIZONTAL, horizontalInput);
@@ -178,7 +175,7 @@ public class PlayerBehaviour : NetworkBehaviour
         Vector2 input = playerInput.actions["PlayerMovement"].ReadValue<Vector2>();
         Vector3 move = new(input.x, input.y);
         move = move.x * mainCamera.transform.right + move.y * mainCamera.transform.up;
-        controller.Move(playerSpeed.Value * Time.deltaTime * move);
+        controller.Move(playerSpeed * Time.deltaTime * move);
 
         animator.SetFloat(HORIZONTAL, input.x);
         animator.SetFloat(VERTICAL, input.y);
@@ -205,5 +202,20 @@ public class PlayerBehaviour : NetworkBehaviour
     public void SetNewSword()
     {
         woodenSword = false;
+    }
+
+    internal void IncreaseSpeed()
+    {
+        Debug.LogWarning("Increasing speed for player");
+        playerSpeed = 6;
+        StartCoroutine(ResetSpeedAfterDelay(10));
+    }
+
+
+    IEnumerator ResetSpeedAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        playerSpeed = 4;
+        Debug.LogWarning("Resetting speed for player");
     }
 }

@@ -35,10 +35,7 @@ public class OpeningPort : MonoBehaviour
     [ClientRpc]
     private void OnGameWonChangedClientRpc(ulong playerNetworkObjectId)
     {
-        GameObject gameUI = GameObject.Find("GameUI");
-        TextMeshProUGUI infoText = gameUI.GetComponentInChildren<TextMeshProUGUI>();
-        infoText.text = "GAME WON BY PLAYER with network id: " + playerNetworkObjectId;
+        GameManager.Singleton.OnGameWon(playerNetworkObjectId);
     }
-
 
 }

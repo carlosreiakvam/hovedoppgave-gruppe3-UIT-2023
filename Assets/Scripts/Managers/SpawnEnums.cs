@@ -3,4 +3,5 @@
     Enemy,
     Ring,
     HealthPowerUp,
+    SpeedPowerUp,
 }

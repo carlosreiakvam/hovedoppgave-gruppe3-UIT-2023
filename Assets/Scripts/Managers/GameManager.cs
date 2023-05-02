@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
 
-    [SerializeField] GameObject infoTextGO;
+    [SerializeField] GameObject gameUI;
     [SerializeField] TextMeshProUGUI infoText;
 
     public static GameManager Singleton;
@@ -36,7 +36,6 @@ public class GameManager : NetworkBehaviour
         try
         {
             Debug.LogWarning("GAMEMANAGER STARTED");
-            SubscribeToNetworkVariables();
             bool spawnSuccess = SpawnManager.Singleton.SpawnAll();
         }
         catch (Exception e)
@@ -47,18 +46,20 @@ public class GameManager : NetworkBehaviour
         return true;
     }
 
-    private void SubscribeToNetworkVariables()
-    {
-    }
-
-
     public void EndGameScene()
     {
-        if (IsClient)
+        if (IsOwner)
         {
-            NetworkManager.Singleton.Shutdown();
-            DestroyObjectsTaggedWithDontDestroy();
-            SceneManager.LoadScene("Menus");
+            try
+            {
+                NetworkManager.Singleton.Shutdown();
+                DestroyObjectsTaggedWithDontDestroy();
+                SceneManager.LoadScene("Menus");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e); return;
+            }
         }
     }
 
@@ -81,32 +82,23 @@ public class GameManager : NetworkBehaviour
     private void OnGameWonChangedClientRpc(bool previousValue, bool newValue)
     {
         Debug.LogWarning("OngameWonChangedClientRpc");
-        infoTextGO.SetActive(true);
+        gameUI.SetActive(true);
         //        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.Value.ToString();
     }
 
-    [ClientRpc]
-    private void OnPlayerIdHasRingChangedClientRpc()
+    public void OnRingChangedOwner(ulong networkedPlayerIdHasRing)
     {
-        Debug.LogWarning("CLIENT KNOWS THAT RING HAS CHANGED");
-        infoTextGO.SetActive(true);
-        infoText.text = "A player has collected the ring!";
+        this.networkedPlayerIdHasRing = networkedPlayerIdHasRing;
+        gameUI.SetActive(true);
+        infoText.text = "A new player has collected the ring!";
     }
 
-
-    internal void OnPlayerCollectedRing(ulong playerNetworkObjectId)
+    public void OnGameWon(ulong networkedPlayerIdHasRing)
     {
-
-        //networkedPlayerIdHasRing.Value = playerNetworkObjectId;
-    }
-
-
-
-
-    [ServerRpc]
-    public void OnGameWonServerRpc()
-    {
-        networkedGameWon.Value = true;
+        Debug.LogWarning("OnGameWon");
+        gameUI.SetActive(true);
+        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.ToString();
     }
 
 }
+

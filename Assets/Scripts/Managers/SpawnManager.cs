@@ -14,6 +14,7 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject ringPrefab;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject hpPrefab;
+    [SerializeField] private GameObject speedPrefab;
     public static SpawnManager Singleton;
     private Transform playerTransform;
     private Dictionary<ulong, NetworkObject> spawnedObjects = new Dictionary<ulong, NetworkObject>();
@@ -31,11 +32,12 @@ public class SpawnManager : NetworkBehaviour
         {
             try
             {
-                Debug.LogWarning("STARTING SPAWNMANAGER");
+                Debug.LogWarning("SPAWNMANAGER STARTED");
                 SpawnAllPlayers();
                 SpawnEnemy();
                 SpawnRing();
                 SpawnHealthPowerUps();
+                SpawnSpeedPowerUps();
                 Debug.LogWarning("SPAWNMANAGER SPAWNED ALL");
             }
             catch { return false; }
@@ -59,6 +61,7 @@ public class SpawnManager : NetworkBehaviour
             SpawnEnums.Enemy => enemyPrefab,
             SpawnEnums.Ring => ringPrefab,
             SpawnEnums.HealthPowerUp => hpPrefab,
+            SpawnEnums.SpeedPowerUp => speedPrefab,
             _ => null
         };
 
@@ -97,6 +100,19 @@ public class SpawnManager : NetworkBehaviour
             SpawnObject(SpawnEnums.HealthPowerUp, spawnpoint);
         }
     }
+
+    public void SpawnSpeedPowerUps()
+    {
+        Vector2[] spawnPoints = {
+        new Vector2(0f,4f),
+        new Vector2(4f,0f),
+    };
+        foreach (Vector2 spawnpoint in spawnPoints)
+        {
+            SpawnObject(SpawnEnums.SpeedPowerUp, spawnpoint);
+        }
+    }
+
 
     private void RespawnRingOnPlayerDeath()
     {

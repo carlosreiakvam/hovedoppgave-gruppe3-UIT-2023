@@ -42,11 +42,7 @@ public class RingBehaviour : NetworkBehaviour
     [ClientRpc]
     private void OnPlayerIdHasRingChangedClientRpc(ulong previousValue, ulong newValue)
     {
-        Debug.Log("RING IS NOW POSSESSED BY: " + newValue);
-        GameManager.Singleton.networkedPlayerIdHasRing = newValue;
-        GameObject gameUI = GameObject.Find("GameUI");
-        TextMeshProUGUI infoAlert = gameUI.GetComponentInChildren<TextMeshProUGUI>();
-        infoAlert.text = "A new player has collected the ring!";
+        GameManager.Singleton.OnRingChangedOwner(newValue);
     }
 
 }
