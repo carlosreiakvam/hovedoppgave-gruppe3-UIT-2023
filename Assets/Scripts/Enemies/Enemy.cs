@@ -19,8 +19,21 @@ public class Enemy :  NetworkBehaviour
     private int playerID;
     private Vector2 size = new Vector2(0.5087228f * 2.2f, 0.9851828f * 1.2f);
     private const string STEELATTACK = "SteelAttack";
+    private float timeLeftToAttack = 0;
 
     RaycastHit2D[] hits;
+
+    private void Update()
+    {
+        if (timeLeftToAttack > 0)
+        {
+            timeLeftToAttack -= Time.deltaTime;
+            if (timeLeftToAttack < 0)
+            {
+                timeLeftToAttack = 0;
+            }
+        }
+    }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
@@ -46,7 +59,11 @@ public class Enemy :  NetworkBehaviour
             {
                 if (raycastHit2D.collider.name == "PlayerAnimation")
                 {
-                    Attack();
+                    if (timeLeftToAttack == 0)
+                    {
+                        Attack();
+                        timeLeftToAttack = 1;
+                    }
                 }
             }
         }
