@@ -282,10 +282,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e831a7e31be3f4242aff0882306ef428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoints: {fileID: 11400000, guid: d7997286ce73bd2449ce18f7aff21852, type: 2}
   lightDamageTaken: {fileID: 11400000, guid: baec012dc7222564aa9e75b204215672, type: 2}
-  healthPowerUpAmount: {fileID: 11400000, guid: 851019526be9e6c4ca92b8b834e4d81c, type: 2}
   resetHP: 1
+  startingHP:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 7cf6d7f20a6c94e468245839d788d5c1, type: 2}
   healthBarVisual: {fileID: 1026990951046153725}
+  healthPowerUpAmount: {fileID: 11400000, guid: 851019526be9e6c4ca92b8b834e4d81c, type: 2}
 --- !u!114 &3175092351913287390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,10 +651,6 @@ MonoBehaviour:
   gamestatusSO: {fileID: 11400000, guid: b9a2a7bd2ec600346808442b5d09cd0f, type: 2}
   playerAnimation: {fileID: 405672945398536863}
   ownerNetworkAnimator: {fileID: 8739179420634378625}
-  playerSpeed:
-    UseConstant: 0
-    ConstantValue: 4
-    Variable: {fileID: 11400000, guid: b8cfb2c8ff3d4fc4b9a359574d25c5c8, type: 2}
   spawnPositionList:
   - {x: 1, y: 0}
   - {x: -1, y: 0}

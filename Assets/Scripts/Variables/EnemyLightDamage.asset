@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyLightDamage
   m_EditorClassIdentifier: 
   DeveloperDescription: "damage dealt by weak enemies \nand primitive shapes"
-  Value: 1
+  Value: 5

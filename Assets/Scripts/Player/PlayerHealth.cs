@@ -9,17 +9,12 @@ using Mono.CSharp;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    private const float START_HP = 100f;
-
-
-    float healthPowerUpAmount = 10f;
+    [SerializeField] private FloatVariable hitPoints;
+    [SerializeField] private FloatVariable lightDamageTaken;
     [SerializeField] private bool resetHP;
+    [SerializeField] private FloatReference startingHP;
     [SerializeField] private Image healthBarVisual;
-    NetworkVariable<float> networkHP = new(START_HP);
-
-    private float lightDamageTaken = 3f;
-    public bool IsKnockedDown { get; private set; } = false;
-
+    [SerializeField] private FloatVariable healthPowerUpAmount;
     public event EventHandler<OnPlayerKnockdownEventArgs> OnPlayerKnockdown; //Publisher of death!
 
     public class OnPlayerKnockdownEventArgs : EventArgs
@@ -27,48 +22,71 @@ public class PlayerHealth : NetworkBehaviour
         public bool isKnockedDown = false;
     }
 
+    private void Start()
+    {
+        if (resetHP)
+            hitPoints.SetValue(startingHP);
+    }
 
     public void SwordCollision()
     {
-        if (IsOwner) ApplyDamage();
+        if (!IsOwner) return;
+        ApplyDamage();
+        VisualizeHealthChangeServerRpc(hitPoints.Value, startingHP.Value);
     }
 
     private void ApplyDamage()
     {
-        float newHP = networkHP.Value;
-        print("applying damage to: " + gameObject.name);
-        newHP -= lightDamageTaken;
-        if (newHP <= 0)
+        if (IsLocalPlayer)
         {
-            newHP = 0;
-            IsKnockedDown = true;
-            VizualizeDeathServerRpc();
+            hitPoints.ApplyChange(-lightDamageTaken.Value);
+            print("applying damage to: " + gameObject.name);
+            if (hitPoints.Value <= 0)
+            {
+                VizualizeDeathServerRpc();
+            }
         }
-        ChangeHealthServerRpc(newHP);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (IsLocalPlayer)
+        {
+            if (!collision.CompareTag("HealthPowerUp")) return;
+
+            Debug.Log("OnTriggerEnter2D in PlayerHealth: " + collision.name);
+            SpawnManager.Singleton.DespawnObjectServerRpc(collision.GetComponent<NetworkObject>().NetworkObjectId);
+
+            AddHealth();
+        }
     }
     public void AddHealth()
     {
-        float newHP = networkHP.Value;
-        if (newHP == START_HP) return; // return if already at max networkHP
-        newHP += healthPowerUpAmount; // Add networkHP
-        if (newHP >= START_HP) newHP = START_HP; // Clamp at max networkHP
-        ChangeHealthServerRpc(newHP); // Inform the other clients
+        if (hitPoints.Value < 0 || hitPoints.Value == startingHP) return;
+        
+            hitPoints.ApplyChange(healthPowerUpAmount.Value);
+            
+            if (hitPoints.Value >= startingHP /*- healthPowerUpAmount*/) //might overshoot
+            {
+                hitPoints.Value = startingHP; // Clamp at max networkHP
+            }
+
+        VisualizeHealthChangeServerRpc(hitPoints.Value, startingHP.Value);
+
     }
+
 
     [ServerRpc(RequireOwnership = false)]
-    private void ChangeHealthServerRpc(float newHP)
+    private void VisualizeHealthChangeServerRpc(float hp, float startHP)
     {
-        //if (!IsServer) return; // remove?
-        networkHP.Value = newHP;
-        VisualizeDamageClientRpc(newHP);
+        VisualizeHealthChangeClientRpc(hp, startingHP);
     }
 
-
     [ClientRpc]
-    private void VisualizeDamageClientRpc(float newHP) //inform the other clients
+    private void VisualizeHealthChangeClientRpc(float hp, float startHP) //inform the other clients
     {
-        float hbVisual = newHP / START_HP;
-        healthBarVisual.fillAmount = hbVisual;
+
+        healthBarVisual.fillAmount = hp / startHP;
     }
 
     [ServerRpc(RequireOwnership = false)]

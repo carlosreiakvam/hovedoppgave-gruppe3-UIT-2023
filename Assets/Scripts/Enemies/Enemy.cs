@@ -38,8 +38,15 @@ public class Enemy :  NetworkBehaviour
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
         Debug.Log($"OnPlayerKnockdown callback; Player with ID: {playerID} is knocked down is {e.isKnockedDown}");
-        StopAnimationClientRpc();
+        //StopAnimationServerRpc(); //This is for the server
+        StopAnimationClientRpc(); //Notify the clients to stop the animation
+        playerDown = true; //for this server
     }
+
+    //private void StopAnimationServerRpc()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     private void FixedUpdate()
     {

@@ -11,6 +11,7 @@ TagManager:
   - TouchUIAttack
   - DontDestroy
   - CountdownText
+  - HealthPowerUp
   layers:
   - Default
   - TransparentFX

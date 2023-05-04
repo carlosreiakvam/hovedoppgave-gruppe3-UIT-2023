@@ -47,10 +47,12 @@ public class SpawnManager : NetworkBehaviour
 
     public void SpawnEnemy()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            SpawnObject(SpawnEnums.Enemy, new Vector2(4f + i * 2, 3f));
-        }
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    SpawnObject(SpawnEnums.Enemy, new Vector2(4f + i * 2, 3f));
+        //}
+
+        SpawnObject(SpawnEnums.Enemy, new Vector2(4f * 2, 3f));
     }
 
 
