@@ -142,7 +142,6 @@ public class PlayerBehaviour : NetworkBehaviour
     private void HandleMovement()
     {
         if (!IsOwner) return;
-        Debug.Log("playerspeed = " + playerSpeed);
 
         horizontalInput = Input.GetAxisRaw(HORIZONTAL);
         verticalInput = Input.GetAxisRaw(VERTICAL);
