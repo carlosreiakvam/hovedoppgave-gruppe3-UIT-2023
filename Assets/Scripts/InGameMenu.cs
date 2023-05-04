@@ -16,7 +16,7 @@ public class InGameMenu : MonoBehaviour
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() =>
         {
-            GameManager.Singleton.EndGameScene();
+                        GameManager.Singleton.EndGameScene();
         });
 
     }

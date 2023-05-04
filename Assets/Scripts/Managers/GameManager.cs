@@ -48,18 +48,15 @@ public class GameManager : NetworkBehaviour
 
     public void EndGameScene()
     {
-        if (IsOwner)
+        try
         {
-            try
-            {
-                NetworkManager.Singleton.Shutdown();
-                DestroyObjectsTaggedWithDontDestroy();
-                SceneManager.LoadScene("Menus");
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e); return;
-            }
+            NetworkManager.Singleton.Shutdown();
+            DestroyObjectsTaggedWithDontDestroy();
+            SceneManager.LoadScene("Menus");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e); return;
         }
     }
 
