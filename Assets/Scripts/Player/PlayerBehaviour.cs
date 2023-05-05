@@ -57,7 +57,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
-        playerIsKnockedOut = !playerIsKnockedOut;
+        playerIsKnockedOut = e.isKnockedDown;
     }
 
     private void Start()
