@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
-//using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : NetworkBehaviour
 {
@@ -15,7 +16,16 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject hpPrefab;
     [SerializeField] private GameObject speedPrefab;
+
+    public Tilemap tilemap;
+    public int maxTries = 100;
+    public int nEnemies = 200;
+    public int nHealthPowerups = 100;
+    public int nSpeedPowerups = 200;
+    private List<GameObject> placedObjects = new List<GameObject>();
+
     public static SpawnManager Singleton;
+
     private Transform playerTransform;
     private Dictionary<ulong, NetworkObject> spawnedObjects = new Dictionary<ulong, NetworkObject>();
 
@@ -28,32 +38,95 @@ public class SpawnManager : NetworkBehaviour
 
     public bool SpawnAll()
     {
-        if (IsServer)
+        try
         {
-            try
-            {
-                Debug.LogWarning("SPAWNMANAGER STARTED");
-                SpawnAllPlayers();
-                SpawnEnemy();
-                SpawnRing();
-                SpawnHealthPowerUps();
-                SpawnSpeedPowerUps();
-                Debug.LogWarning("SPAWNMANAGER SPAWNED ALL");
-            }
-            catch { return false; }
+            SpawnAllPlayers();
+            SpawnRing();
+            SpawnPrefabs();
+            return true;
         }
-        return true;
+        catch { Debug.LogError("SPAWN UNSUCCESSFULL"); return false; }
     }
 
-    public void SpawnEnemy()
+    private void SpawnRing()
     {
-        //for (int i = 0; i < 3; i++)
-        //{
-        //    SpawnObject(SpawnEnums.Enemy, new Vector2(4f + i * 2, 3f));
-        //}
-
-        SpawnObject(SpawnEnums.Enemy, new Vector2(4f * 2, 3f));
+        Vector3 emptyTile = GetEmptyTile(enemyPrefab);
+        SpawnObject(SpawnEnums.Ring, emptyTile);
     }
+
+    public void SpawnPrefabs()
+    {
+        // Reset the list of placed objects
+        placedObjects.Clear();
+
+        // Place enemies
+        for (int i = 0; i < nEnemies; i++)
+        {
+            Vector3 emptyTile = GetEmptyTile(enemyPrefab);
+            SpawnObject(SpawnEnums.Enemy, emptyTile);
+        }
+
+        // Place hp
+        for (int i = 0; i < nHealthPowerups; i++)
+        {
+            Vector3 emptyTile = GetEmptyTile(hpPrefab);
+            SpawnObject(SpawnEnums.HealthPowerUp, emptyTile);
+        }
+
+        // place speed
+        for (int i = 0; i < nSpeedPowerups; i++)
+        {
+            Vector3 emptyTile = GetEmptyTile(speedPrefab);
+            SpawnObject(SpawnEnums.SpeedPowerUp, emptyTile);
+        }
+
+    }
+
+
+
+    private Vector3 GetEmptyTile(GameObject prefab)
+    {
+        Vector3 emptyTile = Vector3.zero;
+        const int searchRange = 1; // only check the tile and its neighbors
+        for (int i = 0; i < maxTries; i++)
+        {
+            Vector3Int randomPosition = new Vector3Int(Random.Range(tilemap.cellBounds.xMin + searchRange, tilemap.cellBounds.xMax - searchRange),
+                                                        Random.Range(tilemap.cellBounds.yMin + searchRange, tilemap.cellBounds.yMax - searchRange),
+                                                        0);
+
+            // Check if the tile and its neighbors are empty
+            bool isTileEmpty = true;
+            for (int dx = -searchRange; dx <= searchRange; dx++)
+            {
+                for (int dy = -searchRange; dy <= searchRange; dy++)
+                {
+                    Vector3Int currentTilePosition = new Vector3Int(randomPosition.x + dx, randomPosition.y + dy, 0);
+                    if (tilemap.GetTile(currentTilePosition) != null)
+                    {
+                        isTileEmpty = false;
+                        break;
+                    }
+                }
+                if (!isTileEmpty) break;
+            }
+
+            if (isTileEmpty)
+            {
+                emptyTile = tilemap.CellToWorld(randomPosition);
+                break;
+            }
+        }
+        return emptyTile;
+    }
+
+
+
+
+    public List<GameObject> GetPlacedObjects()
+    {
+        return placedObjects;
+    }
+
 
 
     private void SpawnObject(SpawnEnums spawnenum, Vector2 spawnPoint)
@@ -74,58 +147,7 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-    private void SpawnRing()
-    {
-        Vector2[] spawnPoints = {
-        new Vector2(0f,0f),
-        new Vector2(5f,5f),
-        new Vector2(0f,5f),
-        new Vector2(3f,5f),
-    };
-        Vector3 randomSpawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-        SpawnObject(SpawnEnums.Ring, randomSpawnPoint);
-    }
-    public void SpawnHealthPowerUps()
-    {
-        Vector2[] spawnPoints = {
-        new Vector2(2f,2f),
-        new Vector2(3f,4f),
-        new Vector2(-2f,5f),
-        new Vector2(4f,1f),
-        new Vector2(1f,2f),
-        new Vector2(1f,2f),
-        new Vector2(-1f,2f),
-        new Vector2(1f,-2f),
-    };
-        foreach (Vector2 spawnpoint in spawnPoints)
-        {
-            SpawnObject(SpawnEnums.HealthPowerUp, spawnpoint);
-        }
-    }
 
-    public void SpawnSpeedPowerUps()
-    {
-        Vector2[] spawnPoints = {
-        new Vector2(0f,4f),
-        new Vector2(4f,0f),
-    };
-        foreach (Vector2 spawnpoint in spawnPoints)
-        {
-            SpawnObject(SpawnEnums.SpeedPowerUp, spawnpoint);
-        }
-    }
-
-
-    private void RespawnRingOnPlayerDeath()
-    {
-        // get player
-        // get player position
-        // spawn ring at player position
-        /*        GameObject ring = Instantiate(ringPrefab, randomSpawnPoint, Quaternion.identity);
-                ring.GetComponent<NetworkObject>().Spawn();
-                Debug.Log("RESPAWNING RING");
-        */
-    }
 
 
     public void SpawnAllPlayers()
@@ -175,5 +197,7 @@ public class SpawnManager : NetworkBehaviour
             Debug.Log($"Failed to disconnect client: {e}");
         }
     }
+
+
 
 }
