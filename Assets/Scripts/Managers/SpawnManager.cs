@@ -18,11 +18,24 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject speedPrefab;
 
     public Tilemap tilemap;
-    public int maxTries = 100;
-    public int nEnemies = 200;
-    public int nHealthPowerups = 100;
-    public int nSpeedPowerups = 200;
+    public const int maxTries = 100;
+    public const int nEnemies = 50;
+    public const int nHealthPowerups = 25;
+    public const int nSpeedPowerups = 25;
     private List<GameObject> placedObjects = new List<GameObject>();
+
+    private const int X_MIN = 0;
+    private const int X_MAX = 50;
+    private const int Y_MIN = 0;
+    private const int Y_MAX = 50;
+    private const int X_MIDDLE = X_MAX / 2;
+    private const int Y_MIDDLE = Y_MAX / 2;
+    private const int MIDDLE_PADDING = 5; // free space around the middle where the players will spawn
+    private const int X_MIN_FREE_SPACE_MIDDLE = X_MIDDLE - MIDDLE_PADDING;
+    private const int X__MAX_FREE_SPACE_MIDDLE = X_MIDDLE + MIDDLE_PADDING;
+    private const int Y_MIN_FREE_SPACE_MIDDLE = Y_MIDDLE - MIDDLE_PADDING;
+    private const int Y_MAX_FREE_SPACE_MIDDLE = Y_MIDDLE + MIDDLE_PADDING;
+
 
     public static SpawnManager Singleton;
 
@@ -50,7 +63,7 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnRing()
     {
-        Vector3 emptyTile = GetEmptyTile(enemyPrefab);
+        Vector3 emptyTile = GetEmptyTile();
         SpawnObject(SpawnEnums.Ring, emptyTile);
     }
 
@@ -62,21 +75,21 @@ public class SpawnManager : NetworkBehaviour
         // Place enemies
         for (int i = 0; i < nEnemies; i++)
         {
-            Vector3 emptyTile = GetEmptyTile(enemyPrefab);
+            Vector3 emptyTile = GetEmptyTile();
             SpawnObject(SpawnEnums.Enemy, emptyTile);
         }
 
         // Place hp
         for (int i = 0; i < nHealthPowerups; i++)
         {
-            Vector3 emptyTile = GetEmptyTile(hpPrefab);
+            Vector3 emptyTile = GetEmptyTile();
             SpawnObject(SpawnEnums.HealthPowerUp, emptyTile);
         }
 
         // place speed
         for (int i = 0; i < nSpeedPowerups; i++)
         {
-            Vector3 emptyTile = GetEmptyTile(speedPrefab);
+            Vector3 emptyTile = GetEmptyTile();
             SpawnObject(SpawnEnums.SpeedPowerUp, emptyTile);
         }
 
@@ -84,15 +97,18 @@ public class SpawnManager : NetworkBehaviour
 
 
 
-    private Vector3 GetEmptyTile(GameObject prefab)
+    private Vector3 GetEmptyTile()
     {
         Vector3 emptyTile = Vector3.zero;
         const int searchRange = 1; // only check the tile and its neighbors
         for (int i = 0; i < maxTries; i++)
         {
-            Vector3Int randomPosition = new Vector3Int(Random.Range(tilemap.cellBounds.xMin + searchRange, tilemap.cellBounds.xMax - searchRange),
-                                                        Random.Range(tilemap.cellBounds.yMin + searchRange, tilemap.cellBounds.yMax - searchRange),
+            Vector3Int randomPosition = new Vector3Int(Random.Range(X_MIN + searchRange, X_MAX - searchRange),
+                                                        Random.Range(Y_MIN + searchRange, Y_MAX - searchRange),
                                                         0);
+
+            // Exclude area in the middle where players will spawn
+            if ((randomPosition.x >= X_MIN_FREE_SPACE_MIDDLE && randomPosition.x <= X__MAX_FREE_SPACE_MIDDLE) && (randomPosition.y >= Y_MIN_FREE_SPACE_MIDDLE && randomPosition.y <= Y_MAX_FREE_SPACE_MIDDLE)) { continue; }
 
             // Check if the tile and its neighbors are empty
             bool isTileEmpty = true;
@@ -103,6 +119,7 @@ public class SpawnManager : NetworkBehaviour
                     Vector3Int currentTilePosition = new Vector3Int(randomPosition.x + dx, randomPosition.y + dy, 0);
                     if (tilemap.GetTile(currentTilePosition) != null)
                     {
+
                         isTileEmpty = false;
                         break;
                     }

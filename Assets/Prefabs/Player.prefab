@@ -132,101 +132,101 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList:
   - Layer: 0
-    OriginatingState: 1111912944
-    DestinationState: -362354361
-    TransitionDuration: 0
-    TriggerNameHash: 1666549902
-    TransitionIndex: 2
-  - Layer: 0
-    OriginatingState: 1111912944
-    DestinationState: 480717672
-    TransitionDuration: 0
-    TriggerNameHash: 1178528288
-    TransitionIndex: 3
-  - Layer: 0
     OriginatingState: -2111515647
     DestinationState: -715066163
     TransitionDuration: 0
     TriggerNameHash: 1666549902
-    TransitionIndex: 2
+    TransitionIndex: 1
   - Layer: 0
     OriginatingState: -2111515647
     DestinationState: -1307141635
     TransitionDuration: 0
     TriggerNameHash: 1178528288
-    TransitionIndex: 3
+    TransitionIndex: 2
   - Layer: 0
     OriginatingState: -1936979550
     DestinationState: 1821287982
     TransitionDuration: 0
     TriggerNameHash: 1666549902
-    TransitionIndex: 2
+    TransitionIndex: 1
   - Layer: 0
     OriginatingState: -1936979550
     DestinationState: 982545291
     TransitionDuration: 0
     TriggerNameHash: 1178528288
-    TransitionIndex: 3
-  - Layer: 0
-    OriginatingState: 1977811535
-    DestinationState: 1691777439
-    TransitionDuration: 0
-    TriggerNameHash: 1666549902
     TransitionIndex: 2
-  - Layer: 0
-    OriginatingState: 1977811535
-    DestinationState: 316148469
-    TransitionDuration: 0
-    TriggerNameHash: 1178528288
-    TransitionIndex: 3
   - Layer: 0
     OriginatingState: -605775166
     DestinationState: -802540216
     TransitionDuration: 0
     TriggerNameHash: 1666549902
-    TransitionIndex: 2
+    TransitionIndex: 1
   - Layer: 0
     OriginatingState: -605775166
     DestinationState: -125825222
     TransitionDuration: 0
     TriggerNameHash: 1178528288
-    TransitionIndex: 3
-  - Layer: 0
-    OriginatingState: 607254923
-    DestinationState: -1554682077
-    TransitionDuration: 0
-    TriggerNameHash: 1666549902
     TransitionIndex: 2
-  - Layer: 0
-    OriginatingState: 607254923
-    DestinationState: 1181090446
-    TransitionDuration: 0
-    TriggerNameHash: 1178528288
-    TransitionIndex: 3
-  - Layer: 0
-    OriginatingState: 483853284
-    DestinationState: -123106463
-    TransitionDuration: 0
-    TriggerNameHash: 1666549902
-    TransitionIndex: 2
-  - Layer: 0
-    OriginatingState: 483853284
-    DestinationState: 1680629041
-    TransitionDuration: 0
-    TriggerNameHash: 1178528288
-    TransitionIndex: 3
   - Layer: 0
     OriginatingState: -1269211401
     DestinationState: -1258134190
     TransitionDuration: 0
     TriggerNameHash: 1666549902
-    TransitionIndex: 2
+    TransitionIndex: 1
   - Layer: 0
     OriginatingState: -1269211401
     DestinationState: 1611256674
     TransitionDuration: 0
     TriggerNameHash: 1178528288
-    TransitionIndex: 3
+    TransitionIndex: 2
+  - Layer: 0
+    OriginatingState: 987039288
+    DestinationState: -362354361
+    TransitionDuration: 0
+    TriggerNameHash: 1666549902
+    TransitionIndex: 0
+  - Layer: 0
+    OriginatingState: 987039288
+    DestinationState: 480717672
+    TransitionDuration: 0
+    TriggerNameHash: 1178528288
+    TransitionIndex: 1
+  - Layer: 0
+    OriginatingState: 57629608
+    DestinationState: 1691777439
+    TransitionDuration: 0
+    TriggerNameHash: 1666549902
+    TransitionIndex: 0
+  - Layer: 0
+    OriginatingState: 57629608
+    DestinationState: 316148469
+    TransitionDuration: 0
+    TriggerNameHash: 1178528288
+    TransitionIndex: 1
+  - Layer: 0
+    OriginatingState: -1493025962
+    DestinationState: -1554682077
+    TransitionDuration: 0
+    TriggerNameHash: 1666549902
+    TransitionIndex: 0
+  - Layer: 0
+    OriginatingState: -1493025962
+    DestinationState: 1181090446
+    TransitionDuration: 0
+    TriggerNameHash: 1178528288
+    TransitionIndex: 1
+  - Layer: 0
+    OriginatingState: 1510337148
+    DestinationState: -123106463
+    TransitionDuration: 0
+    TriggerNameHash: 1666549902
+    TransitionIndex: 0
+  - Layer: 0
+    OriginatingState: 1510337148
+    DestinationState: 1680629041
+    TransitionDuration: 0
+    TriggerNameHash: 1178528288
+    TransitionIndex: 1
   m_Animator: {fileID: 3652268753205044349}
 --- !u!114 &5634196781880440896
 MonoBehaviour:
@@ -612,7 +612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2900308809295077616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1877.1821, y: -3502.2285, z: 0}
+  m_LocalPosition: {x: 56, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -652,10 +652,10 @@ MonoBehaviour:
   playerAnimation: {fileID: 405672945398536863}
   ownerNetworkAnimator: {fileID: 8739179420634378625}
   spawnPositionList:
-  - {x: 1, y: 0}
-  - {x: -1, y: 0}
-  - {x: 0, y: 1}
-  - {x: 0, y: -1}
+  - {x: 25, y: 27}
+  - {x: 25, y: 23}
+  - {x: 23, y: 25}
+  - {x: 27, y: 25}
   isAttackBtn: 0
 --- !u!114 &6921163870223798263
 MonoBehaviour:

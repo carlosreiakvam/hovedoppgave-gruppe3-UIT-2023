@@ -52,7 +52,7 @@ public class PlayerBehaviour : NetworkBehaviour
         animator.SetFloat(PREVVERTICAL, -1);
 
         playerHealth = GetComponentInChildren<PlayerHealth>();
-        playerHealth.OnPlayerKnockdown += OnPlayerKnockdown; //subscribe
+        playerHealth.OnPlayerKnockdown += OnPlayerKnockdown; 
     }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
@@ -62,7 +62,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void Start()
     {
-        ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls; //subscribe
+        ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls;
 
         if (gamestatusSO.isAndroid)
         {
