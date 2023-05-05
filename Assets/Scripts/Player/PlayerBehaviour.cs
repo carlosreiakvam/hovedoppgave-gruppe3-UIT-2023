@@ -52,7 +52,7 @@ public class PlayerBehaviour : NetworkBehaviour
         animator.SetFloat(PREVVERTICAL, -1);
 
         playerHealth = GetComponentInChildren<PlayerHealth>();
-        playerHealth.OnPlayerKnockdown += OnPlayerKnockdown; 
+        playerHealth.OnPlayerKnockdown += OnPlayerKnockdown;
     }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
@@ -216,5 +216,22 @@ public class PlayerBehaviour : NetworkBehaviour
         yield return new WaitForSeconds(delay);
         playerSpeed = 4;
         Debug.LogWarning("Resetting speed for player");
+    }
+
+    internal void RelocatePlayer(bool relocateToCave)
+    {
+        Vector3 caveDoorPosition;
+        if (relocateToCave)
+        {
+            caveDoorPosition = gamestatusSO.caveCaveEntrance;
+            caveDoorPosition.y += 1; // offset from door so it doesnt trigger eternally
+            transform.position = caveDoorPosition;
+        }
+        else
+        {
+            caveDoorPosition = gamestatusSO.outdoorCaveEntrance;
+            caveDoorPosition.y -= 1;
+            transform.position = caveDoorPosition;
+        }
     }
 }

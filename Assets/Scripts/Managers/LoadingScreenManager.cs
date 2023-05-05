@@ -68,7 +68,7 @@ public class LoadingScreenManager : NetworkBehaviour
 
     private IEnumerator StartCountdown()
     {
-        float countdownDuration = 0f;
+        float countdownDuration = 3f;
         float remainingTime = countdownDuration;
 
         while (remainingTime > 0f)

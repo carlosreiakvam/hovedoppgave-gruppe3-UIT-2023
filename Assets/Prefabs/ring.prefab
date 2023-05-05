@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26885d353ad7324eaba2475387ed1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkedPlayerIdHasRing:
+    m_InternalValue: 0
 --- !u!58 &628698394880259110
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +170,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3142841806820012232}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

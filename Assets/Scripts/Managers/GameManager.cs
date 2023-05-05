@@ -22,28 +22,13 @@ public class GameManager : NetworkBehaviour
         else Destroy(gameObject);
     }
 
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-        Debug.Log("GAMEMANAGER SPAWNED");
-    }
-
     public bool StartGameManager()
     {
-        //networkedPlayerIdHasRing.OnValueChanged += OnPlayerIdHasRingChangedClientRpc;
         networkedGameWon.OnValueChanged += OnGameWonChangedClientRpc;
 
-        try
-        {
-            Debug.LogWarning("GAMEMANAGER STARTED");
-            bool spawnSuccess = SpawnManager.Singleton.SpawnAll();
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e);
-            return false;
-        }
-        return true;
+        Debug.LogWarning("GAMEMANAGER STARTED");
+        if (SpawnManager.Singleton.SpawnAll()) { Debug.LogWarning("SPAWNING SUCCESSFULL"); return true; }
+        else { Debug.LogError("SPAWNING FAILED"); return false; }
     }
 
     public void EndGameScene()
