@@ -12,6 +12,7 @@ TagManager:
   - DontDestroy
   - CountdownText
   - HealthPowerUp
+  - StaticColliders
   layers:
   - Default
   - TransparentFX
