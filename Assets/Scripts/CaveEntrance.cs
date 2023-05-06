@@ -11,7 +11,6 @@ public class CaveEntrance : MonoBehaviour
         bool relocateToCave = (gameObject.transform.position.x < 50);
         GameObject player = collision.transform.parent.gameObject;
         PlayerBehaviour playerBehaviour = player.GetComponent<PlayerBehaviour>();
-
         playerBehaviour.RelocatePlayer(relocateToCave);
     }
 

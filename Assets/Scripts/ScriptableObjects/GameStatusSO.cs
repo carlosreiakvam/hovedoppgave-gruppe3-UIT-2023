@@ -8,5 +8,5 @@ public class GameStatusSO : ScriptableObject
     public bool isAndroid = false;
     public bool isWindows = false;
     public Vector2 outdoorCaveEntrance = new Vector2(0, 0);
-    public Vector2 caveCaveEntrance = new Vector2(0, 0);
+    public Vector2 caveCaveEntrance = new Vector2(96f, 4f);
 }

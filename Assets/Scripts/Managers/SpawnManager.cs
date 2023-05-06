@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
+using Mono.CSharp;
 
 public class SpawnManager : NetworkBehaviour
 {
@@ -23,21 +24,20 @@ public class SpawnManager : NetworkBehaviour
 
     public Tilemap tilemap;
     public const int maxTries = 100;
-    public const int nEnemiesOutside = 20;
-    public const int nEnemiesCave = 10;
-    public const int nHealthPowerupsOutdoor = 25;
-    public const int nHealthPowerupsCave = 25;
-    public const int nSpeedPowerupsOutdoor = 25;
-    public const int nSpeedPowerupsCave = 25;
-    private List<GameObject> placedObjects = new List<GameObject>();
+    public const int nEnemiesOutside = 25;
+    public const int nEnemiesCave = 15;
+    public const int nHealthPowerupsOutdoor = 15;
+    public const int nHealthPowerupsCave = 15;
+    public const int nSpeedPowerupsOutdoor = 15;
+    public const int nSpeedPowerupsCave = 15;
 
 
     private static Dictionary<SpawnEnums, int> mapBoundsOutdoor = new Dictionary<SpawnEnums, int>()
 {
-    { SpawnEnums.X_MIN, 5 },
-    { SpawnEnums.X_MAX, 45 },
-    { SpawnEnums.Y_MIN, 5 },
-    { SpawnEnums.Y_MAX, 45 },
+    { SpawnEnums.X_MIN, 1 },
+    { SpawnEnums.X_MAX, 50 },
+    { SpawnEnums.Y_MIN, 1 },
+    { SpawnEnums.Y_MAX, 50 },
     { SpawnEnums.X_MIDDLE, 45/2 },
     { SpawnEnums.Y_MIDDLE, 45/2 },
 
@@ -47,19 +47,11 @@ public class SpawnManager : NetworkBehaviour
 {
     { SpawnEnums.X_MIN, 95 },
     { SpawnEnums.X_MAX, 140 },
-    { SpawnEnums.Y_MIN, 5 },
-    { SpawnEnums.Y_MAX, 45 },
+    { SpawnEnums.Y_MIN, 1 },
+    { SpawnEnums.Y_MAX, 50 },
     { SpawnEnums.X_MIDDLE, 95/2 },
     { SpawnEnums.Y_MIDDLE, 45/2 },
 };
-
-
-
-    private const int MIDDLE_PADDING = 5; // free space around the middle where the players will spawn
-    private int X_MIN_FREE_SPACE_MIDDLE = mapBoundsOutdoor[SpawnEnums.X_MIDDLE] - MIDDLE_PADDING;
-    private int X__MAX_FREE_SPACE_MIDDLE = mapBoundsOutdoor[SpawnEnums.X_MIDDLE] + MIDDLE_PADDING;
-    private int Y_MIN_FREE_SPACE_MIDDLE = mapBoundsOutdoor[SpawnEnums.Y_MIDDLE] - MIDDLE_PADDING;
-    private int Y_MAX_FREE_SPACE_MIDDLE = mapBoundsOutdoor[SpawnEnums.Y_MIDDLE] + MIDDLE_PADDING;
 
 
     private Transform playerTransform;
@@ -73,24 +65,39 @@ public class SpawnManager : NetworkBehaviour
         else Destroy(gameObject);
     }
 
+    private Dictionary<SpawnEnums, int> GetMidAreaFromOutdoor(int sideLength)
+    {
+
+        Dictionary<SpawnEnums, int> midArea = new Dictionary<SpawnEnums, int>()
+        {
+            { SpawnEnums.X_MIN, mapBoundsOutdoor[SpawnEnums.X_MIDDLE] - sideLength },
+            { SpawnEnums.X_MAX, mapBoundsOutdoor[SpawnEnums.X_MIDDLE] + sideLength },
+            { SpawnEnums.Y_MIN, mapBoundsOutdoor[SpawnEnums.Y_MIDDLE] - sideLength },
+            { SpawnEnums.Y_MAX, mapBoundsOutdoor[SpawnEnums.Y_MIDDLE] + sideLength },
+        };
+
+        return midArea;
+    }
+
     public bool SpawnAll()
     {
         Debug.LogWarning("SPAWNING PREFABS");
         try
         {
             SpawnPlayers();
-            SpawnPrefabs(SpawnEnums.Ring, EnvironmentEnums.Cave, 1, 1);
+
+            SpawnPrefabs(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 1, searchRange: 1);
 
             SpawnCaveDoors();
 
-            SpawnPrefabs(SpawnEnums.Enemy, EnvironmentEnums.Outdoor, nEnemiesOutside, 1);
-            SpawnPrefabs(SpawnEnums.Enemy, EnvironmentEnums.Cave, nEnemiesCave, 1);
+            SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: nEnemiesOutside, searchRange: 1, excludedMidAreaSideLength: 10);
+            SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: nEnemiesCave, searchRange: 1);
 
-            SpawnPrefabs(SpawnEnums.HealthPowerUp, EnvironmentEnums.Outdoor, nHealthPowerupsOutdoor, 1);
-            SpawnPrefabs(SpawnEnums.HealthPowerUp, EnvironmentEnums.Cave, nHealthPowerupsCave, 1);
+            SpawnPrefabs(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nHealthPowerupsOutdoor, searchRange: 1);
+            SpawnPrefabs(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Cave, nInstances: nHealthPowerupsCave, searchRange: 1);
 
-            SpawnPrefabs(SpawnEnums.SpeedPowerUp, EnvironmentEnums.Outdoor, nSpeedPowerupsOutdoor, 1);
-            SpawnPrefabs(SpawnEnums.SpeedPowerUp, EnvironmentEnums.Cave, nSpeedPowerupsCave, 1);
+            SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nSpeedPowerupsOutdoor, searchRange: 1);
+            SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: nSpeedPowerupsCave, searchRange: 1);
 
             return true;
         }
@@ -99,46 +106,51 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnCaveDoors()
     {
-        // Cavedoor outdoor
-        // Set the location of the cave entrance in the game status so that the player knows where to respawn on reentering outdoors 
-        Vector3 outdoorCaveEntranceLocation = GetEmptyTile(2, EnvironmentEnums.Outdoor);
-        gameStatus.outdoorCaveEntrance = outdoorCaveEntranceLocation;
-        SpawnObject(SpawnEnums.CaveEntrance, outdoorCaveEntranceLocation);
+        // Get empty tile for cavedoor in forest
+        Vector2 outdoorCaveEntranceLocation = GetEmptyTile(searchRange: 1, environment: EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 20);
+        if (outdoorCaveEntranceLocation == null) { outdoorCaveEntranceLocation = new Vector3(10, 10); Debug.LogWarning("FAILED TO FIND RANDOM EMPTY SPOT FOR CAVEDOOR. REVERTING TO FIXED SPOT"); }
 
-        // Cavedoor in cave
-        Vector3 caveCaveDoorPosition = new Vector3(93, 1.5f, 0f);
+        // Set the location of the cave entrances in the game status SO, so that the player knows where to respawn 
+        gameStatus.outdoorCaveEntrance = outdoorCaveEntranceLocation;
+        Vector3 caveCaveDoorPosition = new Vector3(96, 4, 0);
         gameStatus.caveCaveEntrance = caveCaveDoorPosition;
+
+
+        // spawn cavedoors
+        SpawnObject(SpawnEnums.CaveEntrance, outdoorCaveEntranceLocation);
         SpawnObject(SpawnEnums.CaveEntrance, caveCaveDoorPosition);
+        Debug.LogWarning("SPAWNED CAVE AT; " + caveCaveDoorPosition.x + ", " + caveCaveDoorPosition.y);
     }
 
-    private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange)
+    private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
     {
         for (int i = 0; i < nInstances; i++)
         {
-            Vector3 emptyTile = GetEmptyTile(searchRange, environment);
+            Vector3 emptyTile = GetEmptyTile(searchRange, environment, excludedMidAreaSideLength);
             SpawnObject(spawnEnum, emptyTile);
         }
     }
 
 
-    private Vector3 GetEmptyTile(int searchRange, EnvironmentEnums environment)
+    private Vector2 GetEmptyTile(int searchRange, EnvironmentEnums environment, int excludedMidAreaSideLength = -1)
     {
         Dictionary<SpawnEnums, int> boundaries;
-        if (environment == EnvironmentEnums.Outdoor) { boundaries = mapBoundsOutdoor; }
-        else { boundaries = mapBoundsCave; }
+        if (environment == EnvironmentEnums.Outdoor) boundaries = mapBoundsOutdoor;
+        else boundaries = mapBoundsCave;
 
-        Vector3 emptyTile = Vector3.zero;
+        Vector2 emptyTile = Vector2.zero;
         for (int i = 0; i < maxTries; i++)
         {
             Vector3Int randomPosition = new Vector3Int(Random.Range(boundaries[SpawnEnums.X_MIN] + searchRange, boundaries[SpawnEnums.X_MAX] - searchRange),
-                                                        Random.Range(boundaries[SpawnEnums.Y_MIN] + searchRange, boundaries[SpawnEnums.Y_MAX] - searchRange),
-                                                        0);
+                                                        Random.Range(boundaries[SpawnEnums.Y_MIN] + searchRange, boundaries[SpawnEnums.Y_MAX] - searchRange), 0
+                                                        );
 
-            if (environment == EnvironmentEnums.Outdoor)
+            if (excludedMidAreaSideLength != -1)
             {
-                // Exclude area in the middle where players will spawn
-                if ((randomPosition.x >= X_MIN_FREE_SPACE_MIDDLE && randomPosition.x <= X__MAX_FREE_SPACE_MIDDLE) && (randomPosition.y >= Y_MIN_FREE_SPACE_MIDDLE && randomPosition.y <= Y_MAX_FREE_SPACE_MIDDLE)) { continue; }
-
+                // 'continue' if empty tile is in middle area
+                Dictionary<SpawnEnums, int> midArea = GetMidAreaFromOutdoor(excludedMidAreaSideLength);
+                if ((randomPosition.x >= midArea[SpawnEnums.X_MIN] && randomPosition.x <= midArea[SpawnEnums.X_MAX]) && (randomPosition.y >= midArea[SpawnEnums.Y_MIN] && randomPosition.y <= midArea[SpawnEnums.Y_MAX]))
+                { continue; }
             }
 
             // Check if the tile and its neighbors are empty
@@ -147,10 +159,8 @@ public class SpawnManager : NetworkBehaviour
             {
                 for (int dy = -searchRange; dy <= searchRange; dy++)
                 {
-                    Vector3Int currentTilePosition = new Vector3Int(randomPosition.x + dx, randomPosition.y + dy, 0);
-                    if (tilemap.GetTile(currentTilePosition) != null)
+                    if (tilemap.GetTile(randomPosition) != null)
                     {
-
                         isTileEmpty = false;
                         break;
                     }
@@ -160,17 +170,13 @@ public class SpawnManager : NetworkBehaviour
 
             if (isTileEmpty)
             {
+
                 emptyTile = tilemap.CellToWorld(randomPosition);
                 break;
             }
         }
-        return emptyTile;
-    }
 
-
-    public List<GameObject> GetPlacedObjects()
-    {
-        return placedObjects;
+        return new Vector2(emptyTile.x, emptyTile.y);
     }
 
 
