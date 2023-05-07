@@ -226,13 +226,14 @@ public class PlayerBehaviour : NetworkBehaviour
         {
             caveDoorPosition = gamestatusSO.caveCaveEntrance;
             caveDoorPosition.y += 1f; // offset from door so it doesnt trigger eternally
-            transform.position = caveDoorPosition;
+            
+            playerAnimation.transform.position = caveDoorPosition;
         }
         else
         {
             caveDoorPosition = gamestatusSO.outdoorCaveEntrance;
             caveDoorPosition.y -= 0.5f; // offset from door so it doesnt trigger eternally // watch out for other objects
-            transform.position = caveDoorPosition;
+            playerAnimation.transform.position = caveDoorPosition;
         }
     }
 }
