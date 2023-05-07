@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Unity.Netcode.Components;
 
-public class Enemy :  NetworkBehaviour
+public class Enemy : NetworkBehaviour
 {
     private Transform target = null;
     private const float SPEED_VALUE = 2f;
@@ -20,6 +20,7 @@ public class Enemy :  NetworkBehaviour
     private float timeLeftToAttack = 0;
     private const float ROAMING_SPEED = 1f;
     private readonly WaitForSeconds waitForSeconds = new(3f);
+    private float roamPositionLimit = 2;
 
     RaycastHit2D[] hits;
 
@@ -67,19 +68,46 @@ public class Enemy :  NetworkBehaviour
     {
         if (!IsServer) return;
 
+        if (state == State.ChaseTarget)
+        {
+            if (timeLeftToAttack > 0)
+            {
+                timeLeftToAttack -= Time.deltaTime;
+                if (timeLeftToAttack < 0)
+                {
+                    timeLeftToAttack = 0;
+                }
+            }
+        }
+    }
+
+    private IEnumerator TakeABreakRoutine()
+    {
+        yield return waitForSeconds;
+        Debug.Log(waitForSeconds);
+        state = State.Roaming;
+    }
+
+
+
+    private void FixedUpdate()
+    {
+        if (!IsServer) return;
+
+
         switch (state)
         {
             default:
 
             case State.Roaming:
-                Debug.Log("Current State:" + state.ToString());
+                //Debug.Log("Current State:" + state.ToString());
 
                 moveDirection = (roamPosition - (Vector2)transform.position).normalized;
                 transform.Translate(ROAMING_SPEED * Time.deltaTime * moveDirection);
 
                 //Debug.Log("Distance left to target:" + Vector2.Distance(transform.position, roamPosition));
 
-                if (Vector2.Distance(transform.position, roamPosition) < 1)
+                if (Vector2.Distance(transform.position, roamPosition) < roamPositionLimit)
                 {
                     //reached roam position
                     roamPosition = GetRoamingPosition();
@@ -97,14 +125,6 @@ public class Enemy :  NetworkBehaviour
                 Debug.Log("Current State:" + state.ToString());
                 if (target != null)
                 {
-                    if (timeLeftToAttack > 0)
-                    {
-                        timeLeftToAttack -= Time.deltaTime;
-                        if (timeLeftToAttack < 0)
-                        {
-                            timeLeftToAttack = 0;
-                        }
-                    }
 
                     moveDirection = (target.transform.position - transform.position).normalized;
                     transform.Translate(SPEED_VALUE * Time.deltaTime * moveDirection);
@@ -112,42 +132,24 @@ public class Enemy :  NetworkBehaviour
                     animator.SetFloat(HORIZONTAL, moveDirection.x);
                     animator.SetFloat(VERTICAL, moveDirection.y);
                     animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
+
+                    hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
+                    foreach (RaycastHit2D raycastHit2D in hits)
+                    {
+                        if (raycastHit2D.collider.name == "PlayerAnimation")
+                        {
+                            Attack();
+                        }
+                    }
                 }
                 break;
 
             case State.PlayerDown: //dummy state
-                Debug.Log("Current State:" + state.ToString());
-                moveDirection = Vector2.zero;
-                
+                                   //Debug.Log("Current State:" + state.ToString());
+
                 StartCoroutine(TakeABreakRoutine()); //Take a break before going back into roaming
 
                 break;
-        }
-    }
-
-    private IEnumerator TakeABreakRoutine()
-    {
-        yield return waitForSeconds;
-        Debug.Log(waitForSeconds);
-        state = State.Roaming;
-    }
-
-
-
-    private void FixedUpdate()
-    {
-        if (!IsServer) return;
-
-        if (target != null)
-        {
-            hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
-            foreach (RaycastHit2D raycastHit2D in hits)
-            {
-                if (raycastHit2D.collider.name == "PlayerAnimation")
-                {
-                    Attack();
-                }
-            }
         }
     }
 
@@ -179,12 +181,13 @@ public class Enemy :  NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) //colliding with a "hard" gameobject. Find another path!
     {
-        if (!IsServer) return;
+        if (!IsServer || collision.collider.CompareTag("Player")) return;
 
         if (collision.collider.CompareTag("StaticColliders"))
         {
             //Debug.Log("It is a static collider");
-            roamPosition = Mathf.Abs(GetRandomDir().x) * Mathf.Abs(GetRandomDir().y) * -roamPosition;
+            //TODO: find a new random position
+            //roamPosition = Mathf.Abs(GetRandomDir().x) * Mathf.Abs(GetRandomDir().y) * -roamPosition;
         }
     }
 
