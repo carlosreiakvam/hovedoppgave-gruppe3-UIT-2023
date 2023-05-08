@@ -4,7 +4,7 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
-public class OpeningPort : MonoBehaviour
+public class WizzardCollider : MonoBehaviour
 {
     GameManager gameManager;
     TextMeshPro wonText;
@@ -17,7 +17,7 @@ public class OpeningPort : MonoBehaviour
         NetworkObject playerNetworkObject = collision.gameObject.GetComponentInParent<NetworkObject>();
         ulong playerNetworkObjectId = playerNetworkObject.NetworkObjectId;
 
-        Debug.Log("Player with instance playerNetworkObjectId " + playerNetworkObjectId + " collided with opening port");
+        Debug.Log("Player with instance playerNetworkObjectId " + playerNetworkObjectId + " collided with wizzard");
 
         Debug.Log("gamemanager says this person has ring: " + GameManager.Singleton.networkedPlayerIdHasRing);
         if (playerNetworkObjectId == GameManager.Singleton.networkedPlayerIdHasRing)
