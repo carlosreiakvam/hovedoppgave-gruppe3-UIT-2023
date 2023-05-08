@@ -23,13 +23,11 @@ public class RelayManager : MonoBehaviour
     {
         if (Singleton != null && Singleton != this)
         {
-            Debug.Log("destroying RelayManager as it is already initialized");
             Destroy(gameObject);
 
         }
         else
         {
-            Debug.Log("creating RelayManager for the first time");
             Singleton = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -129,8 +127,8 @@ public class RelayManager : MonoBehaviour
         {
             try
             {
-                allocation = await RelayService.Instance.CreateAllocationAsync(3);
-                relayJoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+                allocation = await RelayService.Singleton.CreateAllocationAsync(3);
+                relayJoinCode = await RelayService.Singleton.GetJoinCodeAsync(allocation.AllocationId);
                 RelayServerData relayServerData = new(allocation, "dtls");
                 NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             }

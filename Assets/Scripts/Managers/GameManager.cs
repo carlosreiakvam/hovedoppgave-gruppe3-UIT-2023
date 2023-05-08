@@ -15,6 +15,8 @@ public class GameManager : NetworkBehaviour
     public ulong networkedPlayerIdHasRing { get; set; }
     public NetworkVariable<bool> networkedGameWon = new NetworkVariable<bool>(false);
 
+    // SHOULD ONLY BE RUN BY SERVER
+
 
     private void Awake()
     {

@@ -17,6 +17,7 @@ public class PlayerBehaviour : NetworkBehaviour
     [SerializeField] private GameObject playerAnimation;
     [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
     [SerializeField] private List<Vector2> spawnPositionList;
+    private bool isControlActive = false;
 
     private const float PLAYER_BASE_SPEED = 3;
     private const float PLAYER_INCREASED_SPEED = 10;
@@ -85,6 +86,7 @@ public class PlayerBehaviour : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        if (IsLocalPlayer) LocalInstance = this;
         transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
         Initialize(); //Running this is start might cause variables to not be initialized
     }
@@ -108,6 +110,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
     void Update()
     {
+        if (!isControlActive) return;
         if (playerIsKnockedOut) return;
 
         if (!chatInFocus)
@@ -226,7 +229,7 @@ public class PlayerBehaviour : NetworkBehaviour
         {
             caveDoorPosition = gamestatusSO.caveCaveEntrance;
             caveDoorPosition.y += 1f; // offset from door so it doesnt trigger eternally
-            
+
             playerAnimation.transform.position = caveDoorPosition;
         }
         else
@@ -235,5 +238,12 @@ public class PlayerBehaviour : NetworkBehaviour
             caveDoorPosition.y -= 0.5f; // offset from door so it doesnt trigger eternally // watch out for other objects
             playerAnimation.transform.position = caveDoorPosition;
         }
+    }
+
+    public void ControlActive(bool isActive)
+    {
+        if (!IsOwner) return;
+        isControlActive = isActive;
+
     }
 }

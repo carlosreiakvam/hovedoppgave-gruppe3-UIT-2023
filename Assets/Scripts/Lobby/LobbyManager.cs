@@ -32,6 +32,21 @@ public class LobbyManager : MonoBehaviour
 
     public event EventHandler OnHandlePollUpdate;  // lets LobbyRoom know when lobby is created
     public event EventHandler OnLobbyLeft;
+    public static LobbyManager Singleton;
+
+    private void Awake()
+    {
+        if (Singleton != null && Singleton != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Singleton = this;
+            //DontDestroyOnLoad(gameObject); // destroyed for simplicity
+        }
+    }
+
 
 
     private void Start()
@@ -328,4 +343,9 @@ public class LobbyManager : MonoBehaviour
         return AuthenticationService.Instance.PlayerId;
     }
 
+    internal void PauseLobby()
+    {
+        isLobbyActive = false;
+        Debug.LogWarning("LOBBY NOT ACTIVE");
+    }
 }

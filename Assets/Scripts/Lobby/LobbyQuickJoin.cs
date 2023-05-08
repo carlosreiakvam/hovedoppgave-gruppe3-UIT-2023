@@ -11,12 +11,10 @@ public class LobbyQuickJoin : MonoBehaviour
     [SerializeField] GameObject goButtonGO;
     [SerializeField] GameObject backButtonGO;
     MenuManager menuManager;
-    LobbyManager lobbyManager;
 
     private void Start()
     {
         menuManager = GetComponentInParent<MenuManager>();
-        lobbyManager = GetComponentInParent<LobbyManager>();
     }
 
     private bool ValidateInput()
@@ -41,7 +39,7 @@ public class LobbyQuickJoin : MonoBehaviour
         goButton.onClick.AddListener(async () =>
         {
             if (!ValidateInput()) return;
-            bool isLobbyFound = await lobbyManager.QuickJoinLobby(playerNameInput.text);
+            bool isLobbyFound = await LobbyManager.Singleton.QuickJoinLobby(playerNameInput.text);
             if (isLobbyFound) menuManager.OpenPage(MenuEnums.LobbyRoom);
             else menuManager.OpenAlert("No open lobbies available!");
         });

@@ -652,10 +652,10 @@ MonoBehaviour:
   playerAnimation: {fileID: 405672945398536863}
   ownerNetworkAnimator: {fileID: 8739179420634378625}
   spawnPositionList:
-  - {x: 25, y: 27}
-  - {x: 25, y: 23}
-  - {x: 23, y: 25}
-  - {x: 27, y: 25}
+  - {x: 22.5, y: 24}
+  - {x: 24.5, y: 24}
+  - {x: 26.5, y: 24}
+  - {x: 28.5, y: 24}
   isAttackBtn: 0
 --- !u!114 &6921163870223798263
 MonoBehaviour:

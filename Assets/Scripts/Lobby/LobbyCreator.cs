@@ -42,7 +42,7 @@ public class LobbyCreator : MonoBehaviour
             else if (lobbyNameInput.text.Length > 15)
             { menuManager.OpenAlert("Enter a lobby name less than 15 characters"); }
             else
-            { await lobbyManager.CreateLobby(lobbyNameInput.text, isPrivate, playerNameInput.text); }
+            { await LobbyManager.Singleton.CreateLobby(lobbyNameInput.text, isPrivate, playerNameInput.text); }
 
         });
 

@@ -36,7 +36,6 @@ public class LobbyRoom : MonoBehaviour
     bool isGameReady = false;
     bool isGameInitiated = false;
 
-    private LobbyManager lobbyManager;
 
     Button readyButton;
     MenuManager menuManager;
@@ -62,9 +61,8 @@ public class LobbyRoom : MonoBehaviour
     private void ConnectWithManagers()
     {
         menuManager = GetComponentInParent<MenuManager>();
-        lobbyManager = GetComponentInParent<LobbyManager>();
-        lobbyManager.OnHandlePollUpdate += HandlePollUpdate;
-        lobbyManager.OnLobbyLeft += OnLobbyLeft;
+        LobbyManager.Singleton.OnHandlePollUpdate += HandlePollUpdate;
+        LobbyManager.Singleton.OnLobbyLeft += OnLobbyLeft;
     }
     private void GetToggles()
     {
@@ -89,7 +87,7 @@ public class LobbyRoom : MonoBehaviour
         readyButton.onClick.AddListener(() =>
         {
             isReady = !isReady;
-            lobbyManager.SetPlayerReady(isReady);
+            LobbyManager.Singleton.SetPlayerReady(isReady);
             readyButtonText.text = isReady ? "Not ready" : "Ready";
         });
     }
@@ -99,18 +97,18 @@ public class LobbyRoom : MonoBehaviour
         startGameButton = startGameButtonGO.GetComponent<Button>();
         startGameButton.interactable = false;
         startGameButtonGO.SetActive(false);
-        startGameButton.onClick.AddListener(() => { lobbyManager.QueGameStart(); });
+        startGameButton.onClick.AddListener(() => { LobbyManager.Singleton.QueGameStart(); });
     }
     private void HandleLeaveButton()
     {
         leaveButton = leaveButtonGO.GetComponent<Button>();
-        leaveButton.onClick.AddListener(() => { lobbyManager.RequestLeaveLobby(); });
+        leaveButton.onClick.AddListener(() => { LobbyManager.Singleton.RequestLeaveLobby(); });
     }
 
     private void SetLobbyText()
     {
-        lobbyNameText.text = lobbyManager.lobbyName;
-        lobbyCodeText.text = lobbyManager.lobbyCode;
+        lobbyNameText.text = LobbyManager.Singleton.lobbyName;
+        lobbyCodeText.text = LobbyManager.Singleton.lobbyCode;
     }
 
 
@@ -144,7 +142,7 @@ public class LobbyRoom : MonoBehaviour
             isReadyStates[i].isOn = (player.Data["IsReady"].Value == true.ToString());
 
             // Set thisPlayer based on this authorized instance
-            if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(lobbyManager.GetThisPlayerId()))
+            if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(LobbyManager.Singleton.GetThisPlayerId()))
             {
                 thisPlayerId = player.Data[LobbyEnums.PlayerId.ToString()].Value;
             }
@@ -179,8 +177,8 @@ public class LobbyRoom : MonoBehaviour
         {
             if (!isGameInitiated)
             {
+                LobbyManager.Singleton.PauseLobby();
                 playersSO.nPlayers = lobby.Players.Count;
-                LoadingScreenCanvas.SetActive(true);
                 isGameInitiated = true;
                 LoadNetwork(authenticatedIsHost);
                 NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);

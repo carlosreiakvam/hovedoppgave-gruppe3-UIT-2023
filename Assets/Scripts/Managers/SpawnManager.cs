@@ -119,7 +119,6 @@ public class SpawnManager : NetworkBehaviour
         // spawn cavedoors
         SpawnObject(SpawnEnums.CaveEntrance, outdoorCaveEntranceLocation);
         SpawnObject(SpawnEnums.CaveEntrance, caveCaveDoorPosition);
-        Debug.LogWarning("SPAWNED CAVE AT; " + caveCaveDoorPosition.x + ", " + caveCaveDoorPosition.y);
     }
 
     private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
