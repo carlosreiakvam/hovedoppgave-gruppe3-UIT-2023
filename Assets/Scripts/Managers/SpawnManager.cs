@@ -20,7 +20,8 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject hpPrefab;
     [SerializeField] private GameObject speedPrefab;
-    [SerializeField] private GameObject cavePrefab;
+    [SerializeField] private GameObject caveDoorForestPrefab;
+    [SerializeField] private GameObject caveDoorCavePrefab;
 
     public Tilemap tilemap;
     public const int maxTries = 100;
@@ -106,10 +107,10 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnCaveDoors()
     {
-        gameStatus.caveDoorInCave = new Vector2(93.5f, 10.6f); // making triple sure the position is correct
+        gameStatus.caveDoorInCave = new Vector2(96f, 4.4f);
         gameStatus.caveDoorForest = new Vector2(25f, 24f);//  This position is changed by the prefab script
-        SpawnObject(SpawnEnums.CaveEntrance, gameStatus.caveDoorForest); // Important that this is spawned first
-        SpawnObject(SpawnEnums.CaveEntrance, gameStatus.caveDoorInCave);
+        SpawnObject(SpawnEnums.CaveDoorForest, gameStatus.caveDoorForest);
+        SpawnObject(SpawnEnums.CaveDoorCave, gameStatus.caveDoorInCave);
     }
 
     private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
@@ -178,7 +179,8 @@ public class SpawnManager : NetworkBehaviour
             SpawnEnums.Ring => ringPrefab,
             SpawnEnums.HealthPowerUp => hpPrefab,
             SpawnEnums.SpeedPowerUp => speedPrefab,
-            SpawnEnums.CaveEntrance => cavePrefab,
+            SpawnEnums.CaveDoorCave => caveDoorCavePrefab,
+            SpawnEnums.CaveDoorForest => caveDoorForestPrefab,
             _ => null
         };
 

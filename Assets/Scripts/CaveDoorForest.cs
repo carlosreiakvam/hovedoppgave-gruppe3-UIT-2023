@@ -3,26 +3,17 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 
-public class CaveDoor : NetworkBehaviour
+public class CaveDoorForest : NetworkBehaviour
 {
     [SerializeField] GameStatusSO gameStatusSO;
     List<Vector2> spawnPositions;
     private NetworkVariable<float> networkPositionX = new NetworkVariable<float>();
     private NetworkVariable<float> networkPositionY = new NetworkVariable<float>();
-    bool isInForest = true;
-
-
-
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        isInForest = transform.position.x < 50f;
-        if (isInForest) InitForestCaveDoor();
-    }
 
-    private void InitForestCaveDoor()
-    {
         spawnPositions = new List<Vector2>
     {
         new Vector2(10, 9.6f),
@@ -48,7 +39,7 @@ public class CaveDoor : NetworkBehaviour
         }
         else
         {
-            // For non servers aka clients.
+            // For  clients.
             // They will get the same position from the network variables
             caveDoorForestPosition = new Vector2(networkPositionX.Value, networkPositionY.Value);
         }
@@ -57,9 +48,6 @@ public class CaveDoor : NetworkBehaviour
         gameStatusSO.caveDoorForest = caveDoorForestPosition;
         transform.position = caveDoorForestPosition;
     }
-
-
-
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,21 +61,9 @@ public class CaveDoor : NetworkBehaviour
         GameObject player = collision.transform.parent.gameObject;
         PlayerBehaviour playerBehaviour = player.GetComponent<PlayerBehaviour>();
 
-        Vector2 relocateToPosition;
-        if (isInForest)
-        {
-            relocateToPosition = gameStatusSO.caveDoorInCave;
-            relocateToPosition.y -= 2;
-            playerBehaviour.RelocatePlayer(relocateToPosition);
-        }
-        else
-        {
-            relocateToPosition = gameStatusSO.caveDoorForest;
-            relocateToPosition.y -= 2;
-            playerBehaviour.RelocatePlayer(relocateToPosition);
-
-        }
-
+        Vector2 relocateToPosition = gameStatusSO.caveDoorInCave;
+        relocateToPosition.y += 2;
+        playerBehaviour.RelocatePlayer(relocateToPosition);
 
     }
 
