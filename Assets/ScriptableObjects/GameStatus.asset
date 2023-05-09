@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: GameStatus
   m_EditorClassIdentifier: 
   gameIsOver: 0
-  isShortcutUsed: 1
   playerIdHasRing: -1
+  isAndroid: 0
+  isWindows: 1
+  caveEntrance: {x: 25, y: 22}
+  caveExit: {x: 93.5, y: 10.6}

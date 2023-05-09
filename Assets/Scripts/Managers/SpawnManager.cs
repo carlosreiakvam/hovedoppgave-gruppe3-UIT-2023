@@ -20,12 +20,12 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject hpPrefab;
     [SerializeField] private GameObject speedPrefab;
-    [SerializeField] private GameObject caveEntrancePrefab;
+    [SerializeField] private GameObject cavePrefab;
 
     public Tilemap tilemap;
     public const int maxTries = 100;
-    public const int nEnemiesOutside = 25;
-    public const int nEnemiesCave = 15;
+    public const int nEnemiesOutside = 5;
+    public const int nEnemiesCave = 5;
     public const int nHealthPowerupsOutdoor = 15;
     public const int nHealthPowerupsCave = 15;
     public const int nSpeedPowerupsOutdoor = 15;
@@ -106,19 +106,10 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnCaveDoors()
     {
-        // Get empty tile for cavedoor in forest
-        Vector2 outdoorCaveEntranceLocation = GetEmptyTile(searchRange: 1, environment: EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 20);
-        if (outdoorCaveEntranceLocation == null) { outdoorCaveEntranceLocation = new Vector3(10, 10); Debug.LogWarning("FAILED TO FIND RANDOM EMPTY SPOT FOR CAVEDOOR. REVERTING TO FIXED SPOT"); }
-
-        // Set the location of the cave entrances in the game status SO, so that the player knows where to respawn 
-        gameStatus.outdoorCaveEntrance = outdoorCaveEntranceLocation;
-        Vector3 caveCaveDoorPosition = new Vector3(96, 4, 0);
-        gameStatus.caveCaveEntrance = caveCaveDoorPosition;
-
-
-        // spawn cavedoors
-        SpawnObject(SpawnEnums.CaveEntrance, outdoorCaveEntranceLocation);
-        SpawnObject(SpawnEnums.CaveEntrance, caveCaveDoorPosition);
+        gameStatus.caveDoorInCave = new Vector2(93.5f, 10.6f); // making triple sure the position is correct
+        gameStatus.caveDoorForest = new Vector2(25f, 24f);//  This position is changed by the prefab script
+        SpawnObject(SpawnEnums.CaveEntrance, gameStatus.caveDoorForest); // Important that this is spawned first
+        SpawnObject(SpawnEnums.CaveEntrance, gameStatus.caveDoorInCave);
     }
 
     private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
@@ -187,7 +178,7 @@ public class SpawnManager : NetworkBehaviour
             SpawnEnums.Ring => ringPrefab,
             SpawnEnums.HealthPowerUp => hpPrefab,
             SpawnEnums.SpeedPowerUp => speedPrefab,
-            SpawnEnums.CaveEntrance => caveEntrancePrefab,
+            SpawnEnums.CaveEntrance => cavePrefab,
             _ => null
         };
 

@@ -18,12 +18,13 @@ public class LoadingManager : NetworkBehaviour
     private void ServerStart()
     {
         StartCoroutine(WaitForPlayersReady());
-        GameManager.Singleton.StartGameManager();
+        GameManager.Singleton.StartGameManagerServer();
     }
 
     public void Start()
     {
         if (IsServer) ServerStart();
+
 
         networkedClientsReady.OnValueChanged += OnClientsReady;
         networkedCountdownFinished.OnValueChanged += OnCountdownFinished;

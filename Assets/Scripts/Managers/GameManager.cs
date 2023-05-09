@@ -8,15 +8,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
 
+    [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] GameObject gameUI;
     [SerializeField] TextMeshProUGUI infoText;
 
     public static GameManager Singleton;
     public ulong networkedPlayerIdHasRing { get; set; }
     public NetworkVariable<bool> networkedGameWon = new NetworkVariable<bool>(false);
-
-    // SHOULD ONLY BE RUN BY SERVER
-
+    public NetworkVariable<string> networkedCaveEntrance = new NetworkVariable<string>();
 
     private void Awake()
     {
@@ -24,13 +23,24 @@ public class GameManager : NetworkBehaviour
         else Destroy(gameObject);
     }
 
-    public bool StartGameManager()
+    private void Start()
     {
         networkedGameWon.OnValueChanged += OnGameWonChangedClientRpc;
+        networkedCaveEntrance.OnValueChanged += OnCaveEntranceChanged;
+    }
 
+
+    public void StartGameManagerServer()
+    {
         Debug.LogWarning("GAMEMANAGER STARTED");
-        if (SpawnManager.Singleton.SpawnAll()) { Debug.LogWarning("SPAWNING SUCCESSFULL"); return true; }
-        else { Debug.LogError("SPAWNING FAILED"); return false; }
+
+        if (SpawnManager.Singleton.SpawnAll()) { Debug.LogWarning("SPAWNING SUCCESSFULL"); }
+        else { Debug.LogError("SPAWNING FAILED"); }
+    }
+
+    private void OnCaveEntranceChanged(string previousValue, string newValue)
+    {
+        Debug.LogWarning("Caveentrance is: " + newValue);
     }
 
     public void EndGameScene()
@@ -61,13 +71,22 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    public void SetCaveEntrance(string position)
+    {
+        Vector3 caveDoorPosition = JsonUtility.FromJson<Vector3>(position);
+        Debug.LogWarning("Got: " + caveDoorPosition.x + " " + caveDoorPosition.y);
+
+        networkedCaveEntrance.Value = position;
+
+    }
+
 
     [ClientRpc]
     private void OnGameWonChangedClientRpc(bool previousValue, bool newValue)
     {
         Debug.LogWarning("OngameWonChangedClientRpc");
         gameUI.SetActive(true);
-        //        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.Value.ToString();
+        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.ToString();
     }
 
     public void OnRingChangedOwner(ulong networkedPlayerIdHasRing)

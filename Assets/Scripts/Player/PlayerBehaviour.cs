@@ -222,28 +222,15 @@ public class PlayerBehaviour : NetworkBehaviour
         Debug.LogWarning("Resetting speed for player");
     }
 
-    internal void RelocatePlayer(bool relocateToCave)
+    internal void RelocatePlayer(Vector2 cavePosition)
     {
-        Vector3 caveDoorPosition;
-        if (relocateToCave)
-        {
-            caveDoorPosition = gamestatusSO.caveCaveEntrance;
-            caveDoorPosition.y += 1f; // offset from door so it doesnt trigger eternally
-
-            playerAnimation.transform.position = caveDoorPosition;
-        }
-        else
-        {
-            caveDoorPosition = gamestatusSO.outdoorCaveEntrance;
-            caveDoorPosition.y -= 0.5f; // offset from door so it doesnt trigger eternally // watch out for other objects
-            playerAnimation.transform.position = caveDoorPosition;
-        }
+        playerAnimation.transform.position = cavePosition;
+        // TODO: Turn player around and wait 0.5 seconds before moving?
     }
 
     public void ControlActive(bool isActive)
     {
         if (!IsOwner) return;
         isControlActive = isActive;
-
     }
 }
