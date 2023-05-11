@@ -43,6 +43,9 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool playerIsKnockedOut = false;
     private bool woodenSword = true;
 
+    private bool isRunningAndroid = false;
+    private bool isRunningWindows = false;
+
     private const string TOUCH_UI_TAG = "TouchUI";
     private PlayerHealth playerHealth;
     private void Initialize()
@@ -67,10 +70,24 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls;
 
-        if (gamestatusSO.isAndroid)
+        if (Application.platform == RuntimePlatform.Android)
         {
+            Debug.Log("Current platform is Android.");
+            isRunningAndroid = true;
             controller = gameObject.GetComponent<CharacterController>();
             playerInput = GetComponent<PlayerInput>();
+        }
+        else if (Application.platform == RuntimePlatform.WindowsEditor ||
+                 Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            Debug.Log("Current platform is Windows.");
+            isRunningWindows = true;
+            GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
+
+        }
+        else
+        {
+            Debug.Log("Current platform is not supported.");
         }
     }
 
@@ -115,10 +132,10 @@ public class PlayerBehaviour : NetworkBehaviour
 
         if (!chatInFocus)
         {
-            if (gamestatusSO.isAndroid)
+            if (isRunningAndroid)
                 HandleTouchInput();
 
-            if (gamestatusSO.isWindows)
+            if (isRunningWindows)
                 HandleMovement();
         }
     }
