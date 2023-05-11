@@ -8,6 +8,10 @@ public class LoadingManager : NetworkBehaviour
 {
 
     [SerializeField] GameStatusSO gameStatusSO;
+    [SerializeField] GameObject loadingScreenPanel;
+    [SerializeField] GameObject windowsPanel;
+    [SerializeField] GameObject androidPanel;
+    [SerializeField] TextMeshProUGUI countdownText;
     public NetworkVariable<bool> networkedClientsReady = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> networkedCountdownFinished = new NetworkVariable<bool>(false);
 
@@ -23,13 +27,25 @@ public class LoadingManager : NetworkBehaviour
         if (IsServer) ServerStart();
         networkedClientsReady.OnValueChanged += OnClientsReady;
         networkedCountdownFinished.OnValueChanged += OnCountdownFinished;
+        if (gameStatusSO.isWindows)
+        {
+            windowsPanel.SetActive(true);
+            androidPanel.SetActive(false);
+        }
+        else if (gameStatusSO.isAndroid)
+        {
+            androidPanel.SetActive(true);
+            windowsPanel.SetActive(false);
+        }
     }
 
     private void OnCountdownFinished(bool previousValue, bool newValue)
     {
-        Debug.LogWarning("ON COUNTDOWN FINISHED");
+        loadingScreenPanel.SetActive(false);
+        androidPanel.SetActive(false);
+        windowsPanel.SetActive(false);
+
         PlayerBehaviour playerBehaviour = PlayerBehaviour.LocalInstance;
-        if (playerBehaviour == null) { Debug.LogWarning("PLAYER BEHAVIOUR IS NULL"); return; }
         playerBehaviour.ControlActive(true);
     }
 
@@ -37,19 +53,17 @@ public class LoadingManager : NetworkBehaviour
     private void OnClientsReady(bool prev, bool newValue)
     {
         StartCoroutine(StartCountdown());
-
     }
 
 
     public IEnumerator WaitForPlayersReady()
     {
 
-        yield return new WaitForSeconds(3f); // Wait  to make sure all players have time to read the wizzard instructions 
+        yield return new WaitForSeconds(1f); // Wait  to make sure all players have time to read the instructions 
         while (NetworkManager.Singleton.ConnectedClientsList.Count != gameStatusSO.lobbyPlayers.Count)
         {
             yield return new WaitForSeconds(1f);
         }
-        Debug.LogWarning("ALL PLAYERS CONNECTED");
 
         networkedClientsReady.Value = true;
     }
@@ -63,7 +77,7 @@ public class LoadingManager : NetworkBehaviour
 
         while (remainingTime > 0f)
         {
-            //countdownText.text = Mathf.CeilToInt(remainingTime).ToString();
+            countdownText.text = Mathf.CeilToInt(remainingTime).ToString();
             yield return new WaitForSeconds(1f);
             remainingTime -= 1f;
         }
