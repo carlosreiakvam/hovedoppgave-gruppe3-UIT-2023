@@ -679,9 +679,9 @@ MonoBehaviour:
   ownerNetworkAnimator: {fileID: 8739179420634378625}
   spawnPositionList:
   - {x: 22, y: 22}
-  - {x: 25, y: 22}
-  - {x: 27, y: 22}
-  - {x: 29, y: 22}
+  - {x: 24, y: 22}
+  - {x: 26, y: 22}
+  - {x: 28, y: 22}
   isAttackBtn: 0
 --- !u!114 &6921163870223798263
 MonoBehaviour:
