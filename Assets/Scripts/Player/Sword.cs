@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     PlayerHealth playerHealth;
+    EnemyHealth enemyHealth;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (GetComponentInParent<Enemy>())
@@ -20,7 +21,17 @@ public class Sword : MonoBehaviour
         {
             if (collision.GetComponentInParent<Enemy>() && collision.GetType().Name == "CapsuleCollider2D")
             {
-                print("Enemy hit! ");
+                print("Enemy hit!");
+                enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+                if (GetComponentInParent<PlayerBehaviour>().GetSword())
+                {
+                    enemyHealth.SwordCollision(5);
+                }
+                else
+                {
+                    enemyHealth.SwordCollision(25);
+                }
+                //enemyHealth.SwordCollision();
             }
         }
     }

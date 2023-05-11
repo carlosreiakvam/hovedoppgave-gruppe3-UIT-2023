@@ -207,6 +207,11 @@ public class PlayerBehaviour : NetworkBehaviour
         woodenSword = false;
     }
 
+    public bool GetSword()
+    {
+        return woodenSword;
+    }
+
     internal void IncreaseSpeed()
     {
         Debug.LogWarning("Increasing speed for player");
