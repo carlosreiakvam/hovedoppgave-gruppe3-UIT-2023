@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerBehaviour : NetworkBehaviour
 {
     public static PlayerBehaviour LocalInstance { get; private set; }
+
     /*TouchControls*/
     private CharacterController controller;
     private PlayerInput playerInput;
@@ -78,14 +79,17 @@ public class PlayerBehaviour : NetworkBehaviour
         chatInFocus = e.IsChatActive;
     }
 
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+
+        transform.position = spawnPositionList[(int)OwnerClientId];
         if (IsLocalPlayer) LocalInstance = this;
-        transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
-        Debug.LogWarning("transformed position to " + spawnPositionList[(int)OwnerClientId]);
-        Initialize(); //Running this is start might cause variables to not be initialized
+        Initialize();
     }
+
+
 
     public override void OnNetworkDespawn()
     {
@@ -221,7 +225,6 @@ public class PlayerBehaviour : NetworkBehaviour
     internal void RelocatePlayer(Vector2 cavePosition)
     {
         playerAnimation.transform.position = cavePosition;
-        // TODO: Turn player around and wait 0.5 seconds before moving?
     }
 
     public void ControlActive(bool isActive)
@@ -229,4 +232,5 @@ public class PlayerBehaviour : NetworkBehaviour
         if (!IsOwner) return;
         isControlActive = isActive;
     }
+
 }

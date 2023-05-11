@@ -203,10 +203,14 @@ public class SpawnManager : NetworkBehaviour
 
     public void SpawnPlayers()
     {
+
+        int playerNumber = 0;
         foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
         {
             Transform playerTransform = Instantiate(playerPrefab);
+            PlayerBehaviour playerBehaviour = playerTransform.GetComponent<PlayerBehaviour>();
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            playerNumber++;
         }
     }
 
