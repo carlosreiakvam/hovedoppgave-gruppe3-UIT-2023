@@ -12,23 +12,23 @@ public class PlayerWizardCollision : NetworkBehaviour
         if (!LocalPlayerManager.Singleton.localPlayer.playerHasRing) { Debug.Log("Player does not have ring"); return; }  // Return if player does not have ring
 
         string localPlayerName = LocalPlayerManager.Singleton.localPlayer.name;
+        ulong localPlayerId = LocalPlayerManager.Singleton.localPlayer.id;
 
-        OnPlayerWonGameServerRpc(localPlayerName);
+        OnPlayerWonGameServerRpc(localPlayerName, localPlayerId);
     }
 
 
     [ServerRpc(RequireOwnership = false)]
-    public void OnPlayerWonGameServerRpc(string name)
+    public void OnPlayerWonGameServerRpc(string name, ulong id)
     {
-        Debug.LogWarning("PlayerWonGameServerRpc");
-        OnPlayerWonGameClientRpc(name);
+        OnPlayerWonGameClientRpc(name, id);
     }
 
     [ClientRpc]
-    public void OnPlayerWonGameClientRpc(string name)
+    public void OnPlayerWonGameClientRpc(string name, ulong networkObjectId)
     {
-        Debug.LogWarning("OnPlayerWonGameClientRpc");
-        GameManager.Singleton.OnGameWon(name);
+        SpawnManager.Singleton.DespawnAllPlayers();
+        GameManager.Singleton.VisualizeOnGameWon(name);
     }
 
 }

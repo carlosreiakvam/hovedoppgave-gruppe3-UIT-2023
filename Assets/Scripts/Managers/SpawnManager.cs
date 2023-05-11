@@ -228,6 +228,14 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
+    public void DespawnAllPlayers()
+    {
+        foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            DisconnectPlayerServerRpc(clientId);
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     internal void DespawnObjectServerRpc(ulong networkObjectId)
     {

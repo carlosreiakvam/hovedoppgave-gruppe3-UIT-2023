@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
 
+    [SerializeField] GameObject inGameMenu;
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] GameObject gameUI;
     [SerializeField] TextMeshProUGUI infoText;
@@ -73,9 +74,10 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    public void OnGameWon(string playerName)
+    public void VisualizeOnGameWon(string playerName)
     {
         infoText.text = playerName + " won the game!";
+        inGameMenu.SetActive(true);
     }
 
 }

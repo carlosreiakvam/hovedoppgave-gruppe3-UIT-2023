@@ -35,7 +35,7 @@ public class WizzardCollider : MonoBehaviour
     [ClientRpc]
     private void OnGameWonChangedClientRpc(ulong playerNetworkObjectId)
     {
-        GameManager.Singleton.OnGameWon(playerNetworkObjectId);
+        GameManager.Singleton.VisualizeOnGameWon(playerNetworkObjectId);
     }
 
 */}

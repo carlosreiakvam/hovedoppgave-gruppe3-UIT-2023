@@ -15,6 +15,10 @@ public class LoadingManager : NetworkBehaviour
     public NetworkVariable<bool> networkedClientsReady = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> networkedCountdownFinished = new NetworkVariable<bool>(false);
 
+    private void Awake()
+    {
+        loadingScreenPanel.SetActive(true);
+    }
 
     private void ServerStart()
     {
