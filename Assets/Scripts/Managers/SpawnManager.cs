@@ -22,13 +22,14 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject speedPrefab;
     [SerializeField] private GameObject caveDoorForestPrefab;
     [SerializeField] private GameObject caveDoorCavePrefab;
+    [SerializeField] private GameObject wizardPrefab;
 
     public Tilemap tilemap;
     public const int maxTries = 100;
-    public const int nEnemiesOutside = 5;
-    public const int nEnemiesCave = 5;
+    public const int nEnemiesOutside = 15;
+    public const int nEnemiesCave = 15;
     public const int nHealthPowerupsOutdoor = 15;
-    public const int nHealthPowerupsCave = 15;
+    public const int nHealthPowerupsCave = 25;
     public const int nSpeedPowerupsOutdoor = 15;
     public const int nSpeedPowerupsCave = 15;
 
@@ -82,14 +83,21 @@ public class SpawnManager : NetworkBehaviour
 
     public bool SpawnAll()
     {
-        Debug.LogWarning("SPAWNING PREFABS");
         try
         {
             SpawnPlayers();
 
-            SpawnPrefabs(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 1, searchRange: 1);
+            // SPAWN TESTRINGS
+            SpawnObject(SpawnEnums.Ring, new Vector2(23, 20));
+            SpawnObject(SpawnEnums.Ring, new Vector2(25, 20));
+
+            // SPAWN WIZARD
+            SpawnObject(SpawnEnums.Wizard, new Vector2(25, 26));
 
             SpawnCaveDoors();
+
+            SpawnPrefabs(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 1, searchRange: 1);
+
 
             SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: nEnemiesOutside, searchRange: 1, excludedMidAreaSideLength: 10);
             SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: nEnemiesCave, searchRange: 1);
@@ -99,6 +107,7 @@ public class SpawnManager : NetworkBehaviour
 
             SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nSpeedPowerupsOutdoor, searchRange: 1);
             SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: nSpeedPowerupsCave, searchRange: 1);
+
 
             return true;
         }
@@ -181,6 +190,7 @@ public class SpawnManager : NetworkBehaviour
             SpawnEnums.SpeedPowerUp => speedPrefab,
             SpawnEnums.CaveDoorCave => caveDoorCavePrefab,
             SpawnEnums.CaveDoorForest => caveDoorForestPrefab,
+            SpawnEnums.Wizard => wizardPrefab,
             _ => null
         };
 
@@ -195,7 +205,6 @@ public class SpawnManager : NetworkBehaviour
     {
         foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Debug.LogWarning("Spawning player with id: " + clientId);
             Transform playerTransform = Instantiate(playerPrefab);
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
         }

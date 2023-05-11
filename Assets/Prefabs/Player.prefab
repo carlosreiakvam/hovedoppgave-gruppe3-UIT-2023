@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 3175092351913287390}
   - component: {fileID: 6841403612468988476}
   - component: {fileID: 2368901357943508331}
+  - component: {fileID: 2811118599056119880}
+  - component: {fileID: 7235294555253934212}
   m_Layer: 0
   m_Name: PlayerAnimation
   m_TagString: Player
@@ -350,6 +352,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2811118599056119880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405672945398536863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77a3c0a3b1097f4f9293a8d59dc377b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7235294555253934212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405672945398536863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908c34704fe6b614d8a2368035051058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &669562833166217992
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,10 +678,10 @@ MonoBehaviour:
   playerAnimation: {fileID: 405672945398536863}
   ownerNetworkAnimator: {fileID: 8739179420634378625}
   spawnPositionList:
-  - {x: 22.5, y: 24}
-  - {x: 24.5, y: 24}
-  - {x: 26.5, y: 24}
-  - {x: 28.5, y: 24}
+  - {x: 22, y: 24}
+  - {x: 25, y: 24}
+  - {x: 27, y: 24}
+  - {x: 29, y: 24}
   isAttackBtn: 0
 --- !u!114 &6921163870223798263
 MonoBehaviour:

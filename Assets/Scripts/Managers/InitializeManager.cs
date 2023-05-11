@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InitPlatform : MonoBehaviour
+public class InitializeManager : MonoBehaviour
 {
     [SerializeField] GameStatusSO gamestatusSO;
-    void Start()
+    void Awake()
+    {
+        gamestatusSO.Reset(); // make sure this is run before anything else
+        InitializePlatform();
+    }
+
+
+    private void InitializePlatform()
     {
         if (Application.platform == RuntimePlatform.Android)
         {
@@ -22,6 +29,8 @@ public class InitPlatform : MonoBehaviour
         {
             Debug.Log("Current platform is not supported.");
         }
+
+
     }
 
 }

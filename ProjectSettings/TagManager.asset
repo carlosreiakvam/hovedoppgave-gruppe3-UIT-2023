@@ -13,6 +13,7 @@ TagManager:
   - CountdownText
   - HealthPowerUp
   - StaticColliders
+  - Wizard
   layers:
   - Default
   - TransparentFX

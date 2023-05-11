@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1279,13 +1279,13 @@ TextureImporter:
       Wizzard_14: -965028808
       Wizzard_38: 1034249791
       Wizzard_52: -1609111201
-      Wizzard_3: 1862925783
-      Wizzard_24: -1041091679
-      Wizzard_31: 96063775
       Wizzard_27: -998423066
+      Wizzard_3: 1862925783
       Wizzard_51: 455160941
-      Wizzard_2: -1231283549
       Wizzard_42: -2137528085
+      Wizzard_31: 96063775
+      Wizzard_2: -1231283549
+      Wizzard_24: -1041091679
       Wizzard_34: -1268968345
       Wizzard_23: 2062784153
       Wizzard_1: 1516235642

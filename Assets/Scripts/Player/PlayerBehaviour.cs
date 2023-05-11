@@ -71,11 +71,6 @@ public class PlayerBehaviour : NetworkBehaviour
             controller = gameObject.GetComponent<CharacterController>();
             playerInput = GetComponent<PlayerInput>();
         }
-        else if (gamestatusSO.isWindows)
-        {
-            try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
-            catch { Debug.LogWarning("TRYING TO DEACTIVATE TOUCH_UI BUT CANNOT FIND IT"); }
-        }
     }
 
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
@@ -88,6 +83,7 @@ public class PlayerBehaviour : NetworkBehaviour
         base.OnNetworkSpawn();
         if (IsLocalPlayer) LocalInstance = this;
         transform.position = spawnPositionList[(int)OwnerClientId]; //OwnerClientId is not sequential, but can be handled in the Lobby (Multiplayer tutorial)
+        Debug.LogWarning("transformed position to " + spawnPositionList[(int)OwnerClientId]);
         Initialize(); //Running this is start might cause variables to not be initialized
     }
 

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Authentication;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,8 +16,6 @@ public class GameManager : NetworkBehaviour
 
     public static GameManager Singleton;
     public ulong networkedPlayerIdHasRing { get; set; }
-    public NetworkVariable<bool> networkedGameWon = new NetworkVariable<bool>(false);
-    public NetworkVariable<string> networkedCaveEntrance = new NetworkVariable<string>();
 
     private void Awake()
     {
@@ -25,9 +25,9 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        networkedGameWon.OnValueChanged += OnGameWonChangedClientRpc;
-        networkedCaveEntrance.OnValueChanged += OnCaveEntranceChanged;
+        LocalPlayerManager.Singleton.RegisterPlayerInScriptableObject();
     }
+
 
 
     public void StartGameManagerServer()
@@ -38,10 +38,6 @@ public class GameManager : NetworkBehaviour
         else { Debug.LogError("SPAWNING FAILED"); }
     }
 
-    private void OnCaveEntranceChanged(string previousValue, string newValue)
-    {
-        Debug.LogWarning("Caveentrance is: " + newValue);
-    }
 
     public void EndGameScene()
     {
@@ -57,7 +53,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    // Might be redundant
+    // Destroy objects tagged with "DontDestroy" when going back to the menu scene
     private void DestroyObjectsTaggedWithDontDestroy()
     {
         GameObject[] objs = GameObject.FindObjectsOfType<GameObject>();
@@ -71,36 +67,15 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void SetCaveEntrance(string position)
+    public void OnPlayerPickedUpRing(string name)
     {
-        Vector3 caveDoorPosition = JsonUtility.FromJson<Vector3>(position);
-        Debug.LogWarning("Got: " + caveDoorPosition.x + " " + caveDoorPosition.y);
-
-        networkedCaveEntrance.Value = position;
-
+        infoText.text = name + " collected a ring!";
     }
 
 
-    [ClientRpc]
-    private void OnGameWonChangedClientRpc(bool previousValue, bool newValue)
+    public void OnGameWon(string playerName)
     {
-        Debug.LogWarning("OngameWonChangedClientRpc");
-        gameUI.SetActive(true);
-        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.ToString();
-    }
-
-    public void OnRingChangedOwner(ulong networkedPlayerIdHasRing)
-    {
-        this.networkedPlayerIdHasRing = networkedPlayerIdHasRing;
-        gameUI.SetActive(true);
-        infoText.text = "A new player has collected the ring!";
-    }
-
-    public void OnGameWon(ulong networkedPlayerIdHasRing)
-    {
-        Debug.LogWarning("OnGameWon");
-        gameUI.SetActive(true);
-        infoText.text = "GAME WON BY PLAYER with id: " + networkedPlayerIdHasRing.ToString();
+        infoText.text = playerName + " won the game!";
     }
 
 }

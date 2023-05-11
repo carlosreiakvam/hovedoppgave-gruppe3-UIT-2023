@@ -3,10 +3,12 @@ using QFSW.QC;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyEventArgs : EventArgs
 {
@@ -14,7 +16,7 @@ public class LobbyEventArgs : EventArgs
 }
 
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : NetworkBehaviour
 {
     MenuManager menuManager;
     [SerializeField] GameObject relayManagerGO;
@@ -23,7 +25,10 @@ public class LobbyManager : MonoBehaviour
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
     private int maxPlayers = 4;
+    private Lobby lobby;
 
+    [SerializeField] GameObject transitionHelperPrefab;
+    [SerializeField] GameStatusSO gameStatusSO;
     [HideInInspector] public string lobbyName;
     [HideInInspector] public string lobbyCode;
     [HideInInspector] public string lobbyId;
@@ -71,7 +76,6 @@ public class LobbyManager : MonoBehaviour
 
     private async void HandlePollUpdate()
     {
-        Lobby lobby;
         float LobbyPollTimerMax = 1.1f; // rate limit of one request per 1.1 second
 
         lobbyUpdateTimer -= Time.deltaTime;
@@ -127,9 +131,9 @@ public class LobbyManager : MonoBehaviour
 
     public async Task CreateLobby(string lobbyName, bool isPrivate, string playerName)
     {
-        Lobby lobby;
         try
         {
+
             await relayManager.Authorize();
             this.lobbyName = lobbyName;
             CreateLobbyOptions options = new CreateLobbyOptions
@@ -211,11 +215,9 @@ public class LobbyManager : MonoBehaviour
 
     public async Task<bool> QuickJoinLobby(string playerName)
     {
-        Lobby lobby;
         try
         {
             // Attempt to get lobby
-            //playerName = GetSemiUniqueName(playerName);
             await relayManager.Authorize();
 
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions { Player = GetNewPlayer(playerName) };
@@ -343,9 +345,22 @@ public class LobbyManager : MonoBehaviour
         return AuthenticationService.Instance.PlayerId;
     }
 
-    internal void PauseLobby()
+    internal void StopLobbyPolling()
     {
         isLobbyActive = false;
-        Debug.LogWarning("LOBBY NOT ACTIVE");
+        Debug.LogWarning("LOBBY SET TO INACTIVE");
+    }
+
+    public void SpawnTransitionHelper()
+    {
+        // only run by host
+        GameObject instance = Instantiate(transitionHelperPrefab);
+        NetworkObject networkObject = instance.GetComponent<NetworkObject>();
+        networkObject.Spawn();
+    }
+
+    internal void RegisterLobbyToGameStatusSO()
+    {
+        gameStatusSO.lobbyPlayers = lobby.Players;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WizzardCollider : MonoBehaviour
 {
-    GameManager gameManager;
+/*    GameManager gameManager;
     TextMeshPro wonText;
     GameObject gameUIGO;
 
@@ -27,7 +27,7 @@ public class WizzardCollider : MonoBehaviour
     }
 
     [ServerRpc]
-    public void OnGameWonServerRpc(ulong playerNetworkObjectId)
+    public void OnGameWonServerRpc(string playerNetworkObjectId)
     {
         OnGameWonChangedClientRpc(playerNetworkObjectId);
     }
@@ -38,4 +38,4 @@ public class WizzardCollider : MonoBehaviour
         GameManager.Singleton.OnGameWon(playerNetworkObjectId);
     }
 
-}
+*/}
