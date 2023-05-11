@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Remove
 public class RandomVectorGenerator : MonoBehaviour
 {
     private System.Random rnd = new System.Random();

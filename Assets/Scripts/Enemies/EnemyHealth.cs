@@ -38,7 +38,11 @@ public class EnemyHealth : NetworkBehaviour
         if (hitPoints <= 0)
         {
             //VizualizeDeathServerRpc();
-            NetworkBehaviour.Destroy(gameObject);
+            //if (IsServer) NetworkBehaviour.Destroy(gameObject);
+
+            NetworkObject networkObject = GetComponent<NetworkObject>();
+            ulong networkId = networkObject.NetworkObjectId;
+            SpawnManager.Singleton.DespawnObjectServerRpc(networkId);
         }
     }
 
