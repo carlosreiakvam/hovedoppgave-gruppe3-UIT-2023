@@ -24,7 +24,9 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject caveDoorCavePrefab;
     [SerializeField] private GameObject wizardPrefab;
 
-    public Tilemap tilemap;
+    public Tilemap forestTilemap;
+    public Tilemap caveTilemap;
+
     public const int maxTries = 100;
     public const int nEnemiesOutside = 15;
     public const int nEnemiesCave = 15;
@@ -135,8 +137,17 @@ public class SpawnManager : NetworkBehaviour
     private Vector2 GetEmptyTile(int searchRange, EnvironmentEnums environment, int excludedMidAreaSideLength = -1)
     {
         Dictionary<SpawnEnums, int> boundaries;
-        if (environment == EnvironmentEnums.Outdoor) boundaries = mapBoundsOutdoor;
-        else boundaries = mapBoundsCave;
+        Tilemap tilemap;
+        if (environment == EnvironmentEnums.Outdoor)
+        {
+            boundaries = mapBoundsOutdoor;
+            tilemap = forestTilemap;
+        }
+        else
+        {
+            boundaries = mapBoundsCave;
+            tilemap = caveTilemap;
+        }
 
         Vector2 emptyTile = Vector2.zero;
         for (int i = 0; i < maxTries; i++)
@@ -149,7 +160,10 @@ public class SpawnManager : NetworkBehaviour
             {
                 // 'continue' if empty tile is in middle area
                 Dictionary<SpawnEnums, int> midArea = GetMidAreaFromOutdoor(excludedMidAreaSideLength);
-                if ((randomPosition.x >= midArea[SpawnEnums.X_MIN] && randomPosition.x <= midArea[SpawnEnums.X_MAX]) && (randomPosition.y >= midArea[SpawnEnums.Y_MIN] && randomPosition.y <= midArea[SpawnEnums.Y_MAX]))
+                if (
+                    (randomPosition.x >= midArea[SpawnEnums.X_MIN] && randomPosition.x <= midArea[SpawnEnums.X_MAX])
+                    && (randomPosition.y >= midArea[SpawnEnums.Y_MIN] && randomPosition.y <= midArea[SpawnEnums.Y_MAX])
+                    )
                 { continue; }
             }
 
