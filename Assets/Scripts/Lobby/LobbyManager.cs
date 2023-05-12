@@ -348,7 +348,6 @@ public class LobbyManager : NetworkBehaviour
     internal void StopLobbyPolling()
     {
         isLobbyActive = false;
-        Debug.LogWarning("LOBBY SET TO INACTIVE");
     }
 
     public void SpawnTransitionHelper()

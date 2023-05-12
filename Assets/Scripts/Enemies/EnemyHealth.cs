@@ -26,24 +26,23 @@ public class EnemyHealth : NetworkBehaviour
 
     public void SwordCollision(float damage)
     {
-        //if (!IsOwner) return;
         ApplyDamage(damage);
-        VisualizeHealthChangeServerRpc(hitPoints, startingHP);
     }
 
     private void ApplyDamage(float damage)
     {
         hitPoints -= damage;
         print("applying damage to: " + gameObject.name);
-        if (hitPoints <= 0)
-        {
-            //VizualizeDeathServerRpc();
-            //if (IsServer) NetworkBehaviour.Destroy(gameObject);
+        VisualizeHealthChangeServerRpc(hitPoints, startingHP);
 
-            NetworkObject networkObject = GetComponent<NetworkObject>();
-            ulong networkId = networkObject.NetworkObjectId;
-            SpawnManager.Singleton.DespawnObjectServerRpc(networkId);
-        }
+        if (hitPoints <= 0) Despawn();
+    }
+    private void Despawn()
+    {
+        if (IsServer) NetworkBehaviour.Destroy(gameObject);
+
+        ulong networkId = GetComponent<NetworkObject>().NetworkObjectId;
+        SpawnManager.Singleton.RemoveFromSpawnedList(networkId);
     }
 
 

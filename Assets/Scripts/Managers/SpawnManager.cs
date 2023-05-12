@@ -236,6 +236,7 @@ public class SpawnManager : NetworkBehaviour
         }
     }
 
+    // Might remove this. Better to use Destroy(gameObject)?
     [ServerRpc(RequireOwnership = false)]
     internal void DespawnObjectServerRpc(ulong networkObjectId)
     {
@@ -272,5 +273,11 @@ public class SpawnManager : NetworkBehaviour
         {
             Debug.Log($"Failed to disconnect client: {e}");
         }
+    }
+
+    // Call this method when despawning with Destroy(gameObject) on gameobject
+    internal void RemoveFromSpawnedList(ulong networkId)
+    {
+        spawnedObjects.Remove(networkId);
     }
 }
