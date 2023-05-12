@@ -80,5 +80,15 @@ public class GameManager : NetworkBehaviour
         inGameMenu.SetActive(true);
     }
 
+    public void DeactivateAllPlayers()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject player in players)
+        {
+            player.SetActive(false);
+        }
+    }
+
 }
 
