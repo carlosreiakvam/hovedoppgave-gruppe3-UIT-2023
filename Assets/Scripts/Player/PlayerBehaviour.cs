@@ -82,9 +82,11 @@ public class PlayerBehaviour : NetworkBehaviour
         {
             Debug.Log("Current platform is Windows.");
             isRunningWindows = true;
-            GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
 
+            try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
+            catch (Exception e) { Debug.Log("TOUCH_UI_TAG not found because it was already inactive"); }
         }
+
         else
         {
             Debug.Log("Current platform is not supported.");
