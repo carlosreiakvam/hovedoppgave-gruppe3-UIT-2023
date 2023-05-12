@@ -10,7 +10,8 @@ public class MenuStart : MonoBehaviour
 {
 
     [SerializeField] GameStatusSO gamestatus;
-    [SerializeField] GameObject beginButtonGO;
+    [SerializeField] Button beginButton;
+    [SerializeField] Button exitButton;
     [SerializeField] GameObject lobbyStartMenu;
 
 
@@ -19,11 +20,16 @@ public class MenuStart : MonoBehaviour
         MenuManager menuManager = GetComponentInParent<MenuManager>();
         LobbyManager lobbyManager = GetComponentInParent<LobbyManager>();
 
-        Button beginButton = beginButtonGO.GetComponent<Button>();
         beginButton.onClick.AddListener(() =>
         {
             menuManager.OpenPage(MenuEnums.LobbyMenu);
         });
+
+        exitButton.onClick.AddListener(() =>
+        {
+            Application.Quit();
+        });
+
 
 
     }
