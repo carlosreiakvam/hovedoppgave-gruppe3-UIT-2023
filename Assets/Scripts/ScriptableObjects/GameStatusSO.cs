@@ -27,7 +27,7 @@ public class GameStatusSO : ScriptableObject
     public Vector2 caveDoorForest = new Vector2(25, 23);
 
     [HideInInspector]
-    public Vector2 caveDoorInCave = new Vector2(93.5f, 10.6f);
+    public Vector2 caveDoorInCave = new Vector2(96f, 4.4f);
 
     public void Reset()
     {
@@ -38,7 +38,7 @@ public class GameStatusSO : ScriptableObject
         isAndroid = false;
         isWindows = false;
         caveDoorForest = new Vector2(25, 23);
-        caveDoorInCave = new Vector2(93.5f, 10.6f);
+        //caveDoorInCave = new Vector2(96f, 4.4f);
     }
 }
 

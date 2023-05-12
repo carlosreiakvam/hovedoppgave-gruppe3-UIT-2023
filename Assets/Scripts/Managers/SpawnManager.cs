@@ -118,8 +118,6 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnCaveDoors()
     {
-        gameStatus.caveDoorInCave = new Vector2(96f, 4.4f);
-        gameStatus.caveDoorForest = new Vector2(25f, 24f);//  This position is changed by the prefab script
         SpawnObject(SpawnEnums.CaveDoorForest, gameStatus.caveDoorForest);
         SpawnObject(SpawnEnums.CaveDoorCave, gameStatus.caveDoorInCave);
     }

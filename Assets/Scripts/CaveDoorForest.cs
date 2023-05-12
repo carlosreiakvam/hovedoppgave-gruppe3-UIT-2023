@@ -39,8 +39,7 @@ public class CaveDoorForest : NetworkBehaviour
         }
         else
         {
-            // For  clients.
-            // They will get the same position from the network variables
+            //   clients will get  position from the network variables
             caveDoorForestPosition = new Vector2(networkPositionX.Value, networkPositionY.Value);
         }
 
