@@ -9,8 +9,6 @@ public class LoadingManager : NetworkBehaviour
 
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] GameObject loadingScreenPanel;
-    [SerializeField] GameObject windowsPanel;
-    [SerializeField] GameObject androidPanel;
     [SerializeField] TextMeshProUGUI countdownText;
     public NetworkVariable<bool> networkedClientsReady = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> networkedCountdownFinished = new NetworkVariable<bool>(false);
@@ -31,24 +29,11 @@ public class LoadingManager : NetworkBehaviour
         if (IsServer) ServerStart();
         networkedClientsReady.OnValueChanged += OnClientsReady;
         networkedCountdownFinished.OnValueChanged += OnCountdownFinished;
-        if (gameStatusSO.isWindows)
-        {
-            windowsPanel.SetActive(true);
-            androidPanel.SetActive(false);
-        }
-        else if (gameStatusSO.isAndroid)
-        {
-            androidPanel.SetActive(true);
-            windowsPanel.SetActive(false);
-        }
     }
 
     private void OnCountdownFinished(bool previousValue, bool newValue)
     {
         loadingScreenPanel.SetActive(false);
-        androidPanel.SetActive(false);
-        windowsPanel.SetActive(false);
-
         PlayerBehaviour playerBehaviour = PlayerBehaviour.LocalInstance;
         playerBehaviour.ControlActive(true);
     }
