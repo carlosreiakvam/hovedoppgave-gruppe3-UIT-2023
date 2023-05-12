@@ -84,7 +84,7 @@ public class PlayerBehaviour : NetworkBehaviour
             isRunningWindows = true;
 
             try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
-            catch (Exception e) { Debug.Log("TOUCH_UI_TAG not found because it was already inactive"); }
+            catch { Debug.Log("TOUCH_UI_TAG not found because it was already inactive"); }
         }
 
         else
