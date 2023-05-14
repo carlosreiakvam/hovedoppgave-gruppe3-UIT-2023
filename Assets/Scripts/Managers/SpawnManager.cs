@@ -14,6 +14,7 @@ public class SpawnManager : NetworkBehaviour
 
     [SerializeField] private GameStatusSO gameStatus;
 
+    [SerializeField] private GameObject torchPrefab;
     [SerializeField] private GameObject ringPrefab;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject hpPrefab;
@@ -89,22 +90,28 @@ public class SpawnManager : NetworkBehaviour
 
             // SPAWN TESTRINGS
             SpawnObject(SpawnEnums.Ring, new Vector2(23, 20), EnvironmentEnums.Outdoor);
-            SpawnObject(SpawnEnums.Ring, new Vector2(25, 20), EnvironmentEnums.Outdoor);
 
             // SPAWN WIZARD
             SpawnObject(SpawnEnums.Wizard, new Vector2(25, 26), EnvironmentEnums.Outdoor);
 
+            // SPAWN CAVE DOORS
             SpawnCaveDoors();
 
-            SpawnPrefabs(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 1, searchRange: 1);
+            // SPAWN RINGS
+            SpawnPrefabs(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 4, searchRange: 1);
 
+            // SPAWN TORCHES
+            SpawnPrefabs(SpawnEnums.TorchPowerUp, environment: EnvironmentEnums.Cave, nInstances: 10, searchRange: 1);
 
+            // SPAWN ENEMIES
             SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: nEnemiesOutside, searchRange: 1, excludedMidAreaSideLength: 10);
             SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: nEnemiesCave, searchRange: 1);
 
+            // SPAWN HEALTH POWERUPS
             SpawnPrefabs(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nHealthPowerupsOutdoor, searchRange: 1);
             SpawnPrefabs(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Cave, nInstances: nHealthPowerupsCave, searchRange: 1);
 
+            // SPAWN SPEED POWERUPS
             SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nSpeedPowerupsOutdoor, searchRange: 1);
             SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: nSpeedPowerupsCave, searchRange: 1);
 
@@ -201,6 +208,7 @@ public class SpawnManager : NetworkBehaviour
             SpawnEnums.CaveDoorCave => caveDoorCavePrefab,
             SpawnEnums.CaveDoorForest => caveDoorForestPrefab,
             SpawnEnums.Wizard => wizardPrefab,
+            SpawnEnums.TorchPowerUp => torchPrefab,
             _ => null
         };
 

@@ -6,6 +6,7 @@
     SpeedPowerUp,
     CaveDoorForest,
     CaveDoorCave,
+    TorchPowerUp,
     Wizard,
     X_MIN,
     X_MAX,

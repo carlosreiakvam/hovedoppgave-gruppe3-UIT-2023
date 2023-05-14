@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -258,6 +259,22 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         if (!IsOwner) return;
         isControlActive = isActive;
+    }
+
+
+    internal void ActivateTorchPowerUp()
+    {
+        StartCoroutine(FireUpNewTorch());
+    }
+
+    internal IEnumerator FireUpNewTorch()
+    {
+        Light2D playerLight = GetComponentInChildren<Light2D>();
+        playerLight.pointLightOuterRadius = 10;
+
+        yield return new WaitForSeconds(10f);
+
+        playerLight.pointLightOuterRadius = 5;
     }
 
 }
