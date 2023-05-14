@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerBehaviour : NetworkBehaviour
 {
@@ -103,6 +104,8 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        Light2D playerLight = GetComponentInChildren<Light2D>();
+        playerLight.enabled = false;
         transform.position = spawnPositionList[(int)OwnerClientId];
         if (IsLocalPlayer) LocalInstance = this;
         Initialize();

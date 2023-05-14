@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CaveDoorForest : NetworkBehaviour
 {
@@ -59,10 +60,12 @@ public class CaveDoorForest : NetworkBehaviour
     {
         GameObject player = collision.transform.parent.gameObject;
         PlayerBehaviour playerBehaviour = player.GetComponent<PlayerBehaviour>();
+        Light2D light2D = collision.transform.GetComponentInChildren<Light2D>();
 
         Vector2 relocateToPosition = gameStatusSO.caveDoorInCave;
         relocateToPosition.y += 2;
         playerBehaviour.RelocatePlayer(relocateToPosition);
+        light2D.enabled = true;
 
     }
 

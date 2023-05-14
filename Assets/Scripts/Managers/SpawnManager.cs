@@ -1,17 +1,15 @@
-using QFSW.QC;
 using System;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
-using Mono.CSharp;
+using UnityEngine.UI;
 
 public class SpawnManager : NetworkBehaviour
 {
+    [SerializeField] Material caveMaterial;
     [SerializeField] Transform playerPrefab = null;
 
     [SerializeField] private GameStatusSO gameStatus;
@@ -90,11 +88,11 @@ public class SpawnManager : NetworkBehaviour
             SpawnPlayers();
 
             // SPAWN TESTRINGS
-            SpawnObject(SpawnEnums.Ring, new Vector2(23, 20));
-            SpawnObject(SpawnEnums.Ring, new Vector2(25, 20));
+            SpawnObject(SpawnEnums.Ring, new Vector2(23, 20), EnvironmentEnums.Outdoor);
+            SpawnObject(SpawnEnums.Ring, new Vector2(25, 20), EnvironmentEnums.Outdoor);
 
             // SPAWN WIZARD
-            SpawnObject(SpawnEnums.Wizard, new Vector2(25, 26));
+            SpawnObject(SpawnEnums.Wizard, new Vector2(25, 26), EnvironmentEnums.Outdoor);
 
             SpawnCaveDoors();
 
@@ -118,8 +116,8 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnCaveDoors()
     {
-        SpawnObject(SpawnEnums.CaveDoorForest, gameStatus.caveDoorForest);
-        SpawnObject(SpawnEnums.CaveDoorCave, gameStatus.caveDoorInCave);
+        SpawnObject(SpawnEnums.CaveDoorForest, gameStatus.caveDoorForest, EnvironmentEnums.Outdoor);
+        SpawnObject(SpawnEnums.CaveDoorCave, gameStatus.caveDoorInCave, EnvironmentEnums.Cave);
     }
 
     private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
@@ -127,7 +125,7 @@ public class SpawnManager : NetworkBehaviour
         for (int i = 0; i < nInstances; i++)
         {
             Vector3 emptyTile = GetEmptyTile(searchRange, environment, excludedMidAreaSideLength);
-            SpawnObject(spawnEnum, emptyTile);
+            SpawnObject(spawnEnum, emptyTile, environment);
         }
     }
 
@@ -192,7 +190,7 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-    private void SpawnObject(SpawnEnums spawnenum, Vector2 spawnPoint)
+    private void SpawnObject(SpawnEnums spawnenum, Vector2 spawnPoint, EnvironmentEnums environment)
     {
         GameObject prefab = spawnenum switch
         {
@@ -207,6 +205,18 @@ public class SpawnManager : NetworkBehaviour
         };
 
         GameObject instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
+
+        // Set sprite-lit-default material to all gameobjects that live in the cave 
+        if (environment == EnvironmentEnums.Cave)
+        {
+            SpriteRenderer[] spriteRenderers = instance.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in spriteRenderers) { sr.material = caveMaterial; }
+
+            Image[] images = instance.GetComponentsInChildren<Image>();
+            foreach (Image image in images) { image.material = caveMaterial; }
+
+        }
+
         NetworkObject networkObject = instance.GetComponent<NetworkObject>();
         networkObject.Spawn();
         spawnedObjects.Add(networkObject.NetworkObjectId, networkObject);
