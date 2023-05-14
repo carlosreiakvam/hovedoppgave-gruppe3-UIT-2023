@@ -10,8 +10,7 @@ public class Wizard : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        coroutine = RepeatMessage();
-        StartCoroutine(coroutine);
+        StartCoroutine(RepeatMessage());
     }
 
     private IEnumerator RepeatMessage()
@@ -23,5 +22,6 @@ public class Wizard : NetworkBehaviour
             yield return new WaitForSeconds(60);
         }
     }
+
 
 }
