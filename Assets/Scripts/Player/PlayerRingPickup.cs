@@ -9,11 +9,12 @@ public class PlayerRingPickup : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!(collision.gameObject.tag == "Ring")) return;
+        if (LocalPlayerManager.Singleton.localPlayer.playerHasRing) return;
+
         DespawnRing(collision);
 
         string localPlayerName = LocalPlayerManager.Singleton.localPlayer.name;
         LocalPlayerManager.Singleton.localPlayer.playerHasRing = true;
-        Debug.LogWarning(localPlayerName + " has ring!");
         OnPlayerPickedUpRingServerRpc(localPlayerName);
     }
 

@@ -95,29 +95,30 @@ public class ChatManager : NetworkBehaviour
         chatInput.text = "";
     }
 
-    private void AddMsg(string message, ulong senderPlayerId)
+    private void AddMsg(string message, ulong senderPlayerId, string senderName = null)
     {
-        _messages.Add($"{pName[(int)senderPlayerId].Value}  : {message} ");
+        if (senderName != null) _messages.Add($"{senderName}: {message}");
+        else _messages.Add($"{pName[(int)senderPlayerId].Value}  : {message} ");
 
         if (_messages.Count > maximumMessages)
             _messages.RemoveAt(0);
     }
 
-    public void SendMsg(string message)
+    public void SendMsg(string message, string senderName = null)
     {
-        SendChatMessageServerRpc(message);
+        SendChatMessageServerRpc(message, senderName, default);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SendChatMessageServerRpc(string message, ServerRpcParams serverRpcParams = default)
+    private void SendChatMessageServerRpc(string message, string senderName = null, ServerRpcParams serverRpcParams = default)
     {
-        ReceiveChatMessageClientRpc(message, serverRpcParams.Receive.SenderClientId);
+        ReceiveChatMessageClientRpc(message, serverRpcParams.Receive.SenderClientId, senderName);
     }
 
     [ClientRpc]
-    private void ReceiveChatMessageClientRpc(string message, ulong senderPlayerId)
+    private void ReceiveChatMessageClientRpc(string message, ulong senderPlayerId, string senderName = null)
     {
-        AddMsg(message, senderPlayerId);
+        AddMsg(message, senderPlayerId, senderName);
     }
 
     void BuildChatContents()

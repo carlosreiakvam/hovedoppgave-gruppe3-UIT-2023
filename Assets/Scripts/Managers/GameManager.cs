@@ -70,7 +70,9 @@ public class GameManager : NetworkBehaviour
 
     public void OnPlayerPickedUpRing(string name)
     {
-        infoText.text = name + " collected a ring!";
+        ChatManager.Instance.SendMsg(name + " collected a ring!", "Wizard");
+        //infoText.text = name + " collected a ring!";
+
     }
 
 

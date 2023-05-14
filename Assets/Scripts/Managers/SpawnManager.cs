@@ -88,9 +88,7 @@ public class SpawnManager : NetworkBehaviour
         try
         {
             SpawnPlayers();
-
-            // SPAWN TESTRINGS
-            SpawnObject(SpawnEnums.Ring, new Vector2(23, 20), EnvironmentEnums.Outdoor);
+            SpawnObject(SpawnEnums.Ring, new Vector2(27, 25), EnvironmentEnums.Outdoor);
 
             // SPAWN WIZARD
             SpawnObject(SpawnEnums.Wizard, new Vector2(25, 26), EnvironmentEnums.Outdoor);
@@ -102,7 +100,7 @@ public class SpawnManager : NetworkBehaviour
             SpawnPrefabs(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 4, searchRange: 1);
 
             // SPAWN TORCHES
-            SpawnPrefabs(SpawnEnums.TorchPowerUp, environment: EnvironmentEnums.Cave, nInstances: 10, searchRange: 1);
+            SpawnPrefabs(SpawnEnums.TorchPowerUp, environment: EnvironmentEnums.Cave, nInstances: 15, searchRange: 1);
 
             // SPAWN ENEMIES
             SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: nEnemiesOutside, searchRange: 1, excludedMidAreaSideLength: 10);
