@@ -5,6 +5,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LocalPlayerManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class LocalPlayerManager : MonoBehaviour
     }
 
 
+    [SerializeField] public GameObject torchPowerup;
+    [SerializeField] public GameObject ring;
+    [SerializeField] public GameObject speedPowerup;
+
     [SerializeField] GameStatusSO gameStatusSO;
     public static LocalPlayerManager Singleton;
     public LocalPlayer localPlayer = new LocalPlayer();
@@ -25,11 +30,15 @@ public class LocalPlayerManager : MonoBehaviour
     {
         if (Singleton == null) Singleton = this;
         else Destroy(gameObject);
+
+        // PowerupUI
+        torchPowerup.SetActive(false);
+        speedPowerup.SetActive(false);
+        ring.SetActive(false);
     }
     public bool IsThisIdForLocalPlayer(ulong id)
     {
         return localPlayer.id == id;
-
     }
 
     public string GetNameFromId(ulong id)

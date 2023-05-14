@@ -33,6 +33,7 @@ public class PlayerRingPickup : NetworkBehaviour
     [ClientRpc]
     public void OnPlayerPickedUpRingClientRpc(string name)
     {
+        LocalPlayerManager.Singleton.ring.SetActive(true);
         GameManager.Singleton.OnPlayerPickedUpRing(name);
     }
 

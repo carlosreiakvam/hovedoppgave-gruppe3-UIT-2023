@@ -11,6 +11,10 @@ public class PlayerBehaviour : NetworkBehaviour
 {
     public static PlayerBehaviour LocalInstance { get; private set; }
 
+    private Coroutine currentSpeedCoroutine;
+    private Coroutine currentTorchCoroutine;
+
+
     /*TouchControls*/
     private CharacterController controller;
     private PlayerInput playerInput;
@@ -23,7 +27,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool isControlActive = false;
 
     private const float PLAYER_BASE_SPEED = 3;
-    private const float PLAYER_INCREASED_SPEED = 10;
+    private const float PLAYER_INCREASED_SPEED = 6;
     private float playerSpeed = PLAYER_BASE_SPEED;
 
     private Camera mainCamera;
@@ -237,19 +241,21 @@ public class PlayerBehaviour : NetworkBehaviour
 
     internal void IncreaseSpeed()
     {
-        Debug.LogWarning("Increasing speed for player");
-        playerSpeed = 6;
-        StartCoroutine(ResetSpeedAfterDelay(10));
+        playerSpeed = PLAYER_INCREASED_SPEED;
+
+        // If there is a coroutine running, stop it
+        if (currentSpeedCoroutine != null) StopCoroutine(currentSpeedCoroutine);
+        currentSpeedCoroutine = StartCoroutine(ResetSpeedAfterDelay(8));
     }
 
 
     IEnumerator ResetSpeedAfterDelay(float delay)
     {
+        LocalPlayerManager.Singleton.speedPowerup.SetActive(true);
         yield return new WaitForSeconds(delay);
-        playerSpeed = 4;
-        Debug.LogWarning("Resetting speed for player");
+        LocalPlayerManager.Singleton.speedPowerup.SetActive(false);
+        playerSpeed = PLAYER_BASE_SPEED;
     }
-
     internal void RelocatePlayer(Vector2 cavePosition)
     {
         playerAnimation.transform.position = cavePosition;
@@ -264,15 +270,18 @@ public class PlayerBehaviour : NetworkBehaviour
 
     internal void ActivateTorchPowerUp()
     {
-        StartCoroutine(FireUpNewTorch());
+        if (currentTorchCoroutine != null) StopCoroutine(currentTorchCoroutine);
+        currentTorchCoroutine = StartCoroutine(FireUpNewTorch(8));
     }
 
-    internal IEnumerator FireUpNewTorch()
+    internal IEnumerator FireUpNewTorch(float delay)
     {
         Light2D playerLight = GetComponentInChildren<Light2D>();
         playerLight.pointLightOuterRadius = 10;
 
-        yield return new WaitForSeconds(10f);
+        LocalPlayerManager.Singleton.torchPowerup.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        LocalPlayerManager.Singleton.torchPowerup.SetActive(false);
 
         playerLight.pointLightOuterRadius = 5;
     }
