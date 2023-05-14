@@ -24,6 +24,7 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject wizardPrefab;
 
     public Tilemap forestTilemap;
+    public Tilemap treeTilemap;
     public Tilemap caveTilemap;
 
     public const int maxTries = 100;
@@ -140,25 +141,34 @@ public class SpawnManager : NetworkBehaviour
     private Vector2 GetEmptyTile(int searchRange, EnvironmentEnums environment, int excludedMidAreaSideLength = -1)
     {
         Dictionary<SpawnEnums, int> boundaries;
-        Tilemap tilemap;
+        List<Tilemap> tilemaps;
+        List<Tilemap> outdoorTilemaps = new List<Tilemap> { forestTilemap, treeTilemap };
+        List<Tilemap> caveTilemaps = new List<Tilemap> { caveTilemap };
+
+        // Set the correct boundaries and tilemaps based on the environment.
         if (environment == EnvironmentEnums.Outdoor)
         {
             boundaries = mapBoundsOutdoor;
-            tilemap = forestTilemap;
+            tilemaps = outdoorTilemaps;
         }
         else
         {
             boundaries = mapBoundsCave;
-            tilemap = caveTilemap;
+            tilemaps = caveTilemaps;
         }
 
         Vector2 emptyTile = Vector2.zero;
+
+        // Try to find an empty tile maxTries times.
         for (int i = 0; i < maxTries; i++)
         {
+
+            // Generate a random position within the boundaries.
             Vector3Int randomPosition = new Vector3Int(Random.Range(boundaries[SpawnEnums.X_MIN] + searchRange, boundaries[SpawnEnums.X_MAX] - searchRange),
                                                         Random.Range(boundaries[SpawnEnums.Y_MIN] + searchRange, boundaries[SpawnEnums.Y_MAX] - searchRange), 0
                                                         );
 
+            // If an area in the middle should be excluded, check if the random position is within that area and if so, skip this iteration.
             if (excludedMidAreaSideLength != -1)
             {
                 // 'continue' if empty tile is in middle area
@@ -170,30 +180,50 @@ public class SpawnManager : NetworkBehaviour
                 { continue; }
             }
 
-            // Check if the tile and its neighbors are empty
+            // Assume the tile is empty until proven otherwise.
             bool isTileEmpty = true;
+
+            // Check the tile at the random position and its neighboring tiles.
             for (int dx = -searchRange; dx <= searchRange; dx++)
             {
                 for (int dy = -searchRange; dy <= searchRange; dy++)
                 {
-                    if (tilemap.GetTile(randomPosition) != null)
+                    Vector3Int position = randomPosition + new Vector3Int(dx, dy, 0);
+
+                    // If a tile is not empty, break out of the loop.
+                    if (!IsTileEmptyAt(position, tilemaps))
                     {
                         isTileEmpty = false;
                         break;
                     }
                 }
+
                 if (!isTileEmpty) break;
             }
 
+            // If an empty tile was found, convert its position to world coordinates and break the loop.
             if (isTileEmpty)
             {
-
-                emptyTile = tilemap.CellToWorld(randomPosition);
+                emptyTile = tilemaps[0].CellToWorld(randomPosition);
                 break;
             }
         }
 
         return new Vector2(emptyTile.x, emptyTile.y);
+    }
+
+    // This method checks if a tile at a given position in a list of tilemaps is empty.
+    private bool IsTileEmptyAt(Vector3Int position, List<Tilemap> tilemaps)
+    {
+        foreach (Tilemap tilemap in tilemaps)
+        {
+            if (tilemap.GetTile(position) != null)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
