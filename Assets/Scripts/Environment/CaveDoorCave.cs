@@ -20,7 +20,6 @@ public class CaveDoorCave : NetworkBehaviour
         Light2D light2D = collision.transform.GetComponentInChildren<Light2D>();
         light2D.enabled = false;
 
-
         Vector2 relocateToPosition = gameStatusSO.caveDoorForest;
         relocateToPosition.y -= 2;
         playerBehaviour.RelocatePlayer(relocateToPosition);
