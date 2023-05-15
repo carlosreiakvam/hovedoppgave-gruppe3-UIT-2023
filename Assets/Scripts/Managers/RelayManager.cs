@@ -34,6 +34,9 @@ public class RelayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Initializes Unity services and signs in anonymously.
+    /// </summary>
     public async Task Authorize()
     {
         try
@@ -44,6 +47,10 @@ public class RelayManager : MonoBehaviour
         catch (Exception e) { Debug.LogWarning(e); }
     }
 
+    /// <summary>
+    /// Initializes Unity services with a profile.
+    /// </summary>
+    /// <returns>True if initialization is successful, false otherwise.</returns>
     private async Task<bool> InitAsyncWithProfile()
     {
         int maxRetries = 5;
@@ -70,6 +77,10 @@ public class RelayManager : MonoBehaviour
 
 
 
+    /// <summary>
+    /// Creates a relay allocation and starts the host.
+    /// </summary>
+    /// <returns>A dictionary containing the relay join code and allocation ID.</returns>
     [Command]
     public async Task<Dictionary<string, string>> CreateRelay()
     {
@@ -98,6 +109,10 @@ public class RelayManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Joins a relay using the given join code.
+    /// </summary>
+    /// <param name="joinCode">The join code for the relay to join.</param>
     [Command]
     public async void JoinRelay(string joinCode)
     {
@@ -121,29 +136,10 @@ public class RelayManager : MonoBehaviour
     }
 
 
-    // TODO: DEVELOPER SHORTCUTS BELOW. REMOVE AT LAUNCH!
-
-    /*    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
-        {
-            try
-            {
-                allocation = await RelayService.Singleton.CreateAllocationAsync(3);
-                relayJoinCode = await RelayService.Singleton.GetJoinCodeAsync(allocation.AllocationId);
-                RelayServerData relayServerData = new(allocation, "dtls");
-                NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-            }
-            catch (Exception e)
-            { Debug.Log("Create Relay Error: " + e); }
-
-            Dictionary<LobbyEnums, string> relayDict = new()
-            {
-                { LobbyEnums.RelayJoinCode, relayJoinCode },
-                { LobbyEnums.AllocationId, allocation.AllocationId.ToString() }
-            };
-
-            return relayDict;
-        }
-    */
+    /// <summary>
+    /// Creates a relay allocation and starts the host (shortcut version).
+    /// </summary>
+    /// <returns>A dictionary containing the relay join code and allocation ID.</returns>
     public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
     {
         try
@@ -169,6 +165,10 @@ public class RelayManager : MonoBehaviour
         return relayDict;
     }
 
+    /// <summary>
+    /// Joins a relay using the given join code (shortcut version).
+    /// </summary>
+    /// <param name="joinCode">The join code for the relay to join.</param>
     public async Task JoinRelayShortcut(string joinCode)
     {
         try

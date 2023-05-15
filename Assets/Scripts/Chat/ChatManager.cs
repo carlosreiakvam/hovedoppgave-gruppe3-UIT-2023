@@ -9,28 +9,35 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Manages the chat system in the game.
+/// </summary>
 public class ChatManager : NetworkBehaviour
 {
     public static ChatManager Instance;
     public event EventHandler<OnChangeFocusEventArgs> OnChangeFocus;
+
     [SerializeField] private List<PlayerNameSO> pName;
-    public class OnChangeFocusEventArgs : EventArgs
-    {
-        public bool IsChatActive;
-    }
-    //[SerializeField] private Button SendBtn;
     [SerializeField] private TMP_InputField chatInput;
     [SerializeField] private TextMeshProUGUI chatContent;
+
     private readonly List<string> _messages = new();
     private float buildDelay;
     private int maximumMessages = 10;
 
+    public class OnChangeFocusEventArgs : EventArgs
+    {
+        public bool IsChatActive;
+    }
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-
         }
         else
         {
@@ -39,62 +46,46 @@ public class ChatManager : NetworkBehaviour
         }
     }
 
-
-
+    /// <summary>
+    /// Start is called before the first frame update.
+    /// </summary>
     void Start()
     {
         chatContent.maxVisibleLines = maximumMessages;
-        //SendBtn.onClick.AddListener(() => SubmitMsg());
         chatInput.onSubmit.AddListener(delegate { SubmitMsg(); });
-
     }
 
+    /// <summary>
+    /// Update is called every frame.
+    /// </summary>
     void Update()
     {
-        //if (CustomNetworkManager.Singleton.IsConnectedClient)
-        //{
-
-
-        //    if (_messages.Count > _maximumMessages)
-        //    {
-        //        _messages.RemoveAt(0);
-        //    }
-
         if (buildDelay < Time.time)
         {
             BuildChatContents();
             buildDelay = Time.time + 0.25f;
         }
 
-        //Debug.Log("chat input is active");
         OnChangeFocus?.Invoke(this,
             new OnChangeFocusEventArgs { IsChatActive = chatInput.isFocused });
-
-        //}
-        //else if (_messages.Count > 0)
-        //{
-        //    _messages.Clear();
-        //    chatContent.text = "0";
-        //}
     }
 
+    /// <summary>
+    /// Submits the chat message entered by the player.
+    /// </summary>
     public void SubmitMsg()
     {
-        //Security measures
-        //string blankCheck = chatInput.text;
-        //blankCheck = Regex.Replace(blankCheck, @"\s", "");
-        //if (blankCheck == "")
-        //{
-        //    chatInput.ActivateInputField();
-        //    chatInput.text = "";
-        //    return;
-        //}
-
         SendMsg(chatInput.text);
         chatInput.ActivateInputField();
         chatInput.text = "";
     }
 
+    /// <summary>
+    /// Adds a chat message to the message list.
+    /// </summary>
+    /// <param name="message">The chat message.</param>
+    /// <param name="senderPlayerId">The ID of the player who sent the message.</param>
+    /// <param name="senderName">The name of the player who sent the message.</param>
     private void AddMsg(string message, ulong senderPlayerId, string senderName = null)
     {
         if (senderName != null) _messages.Add($"{senderName}: {message}");
@@ -104,23 +95,44 @@ public class ChatManager : NetworkBehaviour
             _messages.RemoveAt(0);
     }
 
+    /// <summary>
+    /// Sends a chat message.
+    /// </summary>
+    /// <param name="message">The chat message.</param>
+    /// <param name="senderName">The name of the player who is sending the message.</param>
     public void SendMsg(string message, string senderName = null)
     {
         SendChatMessageServerRpc(message, senderName, default);
     }
 
+
+    /// <summary>
+    /// Server RPC to send a chat message.
+    /// </summary>
+    /// <param name="message">The chat message.</param>
+    /// <param name="senderName">The name of the player who is sending the message.</param>
+    /// <param name="serverRpcParams">Server RPC parameters.</param>
     [ServerRpc(RequireOwnership = false)]
     private void SendChatMessageServerRpc(string message, string senderName = null, ServerRpcParams serverRpcParams = default)
     {
         ReceiveChatMessageClientRpc(message, serverRpcParams.Receive.SenderClientId, senderName);
     }
 
+    /// <summary>
+    /// Client RPC to receive a chat message.
+    /// </summary>
+    /// <param name="message">The chat message.</param>
+    /// <param name="senderPlayerId">The ID of the player who sent the message.</param>
+    /// <param name="senderName">The name of the player who sent the message.</param>
     [ClientRpc]
     private void ReceiveChatMessageClientRpc(string message, ulong senderPlayerId, string senderName = null)
     {
         AddMsg(message, senderPlayerId, senderName);
     }
 
+    /// <summary>
+    /// Builds the chat content from the messages list.
+    /// </summary>
     void BuildChatContents()
     {
         string newContent = "";

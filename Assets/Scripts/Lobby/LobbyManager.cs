@@ -15,7 +15,10 @@ public class LobbyEventArgs : EventArgs
     public Lobby Lobby { get; set; }
 }
 
-
+/// <summary>
+/// The LobbyManager class handles all the lobby related functionality such as lobby creation, lobby joining, lobby updating, and player management within the lobby.
+/// It also handles lobby polling, which is a method of regularly checking the state of the lobby.
+/// </summary>
 public class LobbyManager : NetworkBehaviour
 {
     MenuManager menuManager;
@@ -74,6 +77,9 @@ public class LobbyManager : NetworkBehaviour
     }
 
 
+    /// <summary>
+    /// Called regularly to get the current state of the lobby from the server.
+    /// </summary>
     private async void HandlePollUpdate()
     {
         float LobbyPollTimerMax = 1.1f; // rate limit of one request per 1.1 second
@@ -91,6 +97,9 @@ public class LobbyManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the lobby to be ready to start the game.
+    /// </summary>
     public async void QueGameStart()
     {
         UpdateLobbyOptions options = new UpdateLobbyOptions();
@@ -107,6 +116,9 @@ public class LobbyManager : NetworkBehaviour
 
     }
 
+    /// <summary>
+    /// Called regularly to send a heartbeat to the server to keep the lobby alive.
+    /// </summary>
     private async void HandleLobbyHeartBeat()
     {
         float heartbeatTimerMax = 15;
@@ -129,6 +141,9 @@ public class LobbyManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Creates a new lobby.
+    /// </summary>
     public async Task CreateLobby(string lobbyName, bool isPrivate, string playerName)
     {
         try
@@ -169,6 +184,9 @@ public class LobbyManager : NetworkBehaviour
         catch (Exception e) { Debug.Log("Relay Connector error: " + e); }
     }
 
+    /// <summary>
+    /// Updates the relay join code for the lobby.
+    /// </summary>
     public async void UpdateJoinCode(string joinCode)
     {
         UpdateLobbyOptions options = new UpdateLobbyOptions();
@@ -261,6 +279,9 @@ public class LobbyManager : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns a new player object.
+    /// </summary>
     private Player GetNewPlayer(string playerName)
     {
         return new Player()
@@ -274,6 +295,9 @@ public class LobbyManager : NetworkBehaviour
         };
     }
 
+    /// <summary>
+    /// Sets the host id for the lobby.
+    /// </summary>
     private async void SetHostId(string hostId)
     {
         UpdateLobbyOptions options = new UpdateLobbyOptions();
@@ -290,6 +314,9 @@ public class LobbyManager : NetworkBehaviour
     }
 
 
+    /// <summary>
+    /// Sets the player's ready state.
+    /// </summary>
     public async void SetPlayerReady(bool ready)
     {
         UpdatePlayerOptions options = new UpdatePlayerOptions();
@@ -325,6 +352,9 @@ public class LobbyManager : NetworkBehaviour
     }
 
 
+    /// <summary>
+    /// Set the "IsGameReady" data object to true.
+    /// </summary>
     public void StartGame()
     {
         UpdateLobbyOptions options = new UpdateLobbyOptions();
@@ -340,6 +370,9 @@ public class LobbyManager : NetworkBehaviour
         LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
     }
 
+    /// <summary>
+    /// Returns the id of the current player.
+    /// </summary>
     public string GetThisPlayerId()
     {
         return AuthenticationService.Instance.PlayerId;
@@ -350,6 +383,10 @@ public class LobbyManager : NetworkBehaviour
         isLobbyActive = false;
     }
 
+    /// <summary>
+    /// Spawns a helper object for transitioning between scenes.
+    /// The reason for spawning this is so that it can send RPC messages
+    /// </summary>
     public void SpawnTransitionHelper()
     {
         // only run by host
@@ -358,6 +395,9 @@ public class LobbyManager : NetworkBehaviour
         networkObject.Spawn();
     }
 
+    /// <summary>
+    /// Registers the lobby information to a ScriptableObject representing the game state.
+    /// </summary>
     internal void RegisterLobbyToGameStatusSO()
     {
         gameStatusSO.lobbyPlayers = lobby.Players;

@@ -6,6 +6,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// The LobbyCreator class handles the creation of a lobby in the game.
+/// It manages the interaction between player and lobby settings such as name, privacy, and visual feedback.
+/// </summary>
 public class LobbyCreator : MonoBehaviour
 {
     [SerializeField] Canvas canvas;
@@ -66,6 +70,11 @@ public class LobbyCreator : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// Coroutine to rotate the spinner object while it is active.
+    /// </summary>
+    /// <param name="spinner">GameObject that should be rotated.</param>
+    /// <returns>Coroutine IEnumerator</returns>
     IEnumerator RotateSpinner(GameObject spinner)
     {
         while (spinner.activeSelf)
@@ -76,6 +85,11 @@ public class LobbyCreator : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Creates a spinner GameObject, sets its sprite and parent, and initially sets it to be invisible.
+    /// </summary>
+    /// <returns>A GameObject representing the spinner.</returns>
     public GameObject CreateSpinner()
     {
         // Create a new GameObject for the spinner

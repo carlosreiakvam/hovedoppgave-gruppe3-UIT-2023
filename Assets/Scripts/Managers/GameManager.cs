@@ -7,15 +7,20 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// The main manager for controlling game state.
+/// </summary>
 public class GameManager : NetworkBehaviour
 {
-
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject largeMessage;
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] TextMeshProUGUI infoText;
 
+    // Singleton instance of GameManager
     public static GameManager Singleton;
+
+    // Represents the network player ID who currently has the ring
     public ulong networkedPlayerIdHasRing { get; set; }
 
     private void Awake()
@@ -30,8 +35,9 @@ public class GameManager : NetworkBehaviour
         LocalPlayerManager.Singleton.RegisterPlayerInScriptableObject();
     }
 
-
-
+    /// <summary>
+    /// Begins the game manager server.
+    /// </summary>
     public void StartGameManagerServer()
     {
         Debug.LogWarning("GAMEMANAGER STARTED");
@@ -40,7 +46,9 @@ public class GameManager : NetworkBehaviour
         else { Debug.LogError("SPAWNING FAILED"); }
     }
 
-
+    /// <summary>
+    /// Handles ending the game scene and returning to the main menu.
+    /// </summary>
     public void EndGameScene()
     {
         try
@@ -55,7 +63,9 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    // Destroy objects tagged with "DontDestroy" when going back to the menu scene
+    /// <summary>
+    /// Destroys objects tagged with "DontDestroy" when returning to the menu scene.
+    /// </summary>
     private void DestroyObjectsTaggedWithDontDestroy()
     {
         GameObject[] objs = GameObject.FindObjectsOfType<GameObject>();
@@ -69,14 +79,19 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void OnPlayerPickedUpRing(string name)
+    /// <summary>
+    /// Handles the event when a player picks up a ring.
+    /// </summary>
+    /// <param playerName="playerName">The playerName of the player who picked up the ring.</param>
+    public void OnPlayerPickedUpRing(string playerName)
     {
-        ChatManager.Instance.SendMsg(name + " collected a ring!", "Wizard");
-        //infoText.text = name + " collected a ring!";
-
+        ChatManager.Instance.SendMsg(playerName + " collected a ring!", "Wizard");
     }
 
-
+    /// <summary>
+    /// Handles the visualization when a player wins the game.
+    /// </summary>
+    /// <param playerName="playerName">The playerName of the player who won the game.</param>
     public void VisualizeOnGameWon(string playerName)
     {
         gameStatusSO.gameIsOver = true;
@@ -85,6 +100,9 @@ public class GameManager : NetworkBehaviour
         largeMessage.SetActive(true);
     }
 
+    /// <summary>
+    /// Deactivates all the players in the game.
+    /// </summary>
     public void DeactivateAllPlayers()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -94,6 +112,4 @@ public class GameManager : NetworkBehaviour
             player.SetActive(false);
         }
     }
-
 }
-

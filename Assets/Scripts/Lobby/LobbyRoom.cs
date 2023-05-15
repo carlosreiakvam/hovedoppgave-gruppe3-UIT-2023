@@ -57,12 +57,19 @@ public class LobbyRoom : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Connects the LobbyRoom with MenuManager and LobbyManager.
+    /// </summary>
     private void ConnectWithManagers()
     {
         menuManager = GetComponentInParent<MenuManager>();
         LobbyManager.Singleton.OnHandlePollUpdate += HandlePollUpdate;
         LobbyManager.Singleton.OnLobbyLeft += OnLobbyLeft;
     }
+
+    /// <summary>
+    /// Retrieves the toggles for player ready states from GameObjects.
+    /// </summary>
     private void GetToggles()
     {
         Toggle p1Toggle = p1ToggleGO.GetComponent<Toggle>();
@@ -72,6 +79,9 @@ public class LobbyRoom : MonoBehaviour
         isReadyStates = new List<Toggle> { p1Toggle, p2Toggle, p3Toggle, p4Toggle };
     }
 
+    /// <summary>
+    /// Initializes player name GameObjects and sets their active status to false.
+    /// </summary>
     private void InitPlayerNames()
     {
         pNames = new List<TextMeshProUGUI> { p1Name, p2Name, p3Name, p4Name };
@@ -79,6 +89,9 @@ public class LobbyRoom : MonoBehaviour
         foreach (GameObject playerName in pNamesGO) { playerName.SetActive(false); }
     }
 
+    /// <summary>
+    /// Handles the functionality of the ready button.
+    /// </summary>
     private void HandleReadyButton()
     {
         readyButton = readyButtonGO.GetComponent<Button>();
@@ -104,6 +117,9 @@ public class LobbyRoom : MonoBehaviour
         leaveButton.onClick.AddListener(() => { LobbyManager.Singleton.RequestLeaveLobby(); });
     }
 
+    /// <summary>
+    /// Sets the lobby name and code text.
+    /// </summary>
     private void SetLobbyText()
     {
         lobbyNameText.text = LobbyManager.Singleton.lobbyName;
@@ -111,7 +127,9 @@ public class LobbyRoom : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Handles lobby updates based on the lobby polling event.
+    /// </summary>
     public void HandlePollUpdate(object sender, EventArgs e)
     {
         // Get remote lobby as event argument. This happens every second.
@@ -121,6 +139,9 @@ public class LobbyRoom : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Updates local lobby data based on the state of the remote lobby.
+    /// </summary>
     public void UpdateLocalLobby(Lobby lobby)
     {
         isGameReady = true; // will be false if any player is not ready
@@ -190,6 +211,9 @@ public class LobbyRoom : MonoBehaviour
 
 
 
+    /// <summary>
+    /// Prepares the NetworkManager for game start based on the host status.
+    /// </summary>
     private void LoadNetwork(bool isHost)
     {
         if (isHost)
@@ -206,6 +230,9 @@ public class LobbyRoom : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Handles the lobby leave event.
+    /// </summary>
     public void OnLobbyLeft(object sender, EventArgs e)
     {
         menuManager.OpenPage(MenuEnums.LobbyMenu);
