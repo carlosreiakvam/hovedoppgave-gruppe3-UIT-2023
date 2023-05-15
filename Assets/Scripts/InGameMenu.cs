@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class InGameMenu : MonoBehaviour
 {
+    [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject leaveButtonGO;
     private Button leaveButton;
@@ -16,7 +17,7 @@ public class InGameMenu : MonoBehaviour
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() =>
         {
-                        GameManager.Singleton.EndGameScene();
+            GameManager.Singleton.EndGameScene();
         });
 
     }
@@ -24,8 +25,11 @@ public class InGameMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Toggle inGameMenu's active state
-            inGameMenu.SetActive(!inGameMenu.activeSelf);
+            // Toggle largeMessage's active state
+            if (!gameStatusSO.gameIsOver)
+            {
+                inGameMenu.SetActive(!inGameMenu.activeSelf);
+            }
         }
     }
 }

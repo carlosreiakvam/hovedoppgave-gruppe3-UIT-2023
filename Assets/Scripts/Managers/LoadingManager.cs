@@ -7,6 +7,7 @@ using UnityEngine;
 public class LoadingManager : NetworkBehaviour
 {
 
+    [SerializeField] GameObject powerupUI;
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] GameObject loadingScreenPanel;
     [SerializeField] TextMeshProUGUI countdownText;
@@ -16,6 +17,7 @@ public class LoadingManager : NetworkBehaviour
     private void Awake()
     {
         loadingScreenPanel.SetActive(true);
+        powerupUI.SetActive(false);
     }
 
     private void ServerStart()
@@ -34,6 +36,7 @@ public class LoadingManager : NetworkBehaviour
     private void OnCountdownFinished(bool previousValue, bool newValue)
     {
         loadingScreenPanel.SetActive(false);
+        powerupUI.SetActive(true);
         PlayerBehaviour playerBehaviour = PlayerBehaviour.LocalInstance;
         playerBehaviour.ControlActive(true);
     }

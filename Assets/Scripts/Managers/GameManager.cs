@@ -11,8 +11,8 @@ public class GameManager : NetworkBehaviour
 {
 
     [SerializeField] GameObject inGameMenu;
+    [SerializeField] GameObject largeMessage;
     [SerializeField] GameStatusSO gameStatusSO;
-    [SerializeField] GameObject gameUI;
     [SerializeField] TextMeshProUGUI infoText;
 
     public static GameManager Singleton;
@@ -20,6 +20,7 @@ public class GameManager : NetworkBehaviour
 
     private void Awake()
     {
+        largeMessage.SetActive(false);
         if (Singleton == null) { Singleton = this; DontDestroyOnLoad(gameObject); }
         else Destroy(gameObject);
     }
@@ -78,8 +79,10 @@ public class GameManager : NetworkBehaviour
 
     public void VisualizeOnGameWon(string playerName)
     {
+        gameStatusSO.gameIsOver = true;
         infoText.text = playerName + " won the game!";
         inGameMenu.SetActive(true);
+        largeMessage.SetActive(true);
     }
 
     public void DeactivateAllPlayers()
