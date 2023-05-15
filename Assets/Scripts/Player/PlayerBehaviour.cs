@@ -82,15 +82,15 @@ public class PlayerBehaviour : NetworkBehaviour
             isRunningAndroid = true;
             controller = gameObject.GetComponent<CharacterController>();
             playerInput = GetComponent<PlayerInput>();
+            
         }
         else if (Application.platform == RuntimePlatform.WindowsEditor ||
                  Application.platform == RuntimePlatform.WindowsPlayer)
         {
             Debug.Log("Current platform is Windows.");
             isRunningWindows = true;
-
-            try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
-            catch { Debug.Log("TOUCH_UI_TAG not found because it was already inactive"); }
+            GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
+            
         }
 
         else
@@ -137,7 +137,6 @@ public class PlayerBehaviour : NetworkBehaviour
 
     void Update()
     {
-        if (!isControlActive) return;
         if (playerIsKnockedOut) return;
 
         if (!chatInFocus)
