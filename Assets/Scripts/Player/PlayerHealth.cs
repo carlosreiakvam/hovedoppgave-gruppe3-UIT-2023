@@ -55,23 +55,23 @@ public class PlayerHealth : NetworkBehaviour
             if (!collision.CompareTag("HealthPowerUp")) return;
 
             Debug.Log("OnTriggerEnter2D in PlayerHealth: " + collision.name);
-            SpawnManager.Singleton.DespawnObjectServerRpc(collision.GetComponent<NetworkObject>().NetworkObjectId);
 
-            AddHealth();
+            if (AddHealth()) SpawnManager.Singleton.DespawnObjectServerRpc(collision.GetComponent<NetworkObject>().NetworkObjectId);
         }
     }
-    public void AddHealth()
+    public bool AddHealth()
     {
-        if (hitPoints.Value < 0 || hitPoints.Value == startingHP) return;
-        
-            hitPoints.ApplyChange(healthPowerUpAmount.Value);
-            
-            if (hitPoints.Value >= startingHP /*- healthPowerUpAmount*/) //might overshoot
-            {
-                hitPoints.Value = startingHP; // Clamp at max networkHP
-            }
+        if (hitPoints.Value < 0 || hitPoints.Value == startingHP) return false;
+
+        hitPoints.ApplyChange(healthPowerUpAmount.Value);
+
+        if (hitPoints.Value >= startingHP /*- healthPowerUpAmount*/) //might overshoot
+        {
+            hitPoints.Value = startingHP; // Clamp at max networkHP
+        }
 
         VisualizeHealthChangeServerRpc(hitPoints.Value, startingHP.Value);
+        return true;
 
     }
 
