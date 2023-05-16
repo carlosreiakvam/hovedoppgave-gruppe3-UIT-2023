@@ -32,6 +32,7 @@ public class Wizard : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        if (!IsServer) return;
         ChatManager.Instance.SendMsg("Find the ring and retrieve it to me!", "Wizard");
         StartCoroutine(RepeatMessage());
     }
@@ -41,7 +42,11 @@ public class Wizard : NetworkBehaviour
         while (true)
         {
             yield return new WaitForSeconds(90);
-            ChatManager.Instance.SendMsg(GetRandomQuote(), "Wizard");
+            float a = Random.Range(0, 100);
+            if (Random.Range(0, 100) > 80)
+            {
+                ChatManager.Instance.SendMsg(GetRandomQuote(), "Wizard");
+            }
         }
     }
     private string GetRandomQuote()
