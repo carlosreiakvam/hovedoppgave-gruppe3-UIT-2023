@@ -2,7 +2,7 @@ using Unity.Netcode;
 using UnityEngine.Rendering.Universal;
 using UnityEngine;
 /// <summary>
-/// CaveDoorCave class manages the behavior of the cave door in the game. 
+/// DoorCave class manages the behavior of the cave door in the game. 
 /// It is a NetworkBehaviour, indicating it is expected to function in a networked multiplayer environment.
 /// </summary>
 public class CaveDoorCave : NetworkBehaviour
@@ -31,7 +31,7 @@ public class CaveDoorCave : NetworkBehaviour
         Light2D light2D = collision.transform.GetComponentInChildren<Light2D>();
         light2D.enabled = false;
 
-        Vector2 relocateToPosition = gameStatusSO.caveDoorForest;
+        Vector2 relocateToPosition = gameStatusSO.doorForestPosition;
         relocateToPosition.y -= 2;
         playerBehaviour.RelocatePlayer(relocateToPosition);
     }

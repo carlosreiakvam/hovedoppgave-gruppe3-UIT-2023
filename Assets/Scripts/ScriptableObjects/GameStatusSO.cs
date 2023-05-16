@@ -24,10 +24,10 @@ public class GameStatusSO : ScriptableObject
     public bool isWindows = false;
 
     [HideInInspector]
-    public Vector2 caveDoorForest = new Vector2(25, 23);
+    public Vector2 doorForestPosition = new Vector2(25, 23);
 
     [HideInInspector]
-    public Vector2 caveDoorInCave = new Vector2(96f, 4.4f);
+    public Vector2 doorCavePosition = new Vector2(96f, 4.4f);
 
     public void Reset()
     {
@@ -37,8 +37,8 @@ public class GameStatusSO : ScriptableObject
         playerIdHasRing = -1;
         isAndroid = false;
         isWindows = false;
-        caveDoorForest = new Vector2(25, 23);
-        //caveDoorInCave = new Vector2(96f, 4.4f);
+        doorForestPosition = new Vector2(25, 23);
+        //doorCavePosition = new Vector2(96f, 4.4f);
     }
 }
 

@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 422671849239045618}
   - component: {fileID: 5870070138164304002}
   - component: {fileID: -2128787568054561446}
-  - component: {fileID: -1016037692057106596}
   m_Layer: 0
-  m_Name: CaveDoorCave
-  m_TagString: Untagged
+  m_Name: DoorCave
+  m_TagString: DoorCave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,16 +177,3 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &-1016037692057106596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8297861842638776896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cda2d5bcba5613f42af908d65b31ddf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameStatusSO: {fileID: 11400000, guid: b9a2a7bd2ec600346808442b5d09cd0f, type: 2}

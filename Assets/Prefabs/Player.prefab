@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 2368901357943508331}
   - component: {fileID: 2811118599056119880}
   - component: {fileID: 7235294555253934212}
+  - component: {fileID: 2552972371950035066}
+  - component: {fileID: 2196852675204223531}
   m_Layer: 0
   m_Name: PlayerAnimation
   m_TagString: Player
@@ -378,6 +380,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStatusSO: {fileID: 11400000, guid: b9a2a7bd2ec600346808442b5d09cd0f, type: 2}
+--- !u!114 &2552972371950035066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405672945398536863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1412e0db3f596747b91f1fb6ad7e2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamestatusSO: {fileID: 11400000, guid: b9a2a7bd2ec600346808442b5d09cd0f, type: 2}
+--- !u!114 &2196852675204223531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405672945398536863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7134f3f8349f33e489cfc7c84fe3cd5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &669562833166217992
 GameObject:
   m_ObjectHideFlags: 0

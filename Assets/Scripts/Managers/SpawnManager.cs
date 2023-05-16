@@ -14,13 +14,14 @@ public class SpawnManager : NetworkBehaviour
 
     [SerializeField] private GameStatusSO gameStatus;
 
+    [SerializeField] private GameObject materialManagerPrefab;
     [SerializeField] private GameObject torchPrefab;
     [SerializeField] private GameObject ringPrefab;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject hpPrefab;
     [SerializeField] private GameObject speedPrefab;
-    [SerializeField] private GameObject caveDoorForestPrefab;
-    [SerializeField] private GameObject caveDoorCavePrefab;
+    [SerializeField] private GameObject doorForestPrefab;
+    [SerializeField] private GameObject doorCavePrefab;
     [SerializeField] private GameObject wizardPrefab;
 
     public Tilemap forestTilemap;
@@ -87,6 +88,7 @@ public class SpawnManager : NetworkBehaviour
     {
         try
         {
+
             SpawnPlayers();
             SpawnObject(SpawnEnums.Ring, new Vector2(27, 25), EnvironmentEnums.Outdoor);
 
@@ -114,6 +116,8 @@ public class SpawnManager : NetworkBehaviour
             SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nSpeedPowerupsOutdoor, searchRange: 1);
             SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: nSpeedPowerupsCave, searchRange: 1);
 
+            // MATERIAL MANAGER HAS TO BE LAST
+            SpawnObject(SpawnEnums.MaterialManager, new Vector2(), EnvironmentEnums.NoEnvironment);
 
             return true;
         }
@@ -122,9 +126,24 @@ public class SpawnManager : NetworkBehaviour
 
     private void SpawnCaveDoors()
     {
-        SpawnObject(SpawnEnums.CaveDoorForest, gameStatus.caveDoorForest, EnvironmentEnums.Outdoor);
-        SpawnObject(SpawnEnums.CaveDoorCave, gameStatus.caveDoorInCave, EnvironmentEnums.Cave);
+        List<Vector2> spawnPositions = new List<Vector2>
+    {
+        new Vector2(10, 9.6f),
+        new Vector2(10, 23.6f),
+        new Vector2(44.5f, 50.6f),
+        new Vector2(3.5f, 50.6f),
+        new Vector2(8, 35.6f),
+        new Vector2(37, 37.6f),
+        new Vector2(41, 18.5f),
+        new Vector2(44, 10.6f),
+        new Vector2(46.6f, 18.6f)
+    };
+        Vector2 doorForestPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
+        gameStatus.doorForestPosition = doorForestPosition;
+        SpawnObject(SpawnEnums.DoorForest, doorForestPosition, EnvironmentEnums.Outdoor);
+        SpawnObject(SpawnEnums.DoorCave, gameStatus.doorCavePosition, EnvironmentEnums.Cave);
     }
+
 
     private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
     {
@@ -233,26 +252,26 @@ public class SpawnManager : NetworkBehaviour
             SpawnEnums.Ring => ringPrefab,
             SpawnEnums.HealthPowerUp => hpPrefab,
             SpawnEnums.SpeedPowerUp => speedPrefab,
-            SpawnEnums.CaveDoorCave => caveDoorCavePrefab,
-            SpawnEnums.CaveDoorForest => caveDoorForestPrefab,
+            SpawnEnums.DoorCave => doorCavePrefab,
+            SpawnEnums.DoorForest => doorForestPrefab,
             SpawnEnums.Wizard => wizardPrefab,
             SpawnEnums.TorchPowerUp => torchPrefab,
+            SpawnEnums.MaterialManager => materialManagerPrefab,
             _ => null
         };
 
         GameObject instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
 
-        // Set sprite-lit-default material to all gameobjects that live in the cave 
-        if (environment == EnvironmentEnums.Cave)
-        {
-            SpriteRenderer[] spriteRenderers = instance.GetComponentsInChildren<SpriteRenderer>();
-            foreach (SpriteRenderer sr in spriteRenderers) { sr.material = caveMaterial; }
+        /*        // Set sprite-lit-default material to all gameobjects that live in the cave 
+                if (environment == EnvironmentEnums.Cave)
+                {
+                    SpriteRenderer[] spriteRenderers = instance.GetComponentsInChildren<SpriteRenderer>();
+                    foreach (SpriteRenderer sr in spriteRenderers) { sr.material = caveMaterial; }
 
-            Image[] images = instance.GetComponentsInChildren<Image>();
-            foreach (Image image in images) { image.material = caveMaterial; }
-
-        }
-
+                    Image[] images = instance.GetComponentsInChildren<Image>();
+                    foreach (Image image in images) { image.material = caveMaterial; }
+                }
+        */
         NetworkObject networkObject = instance.GetComponent<NetworkObject>();
         networkObject.Spawn();
         spawnedObjects.Add(networkObject.NetworkObjectId, networkObject);

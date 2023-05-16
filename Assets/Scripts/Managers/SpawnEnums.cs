@@ -1,11 +1,12 @@
 ﻿internal enum SpawnEnums
 {
+    MaterialManager,
     Enemy,
     Ring,
     HealthPowerUp,
     SpeedPowerUp,
-    CaveDoorForest,
-    CaveDoorCave,
+    DoorForest,
+    DoorCave,
     TorchPowerUp,
     Wizard,
     X_MIN,
@@ -19,5 +20,6 @@
 internal enum EnvironmentEnums
 {
     Outdoor,
-    Cave
+    Cave,
+    NoEnvironment
 }
