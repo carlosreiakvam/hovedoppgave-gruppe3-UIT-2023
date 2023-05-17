@@ -164,8 +164,7 @@ public class Enemy : NetworkBehaviour
     {
         if (!IsServer || target == null) return;
 
-        float targetRange = 2;
-        if (Vector2.Distance(transform.position, target.position) < targetRange)
+        if (Vector2.Distance(transform.position, target.position) < agent.stoppingDistance)
         {
             //Debug.Log("Found a new Target! State before update state:" + state.ToString());
             state = State.ChaseTarget;
@@ -190,7 +189,8 @@ public class Enemy : NetworkBehaviour
     {
         if (!IsServer || collision.collider.CompareTag("Player")) return;
 
-        agent.SetDestination(roamPosition);
+        if(collision.collider.CompareTag("StaticColliders"))
+            agent.SetDestination(-roamPosition);
 
         //Debug.Log("It is a static collider");
         //TODO: find a new random position
