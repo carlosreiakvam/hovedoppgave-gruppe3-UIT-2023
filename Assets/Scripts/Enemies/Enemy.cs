@@ -49,7 +49,6 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
-        //validRoamLocations = new Vector2Int[50,50];
         startingPosition = transform.position;
         roamPosition = GetRoamingPosition();
         agent.SetDestination(roamPosition);
@@ -57,9 +56,13 @@ public class Enemy : NetworkBehaviour
 
     private Vector2 GetRoamingPosition()
     {
-        Vector2 vec2 = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 10);
-        Debug.Log("roamingposition: " + vec2);
-        return vec2;
+        Vector2 roamVec;
+        if (transform.position.x < 50)
+            roamVec = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 10);
+        else
+            roamVec = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Cave);
+
+        return roamVec;
     }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
