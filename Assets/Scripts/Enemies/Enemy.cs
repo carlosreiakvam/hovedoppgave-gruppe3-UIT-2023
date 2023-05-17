@@ -25,7 +25,6 @@ public class Enemy : NetworkBehaviour
 
     RaycastHit2D[] hits;
 
-    private Vector2 startingPosition;
     private Vector2 roamPosition;
     private State state;
 
@@ -49,7 +48,6 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
-        startingPosition = transform.position;
         roamPosition = GetRoamingPosition();
         agent.SetDestination(roamPosition);
     }
@@ -118,7 +116,6 @@ public class Enemy : NetworkBehaviour
                 {
                     //reached roam position, get new
                     roamPosition = GetRoamingPosition();
-
                 }
 
                 animator.SetFloat(HORIZONTAL, moveDirection.x);
@@ -190,7 +187,10 @@ public class Enemy : NetworkBehaviour
         if (!IsServer || collision.collider.CompareTag("Player")) return;
 
         if(collision.collider.CompareTag("StaticColliders"))
-            agent.SetDestination(-roamPosition);
+        {
+            //roamPosition = -roamPosition;
+        }
+            
 
         //Debug.Log("It is a static collider");
         //TODO: find a new random position
