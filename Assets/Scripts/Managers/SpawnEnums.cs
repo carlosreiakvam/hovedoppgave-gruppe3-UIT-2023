@@ -17,7 +17,7 @@
     Y_MIDDLE,
 }
 
-internal enum EnvironmentEnums
+public enum EnvironmentEnums
 {
     Outdoor,
     Cave,

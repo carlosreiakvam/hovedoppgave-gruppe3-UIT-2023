@@ -155,7 +155,7 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-    private Vector2 GetEmptyTile(int searchRange, EnvironmentEnums environment, int excludedMidAreaSideLength = -1)
+    public Vector2 GetEmptyTile(int searchRange, EnvironmentEnums environment, int excludedMidAreaSideLength = -1)
     {
         Dictionary<SpawnEnums, int> boundaries;
         List<Tilemap> tilemaps;

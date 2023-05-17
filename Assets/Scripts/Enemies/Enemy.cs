@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using Unity.Netcode.Components;
+using UnityEngine.AI;
+using System.Linq;
 
 public class Enemy : NetworkBehaviour
 {
@@ -14,19 +16,21 @@ public class Enemy : NetworkBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private NetworkAnimator networkAnimator;
     private Vector2 moveDirection = new(0, 0);
-    private int playerID;
     private Vector2 size = new Vector2(0.5087228f * 2.2f, 0.9851828f * 1.2f);
     private const string STEELATTACK = "SteelAttack";
     private float timeLeftToAttack = 0;
-    private const float ROAMING_SPEED = 1f;
     private readonly WaitForSeconds waitForSeconds = new(3f);
-    private float roamPositionLimit = 2;
+
+    NavMeshAgent agent;
 
     RaycastHit2D[] hits;
 
     private Vector2 startingPosition;
     private Vector2 roamPosition;
     private State state;
+
+    //public Vector2Int[,] validRoamLocations;
+    //private int validRoamLocationsCount = 0;
 
     private enum State
     {
@@ -37,13 +41,25 @@ public class Enemy : NetworkBehaviour
 
     private void Awake()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
         state = State.Roaming;
     }
 
     private void Start()
     {
+        //validRoamLocations = new Vector2Int[50,50];
         startingPosition = transform.position;
         roamPosition = GetRoamingPosition();
+        agent.SetDestination(roamPosition);
+    }
+
+    private Vector2 GetRoamingPosition()
+    {
+        Vector2 vec2 = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 10);
+        Debug.Log("roamingposition: " + vec2);
+        return vec2;
     }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
@@ -52,16 +68,6 @@ public class Enemy : NetworkBehaviour
         //Debug.Log($"OnPlayerKnockdown callback; Player with ID: {playerID} is knocked down is {e.isKnockedDown}");
         StopAnimationClientRpc(); //Notify the clients to stop the animation
         target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown; //prevent firing when player is already down
-    }
-
-    private Vector3 GetRoamingPosition()
-    {
-        return startingPosition + GetRandomDir() * Random.Range(5f, 20f);
-    }
-
-    private Vector2 GetRandomDir()
-    {
-        return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }
 
     private void Update()
@@ -100,17 +106,16 @@ public class Enemy : NetworkBehaviour
             default:
 
             case State.Roaming:
-                //Debug.Log("Current State:" + state.ToString());
-
                 moveDirection = (roamPosition - (Vector2)transform.position).normalized;
-                transform.Translate(ROAMING_SPEED * Time.deltaTime * moveDirection);
+                agent.SetDestination(roamPosition);
+                //transform.Translate(ROAMING_SPEED * Time.deltaTime * moveDirection);
 
-                //Debug.Log("Distance left to target:" + Vector2.Distance(transform.position, roamPosition));
-
-                if (Vector2.Distance(transform.position, roamPosition) < roamPositionLimit)
+                Debug.Log("Distance left to target:" + Vector2.Distance(transform.position, roamPosition));
+                if (Vector2.Distance(transform.position, roamPosition) < agent.stoppingDistance)
                 {
-                    //reached roam position
+                    //reached roam position, get new
                     roamPosition = GetRoamingPosition();
+
                 }
 
                 animator.SetFloat(HORIZONTAL, moveDirection.x);
@@ -122,7 +127,6 @@ public class Enemy : NetworkBehaviour
                 break;
 
             case State.ChaseTarget:
-                Debug.Log("Current State:" + state.ToString());
                 if (target != null)
                 {
 
@@ -183,12 +187,11 @@ public class Enemy : NetworkBehaviour
     {
         if (!IsServer || collision.collider.CompareTag("Player")) return;
 
-        if (collision.collider.CompareTag("StaticColliders"))
-        {
-            //Debug.Log("It is a static collider");
-            //TODO: find a new random position
-            //roamPosition = Mathf.Abs(GetRandomDir().x) * Mathf.Abs(GetRandomDir().y) * -roamPosition;
-        }
+        agent.SetDestination(roamPosition);
+
+        //Debug.Log("It is a static collider");
+        //TODO: find a new random position
+        //roamPosition = Mathf.Abs(GetRandomDir().x) * Mathf.Abs(GetRandomDir().y) * -roamPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
