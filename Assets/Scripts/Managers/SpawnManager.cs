@@ -262,16 +262,6 @@ public class SpawnManager : NetworkBehaviour
 
         GameObject instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
 
-        /*        // Set sprite-lit-default material to all gameobjects that live in the cave 
-                if (environment == EnvironmentEnums.Cave)
-                {
-                    SpriteRenderer[] spriteRenderers = instance.GetComponentsInChildren<SpriteRenderer>();
-                    foreach (SpriteRenderer sr in spriteRenderers) { sr.material = caveMaterial; }
-
-                    Image[] images = instance.GetComponentsInChildren<Image>();
-                    foreach (Image image in images) { image.material = caveMaterial; }
-                }
-        */
         NetworkObject networkObject = instance.GetComponent<NetworkObject>();
         networkObject.Spawn();
         spawnedObjects.Add(networkObject.NetworkObjectId, networkObject);

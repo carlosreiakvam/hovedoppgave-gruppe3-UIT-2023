@@ -82,15 +82,15 @@ public class PlayerBehaviour : NetworkBehaviour
             isRunningAndroid = true;
             controller = gameObject.GetComponent<CharacterController>();
             playerInput = GetComponent<PlayerInput>();
-            
+
         }
         else if (Application.platform == RuntimePlatform.WindowsEditor ||
                  Application.platform == RuntimePlatform.WindowsPlayer)
         {
             Debug.Log("Current platform is Windows.");
             isRunningWindows = true;
-            GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false);
-            
+            try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
+            catch (Exception e) { Debug.Log("Touch ui not found"); }
         }
 
         else
