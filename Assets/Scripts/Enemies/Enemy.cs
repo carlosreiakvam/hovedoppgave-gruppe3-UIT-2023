@@ -56,16 +56,20 @@ public class Enemy : NetworkBehaviour
     {
         Vector2 roamVec;
         if (transform.position.x < 50)
+        { 
             roamVec = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 10);
+        }
         else
+        {   
             roamVec = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Cave);
+        }
 
         return roamVec;
     }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
-        state = State.PlayerDown;
+        state = State.PlayerDown; //for the host
         //Debug.Log($"OnPlayerKnockdown callback; Player with ID: {playerID} is knocked down is {e.isKnockedDown}");
         StopAnimationClientRpc(); //Notify the clients to stop the animation
         target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown; //prevent firing when player is already down
@@ -93,7 +97,7 @@ public class Enemy : NetworkBehaviour
         yield return waitForSeconds;
         Debug.Log(waitForSeconds);
         Debug.Log("Finished waiting");
-        agent.SetDestination(roamPosition);
+        agent.SetDestination(GetRoamingPosition());
         state = State.Roaming;
         
     }
@@ -120,7 +124,8 @@ public class Enemy : NetworkBehaviour
                     //reached roam position, get new
                     roamPosition = GetRoamingPosition();
                     agent.SetDestination(roamPosition);
-                    Debug.Log("Destination triggered successfully? " + agent.SetDestination(roamPosition));
+                    //Debug.Log("Destination triggered successfully? " + agent.SetDestination(roamPosition));
+                    Debug.Log("Does agent have a path? " + agent.hasPath);
                 }
 
                 animator.SetFloat(HORIZONTAL, moveDirection.x);
@@ -189,14 +194,16 @@ public class Enemy : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) //colliding with a "hard" gameobject. Find another path!
     {
-        if (!IsServer || collision.collider.CompareTag("Player")) return;
+        if (!IsServer) return;
+        if (collision.collider.CompareTag("Player")) return;
 
-        if(collision.collider.CompareTag("StaticColliders"))
+        if (agent.CompareTag("StaticColliders"))
         {
-            //roamPosition = -roamPosition;
+            agent.SetDestination(GetRoamingPosition());
+            
         }
             
-
+ 
         //Debug.Log("It is a static collider");
         //TODO: find a new random position
         //roamPosition = Mathf.Abs(GetRandomDir().x) * Mathf.Abs(GetRandomDir().y) * -roamPosition;
