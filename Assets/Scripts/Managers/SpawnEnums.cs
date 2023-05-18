@@ -1,6 +1,7 @@
 ﻿internal enum SpawnEnums
 {
     MaterialManager,
+    TileManager,
     Enemy,
     Ring,
     HealthPowerUp,

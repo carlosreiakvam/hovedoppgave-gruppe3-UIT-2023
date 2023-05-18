@@ -24,9 +24,6 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject doorCavePrefab;
     [SerializeField] private GameObject wizardPrefab;
 
-    public Tilemap forestTilemap;
-    public Tilemap treeTilemap;
-    public Tilemap caveTilemap;
 
     public const int maxTries = 100;
     public const int nEnemiesOutside = 15;
@@ -35,29 +32,6 @@ public class SpawnManager : NetworkBehaviour
     public const int nHealthPowerupsCave = 25;
     public const int nSpeedPowerupsOutdoor = 15;
     public const int nSpeedPowerupsCave = 15;
-
-
-    private static Dictionary<SpawnEnums, int> mapBoundsOutdoor = new Dictionary<SpawnEnums, int>()
-{
-    { SpawnEnums.X_MIN, 1 },
-    { SpawnEnums.X_MAX, 50 },
-    { SpawnEnums.Y_MIN, 1 },
-    { SpawnEnums.Y_MAX, 50 },
-    { SpawnEnums.X_MIDDLE, 45/2 },
-    { SpawnEnums.Y_MIDDLE, 45/2 },
-
-};
-
-    private static Dictionary<SpawnEnums, int> mapBoundsCave = new Dictionary<SpawnEnums, int>()
-{
-    { SpawnEnums.X_MIN, 95 },
-    { SpawnEnums.X_MAX, 140 },
-    { SpawnEnums.Y_MIN, 1 },
-    { SpawnEnums.Y_MAX, 50 },
-    { SpawnEnums.X_MIDDLE, 95/2 },
-    { SpawnEnums.Y_MIDDLE, 45/2 },
-};
-
 
     private Transform playerTransform;
     private Dictionary<ulong, NetworkObject> spawnedObjects = new Dictionary<ulong, NetworkObject>();
@@ -70,27 +44,16 @@ public class SpawnManager : NetworkBehaviour
         else Destroy(gameObject);
     }
 
-    private Dictionary<SpawnEnums, int> GetMidAreaFromOutdoor(int sideLength)
-    {
 
-        Dictionary<SpawnEnums, int> midArea = new Dictionary<SpawnEnums, int>()
-        {
-            { SpawnEnums.X_MIN, mapBoundsOutdoor[SpawnEnums.X_MIDDLE] - sideLength },
-            { SpawnEnums.X_MAX, mapBoundsOutdoor[SpawnEnums.X_MIDDLE] + sideLength },
-            { SpawnEnums.Y_MIN, mapBoundsOutdoor[SpawnEnums.Y_MIDDLE] - sideLength },
-            { SpawnEnums.Y_MAX, mapBoundsOutdoor[SpawnEnums.Y_MIDDLE] + sideLength },
-        };
 
-        return midArea;
-    }
 
     public bool SpawnAll()
     {
         try
         {
-
+            
+            // SPAWN PLAYERS
             SpawnPlayers();
-            SpawnObject(SpawnEnums.Ring, new Vector2(27, 25), EnvironmentEnums.Outdoor);
 
             // SPAWN WIZARD
             SpawnObject(SpawnEnums.Wizard, new Vector2(25, 26), EnvironmentEnums.Outdoor);
@@ -99,22 +62,22 @@ public class SpawnManager : NetworkBehaviour
             SpawnCaveDoors();
 
             // SPAWN RINGS
-            SpawnPrefabs(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 4, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.Ring, environment: EnvironmentEnums.Cave, nInstances: 4, searchRange: 1);
 
             // SPAWN TORCHES
-            SpawnPrefabs(SpawnEnums.TorchPowerUp, environment: EnvironmentEnums.Cave, nInstances: 15, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.TorchPowerUp, environment: EnvironmentEnums.Cave, nInstances: 15, searchRange: 1);
 
             // SPAWN ENEMIES
-            SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: nEnemiesOutside, searchRange: 1, excludedMidAreaSideLength: 10);
-            SpawnPrefabs(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: nEnemiesCave, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: nEnemiesOutside, searchRange: 1, excludedMidAreaSideLength: 10);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: nEnemiesCave, searchRange: 1);
 
             // SPAWN HEALTH POWERUPS
-            SpawnPrefabs(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nHealthPowerupsOutdoor, searchRange: 1);
-            SpawnPrefabs(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Cave, nInstances: nHealthPowerupsCave, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nHealthPowerupsOutdoor, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Cave, nInstances: nHealthPowerupsCave, searchRange: 1);
 
             // SPAWN SPEED POWERUPS
-            SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nSpeedPowerupsOutdoor, searchRange: 1);
-            SpawnPrefabs(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: nSpeedPowerupsCave, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nSpeedPowerupsOutdoor, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: nSpeedPowerupsCave, searchRange: 1);
 
             // MATERIAL MANAGER HAS TO BE LAST
             SpawnObject(SpawnEnums.MaterialManager, new Vector2(), EnvironmentEnums.NoEnvironment);
@@ -145,102 +108,13 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-    private void SpawnPrefabs(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
+    private void SpawnPrefabsAtEmptyTiles(SpawnEnums spawnEnum, EnvironmentEnums environment, int nInstances, int searchRange, int excludedMidAreaSideLength = -1)
     {
         for (int i = 0; i < nInstances; i++)
         {
-            Vector3 emptyTile = GetEmptyTile(searchRange, environment, excludedMidAreaSideLength);
+            Vector3 emptyTile = TileManager.Singleton.GetEmptyTile(searchRange, environment, excludedMidAreaSideLength);
             SpawnObject(spawnEnum, emptyTile, environment);
         }
-    }
-
-
-    public Vector2 GetEmptyTile(int searchRange, EnvironmentEnums environment, int excludedMidAreaSideLength = -1)
-    {
-        Dictionary<SpawnEnums, int> boundaries;
-        List<Tilemap> tilemaps;
-        List<Tilemap> outdoorTilemaps = new List<Tilemap> { forestTilemap, treeTilemap };
-        List<Tilemap> caveTilemaps = new List<Tilemap> { caveTilemap };
-
-        // Set the correct boundaries and tilemaps based on the environment.
-        if (environment == EnvironmentEnums.Outdoor)
-        {
-            boundaries = mapBoundsOutdoor;
-            tilemaps = outdoorTilemaps;
-        }
-        else
-        {
-            boundaries = mapBoundsCave;
-            tilemaps = caveTilemaps;
-        }
-
-        Vector2 emptyTile = Vector2.zero;
-
-        // Try to find an empty tile maxTries times.
-        for (int i = 0; i < maxTries; i++)
-        {
-
-            // Generate a random position within the boundaries.
-            Vector3Int randomPosition = new Vector3Int(Random.Range(boundaries[SpawnEnums.X_MIN] + searchRange, boundaries[SpawnEnums.X_MAX] - searchRange),
-                                                        Random.Range(boundaries[SpawnEnums.Y_MIN] + searchRange, boundaries[SpawnEnums.Y_MAX] - searchRange), 0
-                                                        );
-
-            // If an area in the middle should be excluded, check if the random position is within that area and if so, skip this iteration.
-            if (excludedMidAreaSideLength != -1)
-            {
-                // 'continue' if empty tile is in middle area
-                Dictionary<SpawnEnums, int> midArea = GetMidAreaFromOutdoor(excludedMidAreaSideLength);
-                if (
-                    (randomPosition.x >= midArea[SpawnEnums.X_MIN] && randomPosition.x <= midArea[SpawnEnums.X_MAX])
-                    && (randomPosition.y >= midArea[SpawnEnums.Y_MIN] && randomPosition.y <= midArea[SpawnEnums.Y_MAX])
-                    )
-                { continue; }
-            }
-
-            // Assume the tile is empty until proven otherwise.
-            bool isTileEmpty = true;
-
-            // Check the tile at the random position and its neighboring tiles.
-            for (int dx = -searchRange; dx <= searchRange; dx++)
-            {
-                for (int dy = -searchRange; dy <= searchRange; dy++)
-                {
-                    Vector3Int position = randomPosition + new Vector3Int(dx, dy, 0);
-
-                    // If a tile is not empty, break out of the loop.
-                    if (!IsTileEmptyAt(position, tilemaps))
-                    {
-                        isTileEmpty = false;
-                        break;
-                    }
-                }
-
-                if (!isTileEmpty) break;
-            }
-
-            // If an empty tile was found, convert its position to world coordinates and break the loop.
-            if (isTileEmpty)
-            {
-                emptyTile = tilemaps[0].CellToWorld(randomPosition);
-                break;
-            }
-        }
-
-        return new Vector2(emptyTile.x, emptyTile.y);
-    }
-
-    // This method checks if a tile at a given position in a list of tilemaps is empty.
-    private bool IsTileEmptyAt(Vector3Int position, List<Tilemap> tilemaps)
-    {
-        foreach (Tilemap tilemap in tilemaps)
-        {
-            if (tilemap.GetTile(position) != null)
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 
 

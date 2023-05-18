@@ -57,11 +57,11 @@ public class Enemy : NetworkBehaviour
         Vector2 roamVec;
         if (transform.position.x < 50)
         { 
-            roamVec = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 10);
+            roamVec = TileManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Outdoor, excludedMidAreaSideLength: 10);
         }
         else
         {   
-            roamVec = SpawnManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Cave);
+            roamVec = TileManager.Singleton.GetEmptyTile(searchRange: 1, EnvironmentEnums.Cave);
         }
 
         return roamVec;
