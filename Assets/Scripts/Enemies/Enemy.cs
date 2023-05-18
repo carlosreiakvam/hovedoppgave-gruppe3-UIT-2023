@@ -92,7 +92,10 @@ public class Enemy : NetworkBehaviour
     {
         yield return waitForSeconds;
         Debug.Log(waitForSeconds);
+        Debug.Log("Finished waiting");
+        agent.SetDestination(roamPosition);
         state = State.Roaming;
+        
     }
 
 
@@ -108,14 +111,16 @@ public class Enemy : NetworkBehaviour
 
             case State.Roaming:
                 moveDirection = (roamPosition - (Vector2)transform.position).normalized;
-                agent.SetDestination(roamPosition);
+                
                 //transform.Translate(ROAMING_SPEED * Time.deltaTime * moveDirection);
 
-                Debug.Log("Distance left to target:" + Vector2.Distance(transform.position, roamPosition));
+                //Debug.Log("Distance left to target:" + Vector2.Distance(transform.position, roamPosition));
                 if (Vector2.Distance(transform.position, roamPosition) < agent.stoppingDistance)
                 {
                     //reached roam position, get new
                     roamPosition = GetRoamingPosition();
+                    agent.SetDestination(roamPosition);
+                    Debug.Log("Destination triggered successfully? " + agent.SetDestination(roamPosition));
                 }
 
                 animator.SetFloat(HORIZONTAL, moveDirection.x);
