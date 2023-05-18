@@ -76,28 +76,8 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls;
 
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            Debug.Log("Current platform is Android.");
-            isRunningAndroid = true;
-            controller = gameObject.GetComponent<CharacterController>();
-            playerInput = GetComponent<PlayerInput>();
-
-        }
-        else if (Application.platform == RuntimePlatform.WindowsEditor ||
-                 Application.platform == RuntimePlatform.WindowsPlayer)
-        {
-            Debug.Log("Current platform is Windows.");
-            isRunningWindows = true;
-            try { GameObject.FindWithTag(TOUCH_UI_TAG).SetActive(false); }
-            catch (Exception e) { Debug.Log("Touch ui not found"); }
-        }
-
-        else
-        {
-            Debug.Log("Current platform is not supported.");
-        }
     }
+
 
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
     {
@@ -107,6 +87,30 @@ public class PlayerBehaviour : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+
+        if (gamestatusSO.isAndroid)
+        {
+            isRunningAndroid = true;
+            controller = gameObject.GetComponent<CharacterController>();
+            playerInput = GetComponent<PlayerInput>();
+
+        }
+        else if (gamestatusSO.isWindows)
+        {
+            isRunningWindows = true;
+            GameObject touchUI = GameObject.FindWithTag(TOUCH_UI_TAG);
+            try { touchUI.SetActive(false); }
+            catch (Exception e) { Debug.Log(""); }
+        }
+
+        else
+        {
+            Debug.Log("Current platform is not supported.");
+        }
+
+
+
+
         base.OnNetworkSpawn();
 
         Light2D playerLight = GetComponentInChildren<Light2D>();
