@@ -1038,8 +1038,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Player: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2ec18e42de128d049bc299a6b4f1fca0, type: 2}
+  m_sharedMaterial: {fileID: -4702113870448428490, guid: 2ec18e42de128d049bc299a6b4f1fca0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

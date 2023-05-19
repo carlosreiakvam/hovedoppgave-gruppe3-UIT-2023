@@ -1,6 +1,6 @@
 public enum MenuEnums
 { 
-    StartMenu,
+    MenuStart,
     LobbyMenu,
     LobbyCreate,
     LobbyRoom,

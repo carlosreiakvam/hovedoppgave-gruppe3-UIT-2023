@@ -10,6 +10,7 @@ public class LobbyQuickJoin : MonoBehaviour
 {
     [SerializeField] Canvas canvas;
     [SerializeField] Sprite spinnerSprite;
+    [SerializeField] TextMeshProUGUI header;
     [SerializeField] TextMeshProUGUI playerNameInput;
     [SerializeField] GameObject goButtonGO;
     [SerializeField] GameObject backButtonGO;
@@ -18,8 +19,26 @@ public class LobbyQuickJoin : MonoBehaviour
 
     private void Start()
     {
+
         menuManager = GetComponentInParent<MenuManager>();
         spinner = CreateSpinner();
+
+        Button goButton = goButtonGO.GetComponent<Button>();
+        Button backButton = backButtonGO.GetComponent<Button>();
+
+        goButton.onClick.AddListener(async () =>
+        {
+            if (!ValidateInput()) return;
+            spinner.SetActive(true);
+            StartCoroutine(RotateSpinner(spinner));
+            bool isLobbyFound = await LobbyManager.Singleton.QuickJoinLobby(playerNameInput.text);
+            spinner.SetActive(false);
+            if (isLobbyFound) menuManager.OpenPage(MenuEnums.LobbyRoom);
+            else menuManager.OpenAlert("No open lobbies available!");
+        });
+
+        backButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
+
 
     }
 
@@ -39,21 +58,9 @@ public class LobbyQuickJoin : MonoBehaviour
 
     private void OnEnable()
     {
-        Button goButton = goButtonGO.GetComponent<Button>();
-        Button backButton = backButtonGO.GetComponent<Button>();
+        header.gameObject.SetActive(true);
+        header.text = "Join Lobby";
 
-        goButton.onClick.AddListener(async () =>
-        {
-            if (!ValidateInput()) return;
-            spinner.SetActive(true);
-            StartCoroutine(RotateSpinner(spinner));
-            bool isLobbyFound = await LobbyManager.Singleton.QuickJoinLobby(playerNameInput.text);
-            spinner.SetActive(false);
-            if (isLobbyFound) menuManager.OpenPage(MenuEnums.LobbyRoom);
-            else menuManager.OpenAlert("No open lobbies available!");
-        });
-
-        backButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
     }
 
     IEnumerator RotateSpinner(GameObject spinner)

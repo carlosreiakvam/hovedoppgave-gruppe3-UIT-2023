@@ -1,11 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LobbyStartMenu : MonoBehaviour
 {
     // GameObjects
+    [SerializeField] private TextMeshProUGUI header;
     [SerializeField] private Button quickJoinButtonGO;
-    [SerializeField] private Button joinByCodeButtonGO;
     [SerializeField] private Button CreateButtonGO;
     [SerializeField] private Button backButtonGO;
     [SerializeField] private Button quickJoinBackGO;
@@ -24,15 +25,19 @@ public class LobbyStartMenu : MonoBehaviour
         // LOBBY QUICK JOIN
         quickJoinButtonGO.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyQuickJoin); });
 
-        // JOIN BY CODE
-        joinByCodeButtonGO.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyJoinByCode); });
-
         // QUICK JOIN BACK
         quickJoinBackGO.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.LobbyMenu));
 
         // BackButton
-        backButtonGO.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.StartMenu));
+        backButtonGO.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.MenuStart));
     }
+
+    void OnEnable()
+    {
+        header.gameObject.SetActive(true);
+        header.text = "Lobby Menu";
+    }
+
 
 }
 

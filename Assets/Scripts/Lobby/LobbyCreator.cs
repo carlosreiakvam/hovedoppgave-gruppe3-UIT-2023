@@ -14,6 +14,7 @@ public class LobbyCreator : MonoBehaviour
 {
     [SerializeField] Canvas canvas;
     [SerializeField] Sprite spinnerSprite;
+    [SerializeField] TextMeshProUGUI header;
     [SerializeField] TextMeshProUGUI playerNameInput;
     [SerializeField] TextMeshProUGUI lobbyNameInput;
     [SerializeField] GameObject scopeButtonGO;
@@ -26,10 +27,16 @@ public class LobbyCreator : MonoBehaviour
     GameObject spinner;
 
 
+    private void OnEnable()
+    {
+        header.transform.gameObject.SetActive(true);
+        header.text = "Create Lobby";
+    }
 
 
     private void Start()
     {
+
         menuManager = GetComponentInParent<MenuManager>();
         lobbyManager = GetComponentInParent<LobbyManager>();
         spinner = CreateSpinner();

@@ -12,11 +12,10 @@ public class LobbyRoom : MonoBehaviour
 {
     public const string PLAYER_NAME = "PlayerName";
     [SerializeField] GameStatusSO gameStatusSO;
-    [SerializeField] GameObject leaveButtonGO;
-    [SerializeField] GameObject readyButtonGO;
-    [SerializeField] GameObject startGameButtonGO;
-    [SerializeField] TextMeshProUGUI lobbyCodeText;
-    [SerializeField] TextMeshProUGUI lobbyNameText;
+    [SerializeField] Button leaveButton;
+    [SerializeField] Button readyButton;
+    [SerializeField] Button startGameButton;
+    [SerializeField] TextMeshProUGUI header;
     [SerializeField] TextMeshProUGUI p1Name;
     [SerializeField] TextMeshProUGUI p2Name;
     [SerializeField] TextMeshProUGUI p3Name;
@@ -25,10 +24,10 @@ public class LobbyRoom : MonoBehaviour
     [SerializeField] GameObject p2;
     [SerializeField] GameObject p3;
     [SerializeField] GameObject p4;
-    [SerializeField] GameObject p1ToggleGO;
-    [SerializeField] GameObject p2ToggleGO;
-    [SerializeField] GameObject p3ToggleGO;
-    [SerializeField] GameObject p4ToggleGO;
+    [SerializeField] GameObject p1ReadyText;
+    [SerializeField] GameObject p2ReadyText;
+    [SerializeField] GameObject p3ReadyText;
+    [SerializeField] GameObject p4ReadyText;
     [SerializeField] List<PlayerNameSO> playerNameList = new(4);
 
     bool isReady = false;
@@ -36,24 +35,32 @@ public class LobbyRoom : MonoBehaviour
     bool isGameInitiated = false;
 
 
-    Button readyButton;
     MenuManager menuManager;
-    Button leaveButton;
-    Button startGameButton;
-    TextMeshProUGUI readyButtonText;
-    List<Toggle> isReadyStates;
+    List<GameObject> isReadyStates;
     List<TextMeshProUGUI> pNames;
     GameObject[] pNamesGO;
 
-    void Start()
+    private void Start()
     {
-        ConnectWithManagers();
-        GetToggles();
-        InitPlayerNames();
+        InitVariables();
+        InitPlayers();
         HandleReadyButton();
         HandleStartGameButton();
         HandleLeaveButton();
-        SetLobbyText();
+        ConnectWithManagers();
+    }
+
+    private void InitPlayers()
+    {
+        pNamesGO = new GameObject[] { p1, p2, p3, p4 };
+        foreach (GameObject playerName in pNamesGO) { playerName.SetActive(false); }
+    }
+
+
+    private void OnEnable()
+    {
+        InitPlayers();
+        SetHeader();
     }
 
 
@@ -62,31 +69,19 @@ public class LobbyRoom : MonoBehaviour
     /// </summary>
     private void ConnectWithManagers()
     {
-        menuManager = GetComponentInParent<MenuManager>();
         LobbyManager.Singleton.OnHandlePollUpdate += HandlePollUpdate;
         LobbyManager.Singleton.OnLobbyLeft += OnLobbyLeft;
     }
 
-    /// <summary>
-    /// Retrieves the toggles for player ready states from GameObjects.
-    /// </summary>
-    private void GetToggles()
-    {
-        Toggle p1Toggle = p1ToggleGO.GetComponent<Toggle>();
-        Toggle p2Toggle = p2ToggleGO.GetComponent<Toggle>();
-        Toggle p3Toggle = p3ToggleGO.GetComponent<Toggle>();
-        Toggle p4Toggle = p4ToggleGO.GetComponent<Toggle>();
-        isReadyStates = new List<Toggle> { p1Toggle, p2Toggle, p3Toggle, p4Toggle };
-    }
 
     /// <summary>
     /// Initializes player name GameObjects and sets their active status to false.
     /// </summary>
-    private void InitPlayerNames()
+    private void InitVariables()
     {
+        menuManager = GetComponentInParent<MenuManager>();
         pNames = new List<TextMeshProUGUI> { p1Name, p2Name, p3Name, p4Name };
-        pNamesGO = new GameObject[] { p1, p2, p3, p4 };
-        foreach (GameObject playerName in pNamesGO) { playerName.SetActive(false); }
+        isReadyStates = new List<GameObject> { p1ReadyText, p2ReadyText, p3ReadyText, p4ReadyText };
     }
 
     /// <summary>
@@ -94,8 +89,7 @@ public class LobbyRoom : MonoBehaviour
     /// </summary>
     private void HandleReadyButton()
     {
-        readyButton = readyButtonGO.GetComponent<Button>();
-        readyButtonText = readyButton.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI readyButtonText = readyButton.GetComponentInChildren<TextMeshProUGUI>();
         readyButton.onClick.AddListener(() =>
         {
             isReady = !isReady;
@@ -106,24 +100,22 @@ public class LobbyRoom : MonoBehaviour
 
     private void HandleStartGameButton()
     {
-        startGameButton = startGameButtonGO.GetComponent<Button>();
         startGameButton.interactable = false;
-        startGameButtonGO.SetActive(false);
+        startGameButton.gameObject.SetActive(false);
         startGameButton.onClick.AddListener(() => { LobbyManager.Singleton.QueGameStart(); });
     }
     private void HandleLeaveButton()
     {
-        leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() => { LobbyManager.Singleton.RequestLeaveLobby(); });
     }
 
     /// <summary>
     /// Sets the lobby name and code text.
     /// </summary>
-    private void SetLobbyText()
+    private void SetHeader()
     {
-        lobbyNameText.text = LobbyManager.Singleton.lobbyName;
-        lobbyCodeText.text = LobbyManager.Singleton.lobbyCode;
+        header.transform.gameObject.SetActive(true);
+        header.text = LobbyManager.Singleton.lobbyName;
     }
 
 
@@ -140,7 +132,7 @@ public class LobbyRoom : MonoBehaviour
 
 
     /// <summary>
-    /// Updates local lobby data based on the state of the remote lobby.
+    /// Updates local lobby data based on the playerIsReady of the remote lobby.
     /// </summary>
     public void UpdateLocalLobby(Lobby lobby)
     {
@@ -158,8 +150,12 @@ public class LobbyRoom : MonoBehaviour
             // Activate player object and set name
             pNamesGO[i].SetActive(true);
 
-            // Set ready state
-            isReadyStates[i].isOn = (player.Data["IsReady"].Value == true.ToString());
+            // Set ready playerIsReady
+            // TODO: ADD
+
+            bool playerIsReady = player.Data["IsReady"].Value == true.ToString();
+            if (playerIsReady) isReadyStates[i].SetActive(true);
+            else isReadyStates[i].SetActive(false);
 
             // Set thisPlayer based on this authorized instance
             if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(LobbyManager.Singleton.GetThisPlayerId()))
@@ -181,8 +177,7 @@ public class LobbyRoom : MonoBehaviour
             }
 
             // Game is not ready if any one of the ready states are false
-            if (!isReadyStates[i].isOn) { isGameReady = false; }
-
+            isGameReady = isReadyStates[i].activeSelf;
 
             //playerNameList[i].PlayerName = player.Data[PLAYER_NAME].Value;
             playerNameList[i].SetValue(player.Data[PLAYER_NAME].Value);
@@ -191,14 +186,15 @@ public class LobbyRoom : MonoBehaviour
 
         }
 
-        if (authenticatedIsHost) { startGameButtonGO.SetActive(true); }
+        if (authenticatedIsHost) { startGameButton.gameObject.SetActive(true); }
+
         if (isGameReady) { startGameButton.interactable = true; }
         if (lobby.Data["IsGameReady"].Value == true.ToString())
         {
             if (!isGameInitiated)
             {
                 isGameInitiated = true;
-                LobbyManager.Singleton.StopLobbyPolling(); 
+                LobbyManager.Singleton.StopLobbyPolling();
 
                 if (authenticatedIsHost)
                 {

@@ -45,6 +45,13 @@ public class TileManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Get a randomly located empty tile within a given environment.
+    /// </summary>
+    /// <param name="searchRange">How much space in pixels around the given tile should also be empty.</param>
+    /// <param name="environment">The given environment</param>
+    /// <param name="excludedMidAreaSideLength">If greater that 0 this represents a mid area in the tilemap that will be excluded</param>
+    /// <returns></returns>
     public Vector2 GetEmptyTile(int searchRange, EnvironmentEnums environment, int excludedMidAreaSideLength = -1)
     {
         Dictionary<SpawnEnums, int> boundaries;
@@ -119,7 +126,12 @@ public class TileManager : MonoBehaviour
     }
 
 
-    // This method checks if a tile at a given position in a list of tilemaps is empty.
+    /// <summary>
+    /// This method checks if a tile is empty in every tilemap provided.
+    /// </summary>
+    /// <param name="position"> The position to check </param>
+    /// <param name="tilemaps"> The tilemaps that are inspected </param>
+    /// <returns>Returns true if tile is empty in all tilemaps provided, false otherwise.</returns>
     private bool IsTileEmptyAt(Vector3Int position, List<Tilemap> tilemaps)
     {
         foreach (Tilemap tilemap in tilemaps)
@@ -133,6 +145,17 @@ public class TileManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Calculates and returns the mid-area bounds of the outdoor environment based on the given side length.
+    /// </summary>
+    /// <param name="sideLength">The side length for the square mid-area to calculate.</param>
+    /// <returns>
+    /// A dictionary with keys as SpawnEnums (X_MIN, X_MAX, Y_MIN, Y_MAX) representing the bounds of the mid-area,
+    /// and values as integers representing the respective positions within the outdoor environment.
+    /// </returns>
+    /// <remarks>
+    /// The mid-area is calculated as a square with the given side length, centered around the middle point of the outdoor environment.
+    /// </remarks>
     private Dictionary<SpawnEnums, int> GetMidAreaFromOutdoor(int sideLength)
     {
 
