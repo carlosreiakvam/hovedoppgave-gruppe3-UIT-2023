@@ -5,6 +5,7 @@ using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerBehaviour : NetworkBehaviour
@@ -49,10 +50,8 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool playerIsKnockedOut = false;
     private bool woodenSword = true;
 
-    private bool isRunningAndroid = false;
-    private bool isRunningWindows = false;
-
     private const string TOUCH_UI_TAG = "TouchUI";
+    private const string TOUCH_UI_NAME = "TouchUIContainer";
     private PlayerHealth playerHealth;
     private void Initialize()
     {
@@ -65,6 +64,17 @@ public class PlayerBehaviour : NetworkBehaviour
         playerHealth = GetComponentInChildren<PlayerHealth>();
         playerHealth.OnPlayerKnockdown += OnPlayerKnockdown;
     }
+    private void Awake()
+    {
+
+        try
+        {
+            GameObject touchUIContainer = GameObject.Find(TOUCH_UI_NAME);
+            Canvas touchUICanvas = touchUIContainer.GetComponent<Canvas>();
+            touchUICanvas.enabled = false;
+        }
+        catch { }
+    }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
@@ -75,6 +85,7 @@ public class PlayerBehaviour : NetworkBehaviour
     private void Start()
     {
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls;
+
 
     }
 
@@ -90,26 +101,9 @@ public class PlayerBehaviour : NetworkBehaviour
 
         if (gamestatusSO.isAndroid)
         {
-            isRunningAndroid = true;
             controller = gameObject.GetComponent<CharacterController>();
             playerInput = GetComponent<PlayerInput>();
-
         }
-        else if (gamestatusSO.isWindows)
-        {
-            isRunningWindows = true;
-            GameObject touchUI = GameObject.FindWithTag(TOUCH_UI_TAG);
-            try { touchUI.SetActive(false); }
-            catch (Exception e) { Debug.Log(""); }
-        }
-
-        else
-        {
-            Debug.Log("Current platform is not supported.");
-        }
-
-
-
 
         base.OnNetworkSpawn();
 
@@ -145,10 +139,10 @@ public class PlayerBehaviour : NetworkBehaviour
 
         if (!chatInFocus)
         {
-            if (isRunningAndroid)
+            if (gamestatusSO.isAndroid)
                 HandleTouchInput();
 
-            if (isRunningWindows)
+            if (gamestatusSO.isWindows)
                 HandleMovement();
         }
     }

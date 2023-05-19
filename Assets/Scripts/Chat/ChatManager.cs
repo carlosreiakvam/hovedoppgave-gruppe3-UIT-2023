@@ -53,6 +53,7 @@ public class ChatManager : NetworkBehaviour
     {
         chatContent.maxVisibleLines = maximumMessages;
         chatInput.onSubmit.AddListener(delegate { SubmitMsg(); });
+        chatInput.characterLimit = 100;
     }
 
     /// <summary>

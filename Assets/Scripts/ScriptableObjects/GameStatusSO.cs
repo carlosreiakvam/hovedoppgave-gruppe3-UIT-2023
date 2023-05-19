@@ -38,7 +38,6 @@ public class GameStatusSO : ScriptableObject
         isAndroid = false;
         isWindows = false;
         doorForestPosition = new Vector2(25, 23);
-        //doorCavePosition = new Vector2(96f, 4.4f);
     }
 }
 
