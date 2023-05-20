@@ -68,6 +68,14 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    public void OnPlayerDeath()
+    {
+        infoText.text = " You died!";
+        largeMessage.SetActive(true);
+        inGameMenu.SetActive(true);
+
+    }
+
     /// <summary>
     /// Destroys objects tagged with "DontDestroy" when returning to the menu scene.
     /// </summary>
