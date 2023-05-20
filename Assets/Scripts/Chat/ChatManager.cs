@@ -103,6 +103,7 @@ public class ChatManager : NetworkBehaviour
     /// <param name="senderName">The name of the player who is sending the message.</param>
     public void SendMsg(string message, string senderName = null)
     {
+        if (!IsServer) return;
         SendChatMessageServerRpc(message, senderName, default);
     }
 
