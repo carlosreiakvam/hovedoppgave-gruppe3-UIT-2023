@@ -10,7 +10,7 @@ using Mono.CSharp;
 public class Enemy : NetworkBehaviour
 {
     private Transform target = null;
-    float lookingDistance = 7f;
+    float lookingDistance = 10f;
     private const float SPEED_VALUE = 2f;
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
@@ -102,12 +102,10 @@ public class Enemy : NetworkBehaviour
         {
             if (Vector2.Distance(transform.position, target.position) >= lookingDistance)
             {
-                Debug.LogWarning("I GIVE UP");
                 state = State.Looking;
                 animator.SetFloat(SPEED, 0);
                 return;
             }
-            Debug.LogWarning("CHASING TARGET: " + target.name);
 
 
             moveDirection = (target.transform.position - transform.position).normalized;
