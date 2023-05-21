@@ -80,6 +80,7 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         playerIsKnockedOut = e.isKnockedDown;
         playerHealth.OnPlayerKnockdown -= OnPlayerKnockdown;
+        GameManager.Singleton.OnPlayerDeath();
     }
 
     private void Start()

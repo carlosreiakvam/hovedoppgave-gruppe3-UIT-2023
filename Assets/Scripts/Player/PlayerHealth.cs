@@ -99,5 +99,6 @@ public class PlayerHealth : NetworkBehaviour
     private void VizualizeDeathClientRpc()
     {
         OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true });
+
     }
 }
