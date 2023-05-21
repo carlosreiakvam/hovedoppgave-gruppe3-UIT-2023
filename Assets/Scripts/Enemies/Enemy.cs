@@ -51,7 +51,7 @@ public class Enemy : NetworkBehaviour
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
-        state = State.PlayerDown; //for the host
+        state = State.Looking; //for the host
         //Debug.Log($"OnPlayerKnockdown callback; Player with ID: {playerID} is knocked down is {e.isKnockedDown}");
         StopAnimationClientRpc(); //Notify the clients to stop the animation
         target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown; //prevent firing when player is already down
@@ -75,7 +75,7 @@ public class Enemy : NetworkBehaviour
                 break;
 
             case State.PlayerDown:
-                StartCoroutine(TakeABreakRoutine()); //Take a break before going back into roaming
+                //StartCoroutine(TakeABreakRoutine()); //Take a break before going back into roaming
                 break;
         }
     }
@@ -133,17 +133,17 @@ public class Enemy : NetworkBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
-    {
-        if (!IsServer) return;
-        if (!collision.CompareTag("Player")) return;
+    //private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
+    //{
+    //    if (!IsServer) return;
+    //    if (!collision.CompareTag("Player")) return;
 
-        if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
-        {
-            target = collision.transform;
-            //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
-        }
-    }
+    //    if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
+    //    {
+    //        target = collision.transform;
+    //        //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+    //    }
+    //}
 
 
     private void StopAnimation()
