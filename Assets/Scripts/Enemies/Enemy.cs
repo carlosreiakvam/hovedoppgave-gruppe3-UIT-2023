@@ -75,9 +75,16 @@ public class Enemy : NetworkBehaviour
                 break;
 
             case State.PlayerDown:
-                //StartCoroutine(TakeABreakRoutine()); //Take a break before going back into roaming
+                StartCoroutine(TakeABreakRoutine()); //Take a break before going back into roaming
                 break;
         }
+    }
+
+    private IEnumerator TakeABreakRoutine()
+    {
+        yield return waitForSeconds;
+        Debug.Log(waitForSeconds);
+        state = State.Looking;
     }
 
     private void LookForTarget()
@@ -123,6 +130,18 @@ public class Enemy : NetworkBehaviour
                     Attack();
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
+    {
+        if (!IsServer) return;
+        if (!collision.CompareTag("Player")) return;
+
+        if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
+        {
+            target = collision.transform;
+            //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
         }
     }
 
