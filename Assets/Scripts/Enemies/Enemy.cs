@@ -10,7 +10,7 @@ using Mono.CSharp;
 public class Enemy : NetworkBehaviour
 {
     private Transform target = null;
-    float lookingDistance = 10f;
+    readonly float lookingDistance = 5f;
     private const float SPEED_VALUE = 2f;
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
@@ -21,40 +21,80 @@ public class Enemy : NetworkBehaviour
     private Vector2 size = new Vector2(0.5087228f * 2.2f, 0.9851828f * 1.2f);
     private const string STEELATTACK = "SteelAttack";
     private float timeLeftToAttack = 0;
-    private readonly WaitForSeconds waitForSeconds = new(3f);
-    private List<Transform> targets = new();
+    private int indexOfChasedPlayer = 0;
+
 
     RaycastHit2D[] hits;
 
-    private Vector2 roamPosition;
     private State state;
-    GameObject[] players;
+    private List<GameObject> players;
 
+    // A minimum and maximum time delay for taking a decision, choosing a direction to move in
+    public Vector2 decisionTime = new(1, 4);
+    internal float decisionTimeCount = 0;
+
+    // The possible directions that the object can move int, right, left, up, down, and zero for staying in place. I added zero twice to give a bigger chance if it happening than other directions
+    internal Vector2[] moveDirections = new Vector2[] { Vector2.right, Vector2.left, Vector2.down, Vector2.up };
+    internal int currentMoveDirection;
 
     private enum State
     {
-        Looking,
+        Roaming,
         ChaseTarget,
         PlayerDown,
     }
 
     private void Awake()
     {
-        state = State.Looking;
+        //state = State.Looking;
+        state = State.Roaming;
+    }
+
+    private void Update()
+    {
+        if (!IsServer) return;
+
+        if (state == State.ChaseTarget)
+        {
+            if (timeLeftToAttack > 0)
+            {
+                timeLeftToAttack -= Time.deltaTime;
+                if (timeLeftToAttack < 0)
+                {
+                    timeLeftToAttack = 0;
+                }
+            }
+        }
+    }
+
+    private void Start()
+    {
+        // Set a random time delay for taking a decision ( changing direction, or standing in place for a while )
+        decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
+
+        // Choose a movement direction, or stay in place
+        ChooseMoveDirection();
+    }
+
+    void ChooseMoveDirection()
+    {
+        // Choose whether to move sideways or up/down
+        currentMoveDirection = Mathf.FloorToInt(Random.Range(0, moveDirections.Length));
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player").ToList();
     }
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
-        state = State.Looking; //for the host
-        //Debug.Log($"OnPlayerKnockdown callback; Player with ID: {playerID} is knocked down is {e.isKnockedDown}");
+        if (players.Count != 0)
+            players.RemoveAt(indexOfChasedPlayer);
         StopAnimationClientRpc(); //Notify the clients to stop the animation
-        target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown; //prevent firing when player is already down
+        state = State.Roaming;
+        target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown;
     }
 
 
@@ -64,44 +104,50 @@ public class Enemy : NetworkBehaviour
 
         switch (state)
         {
-            default:
 
-            case State.Looking:
-                LookForTarget();
+            case State.Roaming:
+                moveDirection = moveDirections[currentMoveDirection];
+
+                transform.Translate(SPEED_VALUE * Time.deltaTime * moveDirection);
+
+                animator.SetFloat(HORIZONTAL, moveDirection.x);
+                animator.SetFloat(VERTICAL, moveDirection.y);
+                animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
+
+                if (decisionTimeCount > 0) decisionTimeCount -= Time.deltaTime;
+                else
+                {
+                    // Choose a random time delay for taking a decision ( changing direction, or standing in place for a while )
+                    decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
+
+                    // Choose a movement direction, or stay in place
+                    ChooseMoveDirection();
+                    SearchForTarget();
+                }
                 break;
+
 
             case State.ChaseTarget:
                 ChaseTarget();
                 break;
-
-            case State.PlayerDown:
-                //StartCoroutine(TakeABreakRoutine()); //Take a break before going back into roaming
-                break;
         }
     }
 
-    private IEnumerator TakeABreakRoutine()
+    private void SearchForTarget()
     {
-        yield return waitForSeconds;
-        Debug.Log(waitForSeconds);
-        state = State.Looking;
-    }
-
-    private void LookForTarget()
-    {
-        targets.Clear();
         foreach (GameObject player in players)
         {
-            float distance = Vector2.Distance(player.transform.position, transform.position);
-            if (distance < lookingDistance) targets.Add(player.transform);
-        }
-        if (targets.Count > 0)
-        {
-            target = targets[Random.Range(0, players.Length)];
-            target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
-            state = State.ChaseTarget;
+            if (Vector2.Distance(player.transform.position, transform.position) < lookingDistance)
+            {
+                indexOfChasedPlayer = players.IndexOf(player);
+                state = State.ChaseTarget;
+                target = player.transform;
+                target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            }
+
         }
     }
+
 
     private void ChaseTarget()
     {
@@ -109,8 +155,7 @@ public class Enemy : NetworkBehaviour
         {
             if (Vector2.Distance(transform.position, target.position) >= lookingDistance)
             {
-                state = State.Looking;
-                animator.SetFloat(SPEED, 0);
+                state = State.Roaming;
                 return;
             }
 
@@ -122,33 +167,24 @@ public class Enemy : NetworkBehaviour
             animator.SetFloat(VERTICAL, moveDirection.y);
             animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
 
-            hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
-            foreach (RaycastHit2D raycastHit2D in hits)
-            {
-                if (raycastHit2D.collider.name == "PlayerAnimation")
+            if(timeLeftToAttack == 0)
+            { 
+                hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
+                foreach (RaycastHit2D raycastHit2D in hits)
                 {
-                    Attack();
+                    if (raycastHit2D.collider.name == "PlayerAnimation")
+                    {
+                        Attack();
+                    }
                 }
             }
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
-    //{
-    //    if (!IsServer) return;
-    //    if (!collision.CompareTag("Player")) return;
-
-    //    if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
-    //    {
-    //        target = collision.transform;
-    //        //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
-    //    }
-    //}
-
 
     private void StopAnimation()
     {
-        state = State.PlayerDown;
+        state = State.Roaming;
         moveDirection = Vector2.zero;
         animator.SetFloat(SPEED, 0);
     }
