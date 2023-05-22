@@ -93,7 +93,7 @@ public class Enemy : NetworkBehaviour
         if (players.Count != 0)
             players.RemoveAt(indexOfChasedPlayer);
         StopAnimationClientRpc(); //Notify the clients to stop the animation
-        state = State.Roaming;
+        state = State.PlayerDown;
         target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown;
     }
 
@@ -126,11 +126,20 @@ public class Enemy : NetworkBehaviour
                 }
                 break;
 
+            case State.PlayerDown:
+                StartCoroutine(BreakBeforeRoaming());
+                break;
 
             case State.ChaseTarget:
                 ChaseTarget();
                 break;
         }
+    }
+
+    private IEnumerator BreakBeforeRoaming()
+    {
+        yield return new WaitForSeconds(3f);
+        state = State.Roaming;
     }
 
     private void SearchForTarget()
