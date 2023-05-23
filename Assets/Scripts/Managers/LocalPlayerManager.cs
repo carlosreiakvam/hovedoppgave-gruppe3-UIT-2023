@@ -93,10 +93,10 @@ public class LocalPlayerManager : MonoBehaviour
 
         foreach (Player player in gameStatusSO.lobbyPlayers)
         {
-            if (player.Data["PlayerId"].Value == authId)
+            if (player.Data[LobbyStringConst.PLAYER_ID].Value == authId)
             {
-                Debug.LogWarning("FOUND PLAYER WITH NAME " + player.Data["PlayerName"].Value + " and client id " + localClientid);
-                localPlayer.name = player.Data["PlayerName"].Value;
+                Debug.LogWarning("FOUND PLAYER WITH NAME " + player.Data[LobbyStringConst.PLAYER_NAME].Value + " and client id " + localClientid);
+                localPlayer.name = player.Data[LobbyStringConst.PLAYER_NAME].Value;
                 localPlayer.id = localClientid;
             }
         }

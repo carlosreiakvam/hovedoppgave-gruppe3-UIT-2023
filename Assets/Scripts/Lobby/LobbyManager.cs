@@ -34,7 +34,6 @@ public class LobbyManager : NetworkBehaviour
     [SerializeField] GameStatusSO gameStatusSO;
     [HideInInspector] public string lobbyName;
     [HideInInspector] public string lobbyCode;
-    [HideInInspector] public string lobbyId;
     [HideInInspector] public bool isHost = false;
     private bool isLobbyActive = false;
 
@@ -88,12 +87,9 @@ public class LobbyManager : NetworkBehaviour
         if (lobbyUpdateTimer < 0f)
         {
             lobbyUpdateTimer = LobbyPollTimerMax;
-            try
-            {
-                lobby = await LobbyService.Instance.GetLobbyAsync(lobbyId);
-                if (lobby != null) OnHandlePollUpdate.Invoke(this, new LobbyEventArgs { Lobby = lobby });
-            }
-            catch { Debug.Log("Lobby not located. Trying again next PollUpdate"); }
+            lobby = await LobbyService.Instance.GetLobbyAsync(lobby.Id);
+            if (lobby != null) OnHandlePollUpdate.Invoke(this, new LobbyEventArgs { Lobby = lobby });
+            else menuManager.OpenAlert("Lobby not located");
         }
     }
 
@@ -106,13 +102,13 @@ public class LobbyManager : NetworkBehaviour
         options.Data = new Dictionary<string, DataObject>()
             {
                 {
-                     "IsGameReady",  new DataObject(
+                     LobbyStringConst.IS_LOBBY_READY,  new DataObject(
                         visibility: DataObject.VisibilityOptions.Public,
-                        value: true.ToString())
+                        value: LobbyStringConst.TRUE)
                 },
             };
 
-        await LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
+        await LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
 
     }
 
@@ -131,7 +127,7 @@ public class LobbyManager : NetworkBehaviour
                 try
                 {
                     heartbeatTimer = heartbeatTimerMax;
-                    await LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
+                    await LobbyService.Instance.SendHeartbeatPingAsync(lobby.Id);
                 }
                 catch (Exception e)
                 {
@@ -159,17 +155,14 @@ public class LobbyManager : NetworkBehaviour
             options.Data = new Dictionary<string, DataObject>()
             {
                 {
-                "IsGameReady", new DataObject(
+                LobbyStringConst.IS_LOBBY_READY, new DataObject(
                  visibility: DataObject.VisibilityOptions.Public, // Visible publicly.
-                 value: false.ToString())
+                 value: LobbyStringConst.FALSE)
                  },
             };
 
             lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-            lobbyId = lobby.Id;
-            isLobbyActive = true;
-            isHost = true;
-            lobbyCode = lobby.LobbyCode;
+            if (lobby == null) Debug.LogWarning("Lobby not initiated");
             SetHostId(AuthenticationService.Instance.PlayerId);
         }
         catch (Exception e) { Debug.LogWarning("Unable to create lobby"); Debug.LogError(e); }
@@ -178,8 +171,9 @@ public class LobbyManager : NetworkBehaviour
         {
             // Connect to relay
             Dictionary<string, string> relayValues = await RelayManager.Singleton.CreateRelay();
-            UpdateJoinCode(relayValues[LobbyEnums.RelayJoinCode.ToString()]);
-            Debug.Log($"CreateLobby RelayJoinCode: {relayValues[LobbyEnums.RelayJoinCode.ToString()]}");
+            UpdateJoinCode(relayValues[LobbyStringConst.RELAY_JOIN_CODE]);
+            Debug.Log($"CreateLobby RelayJoinCode: {relayValues[LobbyStringConst.RELAY_JOIN_CODE]}");
+            isLobbyActive = true;
         }
         catch (Exception e) { Debug.Log("Relay Connector error: " + e); }
     }
@@ -193,42 +187,15 @@ public class LobbyManager : NetworkBehaviour
         options.Data = new Dictionary<string, DataObject>()
             {
                 {
-                    LobbyEnums.RelayJoinCode.ToString(), new DataObject(
+                    LobbyStringConst.RELAY_JOIN_CODE, new DataObject(
                         visibility: DataObject.VisibilityOptions.Public,
                         value: joinCode)
                 },
             };
 
 
-        await LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
+        await LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
     }
-
-
-    public async void JoinLobbyByCode(string lobbyCode, string playerName)
-    {
-        //playerName = GetSemiUniqueName(playerName);
-        await relayManager.Authorize();
-        JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions { Player = GetNewPlayer(playerName) };
-
-        try
-        {
-            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
-
-            if (lobby != null)
-            {
-                isLobbyActive = true;
-                lobbyName = lobby.Name;
-                lobbyCode = lobby.LobbyCode;
-                menuManager.OpenPage(MenuEnums.LobbyRoom);
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-            menuManager.OpenAlert("Lobby not found");
-        }
-    }
-
 
 
     public async Task<bool> QuickJoinLobby(string playerName)
@@ -240,14 +207,10 @@ public class LobbyManager : NetworkBehaviour
 
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions { Player = GetNewPlayer(playerName) };
             lobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
-
             isLobbyActive = true;
-            lobbyName = lobby.Name;
-            lobbyCode = lobby.LobbyCode;
-            lobbyId = lobby.Id;
 
             // Connect to relay
-            string relayCode = lobby.Data[LobbyEnums.RelayJoinCode.ToString()].Value;
+            string relayCode = lobby.Data[LobbyStringConst.RELAY_JOIN_CODE].Value;
             Debug.Log($"QuickJoin RelayJoinCode: {relayCode}");
             RelayManager.Singleton.JoinRelay(relayCode);
 
@@ -288,9 +251,9 @@ public class LobbyManager : NetworkBehaviour
         {
             Data = new Dictionary<string, PlayerDataObject>
                 {
-                    {"PlayerId" , new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, AuthenticationService.Instance.PlayerId )},
-                    {"PlayerName" , new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName)},
-                    {"IsReady" , new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, false.ToString())},
+                    {LobbyStringConst.PLAYER_ID , new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, AuthenticationService.Instance.PlayerId )},
+                    {LobbyStringConst.PLAYER_NAME , new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, playerName)},
+                    {LobbyStringConst.IS_PLAYER_READY , new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, LobbyStringConst.FALSE)},
             }
         };
     }
@@ -304,32 +267,32 @@ public class LobbyManager : NetworkBehaviour
         options.Data = new Dictionary<string, DataObject>()
             {
                 {
-                    LobbyEnums.HostId.ToString(), new DataObject(
+                    LobbyStringConst.HOST_ID, new DataObject(
                         visibility: DataObject.VisibilityOptions.Public,
                         value: hostId)
                 },
             };
 
-        await LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
+        await LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
     }
 
 
     /// <summary>
     /// Sets the player's ready state.
     /// </summary>
-    public async void SetPlayerReady(bool ready)
+    public async void SetPlayerReady(string readyConst)
     {
         UpdatePlayerOptions options = new UpdatePlayerOptions();
         options.Data = new Dictionary<string, PlayerDataObject>()
             {
                 {
-                    "IsReady", new PlayerDataObject(
+                    LobbyStringConst.IS_PLAYER_READY, new PlayerDataObject(
                         visibility: PlayerDataObject.VisibilityOptions.Public,
-                        value: ready.ToString())
+                        value: readyConst)
                 }
             };
 
-        await LobbyService.Instance.UpdatePlayerAsync(lobbyId, AuthenticationService.Instance.PlayerId, options);
+        await LobbyService.Instance.UpdatePlayerAsync(lobby.Id, AuthenticationService.Instance.PlayerId, options);
     }
 
 
@@ -340,7 +303,7 @@ public class LobbyManager : NetworkBehaviour
         {
             isLobbyActive = false;
             string playerId = AuthenticationService.Instance.PlayerId;
-            await LobbyService.Instance.RemovePlayerAsync(lobbyId, playerId);
+            await LobbyService.Instance.RemovePlayerAsync(lobby.Id, playerId);
             lobbyName = "";
             OnLobbyLeft.Invoke(this, EventArgs.Empty); // tells LobbyRoom that the lobby is left
         }
@@ -361,13 +324,13 @@ public class LobbyManager : NetworkBehaviour
         options.Data = new Dictionary<string, DataObject>()
             {
                 {
-                    "IsGameReady", new DataObject(
+                    LobbyStringConst.IS_PLAYER_READY, new DataObject(
                         visibility: DataObject.VisibilityOptions.Private,
-                        value: true.ToString())
+                        value: LobbyStringConst.TRUE)
                 },
             };
 
-        LobbyService.Instance.UpdateLobbyAsync(lobbyId, options);
+        LobbyService.Instance.UpdateLobbyAsync(lobby.Id, options);
     }
 
     /// <summary>

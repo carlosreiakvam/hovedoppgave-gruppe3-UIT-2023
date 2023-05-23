@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class LoadingManager : NetworkBehaviour
 {
+    [SerializeField] GameObject touchControlsPrefab;
     [SerializeField] GameObject powerupUI;
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] GameObject loadingScreenPanel;
@@ -17,11 +18,19 @@ public class LoadingManager : NetworkBehaviour
     // Network variables to sync readiness of clients and completion of countdown across network
     public NetworkVariable<bool> networkedClientsReady = new NetworkVariable<bool>(false);
     public NetworkVariable<bool> networkedCountdownFinished = new NetworkVariable<bool>(false);
+    GameObject chatPanel;
+    GameObject touchUIInstantiated;
+
 
     private void Awake()
     {
         loadingScreenPanel.SetActive(true);
         powerupUI.SetActive(false);
+        if (gameStatusSO.isAndroid)
+        {
+            touchUIInstantiated = Instantiate(touchControlsPrefab);
+            touchUIInstantiated.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -41,6 +50,8 @@ public class LoadingManager : NetworkBehaviour
         if (IsServer) ServerStart();
         networkedClientsReady.OnValueChanged += OnClientsReady;
         networkedCountdownFinished.OnValueChanged += OnCountdownFinished;
+        chatPanel = GameObject.Find("ChatPanel");
+        chatPanel.SetActive(false);
     }
 
     /// <summary>
@@ -50,8 +61,12 @@ public class LoadingManager : NetworkBehaviour
     {
         loadingScreenPanel.SetActive(false);
         powerupUI.SetActive(true);
+        chatPanel.SetActive(true);
         PlayerBehaviour playerBehaviour = PlayerBehaviour.LocalInstance;
         playerBehaviour.ControlActive(true);
+
+        // Display touch controls if on Android
+        if (gameStatusSO.isAndroid) touchUIInstantiated.SetActive(true);
     }
 
     /// <summary>

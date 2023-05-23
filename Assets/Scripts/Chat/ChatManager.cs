@@ -23,8 +23,12 @@ public class ChatManager : NetworkBehaviour
 
     private readonly List<string> _messages = new();
     private float buildDelay;
-    private int maximumMessages = 10;
+    private int maximumMessages = 8;
 
+    public void SetMaxMessages(int max)
+    {
+        maximumMessages = max;
+    }
     public class OnChangeFocusEventArgs : EventArgs
     {
         public bool IsChatActive;
@@ -42,7 +46,7 @@ public class ChatManager : NetworkBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject.transform.parent);
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -51,7 +55,6 @@ public class ChatManager : NetworkBehaviour
     /// </summary>
     void Start()
     {
-        chatContent.maxVisibleLines = maximumMessages;
         chatInput.onSubmit.AddListener(delegate { SubmitMsg(); });
         chatInput.characterLimit = 100;
     }

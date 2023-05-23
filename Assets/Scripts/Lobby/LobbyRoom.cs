@@ -7,82 +7,78 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 public class LobbyRoom : MonoBehaviour
 {
-    public const string PLAYER_NAME = "PlayerName";
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] Button leaveButton;
     [SerializeField] Button readyButton;
     [SerializeField] Button startGameButton;
     [SerializeField] TextMeshProUGUI header;
-    [SerializeField] TextMeshProUGUI p1Name;
-    [SerializeField] TextMeshProUGUI p2Name;
-    [SerializeField] TextMeshProUGUI p3Name;
-    [SerializeField] TextMeshProUGUI p4Name;
-    [SerializeField] GameObject p1;
-    [SerializeField] GameObject p2;
-    [SerializeField] GameObject p3;
-    [SerializeField] GameObject p4;
-    [SerializeField] GameObject p1ReadyText;
-    [SerializeField] GameObject p2ReadyText;
-    [SerializeField] GameObject p3ReadyText;
-    [SerializeField] GameObject p4ReadyText;
-    [SerializeField] List<PlayerNameSO> playerNameList = new(4);
+    [SerializeField] List<GameObject> playerNameFields;
+    [SerializeField] List<GameObject> playerReadyFields;
+    [SerializeField] List<PlayerNameSO> playerNamesSO = new(4);
 
-    bool isReady = false;
-    bool isGameReady = false;
+    bool areAllPlayersReady = false;
+    bool isLocalPlayerReady = false;
     bool isGameInitiated = false;
 
-
     MenuManager menuManager;
-    List<GameObject> isReadyStates;
-    List<TextMeshProUGUI> pNames;
-    GameObject[] pNamesGO;
+    List<TextMeshProUGUI> playerNamesText = new();
 
-    private void Start()
+
+    private void Awake()
     {
-        InitVariables();
-        InitPlayers();
+        menuManager = GetComponentInParent<MenuManager>();
+        menuManager.OnLobbyRoomOpened += MenuManager_OnLobbyRoomOpened;
+
         HandleReadyButton();
         HandleStartGameButton();
         HandleLeaveButton();
-        ConnectWithManagers();
+
     }
 
-    private void InitPlayers()
-    {
-        pNamesGO = new GameObject[] { p1, p2, p3, p4 };
-        foreach (GameObject playerName in pNamesGO) { playerName.SetActive(false); }
-    }
-
-
-    private void OnEnable()
+    private void MenuManager_OnLobbyRoomOpened(object sender, EventArgs e)
     {
         InitPlayers();
         SetHeader();
+        Subscribe();
     }
 
+
+    private void InitPlayers()
+    {
+
+        // Fill the playerNamesText list with the player names.
+        foreach (GameObject playerName in playerNameFields)
+        {
+            TextMeshProUGUI playerNameText = playerName.GetComponent<TextMeshProUGUI>();
+            playerNamesText.Add(playerNameText);
+        }
+
+        // Fill the player ready text list 
+        foreach (GameObject playerReady in playerReadyFields)
+        {
+            TextMeshProUGUI playerReadyText = playerReady.GetComponent<TextMeshProUGUI>();
+            playerNamesText.Add(playerReadyText);
+        }
+
+
+        // Deactivate all player and ready objects
+        foreach (GameObject p in playerNameFields) { p.SetActive(false); }
+        foreach (GameObject p in playerReadyFields) { p.SetActive(false); }
+    }
 
     /// <summary>
     /// Connects the LobbyRoom with MenuManager and LobbyManager.
     /// </summary>
-    private void ConnectWithManagers()
+    private void Subscribe()
     {
         LobbyManager.Singleton.OnHandlePollUpdate += HandlePollUpdate;
         LobbyManager.Singleton.OnLobbyLeft += OnLobbyLeft;
     }
 
-
-    /// <summary>
-    /// Initializes player name GameObjects and sets their active status to false.
-    /// </summary>
-    private void InitVariables()
-    {
-        menuManager = GetComponentInParent<MenuManager>();
-        pNames = new List<TextMeshProUGUI> { p1Name, p2Name, p3Name, p4Name };
-        isReadyStates = new List<GameObject> { p1ReadyText, p2ReadyText, p3ReadyText, p4ReadyText };
-    }
 
     /// <summary>
     /// Handles the functionality of the ready button.
@@ -92,16 +88,16 @@ public class LobbyRoom : MonoBehaviour
         TextMeshProUGUI readyButtonText = readyButton.GetComponentInChildren<TextMeshProUGUI>();
         readyButton.onClick.AddListener(() =>
         {
-            isReady = !isReady;
-            LobbyManager.Singleton.SetPlayerReady(isReady);
-            readyButtonText.text = isReady ? "Not ready" : "Ready";
+            isLocalPlayerReady = !isLocalPlayerReady;
+            string readyStatus = isLocalPlayerReady ? LobbyStringConst.TRUE : LobbyStringConst.FALSE;
+            LobbyManager.Singleton.SetPlayerReady(readyStatus);
+            readyButtonText.text = isLocalPlayerReady ? "Not ready" : "Ready";
         });
     }
 
     private void HandleStartGameButton()
     {
         startGameButton.interactable = false;
-        startGameButton.gameObject.SetActive(false);
         startGameButton.onClick.AddListener(() => { LobbyManager.Singleton.QueGameStart(); });
     }
     private void HandleLeaveButton()
@@ -114,91 +110,98 @@ public class LobbyRoom : MonoBehaviour
     /// </summary>
     private void SetHeader()
     {
-        header.transform.gameObject.SetActive(true);
         header.text = LobbyManager.Singleton.lobbyName;
     }
 
 
     /// <summary>
+    /// Fired by OnHandlePollUpdate from LobbyManager.
     /// Handles lobby updates based on the lobby polling event.
     /// </summary>
-    public void HandlePollUpdate(object sender, EventArgs e)
+    public void HandlePollUpdate(object sender, EventArgs lobbyEventArg)
     {
         // Get remote lobby as event argument. This happens every second.
-        var lobbyEventArgs = e as LobbyEventArgs;
+        var lobbyEventArgs = lobbyEventArg as LobbyEventArgs;
         var lobby = lobbyEventArgs.Lobby;
+        if (lobby == null) { menuManager.OpenAlert("Lobby connection lost"); }
         UpdateLocalLobby(lobby);
     }
 
 
     /// <summary>
-    /// Updates local lobby data based on the playerIsReady of the remote lobby.
+    /// Updates local lobby data.
+    /// Called by LobbyManager.
     /// </summary>
     public void UpdateLocalLobby(Lobby lobby)
     {
-        isGameReady = true; // will be false if any player is not ready
-        bool authenticatedIsHost = false;
+        if (isGameInitiated) return;
+        areAllPlayersReady = true; // will be false if any player is not ready
+        bool isCurrentPlayerHost = false;
         string thisPlayerId = "";
-        string lobbyHostId = lobby.Data[LobbyEnums.HostId.ToString()].Value;
+        string lobbyHostId = lobby.Data[LobbyStringConst.HOST_ID].Value;
 
+        // Allways assume that all players left the lobby
         for (int j = 0; j < 4; j++)
-        { pNamesGO[j].SetActive(false); }
+        {
+            playerNameFields[j].SetActive(false);
+        }
 
         int i = 0;
         foreach (Player player in lobby.Players)
         {
-            // Activate player object and set name
-            pNamesGO[i].SetActive(true);
+            // Get player names position in the list
+            Vector2 playerNamePos = playerNameFields[i].transform.position;
+            Vector2 playerReadyPos = playerNamePos;
+            playerReadyPos.x += 400;
+            playerReadyFields[i].transform.position = playerReadyPos;
 
-            // Set ready playerIsReady
-            // TODO: ADD
+            // Activate player object 
+            playerNameFields[i].SetActive(true);
 
-            bool playerIsReady = player.Data["IsReady"].Value == true.ToString();
-            if (playerIsReady) isReadyStates[i].SetActive(true);
-            else isReadyStates[i].SetActive(false);
+            // Check if current player is ready
+            bool isPlayerReady = player.Data[LobbyStringConst.IS_PLAYER_READY].Value == LobbyStringConst.TRUE;
+            playerReadyFields[i].SetActive(isPlayerReady);
+
+            // If any player is not ready, areAllPlayersReady is false 
+            if (!isPlayerReady) areAllPlayersReady = false;
 
             // Set thisPlayer based on this authorized instance
-            if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(LobbyManager.Singleton.GetThisPlayerId()))
+            if (player.Data[LobbyStringConst.PLAYER_ID].Value.Equals(LobbyManager.Singleton.GetThisPlayerId()))
             {
-                thisPlayerId = player.Data[LobbyEnums.PlayerId.ToString()].Value;
+                thisPlayerId = player.Data[LobbyStringConst.PLAYER_ID].Value;
             }
 
-            // Check if authenticated player is host of this lobby
-            authenticatedIsHost = thisPlayerId.Equals(lobbyHostId);
+            // Check if current player is host
+            isCurrentPlayerHost = thisPlayerId.Equals(lobbyHostId);
 
-            // if player of current iteration is host
-            if (player.Data[LobbyEnums.PlayerId.ToString()].Value.Equals(lobbyHostId))
-            {
-                pNames[i].text = player.Data[PLAYER_NAME].Value + " [host]";
-            }
-            else
-            {
-                pNames[i].text = player.Data[PLAYER_NAME].Value;
-            }
+            // Set name of current player
+            playerNamesText[i].text = player.Data[LobbyStringConst.PLAYER_NAME].Value;
 
-            // Game is not ready if any one of the ready states are false
-            isGameReady = isReadyStates[i].activeSelf;
-
-            //playerNameList[i].PlayerName = player.Data[PLAYER_NAME].Value;
-            playerNameList[i].SetValue(player.Data[PLAYER_NAME].Value);
+            // Set name to the scriptable object
+            playerNamesSO[i].SetValue(player.Data[LobbyStringConst.PLAYER_NAME].Value);
 
             i++;
-
         }
 
-        if (authenticatedIsHost) { startGameButton.gameObject.SetActive(true); }
+        // Start button is only interactable if the current player is host and all players are ready
 
-        if (isGameReady) { startGameButton.interactable = true; }
-        if (lobby.Data["IsGameReady"].Value == true.ToString())
+        startGameButton.interactable = (areAllPlayersReady && isCurrentPlayerHost);
+
+
+        // If the game is set as ready from the lobby object, load the network
+        if (lobby.Data[LobbyStringConst.IS_LOBBY_READY].Value == LobbyStringConst.TRUE)
         {
             if (!isGameInitiated)
             {
                 isGameInitiated = true;
+
+                // Stop the lobby polling so that the lobby is not updated anymore
                 LobbyManager.Singleton.StopLobbyPolling();
 
-                if (authenticatedIsHost)
+                // Only the host loads the network
+                if (isCurrentPlayerHost)
                 {
-                    LoadNetwork(authenticatedIsHost);
+                    LoadNetwork(isCurrentPlayerHost);
                     LobbyManager.Singleton.SpawnTransitionHelper();
                 }
             }

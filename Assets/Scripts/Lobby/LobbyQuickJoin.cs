@@ -17,10 +17,15 @@ public class LobbyQuickJoin : MonoBehaviour
     MenuManager menuManager;
     GameObject spinner;
 
+    private void Awake()
+    {
+        menuManager = GetComponentInParent<MenuManager>();
+        menuManager.OnLobbyJoinOpened += OnActivated;
+    }
+
     private void Start()
     {
 
-        menuManager = GetComponentInParent<MenuManager>();
         spinner = CreateSpinner();
 
         Button goButton = goButtonGO.GetComponent<Button>();
@@ -33,8 +38,10 @@ public class LobbyQuickJoin : MonoBehaviour
             StartCoroutine(RotateSpinner(spinner));
             bool isLobbyFound = await LobbyManager.Singleton.QuickJoinLobby(playerNameInput.text);
             spinner.SetActive(false);
-            if (isLobbyFound) menuManager.OpenPage(MenuEnums.LobbyRoom);
-            else menuManager.OpenAlert("No open lobbies available!");
+
+            // Opens lobby room regardless of whether a lobby was found or not
+            menuManager.OpenLobbyRoom(this, EventArgs.Empty);
+            //menuManager.OpenAlert("No open lobbies available!");
         });
 
         backButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
@@ -55,13 +62,12 @@ public class LobbyQuickJoin : MonoBehaviour
         return isInputValid;
     }
 
-
-    private void OnEnable()
+    void OnActivated(object sender, EventArgs e)
     {
-        header.gameObject.SetActive(true);
         header.text = "Join Lobby";
 
     }
+
 
     IEnumerator RotateSpinner(GameObject spinner)
     {

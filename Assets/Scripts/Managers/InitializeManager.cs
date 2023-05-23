@@ -30,7 +30,6 @@ public class InitializeManager : MonoBehaviour
             Debug.Log("Current platform is not supported.");
         }
 
-
     }
 
 }

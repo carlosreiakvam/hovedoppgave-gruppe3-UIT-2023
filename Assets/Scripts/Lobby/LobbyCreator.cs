@@ -14,38 +14,28 @@ public class LobbyCreator : MonoBehaviour
 {
     [SerializeField] Canvas canvas;
     [SerializeField] Sprite spinnerSprite;
-    [SerializeField] TextMeshProUGUI header;
     [SerializeField] TextMeshProUGUI playerNameInput;
     [SerializeField] TextMeshProUGUI lobbyNameInput;
-    [SerializeField] GameObject scopeButtonGO;
     [SerializeField] GameObject createButtonGO;
     [SerializeField] GameObject backButtonGO;
-    [SerializeField] GameObject lobbyPreGameGO;
     LobbyManager lobbyManager;
     MenuManager menuManager;
     bool isPrivate = false;
     GameObject spinner;
 
 
-    private void OnEnable()
-    {
-        header.transform.gameObject.SetActive(true);
-        header.text = "Create Lobby";
-    }
-
-
     private void Start()
     {
+
+        GameObject verticalLayout = transform.GetChild(0).gameObject;
 
         menuManager = GetComponentInParent<MenuManager>();
         lobbyManager = GetComponentInParent<LobbyManager>();
         spinner = CreateSpinner();
 
 
-        Button scopeButton = scopeButtonGO.GetComponent<Button>();
         Button createButton = createButtonGO.GetComponent<Button>();
         Button backButton = backButtonGO.GetComponent<Button>();
-        TextMeshProUGUI scopeText = scopeButton.GetComponentInChildren<TextMeshProUGUI>();
 
         backButton.onClick.AddListener(() =>
         {
@@ -70,11 +60,6 @@ public class LobbyCreator : MonoBehaviour
 
         });
 
-        scopeButton.onClick.AddListener(() =>
-        {
-            isPrivate = !isPrivate;
-            scopeText.text = isPrivate ? "Private" : "Public";
-        });
     }
 
     /// <summary>

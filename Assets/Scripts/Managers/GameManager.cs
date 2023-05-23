@@ -12,7 +12,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : NetworkBehaviour
 {
-    [SerializeField] GameObject touchUIPrefab;
     [SerializeField] GameObject inGameMenu;
     [SerializeField] GameObject largeMessage;
     [SerializeField] GameStatusSO gameStatusSO;
@@ -34,10 +33,6 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         LocalPlayerManager.Singleton.RegisterPlayerInScriptableObject();
-        if (gameStatusSO.isAndroid)
-        {
-            Instantiate(touchUIPrefab);
-        }
     }
 
     /// <summary>

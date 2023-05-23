@@ -10,7 +10,6 @@ using UnityEngine.UI;
 public class MenuStart : MonoBehaviour
 {
 
-    [SerializeField] TextMeshProUGUI header;
     [SerializeField] GameStatusSO gamestatus;
     [SerializeField] Button beginButton;
     [SerializeField] Button exitButton;
@@ -31,11 +30,6 @@ public class MenuStart : MonoBehaviour
             Application.Quit();
         });
 
-    }
-
-    private void OnEnable()
-    {
-        header.gameObject.SetActive(false);
     }
 
 }

@@ -102,7 +102,7 @@ public class RelayManager : MonoBehaviour
         }
         Dictionary<string, string> relayDict = new()
         {
-            { LobbyEnums.RelayJoinCode.ToString(), relayJoinCode },
+            { LobbyStringConst.RELAY_JOIN_CODE, relayJoinCode },
             { LobbyEnums.AllocationId.ToString(), allocation.AllocationId.ToString() }
         };
         return relayDict;
@@ -136,34 +136,6 @@ public class RelayManager : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Creates a relay allocation and starts the host (shortcut version).
-    /// </summary>
-    /// <returns>A dictionary containing the relay join code and allocation ID.</returns>
-    public async Task<Dictionary<LobbyEnums, string>> CreateRelayShortcut()
-    {
-        try
-        {
-            allocation = await RelayService.Instance.CreateAllocationAsync(3);
-            relayJoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-
-            RelayServerData relayServerData = new(allocation, "dtls");
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-            Debug.Log("; JoinCode: " + relayJoinCode);
-            NetworkManager.Singleton.StartHost();
-
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Create Relay Error: " + e);
-        }
-        Dictionary<LobbyEnums, string> relayDict = new()
-        {
-            { LobbyEnums.RelayJoinCode, relayJoinCode },
-            { LobbyEnums.AllocationId, allocation.AllocationId.ToString() }
-        };
-        return relayDict;
-    }
 
     /// <summary>
     /// Joins a relay using the given join code (shortcut version).
