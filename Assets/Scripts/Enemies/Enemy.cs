@@ -30,7 +30,7 @@ public class Enemy : NetworkBehaviour
     private List<GameObject> players;
 
     // A minimum and maximum time delay for taking a decision, choosing a direction to move in
-    public Vector2 decisionTime = new(1, 4);
+    public Vector2 decisionTime = new(0, 4);
     internal float decisionTimeCount = 0;
 
     // The possible directions that the object can move int, right, left, up, down, and zero for staying in place. I added zero twice to give a bigger chance if it happening than other directions
@@ -144,7 +144,7 @@ public class Enemy : NetworkBehaviour
     private IEnumerator BreakBeforeRoaming()
     {
         yield return new WaitForSeconds(3f);
-        state = State.PlayerDown;
+        state = State.Roaming;
     }
 
     private void SearchForTarget()
@@ -198,7 +198,7 @@ public class Enemy : NetworkBehaviour
 
     private void StopAnimation()
     {
-        state = State.Roaming;
+        //state = State.Roaming;
         moveDirection = Vector2.zero;
         animator.SetFloat(SPEED, 0);
     }
