@@ -20,6 +20,7 @@ public class PlayerHealth : NetworkBehaviour
     public class OnPlayerKnockdownEventArgs : EventArgs
     {
         public bool isKnockedDown = false;
+        public ulong senderId;
     }
 
     private void Start()
@@ -90,15 +91,17 @@ public class PlayerHealth : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void VizualizeDeathServerRpc()
+    private void VizualizeDeathServerRpc(ServerRpcParams serverRpcParams = default)
     {
-        VizualizeDeathClientRpc();
+        VizualizeDeathClientRpc(serverRpcParams.Receive.SenderClientId);
     }
 
     [ClientRpc]
-    private void VizualizeDeathClientRpc()
+    private void VizualizeDeathClientRpc(ulong clientId)
     {
-        OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true });
+        OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true 
+            , senderId = clientId
+        });
 
     }
 }

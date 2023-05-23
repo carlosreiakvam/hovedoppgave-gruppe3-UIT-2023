@@ -90,7 +90,12 @@ public class Enemy : NetworkBehaviour
 
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
+        //check if the knocked down player is the same as the chased player
+        ulong nId1 = players[indexOfChasedPlayer].GetComponentInParent<NetworkObject>().NetworkObjectId;
+        ulong nId2 = e.senderId;
+
         if (players.Count != 0)
+            if(nId1 == nId2)
             players.RemoveAt(indexOfChasedPlayer);
         StopAnimationClientRpc(); //Notify the clients to stop the animation
         state = State.PlayerDown;
@@ -139,7 +144,7 @@ public class Enemy : NetworkBehaviour
     private IEnumerator BreakBeforeRoaming()
     {
         yield return new WaitForSeconds(3f);
-        state = State.Roaming;
+        state = State.PlayerDown;
     }
 
     private void SearchForTarget()
