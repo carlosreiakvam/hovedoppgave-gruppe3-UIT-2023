@@ -21,9 +21,6 @@ public class LobbyEventArgs : EventArgs
 /// </summary>
 public class LobbyManager : NetworkBehaviour
 {
-    MenuManager menuManager;
-    [SerializeField] GameObject relayManagerGO;
-    RelayManager relayManager;
 
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
@@ -50,17 +47,10 @@ public class LobbyManager : NetworkBehaviour
         else
         {
             Singleton = this;
-            //DontDestroyOnLoad(gameObject); // destroyed for simplicity
+            // Class is not kept alive on scene change
         }
     }
 
-
-
-    private void Start()
-    {
-        menuManager = GetComponent<MenuManager>();
-        relayManager = relayManagerGO.GetComponent<RelayManager>();
-    }
 
     private void Update()
     {
@@ -89,7 +79,7 @@ public class LobbyManager : NetworkBehaviour
             lobbyUpdateTimer = LobbyPollTimerMax;
             lobby = await LobbyService.Instance.GetLobbyAsync(lobby.Id);
             if (lobby != null) OnHandlePollUpdate.Invoke(this, new LobbyEventArgs { Lobby = lobby });
-            else menuManager.OpenAlert("Lobby not located");
+            else MenuManager.Singleton.OpenAlert("Lobby not located");
         }
     }
 
@@ -145,7 +135,7 @@ public class LobbyManager : NetworkBehaviour
         try
         {
 
-            await relayManager.Authorize();
+            await RelayManager.Singleton.Authorize();
             this.lobbyName = lobbyName;
             CreateLobbyOptions options = new CreateLobbyOptions
             {
@@ -203,7 +193,7 @@ public class LobbyManager : NetworkBehaviour
         try
         {
             // Attempt to get lobby
-            await relayManager.Authorize();
+            await RelayManager.Singleton.Authorize();
 
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions { Player = GetNewPlayer(playerName) };
             lobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);

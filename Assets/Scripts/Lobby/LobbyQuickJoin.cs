@@ -39,7 +39,6 @@ public class LobbyQuickJoin : MonoBehaviour
 
             // Opens lobby room regardless of whether a lobby was found or not
             MenuManager.Singleton.OpenLobbyRoom(this, EventArgs.Empty);
-            //menuManager.OpenAlert("No open lobbies available!");
         });
 
         backButton.onClick.AddListener(() => { MenuManager.Singleton.OpenPage(MenuEnums.LobbyMenu); });

@@ -18,8 +18,6 @@ public class LobbyCreator : MonoBehaviour
     [SerializeField] TextMeshProUGUI lobbyNameInput;
     [SerializeField] GameObject createButtonGO;
     [SerializeField] GameObject backButtonGO;
-    LobbyManager lobbyManager;
-    MenuManager menuManager;
     bool isPrivate = false;
     GameObject spinner;
 
@@ -29,8 +27,6 @@ public class LobbyCreator : MonoBehaviour
 
         GameObject verticalLayout = transform.GetChild(0).gameObject;
 
-        menuManager = GetComponentInParent<MenuManager>();
-        lobbyManager = GetComponentInParent<LobbyManager>();
         spinner = CreateSpinner();
 
 
@@ -39,17 +35,17 @@ public class LobbyCreator : MonoBehaviour
 
         backButton.onClick.AddListener(() =>
         {
-            menuManager.OpenPage(MenuEnums.LobbyMenu);
+            MenuManager.Singleton.OpenPage(MenuEnums.LobbyMenu);
         });
 
         createButton.onClick.AddListener(async () =>
         {
             if (lobbyNameInput.text.Length <= 1 || playerNameInput.text.Length <= 1)
-            { menuManager.OpenAlert("Fill out all fields"); }
+            { MenuManager.Singleton.OpenAlert("Fill out all fields"); }
             else if (playerNameInput.text.Length > 15)
-            { menuManager.OpenAlert("Enter a name less than 15 characters"); }
+            { MenuManager.Singleton.OpenAlert("Enter a name less than 15 characters"); }
             else if (lobbyNameInput.text.Length > 15)
-            { menuManager.OpenAlert("Enter a lobby name less than 15 characters"); }
+            { MenuManager.Singleton.OpenAlert("Enter a lobby name less than 15 characters"); }
             else
             {
                 spinner.SetActive(true);
