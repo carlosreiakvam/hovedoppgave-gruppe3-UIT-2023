@@ -14,17 +14,15 @@ public class LobbyQuickJoin : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerNameInput;
     [SerializeField] GameObject goButtonGO;
     [SerializeField] GameObject backButtonGO;
-    MenuManager menuManager;
     GameObject spinner;
 
     private void Awake()
     {
-        menuManager = GetComponentInParent<MenuManager>();
-        menuManager.OnLobbyJoinOpened += OnActivated;
     }
 
     private void Start()
     {
+        MenuManager.Singleton.OnLobbyJoinOpened += OnActivated;
 
         spinner = CreateSpinner();
 
@@ -40,11 +38,11 @@ public class LobbyQuickJoin : MonoBehaviour
             spinner.SetActive(false);
 
             // Opens lobby room regardless of whether a lobby was found or not
-            menuManager.OpenLobbyRoom(this, EventArgs.Empty);
+            MenuManager.Singleton.OpenLobbyRoom(this, EventArgs.Empty);
             //menuManager.OpenAlert("No open lobbies available!");
         });
 
-        backButton.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyMenu); });
+        backButton.onClick.AddListener(() => { MenuManager.Singleton.OpenPage(MenuEnums.LobbyMenu); });
 
 
     }
@@ -54,10 +52,10 @@ public class LobbyQuickJoin : MonoBehaviour
         bool isInputValid = false;
         if (playerNameInput.text.Length <= 1 || playerNameInput.text.Length <= 1)
         {
-            menuManager.OpenAlert("Fill out all fields");
+            MenuManager.Singleton.OpenAlert("Fill out all fields");
         }
         else if (playerNameInput.text.Length > 15)
-        { menuManager.OpenAlert("Enter a name less than 15 characters"); }
+        { MenuManager.Singleton.OpenAlert("Enter a name less than 15 characters"); }
         else { isInputValid = true; }
         return isInputValid;
     }
