@@ -9,20 +9,18 @@ public class LobbyStartMenu : MonoBehaviour
     [SerializeField] private Button CreateButtonGO;
     [SerializeField] private Button backButtonGO;
 
-    MenuManager menuManager;
 
     private void Start()
     {
-        menuManager = GetComponentInParent<MenuManager>();
 
         // CREATE LOBBY
-        CreateButtonGO.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyCreate); });
+        CreateButtonGO.onClick.AddListener(() => { MenuManager.Singleton.OpenPage(MenuEnums.LobbyCreate); });
 
         // LOBBY QUICK JOIN
-        quickJoinButtonGO.onClick.AddListener(() => { menuManager.OpenPage(MenuEnums.LobbyQuickJoin); });
+        quickJoinButtonGO.onClick.AddListener(() => { MenuManager.Singleton.OpenPage(MenuEnums.LobbyQuickJoin); });
 
         // BackButton
-        backButtonGO.onClick.AddListener(() => menuManager.OpenPage(MenuEnums.MenuStart));
+        backButtonGO.onClick.AddListener(() => MenuManager.Singleton.OpenPage(MenuEnums.MenuStart));
     }
 
 }

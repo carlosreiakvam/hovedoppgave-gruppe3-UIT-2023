@@ -17,12 +17,10 @@ public class MenuStart : MonoBehaviour
 
     private void Start()
     {
-        MenuManager menuManager = GetComponentInParent<MenuManager>();
-        LobbyManager lobbyManager = GetComponentInParent<LobbyManager>();
 
         beginButton.onClick.AddListener(() =>
         {
-            menuManager.OpenPage(MenuEnums.LobbyMenu);
+            MenuManager.Singleton.OpenPage(MenuEnums.LobbyMenu);
         });
 
         exitButton.onClick.AddListener(() =>

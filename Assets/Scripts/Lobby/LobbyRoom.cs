@@ -24,20 +24,20 @@ public class LobbyRoom : MonoBehaviour
     bool isLocalPlayerReady = false;
     bool isGameInitiated = false;
 
-    MenuManager menuManager;
     List<TextMeshProUGUI> playerNamesText = new();
 
 
     private void Awake()
     {
-        menuManager = GetComponentInParent<MenuManager>();
-        menuManager.OnLobbyRoomOpened += MenuManager_OnLobbyRoomOpened;
-
         HandleReadyButton();
         HandleStartGameButton();
         HandleLeaveButton();
-
     }
+    private void Start()
+    {
+        MenuManager.Singleton.OnLobbyRoomOpened += MenuManager_OnLobbyRoomOpened;
+    }
+
 
     private void MenuManager_OnLobbyRoomOpened(object sender, EventArgs e)
     {
@@ -123,7 +123,7 @@ public class LobbyRoom : MonoBehaviour
         // Get remote lobby as event argument. This happens every second.
         var lobbyEventArgs = lobbyEventArg as LobbyEventArgs;
         var lobby = lobbyEventArgs.Lobby;
-        if (lobby == null) { menuManager.OpenAlert("Lobby connection lost"); }
+        if (lobby == null) { MenuManager.Singleton.OpenAlert("Lobby connection lost"); }
         UpdateLocalLobby(lobby);
     }
 
@@ -234,6 +234,6 @@ public class LobbyRoom : MonoBehaviour
     /// </summary>
     public void OnLobbyLeft(object sender, EventArgs e)
     {
-        menuManager.OpenPage(MenuEnums.LobbyMenu);
+        MenuManager.Singleton.OpenPage(MenuEnums.LobbyMenu);
     }
 }
