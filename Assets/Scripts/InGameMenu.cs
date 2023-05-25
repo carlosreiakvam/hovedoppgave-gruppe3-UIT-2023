@@ -14,6 +14,7 @@ public class InGameMenu : MonoBehaviour
 
     private void Start()
     {
+        inGameMenu.SetActive(false);
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() =>
         {
@@ -25,7 +26,6 @@ public class InGameMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Toggle largeMessage's active state
             if (!gameStatusSO.gameIsOver)
             {
                 inGameMenu.SetActive(!inGameMenu.activeSelf);

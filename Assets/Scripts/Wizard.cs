@@ -54,8 +54,4 @@ public class Wizard : NetworkBehaviour
         int randomIndex = Random.Range(0, wizardQuotes.Length);
         return wizardQuotes[randomIndex];
     }
-
-
-
-
 }
