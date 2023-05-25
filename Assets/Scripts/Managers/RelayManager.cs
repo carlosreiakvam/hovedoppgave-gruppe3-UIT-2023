@@ -7,7 +7,6 @@ using Unity.Services.Relay.Models;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
-using QFSW.QC;
 using System;
 using System.Collections.Generic;
 
@@ -81,7 +80,6 @@ public class RelayManager : MonoBehaviour
     /// Creates a relay allocation and starts the host.
     /// </summary>
     /// <returns>A dictionary containing the relay join code and allocation ID.</returns>
-    [Command]
     public async Task<Dictionary<string, string>> CreateRelay()
     {
         try
@@ -113,7 +111,6 @@ public class RelayManager : MonoBehaviour
     /// Joins a relay using the given join code.
     /// </summary>
     /// <param name="joinCode">The join code for the relay to join.</param>
-    [Command]
     public async void JoinRelay(string joinCode)
     {
         try

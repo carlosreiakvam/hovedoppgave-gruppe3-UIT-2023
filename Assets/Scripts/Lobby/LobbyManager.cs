@@ -1,5 +1,4 @@
 //using ParrelSync;
-using QFSW.QC;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -209,8 +208,6 @@ public class LobbyManager : NetworkBehaviour
         catch { return false; }
 
     }
-
-    [Command]
     private async void ListLobbies()
     {
         try

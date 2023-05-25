@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using Unity.Netcode.Components;
-using UnityEngine.AI;
 using System.Linq;
-using Mono.CSharp;
 
 public class Enemy : NetworkBehaviour
 {
