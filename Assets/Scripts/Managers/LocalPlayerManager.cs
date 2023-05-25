@@ -15,6 +15,7 @@ public class LocalPlayerManager : MonoBehaviour
         public ulong id;
         public bool playerHasRing;
         public bool playerWonGame;
+        public bool isDead;
     }
 
 
@@ -28,6 +29,7 @@ public class LocalPlayerManager : MonoBehaviour
 
     public void Awake()
     {
+        localPlayer.isDead = false;
         if (Singleton == null) Singleton = this;
         else Destroy(gameObject);
 

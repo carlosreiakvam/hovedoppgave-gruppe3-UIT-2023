@@ -23,6 +23,8 @@ public class GameManager : NetworkBehaviour
     // Represents the network player ID who currently has the ring
     public ulong networkedPlayerIdHasRing { get; set; }
 
+    bool isLocalPlayerDead = false;
+
     private void Awake()
     {
         largeMessage.SetActive(false);
@@ -65,9 +67,13 @@ public class GameManager : NetworkBehaviour
 
     public void OnPlayerDeath()
     {
+
+        if (LocalPlayerManager.Singleton.localPlayer.isDead) return;
+        ChatManager.Instance.SendMsg(LocalPlayerManager.Singleton.localPlayer.name + " died a tragic death!", "Wizard");
         infoText.text = " You died!";
         largeMessage.SetActive(true);
         inGameMenu.SetActive(true);
+        LocalPlayerManager.Singleton.localPlayer.isDead = true;
 
     }
 

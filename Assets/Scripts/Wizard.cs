@@ -43,7 +43,7 @@ public class Wizard : NetworkBehaviour
         {
             yield return new WaitForSeconds(90);
             float a = Random.Range(0, 100);
-            if (Random.Range(0, 100) > 80)
+            if (Random.Range(0, 100) > 60)
             {
                 ChatManager.Instance.SendMsg(GetRandomQuote(), "Wizard");
             }

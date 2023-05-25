@@ -19,7 +19,6 @@ public class PlayerDeath : MonoBehaviour
     {
         bool test = e.isKnockedDown;
         animator.SetBool("Knockdown", true); //Todo: Notify other players and make enemy uninterested as well
-        ChatManager.Instance.SendMsg(LocalPlayerManager.Singleton.localPlayer.name + " died a tragic death!", "Wizard");
         //StartCoroutine(KnockdownRoutine());
         //TODO: connect animation of player going down
         //hide sprite        
