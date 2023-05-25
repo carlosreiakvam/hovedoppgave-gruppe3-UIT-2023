@@ -20,9 +20,8 @@ public class Enemy : NetworkBehaviour
     private Vector2 moveDirection = new(0, 0);
     private Vector2 size = new Vector2(0.5087228f * 2.2f, 0.9851828f * 1.2f);
     private const string STEELATTACK = "SteelAttack";
-    private float timeLeftToAttack = 0;
+    private float timeLeftToAttack = 1;
     private int indexOfChasedPlayer = 0;
-
 
     RaycastHit2D[] hits;
 
@@ -30,7 +29,7 @@ public class Enemy : NetworkBehaviour
     private List<GameObject> players;
 
     // A minimum and maximum time delay for taking a decision, choosing a direction to move in
-    public Vector2 decisionTime = new(0, 4);
+    public Vector2 decisionTime = new(0.1f, 4.0f);
     internal float decisionTimeCount = 0;
 
     // The possible directions that the object can move int, right, left, up, down, and zero for staying in place. I added zero twice to give a bigger chance if it happening than other directions
@@ -41,19 +40,16 @@ public class Enemy : NetworkBehaviour
     {
         Roaming,
         ChaseTarget,
-        PlayerDown,
+        PlayerDown
     }
 
     private void Awake()
     {
-        //state = State.Looking;
         state = State.Roaming;
     }
 
     private void Update()
     {
-        if (!IsServer) return;
-
         if (state == State.ChaseTarget)
         {
             if (timeLeftToAttack > 0)
@@ -88,18 +84,33 @@ public class Enemy : NetworkBehaviour
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
     }
 
+    private int counter;
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
-        //check if the knocked down player is the same as the chased player
-        ulong nId1 = players[indexOfChasedPlayer].GetComponentInParent<NetworkObject>().NetworkObjectId;
-        ulong nId2 = e.senderId;
+        //counter++;
+        //Debug.Log("counter" + counter);
 
-        if (players.Count != 0)
-            if(nId1 == nId2)
-            players.RemoveAt(indexOfChasedPlayer);
+        //check if the knocked down player is the same as the chased player
+        //Debug.Log("player.Any()" + players.Any());
+
+        if (players.Any() && players != null && indexOfChasedPlayer >= 0 && !e.isKnockedDown)
+        {
+            //Debug.Log("players[indexOfChasedPlayer].locpos" + (players[indexOfChasedPlayer]).transform.localPosition);
+            //Debug.Log("target.transform.locpos" + target.transform.localPosition);
+            if (players[indexOfChasedPlayer].transform == target.transform)
+            {
+                players.RemoveAt(indexOfChasedPlayer);
+                target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown;
+            }
+        }
+        else
+        {
+            target = null;
+        }
+        
         StopAnimationClientRpc(); //Notify the clients to stop the animation
         state = State.PlayerDown;
-        target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown;
+        
     }
 
 
@@ -109,25 +120,26 @@ public class Enemy : NetworkBehaviour
 
         switch (state)
         {
-
             case State.Roaming:
-                moveDirection = moveDirections[currentMoveDirection];
-
-                transform.Translate(SPEED_VALUE * Time.deltaTime * moveDirection);
-
-                animator.SetFloat(HORIZONTAL, moveDirection.x);
-                animator.SetFloat(VERTICAL, moveDirection.y);
-                animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
-
-                if (decisionTimeCount > 0) decisionTimeCount -= Time.deltaTime;
-                else
+                if (players.Any() && players != null)
                 {
-                    // Choose a random time delay for taking a decision ( changing direction, or standing in place for a while )
-                    decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
+                    moveDirection = moveDirections[currentMoveDirection];
+                    transform.Translate(SPEED_VALUE * Time.deltaTime * moveDirection);
 
-                    // Choose a movement direction, or stay in place
-                    ChooseMoveDirection();
-                    SearchForTarget();
+                    animator.SetFloat(HORIZONTAL, moveDirection.x);
+                    animator.SetFloat(VERTICAL, moveDirection.y);
+                    animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
+
+                    if (decisionTimeCount > 0) decisionTimeCount -= Time.deltaTime;
+                    else
+                    {
+                        // Choose a random time delay for taking a decision ( changing direction, or standing in place for a while )
+                        decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
+
+                        // Choose a movement direction
+                        ChooseMoveDirection();
+                        SearchForTarget();
+                    }
                 }
                 break;
 
@@ -149,58 +161,99 @@ public class Enemy : NetworkBehaviour
 
     private void SearchForTarget()
     {
-        foreach (GameObject player in players)
+        if (players.Any() && players != null && indexOfChasedPlayer >= 0)
         {
-            if (Vector2.Distance(player.transform.position, transform.position) < lookingDistance)
+            foreach (GameObject player in players)
             {
-                indexOfChasedPlayer = players.IndexOf(player);
-                state = State.ChaseTarget;
-                target = player.transform;
-                target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+                if (Vector2.Distance(player.transform.position, transform.position) < lookingDistance)
+                {
+                    indexOfChasedPlayer = players.IndexOf(player);
+                    state = State.ChaseTarget;
+                    target = player.transform;
+                    target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+                }
             }
-
         }
     }
 
-
     private void ChaseTarget()
     {
-        if (target != null)
+        if (players.Any() && players != null)
         {
-            if (Vector2.Distance(transform.position, target.position) >= lookingDistance)
+
+            if (target != null)
             {
-                state = State.Roaming;
-                return;
-            }
-
-
-            moveDirection = (target.transform.position - transform.position).normalized;
-            transform.Translate(SPEED_VALUE * Time.deltaTime * moveDirection);
-
-            animator.SetFloat(HORIZONTAL, moveDirection.x);
-            animator.SetFloat(VERTICAL, moveDirection.y);
-            animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
-
-            if(timeLeftToAttack == 0)
-            { 
-                hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
-                foreach (RaycastHit2D raycastHit2D in hits)
+                if (Vector2.Distance(transform.position, target.position) >= lookingDistance)
                 {
-                    if (raycastHit2D.collider.name == "PlayerAnimation")
+                    state = State.Roaming;
+                    return;
+                }
+
+                moveDirection = (target.transform.position - transform.position).normalized;
+                transform.Translate(SPEED_VALUE * Time.deltaTime * moveDirection);
+
+                animator.SetFloat(HORIZONTAL, moveDirection.x);
+                animator.SetFloat(VERTICAL, moveDirection.y);
+                animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
+
+                if (timeLeftToAttack == 0)
+                {
+                    hits = Physics2D.CapsuleCastAll(transform.position, size, CapsuleDirection2D.Vertical, 0, Vector2.up, 0);
+                    foreach (RaycastHit2D raycastHit2D in hits)
                     {
-                        Attack();
+                        if (raycastHit2D.collider.name == "PlayerAnimation")
+                        {
+                            Attack();
+                        }
                     }
                 }
             }
         }
     }
 
+    public LayerMask filter;
+    private void HandleHardCollision()
+    {
+        Physics2D.queriesHitTriggers = false; //must be reset to true when triggers are to have an effect
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, 0.3f, filter);
+
+        //hit.collider.GetComponent<Collider2D>().name;
+        if (hit.collider != null)
+        {
+            if (hit.collider.CompareTag("StaticColliders"))
+            {
+                Debug.Log("Collider name: " + hit.collider.name);
+                //Debug.DrawRay(transform.position, moveDirection);
+                moveDirection = -moveDirection;
+            }
+        }
+    }
+
+    //react to the circle collider to pick new targets within range
+    private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
+    {
+        if (!IsServer) return;
+        if (players.Any() && players != null)
+        {
+            if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
+            {
+                target = collision.transform;
+                //playerID = (int)collision.GetComponentInParent<PlayerBehaviour>().OwnerClientId;
+                //Debug.Log($"New Target, With ID: " + playerID);
+                //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
+            }
+        }
+    }
 
     private void StopAnimation()
     {
-        //state = State.Roaming;
+        if (players?.Any() != true) // Handle null or empty list
+        {
+            target = null;
+        }
         moveDirection = Vector2.zero;
         animator.SetFloat(SPEED, 0);
+        //state = State.PlayerDown;
     }
 
     [ClientRpc]

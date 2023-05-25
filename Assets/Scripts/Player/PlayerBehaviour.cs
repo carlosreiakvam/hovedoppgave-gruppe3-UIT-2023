@@ -148,26 +148,6 @@ public class PlayerBehaviour : NetworkBehaviour
         }
     }
 
-
-    private void HandleInteractions()
-    {
-        if (!IsLocalPlayer) return;
-
-        Vector2 inputVector = new Vector2(horizontalInput, verticalInput).normalized;
-        Vector2 moveDir = new(inputVector.x, inputVector.y);
-
-        if (moveDir != Vector2.zero)
-            lastInteractDir = moveDir;
-
-        float interactDistance = 0f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDir, interactDistance);
-
-        /*        if (hit.transform.TryGetComponent(out Enemy en))
-                    Debug.Log("Hit Something: " + en.tag);
-        */
-
-    }
-
     private void HandleMovement()
     {
         if (!IsOwner) return;
