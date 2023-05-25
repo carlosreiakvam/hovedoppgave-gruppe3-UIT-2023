@@ -37,7 +37,7 @@ public class LobbyQuickJoin : MonoBehaviour
             bool isLobbyFound = await LobbyManager.Singleton.QuickJoinLobby(playerNameInput.text);
             spinner.SetActive(false);
 
-            // Opens lobby room regardless of whether a lobby was found or not
+            if (!isLobbyFound) { MenuManager.Singleton.OpenAlert("No open lobbies found"); return; }
             MenuManager.Singleton.OpenLobbyRoom(this, EventArgs.Empty);
         });
 

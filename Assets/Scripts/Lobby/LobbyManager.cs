@@ -196,6 +196,8 @@ public class LobbyManager : NetworkBehaviour
 
             QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions { Player = GetNewPlayer(playerName) };
             lobby = await LobbyService.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
+            if (lobby == null) return false;
+
             isLobbyActive = true;
 
             // Connect to relay
