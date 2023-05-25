@@ -81,34 +81,19 @@ public class Enemy : NetworkBehaviour
         base.OnNetworkSpawn();
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
     }
-
-    private int counter;
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
-        //counter++;
-        //Debug.Log("counter" + counter);
-
-        //check if the knocked down player is the same as the chased player
-        //Debug.Log("player.Any()" + players.Any());
-
-        if (players.Any() && players != null && indexOfChasedPlayer >= 0 && !e.isKnockedDown)
+        if (players.Any())
         {
-            //Debug.Log("players[indexOfChasedPlayer].locpos" + (players[indexOfChasedPlayer]).transform.localPosition);
-            //Debug.Log("target.transform.locpos" + target.transform.localPosition);
             if (players[indexOfChasedPlayer].transform == target.transform)
             {
                 players.RemoveAt(indexOfChasedPlayer);
                 target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown;
             }
         }
-        else
-        {
-            target = null;
-        }
         
         StopAnimationClientRpc(); //Notify the clients to stop the animation
         state = State.PlayerDown;
-        
     }
 
 
@@ -159,7 +144,7 @@ public class Enemy : NetworkBehaviour
 
     private void SearchForTarget()
     {
-        if (players.Any() && players != null && indexOfChasedPlayer >= 0)
+        if (players.Any())
         {
             foreach (GameObject player in players)
             {
@@ -176,9 +161,8 @@ public class Enemy : NetworkBehaviour
 
     private void ChaseTarget()
     {
-        if (players.Any() && players != null)
+        if (players.Any())
         {
-
             if (target != null)
             {
                 if (Vector2.Distance(transform.position, target.position) >= lookingDistance)
@@ -210,7 +194,7 @@ public class Enemy : NetworkBehaviour
     }
 
     public LayerMask filter;
-    private void HandleHardCollision()
+    private void HandleHardCollision() //Not in use
     {
         Physics2D.queriesHitTriggers = false; //must be reset to true when triggers are to have an effect
         RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, 0.3f, filter);
@@ -231,13 +215,11 @@ public class Enemy : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
     {
         if (!IsServer) return;
-        if (players.Any() && players != null)
+        if (players.Any())
         {
             if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
             {
                 target = collision.transform;
-                //playerID = (int)collision.GetComponentInParent<PlayerBehaviour>().OwnerClientId;
-                //Debug.Log($"New Target, With ID: " + playerID);
                 //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
             }
         }
@@ -245,13 +227,8 @@ public class Enemy : NetworkBehaviour
 
     private void StopAnimation()
     {
-        if (players?.Any() != true) // Handle null or empty list
-        {
-            target = null;
-        }
         moveDirection = Vector2.zero;
         animator.SetFloat(SPEED, 0);
-        //state = State.PlayerDown;
     }
 
     [ClientRpc]
