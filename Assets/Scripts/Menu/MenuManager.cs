@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using TMPro;
 
+/// <summary>
+/// Manages various menus and UI elements in the game. It also handles events associated with these menus.
+/// </summary>
 public class MenuManager : MonoBehaviour
 {
+    // Events that trigger when a menu is opened.
     public event EventHandler OnMenuStartOpened;
     public event EventHandler OnLobbyMenuOpened;
     public event EventHandler OnLobbyCreateOpened;
     public event EventHandler OnLobbyJoinOpened;
     public event EventHandler OnLobbyRoomOpened;
+
+    // SerializeField attribute exposes private fields to the Unity Inspector.
     [SerializeField] GameObject imageControl;
     [SerializeField] private GameStatusSO gameStatusSO;
     [SerializeField] private TextMeshProUGUI alertMessage;
@@ -21,6 +24,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject chatVisual;
     [SerializeField] List<GameObject> pages;
 
+    /// <summary>
+    /// Singleton instance of the MenuManager.
+    /// </summary>
     public static MenuManager Singleton;
 
     private void Awake()
@@ -34,18 +40,15 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        // DISPLAY MESSAGE IF IS ANDROID
         imageControl.SetActive(gameStatusSO.isAndroid);
-
-        // Subscribe to events
         RelayManager.Singleton.OnRelayCreated += OpenLobbyRoom;
-
         OpenPage(MenuEnums.MenuStart);
     }
 
-
-
-
+    /// <summary>
+    /// Opens the specified page or menu.
+    /// </summary>
+    /// <param name="pageToOpen">The menu page to open.</param>
     public void OpenPage(MenuEnums pageToOpen)
     {
         header.gameObject.SetActive(pageToOpen != MenuEnums.MenuStart);
@@ -108,9 +111,11 @@ public class MenuManager : MonoBehaviour
     {
         alertMessage.transform.parent.gameObject.SetActive(false);
     }
+    /// </summary>
+    /// <param name="sender">The originator of the event.</param>
+    /// <param name="e">An EventArgs that contains the event data. The parameter is not in use.</param>
     public void OpenLobbyRoom(object sender, System.EventArgs e)
     {
         OpenPage(MenuEnums.LobbyRoom);
     }
-
 }
