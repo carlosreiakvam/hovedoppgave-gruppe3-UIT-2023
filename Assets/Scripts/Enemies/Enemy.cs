@@ -9,6 +9,7 @@ public class Enemy : NetworkBehaviour
 {
     private Transform target = null;
     readonly float lookingDistance = 5f;
+    private float stopChasingDistance = 10f;
     private const float SPEED_VALUE = 2f;
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
@@ -113,6 +114,8 @@ public class Enemy : NetworkBehaviour
                     animator.SetFloat(VERTICAL, moveDirection.y);
                     animator.SetFloat(SPEED, moveDirection.sqrMagnitude);
 
+                    SearchForTarget();
+
                     if (decisionTimeCount > 0) decisionTimeCount -= Time.deltaTime;
                     else
                     {
@@ -121,7 +124,7 @@ public class Enemy : NetworkBehaviour
 
                         // Choose a movement direction
                         ChooseMoveDirection();
-                        SearchForTarget();
+                        
                     }
                 }
                 break;
@@ -148,7 +151,7 @@ public class Enemy : NetworkBehaviour
         {
             foreach (GameObject player in players)
             {
-                if (Vector2.Distance(player.transform.position, transform.position) < lookingDistance)
+                if (Vector2.Distance(player.transform.position, transform.position) < stopChasingDistance)
                 {
                     indexOfChasedPlayer = players.IndexOf(player);
                     state = State.ChaseTarget;
