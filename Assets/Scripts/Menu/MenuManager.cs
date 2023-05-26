@@ -59,7 +59,6 @@ public class MenuManager : MonoBehaviour
             page.SetActive(false);
         }
 
-
         switch (pageToOpen)
         {
             case MenuEnums.MenuStart:
@@ -93,24 +92,28 @@ public class MenuManager : MonoBehaviour
 
             default: break;
         }
-
-
     }
 
-    public void DestroyMenus()
-    { Destroy(gameObject); }
-
-
+    /// <summary>
+    /// Displays an alert with a specified message.
+    /// </summary>
+    /// <param name="message">The message to display in the alert.</param>
     public void OpenAlert(string message)
     {
         alertMessage.transform.parent.gameObject.SetActive(true);
         alertMessage.text = message;
-
     }
+
+    /// <summary>
+    /// Closes the currently displayed alert.
+    /// </summary>
     public void CloseAlert()
     {
         alertMessage.transform.parent.gameObject.SetActive(false);
     }
+
+    /// <summary>
+    /// Opens the lobby room page.
     /// </summary>
     /// <param name="sender">The originator of the event.</param>
     /// <param name="e">An EventArgs that contains the event data. The parameter is not in use.</param>
