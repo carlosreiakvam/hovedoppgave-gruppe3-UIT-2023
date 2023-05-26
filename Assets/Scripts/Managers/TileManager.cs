@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class TileManager : MonoBehaviour
 {
     public static TileManager Singleton;
+    const int MAX_TRIES_TO_FIND_EMPTY_TILE = 100;
 
 
     [SerializeField] Tilemap forestTilemap;
@@ -73,8 +74,8 @@ public class TileManager : MonoBehaviour
 
         Vector2 emptyTile = Vector2.zero;
 
-        // Try to find an empty tile maxTries times.
-        for (int i = 0; i < 100; i++)
+        // Try to find an empty tile.
+        for (int i = 0; i < MAX_TRIES_TO_FIND_EMPTY_TILE; i++)
         {
 
             // Generate a random position within the boundaries.

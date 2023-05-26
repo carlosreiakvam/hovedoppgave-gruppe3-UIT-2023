@@ -14,6 +14,9 @@ public class InitializeManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Initialize the platform. This is used to determine if the game is running on Android or Windows.
+    /// </summary>
     private void InitializePlatform()
     {
         if (Application.platform == RuntimePlatform.Android)
@@ -34,6 +37,9 @@ public class InitializeManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Destroy all NetworkManager Multiples. Multiples are created when the scene is reloaded.
+    /// </summary>
     private void DestroyNetworkManagerMultiples()
     {
         List<GameObject> objects = GameObject.FindObjectsOfType<GameObject>().ToList<GameObject>();

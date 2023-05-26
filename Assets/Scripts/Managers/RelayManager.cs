@@ -46,6 +46,7 @@ public class RelayManager : MonoBehaviour
         catch (Exception e) { Debug.LogWarning(e); }
     }
 
+
     /// <summary>
     /// Initializes Unity services with a profile.
     /// </summary>
@@ -73,9 +74,6 @@ public class RelayManager : MonoBehaviour
     }
 
 
-
-
-
     /// <summary>
     /// Creates a relay allocation and starts the host.
     /// </summary>
@@ -89,7 +87,6 @@ public class RelayManager : MonoBehaviour
 
             RelayServerData relayServerData = new(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-            Debug.Log("; JoinCode: " + relayJoinCode);
             OnRelayCreated?.Invoke(this, EventArgs.Empty);
             NetworkManager.Singleton.StartHost();
 
@@ -115,13 +112,11 @@ public class RelayManager : MonoBehaviour
     {
         try
         {
-            Debug.Log("Joining Realy with " + joinCode);
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             OnRelayCreated?.Invoke(this, EventArgs.Empty);
-            Debug.Log("Success on JoinRelay");
             NetworkManager.Singleton.StartClient();
         }
 
@@ -131,7 +126,6 @@ public class RelayManager : MonoBehaviour
             Debug.Log(e);
         }
     }
-
 
 
     /// <summary>
@@ -147,7 +141,6 @@ public class RelayManager : MonoBehaviour
 
             RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-            Debug.Log("Success on JoinRelay");
         }
 
         catch (RelayServiceException e)
@@ -157,6 +150,4 @@ public class RelayManager : MonoBehaviour
         }
         NetworkManager.Singleton.StartClient();
     }
-
-
 }

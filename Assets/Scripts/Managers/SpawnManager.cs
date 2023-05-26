@@ -9,11 +9,19 @@ using UnityEngine.UI;
 
 public class SpawnManager : NetworkBehaviour
 {
+    public const int MAX_TRIES = 100;
+    public const int N_ENEMIES_FOREST = 15;
+    public const int N_ENEMIES_CAVE = 15;
+    public const int N_HEALTH_POWERUPS_FOREST = 15;
+    public const int N_HEALTH_POWERUPS_CAVE = 25;
+    public const int N_SPEED_POWERUPS_FOREST = 15;
+    public const int N_SPEED_POWERUPS_CAVE = 15;
+
     [SerializeField] Material caveMaterial;
-    [SerializeField] Transform playerPrefab = null;
-
     [SerializeField] private GameStatusSO gameStatus;
+    [SerializeField] Transform playerPrefabTransform = null;
 
+    // Prefabs
     [SerializeField] private GameObject materialManagerPrefab;
     [SerializeField] private GameObject torchPrefab;
     [SerializeField] private GameObject ringPrefab;
@@ -25,13 +33,6 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField] private GameObject wizardPrefab;
 
 
-    public const int maxTries = 100;
-    public const int nEnemiesOutside = 15;
-    public const int nEnemiesCave = 15;
-    public const int nHealthPowerupsOutdoor = 15;
-    public const int nHealthPowerupsCave = 25;
-    public const int nSpeedPowerupsOutdoor = 15;
-    public const int nSpeedPowerupsCave = 15;
 
     private Transform playerTransform;
     private Dictionary<ulong, NetworkObject> spawnedObjects = new Dictionary<ulong, NetworkObject>();
@@ -45,13 +46,11 @@ public class SpawnManager : NetworkBehaviour
     }
 
 
-
-
     public bool SpawnAll()
     {
         try
         {
-            
+
             // SPAWN PLAYERS
             SpawnPlayers();
 
@@ -68,16 +67,16 @@ public class SpawnManager : NetworkBehaviour
             SpawnPrefabsAtEmptyTiles(SpawnEnums.TorchPowerUp, environment: EnvironmentEnums.Cave, nInstances: 15, searchRange: 1);
 
             // SPAWN ENEMIES
-            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: nEnemiesOutside, searchRange: 1, excludedMidAreaSideLength: 10);
-            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: nEnemiesCave, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: N_ENEMIES_FOREST, searchRange: 1, excludedMidAreaSideLength: 10);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: N_ENEMIES_CAVE, searchRange: 1);
 
             // SPAWN HEALTH POWERUPS
-            SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nHealthPowerupsOutdoor, searchRange: 1);
-            SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Cave, nInstances: nHealthPowerupsCave, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: N_HEALTH_POWERUPS_FOREST, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Cave, nInstances: N_HEALTH_POWERUPS_CAVE, searchRange: 1);
 
             // SPAWN SPEED POWERUPS
-            SpawnPrefabsAtEmptyTiles(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: nSpeedPowerupsOutdoor, searchRange: 1);
-            SpawnPrefabsAtEmptyTiles(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: nSpeedPowerupsCave, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: N_SPEED_POWERUPS_FOREST, searchRange: 1);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.SpeedPowerUp, environment: EnvironmentEnums.Cave, nInstances: N_SPEED_POWERUPS_CAVE, searchRange: 1);
 
             // MATERIAL MANAGER HAS TO BE LAST
             SpawnObject(SpawnEnums.MaterialManager, new Vector2(), EnvironmentEnums.NoEnvironment);
@@ -144,12 +143,13 @@ public class SpawnManager : NetworkBehaviour
 
     public void SpawnPlayers()
     {
-
         int playerNumber = 0;
-        foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
+        Transform playerTransform;
+        PlayerBehaviour playerBehaviour;
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Transform playerTransform = Instantiate(playerPrefab);
-            PlayerBehaviour playerBehaviour = playerTransform.GetComponent<PlayerBehaviour>();
+            playerTransform = Instantiate(playerPrefabTransform);
+            playerBehaviour = playerTransform.GetComponent<PlayerBehaviour>();
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
             playerNumber++;
         }
@@ -157,13 +157,12 @@ public class SpawnManager : NetworkBehaviour
 
     public void DespawnAllPlayers()
     {
-        foreach (ulong clientId in Unity.Netcode.NetworkManager.Singleton.ConnectedClientsIds)
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
             DisconnectPlayerServerRpc(clientId);
         }
     }
 
-    // Might remove this. Better to use Destroy(gameObject)?
     [ServerRpc(RequireOwnership = false)]
     internal void DespawnObjectServerRpc(ulong networkObjectId)
     {

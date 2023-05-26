@@ -16,9 +16,6 @@ public class LobbyQuickJoin : MonoBehaviour
     [SerializeField] GameObject backButtonGO;
     GameObject spinner;
 
-    private void Awake()
-    {
-    }
 
     private void Start()
     {

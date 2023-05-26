@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class Wizard : NetworkBehaviour
 {
     private IEnumerator coroutine;
-    string[] wizardQuotes =
+    private string[] wizardQuotes =
 {
     "The ring, lost to the shadows, must be found!",
     "My magic is weakened without my ring, I need your aid!",

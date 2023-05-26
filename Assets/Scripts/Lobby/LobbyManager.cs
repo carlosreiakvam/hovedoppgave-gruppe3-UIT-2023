@@ -23,7 +23,7 @@ public class LobbyManager : NetworkBehaviour
 
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
-    private int maxPlayers = 4;
+    private const int MAX_PLAYERS = 4;
     private Lobby lobby;
 
     [SerializeField] GameObject transitionHelperPrefab;
@@ -150,7 +150,7 @@ public class LobbyManager : NetworkBehaviour
                  },
             };
 
-            lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+            lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, MAX_PLAYERS, options);
             if (lobby == null) Debug.LogWarning("Lobby not initiated");
             SetHostId(AuthenticationService.Instance.PlayerId);
         }
