@@ -6,12 +6,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
+/// <summary>
+/// Represents the behavior of a player in the game.
+/// </summary>
 public class PlayerBehaviour : NetworkBehaviour
 {
     private Coroutine currentSpeedCoroutine;
     private Coroutine currentTorchCoroutine;
 
-    /*TouchControls*/
     private CharacterController controller;
     private PlayerInput playerInput;
 
@@ -40,12 +42,16 @@ public class PlayerBehaviour : NetworkBehaviour
     private bool playerIsKnockedOut = false;
     private bool woodenSword = true;
 
-    private const string TOUCH_UI_TAG = "TouchUI";
     private const string TOUCH_UI_NAME = "TouchUIContainer";
     private PlayerHealth playerHealth;
+
+    /// <summary>
+    /// Initializes the player behavior.
+    /// </summary>
     private void Initialize()
     {
         if (!IsOwner) return;
+
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat(PREVHORIZONTAL, 0);
         animator.SetFloat(PREVVERTICAL, -1);
@@ -53,6 +59,10 @@ public class PlayerBehaviour : NetworkBehaviour
         playerHealth = GetComponentInChildren<PlayerHealth>();
         playerHealth.OnPlayerKnockdown += OnPlayerKnockdown;
     }
+
+    /// <summary>
+    /// Runs before every other method
+    /// </summary>
     private void Awake()
     {
         try
@@ -64,6 +74,9 @@ public class PlayerBehaviour : NetworkBehaviour
         catch { }
     }
 
+    /// <summary>
+    /// Callback method. Tells what's going to happen if the player is knocked down.
+    /// </summary>
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
         playerIsKnockedOut = e.isKnockedDown;
@@ -71,18 +84,25 @@ public class PlayerBehaviour : NetworkBehaviour
         GameManager.Singleton.OnPlayerDeath();
     }
 
+    /// <summary>
+    /// Runs after OnNetworkSpawn (because this script belongs to a dynamically spawned object)
+    /// </summary>
     private void Start()
     {
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls;
     }
 
-
+    /// <summary>
+    /// Toggles player controls based on the focus of the chat.
+    /// </summary>
     private void Toggle_PlayerControls(object sender, ChatManager.OnChangeFocusEventArgs e)
     {
         chatInFocus = e.IsChatActive;
     }
 
-
+    /// <summary>
+    /// Called when the player is spawned in the network. After Awake()
+    /// </summary>
     public override void OnNetworkSpawn()
     {
         if (gamestatusSO.isAndroid)
@@ -99,8 +119,9 @@ public class PlayerBehaviour : NetworkBehaviour
         Initialize();
     }
 
-
-
+    /// <summary>
+    /// Called when the player is despawned from the network.
+    /// </summary>
     public override void OnNetworkDespawn()
     {
         Debug.Log("OnNetworkDespawn i playerbehaviour");
@@ -108,6 +129,9 @@ public class PlayerBehaviour : NetworkBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Makes sure movement is done before updating camera position
+    /// </summary>
     private void LateUpdate()
     {
         if (IsLocalPlayer)
@@ -118,6 +142,9 @@ public class PlayerBehaviour : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Called every frame
+    /// </summary>
     void Update()
     {
         if (playerIsKnockedOut) return;
@@ -132,6 +159,9 @@ public class PlayerBehaviour : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles player movement on Windows platform.
+    /// </summary>
     private void HandleMovement()
     {
         if (!IsOwner) return;
@@ -159,7 +189,9 @@ public class PlayerBehaviour : NetworkBehaviour
         }
     }
 
-    public bool isAttackBtn;
+    /// <summary>
+    /// Handles player input on Android platform.
+    /// </summary>
     public void HandleTouchInput()
     {
         if (!IsOwner) return;
@@ -184,22 +216,34 @@ public class PlayerBehaviour : NetworkBehaviour
             Attack();
     }
 
+    /// <summary>
+    /// Performs an attack action.
+    /// </summary>
     private void Attack()
     {
         if (woodenSword) { ownerNetworkAnimator.SetTrigger(WOODENATTACK); }
         else ownerNetworkAnimator.SetTrigger(STEELATTACK);
     }
 
+    /// <summary>
+    /// Sets the player to have a new sword.
+    /// </summary>
     public void SetNewSword()
     {
         woodenSword = false;
     }
 
+    /// <summary>
+    /// Returns whether the player has a wooden sword or not.
+    /// </summary>
     public bool GetSword()
     {
         return woodenSword;
     }
 
+    /// <summary>
+    /// Increases the player's speed.
+    /// </summary>
     internal void IncreaseSpeed()
     {
         playerSpeed = PLAYER_INCREASED_SPEED;
@@ -209,7 +253,9 @@ public class PlayerBehaviour : NetworkBehaviour
         currentSpeedCoroutine = StartCoroutine(ResetSpeedAfterDelay(8));
     }
 
-
+    /// <summary>
+    /// Resets the player's speed after a specified delay.
+    /// </summary>
     IEnumerator ResetSpeedAfterDelay(float delay)
     {
         LocalPlayerManager.Singleton.speedPowerup.SetActive(true);
@@ -217,17 +263,27 @@ public class PlayerBehaviour : NetworkBehaviour
         LocalPlayerManager.Singleton.speedPowerup.SetActive(false);
         playerSpeed = PLAYER_BASE_SPEED;
     }
+
+    /// <summary>
+    /// Relocates the player to a new position.
+    /// </summary>
     internal void RelocatePlayer(Vector2 cavePosition)
     {
         playerAnimation.transform.position = cavePosition;
     }
 
+    /// <summary>
+    /// Activates the torch power-up for the player.
+    /// </summary>
     internal void ActivateTorchPowerUp()
     {
         if (currentTorchCoroutine != null) StopCoroutine(currentTorchCoroutine);
         currentTorchCoroutine = StartCoroutine(FireUpNewTorch(8));
     }
 
+    /// <summary>
+    /// Activates the torch power-up for a specified duration.
+    /// </summary>
     internal IEnumerator FireUpNewTorch(float delay)
     {
         Light2D playerLight = GetComponentInChildren<Light2D>();
@@ -239,5 +295,4 @@ public class PlayerBehaviour : NetworkBehaviour
 
         playerLight.pointLightOuterRadius = 5;
     }
-
 }
