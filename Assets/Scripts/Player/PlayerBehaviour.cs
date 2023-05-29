@@ -31,7 +31,6 @@ public class PlayerBehaviour : NetworkBehaviour
     private const float PLAYER_INCREASED_SPEED = 6;
     private float playerSpeed = PLAYER_BASE_SPEED;
 
-    private Camera mainCamera;
     private float horizontalInput;
     private float verticalInput;
     private Vector2 lastInteractDir;
@@ -56,7 +55,6 @@ public class PlayerBehaviour : NetworkBehaviour
     private void Initialize()
     {
         if (!IsOwner) return;
-        mainCamera = Camera.main;
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat(PREVHORIZONTAL, 0);
         animator.SetFloat(PREVVERTICAL, -1);
@@ -182,7 +180,7 @@ public class PlayerBehaviour : NetworkBehaviour
 
         Vector2 input = playerInput.actions["PlayerMovement"].ReadValue<Vector2>();
         Vector3 move = new(input.x, input.y);
-        move = move.x * mainCamera.transform.right + move.y * mainCamera.transform.up;
+        move = move.x * Camera.main.transform.right + move.y * Camera.main.transform.up;
         controller.Move(playerSpeed * Time.deltaTime * move);
 
         animator.SetFloat(HORIZONTAL, input.x);
