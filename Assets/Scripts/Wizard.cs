@@ -34,6 +34,8 @@ public class Wizard : NetworkBehaviour
         if (!IsServer) return;
         ChatManager.Instance.SendMsg("Find the ring and retrieve it to me!", "Wizard");
         StartCoroutine(RepeatMessage());
+        Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D.bodyType = RigidbodyType2D.Static;
     }
 
     private IEnumerator RepeatMessage()

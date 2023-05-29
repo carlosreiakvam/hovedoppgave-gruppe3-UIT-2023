@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerWizardCollision : NetworkBehaviour
 {
     [SerializeField] GameStatusSO gameStatusSO;
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!(collision.gameObject.tag == "Wizard")) { return; } // Return if not wizard
         if (!LocalPlayerManager.Singleton.localPlayer.playerHasRing) { Debug.Log("Player does not have ring"); return; }  // Return if player does not have ring
@@ -16,6 +17,7 @@ public class PlayerWizardCollision : NetworkBehaviour
         string playerName = LocalPlayerManager.Singleton.GetNameFromId(localPlayerId);
 
         OnPlayerWonGameServerRpc(localPlayerId, playerName);
+
     }
 
     [ServerRpc(RequireOwnership = false)]
