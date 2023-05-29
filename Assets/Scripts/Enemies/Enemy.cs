@@ -82,6 +82,7 @@ public class Enemy : NetworkBehaviour
         base.OnNetworkSpawn();
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
     }
+
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
         if (players.Any())
@@ -92,7 +93,7 @@ public class Enemy : NetworkBehaviour
                 target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown;
             }
         }
-        
+
         StopAnimationClientRpc(); //Notify the clients to stop the animation
         state = State.PlayerDown;
     }
@@ -124,7 +125,7 @@ public class Enemy : NetworkBehaviour
 
                         // Choose a movement direction
                         ChooseMoveDirection();
-                        
+
                     }
                 }
                 break;
@@ -151,6 +152,7 @@ public class Enemy : NetworkBehaviour
         {
             foreach (GameObject player in players)
             {
+                if (player == null) return;
                 if (Vector2.Distance(player.transform.position, transform.position) < stopChasingDistance)
                 {
                     indexOfChasedPlayer = players.IndexOf(player);

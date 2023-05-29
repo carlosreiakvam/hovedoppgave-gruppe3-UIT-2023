@@ -6,6 +6,7 @@ using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,6 +55,7 @@ public class LobbyManager : NetworkBehaviour
     private void Update()
     {
 
+        if (lobby.IsUnityNull()) return;
         if (isLobbyActive)
         {
             HandlePollUpdate();
@@ -353,5 +355,12 @@ public class LobbyManager : NetworkBehaviour
     internal void RegisterLobbyToGameStatusSO()
     {
         gameStatusSO.lobbyPlayers = lobby.Players;
+    }
+    
+    internal async void EndLobby()
+    {
+        if (!IsServer) return;
+        await LobbyService.Instance.DeleteLobbyAsync(lobby.Id);
+
     }
 }

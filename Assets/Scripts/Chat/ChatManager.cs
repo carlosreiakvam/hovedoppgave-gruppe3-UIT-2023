@@ -144,6 +144,7 @@ public class ChatManager : NetworkBehaviour
         {
             newContent += s + "\n";
         }
+        if (chatContent.isTextOverflowing) _messages.RemoveAt(0);
 
         chatContent.text = newContent;
     }

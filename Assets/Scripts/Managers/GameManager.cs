@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
-using Unity.Services.Authentication;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,11 +25,32 @@ public class GameManager : NetworkBehaviour
         largeMessage.SetActive(false);
         if (Singleton == null) { Singleton = this; DontDestroyOnLoad(gameObject); }
         else Destroy(gameObject);
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
+    }
+
+    private void OnClientDisconnect(ulong clientId)
+    {
+        // Check if the server (host) disconnected
+        if (clientId == 0)
+        {
+            EndGameScene();
+        }
+        else
+        {
+            ChatManager.Instance.SendMsg("A player has disconnected from the game.", "Wizard");
+        }
+
+
     }
 
     private void Start()
     {
         LocalPlayerManager.Singleton.RegisterPlayerInScriptableObject();
+    }
+
+    private void LateUpdate()
+    {
     }
 
     /// <summary>

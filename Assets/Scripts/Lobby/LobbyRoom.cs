@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.Netcode;
-using Unity.VisualScripting;
 
 public class LobbyRoom : MonoBehaviour
 {
@@ -203,6 +200,9 @@ public class LobbyRoom : MonoBehaviour
                 {
                     LoadNetwork(isCurrentPlayerHost);
                     LobbyManager.Singleton.SpawnTransitionHelper();
+
+                    // Destroy lobby gracefully
+                    LobbyManager.Singleton.EndLobby();
                 }
             }
         }
@@ -234,6 +234,7 @@ public class LobbyRoom : MonoBehaviour
     /// </summary>
     public void OnLobbyLeft(object sender, EventArgs e)
     {
+        LobbyManager.Singleton.EndLobby(); // only invoked by server
         MenuManager.Singleton.OpenPage(MenuEnums.LobbyMenu);
     }
 }
