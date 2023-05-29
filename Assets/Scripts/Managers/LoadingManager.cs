@@ -62,8 +62,6 @@ public class LoadingManager : NetworkBehaviour
         loadingScreenPanel.SetActive(false);
         powerupUI.SetActive(true);
         chatPanel.SetActive(true);
-        PlayerBehaviour playerBehaviour = PlayerBehaviour.LocalInstance;
-        playerBehaviour.ControlActive(true);
 
         // Display touch controls if on Android
         if (gameStatusSO.isAndroid) touchUIInstantiated.SetActive(true);
