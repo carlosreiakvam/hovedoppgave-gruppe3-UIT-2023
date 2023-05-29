@@ -5,18 +5,26 @@ using UnityEngine;
 using Unity.Netcode.Components;
 using System.Linq;
 
+/// <summary>
+/// Represents an enemy character controlled by the server.
+/// </summary>
 public class Enemy : NetworkBehaviour
 {
     private Transform target = null;
-    readonly float lookingDistance = 5f;
-    private float stopChasingDistance = 10f;
+    private readonly float lookingDistance = 6f;
+    private readonly float stopChasingDistance = 10f;
     private const float SPEED_VALUE = 2f;
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
     private const string SPEED = "Speed";
-    [SerializeField] private Animator animator;
-    [SerializeField] private NetworkAnimator networkAnimator;
-    private Vector2 moveDirection = new(0, 0);
+
+    [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
+    private NetworkAnimator networkAnimator;
+
+    private Vector2 moveDirection = new Vector2(0, 0);
     private Vector2 size = new Vector2(0.5087228f * 2.2f, 0.9851828f * 1.2f);
     private const string STEELATTACK = "SteelAttack";
     private float timeLeftToAttack = 1;
@@ -27,14 +35,23 @@ public class Enemy : NetworkBehaviour
     private State state;
     private List<GameObject> players;
 
-    // A minimum and maximum time delay for taking a decision, choosing a direction to move in
+    /// <summary>
+    /// A minimum and maximum time delay for taking a decision.
+    /// </summary>
     public Vector2 decisionTime = new(0.1f, 4.0f);
+
     internal float decisionTimeCount = 0;
 
-    // The possible directions that the object can move int, right, left, up, down, and zero for staying in place. I added zero twice to give a bigger chance if it happening than other directions
+    /// <summary>
+    /// The possible directions that the object can move in.
+    /// </summary>
     internal Vector2[] moveDirections = new Vector2[] { Vector2.right, Vector2.left, Vector2.down, Vector2.up };
+
     internal int currentMoveDirection;
 
+    /// <summary>
+    /// States that the enemy transitions between
+    /// </summary>
     private enum State
     {
         Roaming,
@@ -42,11 +59,17 @@ public class Enemy : NetworkBehaviour
         PlayerDown
     }
 
+    /// <summary>
+    /// The enemy starts roaming when he awakes
+    /// </summary>
     private void Awake()
     {
         state = State.Roaming;
     }
 
+    /// <summary>
+    /// Called every frame. Limit attack frequency.
+    /// </summary>
     private void Update()
     {
         if (state == State.ChaseTarget)
@@ -62,27 +85,35 @@ public class Enemy : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Set a random timeframe for how long before the next decision is made 
+    /// </summary>
     private void Start()
     {
-        // Set a random time delay for taking a decision ( changing direction, or standing in place for a while )
         decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
-
-        // Choose a movement direction, or stay in place
         ChooseMoveDirection();
     }
 
-    void ChooseMoveDirection()
+    /// <summary>
+    /// Selects a random movement direction.
+    /// </summary>
+    private void ChooseMoveDirection()
     {
-        // Choose whether to move sideways or up/down
         currentMoveDirection = Mathf.FloorToInt(Random.Range(0, moveDirections.Length));
     }
 
+    /// <inheritdoc cref="NetworkBehaviour.OnNetworkSpawn"/>
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
     }
 
+    /// <summary>
+    /// Event handler for player knockdown event.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">The event arguments.</param>
     private void OnPlayerKnockdown(object sender, PlayerHealth.OnPlayerKnockdownEventArgs e)
     {
         if (players.Any())
@@ -94,10 +125,9 @@ public class Enemy : NetworkBehaviour
             }
         }
 
-        StopAnimationClientRpc(); //Notify the clients to stop the animation
+        StopAnimationClientRpc();
         state = State.PlayerDown;
     }
-
 
     private void FixedUpdate()
     {
@@ -120,12 +150,8 @@ public class Enemy : NetworkBehaviour
                     if (decisionTimeCount > 0) decisionTimeCount -= Time.deltaTime;
                     else
                     {
-                        // Choose a random time delay for taking a decision ( changing direction, or standing in place for a while )
                         decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
-
-                        // Choose a movement direction
                         ChooseMoveDirection();
-
                     }
                 }
                 break;
@@ -140,12 +166,18 @@ public class Enemy : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Take a break after defeating a player, resume roaming afterwards
+    /// </summary>
     private IEnumerator BreakBeforeRoaming()
     {
         yield return new WaitForSeconds(3f);
         state = State.Roaming;
     }
 
+    /// <summary>
+    /// Searches for a target within the chasing range.
+    /// </summary>
     private void SearchForTarget()
     {
         if (players.Any())
@@ -164,6 +196,9 @@ public class Enemy : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Chase the target player.
+    /// </summary>
     private void ChaseTarget()
     {
         if (players.Any())
@@ -198,26 +233,11 @@ public class Enemy : NetworkBehaviour
         }
     }
 
-    public LayerMask filter;
-    private void HandleHardCollision() //Not in use
-    {
-        Physics2D.queriesHitTriggers = false; //must be reset to true when triggers are to have an effect
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, 0.3f, filter);
-
-        //hit.collider.GetComponent<Collider2D>().name;
-        if (hit.collider != null)
-        {
-            if (hit.collider.CompareTag("StaticColliders"))
-            {
-                Debug.Log("Collider name: " + hit.collider.name);
-                //Debug.DrawRay(transform.position, moveDirection);
-                moveDirection = -moveDirection;
-            }
-        }
-    }
-
-    //react to the circle collider to pick new targets within range
-    private void OnTriggerEnter2D(Collider2D collision) //A new target for the enemy!
+    /// <summary>
+    /// React to the circle collider to pick new targets within range.
+    /// </summary>
+    /// <param name="collision">The collision information.</param>
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsServer) return;
         if (players.Any())
@@ -225,7 +245,6 @@ public class Enemy : NetworkBehaviour
             if (collision.GetComponentInParent<PlayerBehaviour>() && !collision.isTrigger)
             {
                 target = collision.transform;
-                //target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown += OnPlayerKnockdown;
             }
         }
     }
@@ -236,14 +255,18 @@ public class Enemy : NetworkBehaviour
         animator.SetFloat(SPEED, 0);
     }
 
+    /// <summary>
+    /// Tell clients to stop animating the enemy when he is taking a break
+    /// </summary>
     [ClientRpc]
     private void StopAnimationClientRpc()
     {
         StopAnimation();
     }
 
-
-
+    /// <summary>
+    /// Use the new sword with a more powerful attack
+    /// </summary>
     private void Attack()
     {
         animator.SetTrigger(STEELATTACK);
