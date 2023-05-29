@@ -2,30 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerBehaviour : NetworkBehaviour
 {
-    public static PlayerBehaviour LocalInstance { get; private set; }
-
     private Coroutine currentSpeedCoroutine;
     private Coroutine currentTorchCoroutine;
-
 
     /*TouchControls*/
     private CharacterController controller;
     private PlayerInput playerInput;
-    private InputAction attackAction;
 
     [SerializeField] GameStatusSO gamestatusSO;
     [SerializeField] private GameObject playerAnimation;
     [SerializeField] private OwnerNetworkAnimator ownerNetworkAnimator;
     [SerializeField] private List<Vector2> spawnPositionList;
-    private bool isControlActive = false;
 
     private const float PLAYER_BASE_SPEED = 3;
     private const float PLAYER_INCREASED_SPEED = 6;
@@ -33,8 +26,6 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private float horizontalInput;
     private float verticalInput;
-    private Vector2 lastInteractDir;
-    private LayerMask enemyLayerMask;
     private Animator animator;
 
     private const string HORIZONTAL = "Horizontal";
@@ -64,7 +55,6 @@ public class PlayerBehaviour : NetworkBehaviour
     }
     private void Awake()
     {
-
         try
         {
             GameObject touchUIContainer = GameObject.Find(TOUCH_UI_NAME);
@@ -84,8 +74,6 @@ public class PlayerBehaviour : NetworkBehaviour
     private void Start()
     {
         ChatManager.Instance.OnChangeFocus += Toggle_PlayerControls;
-
-
     }
 
 
@@ -97,7 +85,6 @@ public class PlayerBehaviour : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-
         if (gamestatusSO.isAndroid)
         {
             controller = gameObject.GetComponent<CharacterController>();
@@ -109,7 +96,6 @@ public class PlayerBehaviour : NetworkBehaviour
         Light2D playerLight = GetComponentInChildren<Light2D>();
         playerLight.enabled = false;
         transform.position = spawnPositionList[(int)OwnerClientId];
-        if (IsLocalPlayer) LocalInstance = this;
         Initialize();
     }
 
@@ -196,7 +182,6 @@ public class PlayerBehaviour : NetworkBehaviour
         bool attack = Convert.ToBoolean(playerInput.actions["PlayerAttack"].ReadValue<float>());
         if (attack)
             Attack();
-
     }
 
     private void Attack()
@@ -236,13 +221,6 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         playerAnimation.transform.position = cavePosition;
     }
-
-    public void ControlActive(bool isActive)
-    {
-        if (!IsOwner) return;
-        isControlActive = isActive;
-    }
-
 
     internal void ActivateTorchPowerUp()
     {
