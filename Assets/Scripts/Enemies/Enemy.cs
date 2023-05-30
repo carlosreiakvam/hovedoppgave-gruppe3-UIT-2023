@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Unity.Netcode.Components;
 using System.Linq;
+using System;
 
 /// <summary>
 /// Represents an enemy character controlled by the server.
@@ -90,7 +91,7 @@ public class Enemy : NetworkBehaviour
     /// </summary>
     private void Start()
     {
-        decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
+        decisionTimeCount = UnityEngine.Random.Range(decisionTime.x, decisionTime.y);
         ChooseMoveDirection();
     }
 
@@ -99,7 +100,7 @@ public class Enemy : NetworkBehaviour
     /// </summary>
     private void ChooseMoveDirection()
     {
-        currentMoveDirection = Mathf.FloorToInt(Random.Range(0, moveDirections.Length));
+        currentMoveDirection = Mathf.FloorToInt(UnityEngine.Random.Range(0, moveDirections.Length));
     }
 
     /// <inheritdoc cref="NetworkBehaviour.OnNetworkSpawn"/>
@@ -118,6 +119,8 @@ public class Enemy : NetworkBehaviour
     {
         if (players.Any())
         {
+            if (indexOfChasedPlayer >= players.Count) return;
+
             if (players[indexOfChasedPlayer].transform == target.transform)
             {
                 players.RemoveAt(indexOfChasedPlayer);
@@ -150,7 +153,7 @@ public class Enemy : NetworkBehaviour
                     if (decisionTimeCount > 0) decisionTimeCount -= Time.deltaTime;
                     else
                     {
-                        decisionTimeCount = Random.Range(decisionTime.x, decisionTime.y);
+                        decisionTimeCount = UnityEngine.Random.Range(decisionTime.x, decisionTime.y);
                         ChooseMoveDirection();
                     }
                 }
