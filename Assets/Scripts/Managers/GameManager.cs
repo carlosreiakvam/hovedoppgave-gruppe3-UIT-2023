@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : NetworkBehaviour
 {
-    [SerializeField] GameObject inGameMenuPanel;
     [SerializeField] GameObject largeMessage;
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] TextMeshProUGUI infoText;
@@ -48,7 +47,6 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         LocalPlayerManager.Singleton.RegisterPlayerInScriptableObject();
-        inGameMenuPanel.SetActive(false);
     }
 
     private void LateUpdate()
@@ -89,7 +87,7 @@ public class GameManager : NetworkBehaviour
         if (LocalPlayerManager.Singleton.localPlayer.isDead) return;
         ChatManager.Instance.SendMsg(LocalPlayerManager.Singleton.localPlayer.name + " died a tragic death!", "Wizard");
         infoText.text = " You died!";
-        inGameMenuPanel.SetActive(true);
+        InGameMenu.Singleton.ShowInGameMenu(true);
         largeMessage.SetActive(true);
         LocalPlayerManager.Singleton.localPlayer.isDead = true;
 
@@ -132,7 +130,7 @@ public class GameManager : NetworkBehaviour
         gameStatusSO.gameIsOver = true;
         infoText.text = playerName + " won the game!";
         largeMessage.SetActive(true);
-        inGameMenuPanel.SetActive(true);
+        InGameMenu.Singleton.ShowInGameMenu(true);
     }
 
     /// <summary>

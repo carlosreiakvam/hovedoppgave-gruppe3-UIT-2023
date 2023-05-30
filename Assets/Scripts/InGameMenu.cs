@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InGameMenu : MonoBehaviour
 {
     [SerializeField] GameStatusSO gameStatusSO;
-    [SerializeField] GameObject inGameMenuPanel;
     [SerializeField] GameObject leaveButtonGO;
+    [SerializeField] GameObject inGameMenuPanel;
+
     private Button leaveButton;
+    public static InGameMenu Singleton;
+
+    private void Awake()
+    {
+        if (Singleton == null) { Singleton = this; DontDestroyOnLoad(gameObject); }
+        else Destroy(gameObject);
+    }
 
     private void Start()
     {
+        inGameMenuPanel.SetActive(false);
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() =>
         {
@@ -20,6 +26,14 @@ public class InGameMenu : MonoBehaviour
         });
 
     }
+
+    public void ShowInGameMenu(bool show)
+    {
+        inGameMenuPanel.SetActive(show);
+    }
+
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
