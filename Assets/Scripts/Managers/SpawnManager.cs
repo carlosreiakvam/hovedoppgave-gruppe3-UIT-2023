@@ -67,9 +67,9 @@ public class SpawnManager : NetworkBehaviour
             SpawnPrefabsAtEmptyTiles(SpawnEnums.TorchPowerUp, environment: EnvironmentEnums.Cave, nInstances: 15, searchRange: 1);
 
             // SPAWN ENEMIES
-/*            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: N_ENEMIES_FOREST, searchRange: 1, excludedMidAreaSideLength: 10);
+            SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Outdoor, nInstances: N_ENEMIES_FOREST, searchRange: 1, excludedMidAreaSideLength: 10);
             SpawnPrefabsAtEmptyTiles(SpawnEnums.Enemy, environment: EnvironmentEnums.Cave, nInstances: N_ENEMIES_CAVE, searchRange: 1);
-*/
+
             // SPAWN HEALTH POWERUPS
             SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Outdoor, nInstances: N_HEALTH_POWERUPS_FOREST, searchRange: 1);
             SpawnPrefabsAtEmptyTiles(SpawnEnums.HealthPowerUp, environment: EnvironmentEnums.Cave, nInstances: N_HEALTH_POWERUPS_CAVE, searchRange: 1);
