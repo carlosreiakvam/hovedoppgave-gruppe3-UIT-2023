@@ -8,14 +8,19 @@ public class PlayerRingPickup : NetworkBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!IsOwner) return;
         if (!(collision.gameObject.tag == "Ring")) return;
         if (LocalPlayerManager.Singleton.localPlayer.playerHasRing) return;
 
+        LocalPlayerManager.Singleton.ring.SetActive(true);
+        LocalPlayerManager.Singleton.localPlayer.playerHasRing = true;
+
         DespawnRing(collision);
 
-        string localPlayerName = LocalPlayerManager.Singleton.localPlayer.name;
-        LocalPlayerManager.Singleton.localPlayer.playerHasRing = true;
-        OnPlayerPickedUpRingServerRpc(localPlayerName);
+        string playerName = LocalPlayerManager.Singleton.localPlayer.name;
+        ChatManager.Instance.SendMsg(playerName + " collected a ring!", "Wizard");
+
+        // OnPlayerPickedUpRingServerRpc(localPlayerName);
     }
 
     private void DespawnRing(Collider2D collision)
@@ -25,7 +30,7 @@ public class PlayerRingPickup : NetworkBehaviour
         SpawnManager.Singleton.DespawnObjectServerRpc(ringNetworkObject.NetworkObjectId);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+/*    [ServerRpc(RequireOwnership = false)]
     public void OnPlayerPickedUpRingServerRpc(string name)
     {
         OnPlayerPickedUpRingClientRpc(name);
@@ -34,8 +39,7 @@ public class PlayerRingPickup : NetworkBehaviour
     [ClientRpc]
     public void OnPlayerPickedUpRingClientRpc(string name)
     {
-        LocalPlayerManager.Singleton.ring.SetActive(true);
         GameManager.Singleton.OnPlayerPickedUpRing(name);
     }
-
+*/
 }
