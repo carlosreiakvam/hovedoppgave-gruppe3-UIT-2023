@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : NetworkBehaviour
 {
-    [SerializeField] GameObject inGameMenu;
+    [SerializeField] GameObject inGameMenuPanel;
     [SerializeField] GameObject largeMessage;
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] TextMeshProUGUI infoText;
@@ -48,6 +48,7 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         LocalPlayerManager.Singleton.RegisterPlayerInScriptableObject();
+        inGameMenuPanel.SetActive(false);
     }
 
     private void LateUpdate()
@@ -59,8 +60,6 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     public void StartGameManagerServer()
     {
-        Debug.LogWarning("GAMEMANAGER STARTED");
-
         if (SpawnManager.Singleton.SpawnAll()) { Debug.LogWarning("SPAWNING SUCCESSFULL"); }
         else { Debug.LogError("SPAWNING FAILED"); }
     }
@@ -90,8 +89,8 @@ public class GameManager : NetworkBehaviour
         if (LocalPlayerManager.Singleton.localPlayer.isDead) return;
         ChatManager.Instance.SendMsg(LocalPlayerManager.Singleton.localPlayer.name + " died a tragic death!", "Wizard");
         infoText.text = " You died!";
+        inGameMenuPanel.SetActive(true);
         largeMessage.SetActive(true);
-        inGameMenu.SetActive(true);
         LocalPlayerManager.Singleton.localPlayer.isDead = true;
 
     }
@@ -132,8 +131,8 @@ public class GameManager : NetworkBehaviour
     {
         gameStatusSO.gameIsOver = true;
         infoText.text = playerName + " won the game!";
-        inGameMenu.SetActive(true);
         largeMessage.SetActive(true);
+        inGameMenuPanel.SetActive(true);
     }
 
     /// <summary>

@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InGameMenu : MonoBehaviour
 {
     [SerializeField] GameStatusSO gameStatusSO;
-    [SerializeField] GameObject inGameMenu;
+    [SerializeField] GameObject inGameMenuPanel;
     [SerializeField] GameObject leaveButtonGO;
     private Button leaveButton;
 
     private void Start()
     {
-        inGameMenu.SetActive(false);
         leaveButton = leaveButtonGO.GetComponent<Button>();
         leaveButton.onClick.AddListener(() =>
         {
@@ -28,7 +26,7 @@ public class InGameMenu : MonoBehaviour
         {
             if (!gameStatusSO.gameIsOver)
             {
-                inGameMenu.SetActive(!inGameMenu.activeSelf);
+                inGameMenuPanel.SetActive(!inGameMenuPanel.activeSelf);
             }
         }
     }
