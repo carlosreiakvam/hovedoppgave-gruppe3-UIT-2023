@@ -271,28 +271,4 @@ public class PlayerBehaviour : NetworkBehaviour
     {
         playerAnimation.transform.position = cavePosition;
     }
-
-    /// <summary>
-    /// Activates the torch power-up for the player.
-    /// </summary>
-    internal void ActivateTorchPowerUp()
-    {
-        if (currentTorchCoroutine != null) StopCoroutine(currentTorchCoroutine);
-        currentTorchCoroutine = StartCoroutine(FireUpNewTorch(8));
-    }
-
-    /// <summary>
-    /// Activates the torch power-up for a specified duration.
-    /// </summary>
-    internal IEnumerator FireUpNewTorch(float delay)
-    {
-        Light2D playerLight = GetComponentInChildren<Light2D>();
-        playerLight.pointLightOuterRadius = 10;
-
-        LocalPlayerManager.Singleton.torchPowerup.SetActive(true);
-        yield return new WaitForSeconds(delay);
-        LocalPlayerManager.Singleton.torchPowerup.SetActive(false);
-
-        playerLight.pointLightOuterRadius = 5;
-    }
 }

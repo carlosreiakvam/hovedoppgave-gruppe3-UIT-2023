@@ -19,7 +19,7 @@ public class LocalPlayerManager : MonoBehaviour
     }
 
 
-    [SerializeField] public GameObject torchPowerup;
+    [SerializeField] public GameObject torchPowerupUI;
     [SerializeField] public GameObject ring;
     [SerializeField] public GameObject speedPowerup;
 
@@ -34,7 +34,7 @@ public class LocalPlayerManager : MonoBehaviour
         else Destroy(gameObject);
 
         // PowerupUI
-        torchPowerup.SetActive(false);
+        torchPowerupUI.SetActive(false);
         speedPowerup.SetActive(false);
         ring.SetActive(false);
     }
