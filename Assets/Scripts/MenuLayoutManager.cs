@@ -22,7 +22,6 @@ public class MenuLayoutManager : MonoBehaviour
     [SerializeField] Canvas menuCanvas;
     [SerializeField] private TextMeshProUGUI header;
     [SerializeField] private TextMeshProUGUI gametitle;
-    [SerializeField] private GameObject chatVisual;
     [SerializeField] List<GameObject> pages;
 
 
@@ -213,7 +212,7 @@ public class MenuLayoutManager : MonoBehaviour
             ChatManager.Instance.SetMaxMessages(CHAT_MAX_MESSAGES_REGULAR);
         }
 
-        RectTransform chatTransform = chatVisual.GetComponent<RectTransform>();
+        RectTransform chatTransform = ChatCanvas.Instance.GetComponent<RectTransform>();
         chatTransform.sizeDelta = new Vector2(chatWidth, chatHeight);
         float offsetX = (chatWidth / 2f);
         float offsetY = -(chatHeight / 2f);

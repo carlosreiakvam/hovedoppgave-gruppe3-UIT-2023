@@ -21,7 +21,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI alertMessage;
     [SerializeField] private TextMeshProUGUI header;
     [SerializeField] private TextMeshProUGUI gametitle;
-    [SerializeField] private GameObject chatVisual;
     [SerializeField] List<GameObject> pages;
 
     /// <summary>
@@ -35,7 +34,7 @@ public class MenuManager : MonoBehaviour
         else Destroy(gameObject);
 
         header.gameObject.SetActive(false);
-        chatVisual.SetActive(false);
+        ChatCanvas.Instance.ShowChatCanvas(false);
     }
 
     private void Start()
@@ -52,7 +51,7 @@ public class MenuManager : MonoBehaviour
     public void OpenPage(MenuEnums pageToOpen)
     {
         header.gameObject.SetActive(pageToOpen != MenuEnums.MenuStart);
-        chatVisual.SetActive(pageToOpen == MenuEnums.LobbyRoom);
+        ChatCanvas.Instance.ShowChatCanvas(pageToOpen == MenuEnums.LobbyRoom);
 
         foreach (GameObject page in pages)
         {

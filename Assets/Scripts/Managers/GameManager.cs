@@ -35,6 +35,7 @@ public class GameManager : NetworkBehaviour
         if (clientId == 0)
         {
             EndGameScene();
+            NetworkManager.Singleton.Shutdown();
         }
         else
         {
@@ -71,14 +72,13 @@ public class GameManager : NetworkBehaviour
     {
         try
         {
-            NetworkManager.Singleton.Shutdown();
             DestroyObjectsTaggedWithDontDestroy();
-            SceneManager.LoadScene("Menus");
         }
         catch (Exception e)
         {
-            Debug.LogError(e); return;
+            Debug.LogError(e);
         }
+        SceneManager.LoadScene("Menus");
     }
 
     /// <summary>
@@ -101,15 +101,18 @@ public class GameManager : NetworkBehaviour
     /// </summary>
     private void DestroyObjectsTaggedWithDontDestroy()
     {
+        if (gameObject == null) return; // If the gameobject is null, then the game is already destroyed.
         GameObject[] objs = GameObject.FindObjectsOfType<GameObject>();
+        if (objs == null) return; // If there are no objects, then there is nothing to destroy.
         foreach (GameObject obj in objs)
         {
             if (obj.transform.parent == null && obj.transform != transform && obj.scene.name != null)
             {
                 if (obj.CompareTag("DontDestroy")) Destroy(obj);
-                Debug.LogWarning("Destroyed: " + obj.name);
+                //Debug.LogWarning("Destroyed: " + obj.name);
             }
         }
+        Destroy(gameObject); // Destroy the game manager.
     }
 
     /// <summary>

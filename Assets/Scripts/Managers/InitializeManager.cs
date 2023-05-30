@@ -59,4 +59,24 @@ public class InitializeManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroy all NetworkManager Multiples. Multiples are created when the scene is reloaded.
+    /// </summary>
+    private void DestroyChatCanvasDuplicats()
+    {
+        List<GameObject> objects = GameObject.FindObjectsOfType<GameObject>().ToList<GameObject>();
+        List<GameObject> chatcanvas = new List<GameObject>();
+        foreach (GameObject obj in objects)
+        {
+            if (obj.name.Equals("ChatCanvas")) chatcanvas.Add(obj);
+        }
+        while (chatcanvas.Count > 1)
+        {
+            chatcanvas.Remove(chatcanvas.First());
+            Destroy(chatcanvas.First());
+            Debug.LogWarning("Destroyed a ChatCanvas Multiple");
+        }
+    }
+
+
 }
