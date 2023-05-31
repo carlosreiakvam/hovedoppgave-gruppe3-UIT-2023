@@ -32,6 +32,13 @@ public class InGameMenu : MonoBehaviour
         inGameMenuPanel.SetActive(show);
     }
 
+    public void ToggleInGameMenu()
+    {
+        inGameMenuPanel.SetActive(!inGameMenuPanel.activeSelf);
+
+    }
+
+
 
 
     private void Update()
