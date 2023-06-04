@@ -9,7 +9,6 @@ public class LobbyStartMenu : MonoBehaviour
     [SerializeField] private Button CreateButtonGO;
     [SerializeField] private Button backButtonGO;
 
-
     private void Start()
     {
 

@@ -12,7 +12,6 @@ public class Sword : MonoBehaviour
         {
             if (collision.GetComponentInParent<PlayerBehaviour>() && collision.GetType().Name == "CapsuleCollider2D")
             {
-                //print("Player hit!");
                 playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
                 playerHealth.SwordCollision();
             }
@@ -21,7 +20,6 @@ public class Sword : MonoBehaviour
         {
             if (collision.GetComponentInParent<Enemy>() && collision.GetType().Name == "CapsuleCollider2D")
             {
-                //print("Enemy hit!");
                 enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
                 if (GetComponentInParent<PlayerBehaviour>().GetSword())
                 {
@@ -31,7 +29,6 @@ public class Sword : MonoBehaviour
                 {
                     enemyHealth.SwordCollision(25);
                 }
-                //enemyHealth.SwordCollision();
             }
         }
     }

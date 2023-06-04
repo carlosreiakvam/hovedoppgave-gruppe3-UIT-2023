@@ -6,7 +6,6 @@ public class PlayerDeath : MonoBehaviour
 {
     private PlayerHealth playerHealth;
     private Animator animator;
-    private readonly WaitForSeconds waitForSeconds = new(7f);
     void Start()
     {
         playerHealth = GetComponent<PlayerHealth>();
