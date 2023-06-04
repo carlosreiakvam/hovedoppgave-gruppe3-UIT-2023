@@ -125,6 +125,7 @@ public class Enemy : NetworkBehaviour
             {
                 players.RemoveAt(indexOfChasedPlayer);
                 target.GetComponentInChildren<PlayerHealth>().OnPlayerKnockdown -= OnPlayerKnockdown;
+                target = null;
             }
         }
 
