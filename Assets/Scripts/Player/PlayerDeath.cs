@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using Unity.Netcode;
 
 public class PlayerDeath : MonoBehaviour
 {

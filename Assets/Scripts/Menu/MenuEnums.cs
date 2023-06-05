@@ -1,5 +1,5 @@
 public enum MenuEnums
-{ 
+{
     MenuStart,
     LobbyMenu,
     LobbyCreate,

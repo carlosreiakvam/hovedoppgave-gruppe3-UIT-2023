@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 /// <summary>
 /// Manages various menus and UI elements in the game. It also handles events associated with these menus.

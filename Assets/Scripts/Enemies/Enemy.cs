@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
-using UnityEngine;
-using Unity.Netcode.Components;
 using System.Linq;
-using System;
+using Unity.Netcode;
+using Unity.Netcode.Components;
+using UnityEngine;
 
 /// <summary>
 /// Represents an enemy character controlled by the server.

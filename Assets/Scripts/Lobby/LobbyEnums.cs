@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum PreGameJoinType{
+public enum PreGameJoinType
+{
     Host,
     Join,
     QuickJoin,

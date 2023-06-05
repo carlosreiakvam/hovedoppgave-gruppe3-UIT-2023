@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
-using UnityEngine.UI;
 
 public class SpawnManager : NetworkBehaviour
 {

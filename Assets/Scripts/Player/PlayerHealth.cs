@@ -1,10 +1,7 @@
-using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
-using Unity.Netcode;
-using UnityEngine.UI;
 using System;
-using System.Diagnostics.CodeAnalysis;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : NetworkBehaviour
 {
@@ -80,7 +77,7 @@ public class PlayerHealth : NetworkBehaviour
 
         hitPoints.ApplyChange(healthPowerUpAmount.Value);
 
-        if (hitPoints.Value >= startingHP ) //might overshoot
+        if (hitPoints.Value >= startingHP) //might overshoot
         {
             hitPoints.Value = startingHP; // Clamp at max networkHP
         }
@@ -124,7 +121,9 @@ public class PlayerHealth : NetworkBehaviour
     [ClientRpc]
     private void VizualizeDeathClientRpc()
     {
-        OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs { isKnockedDown = true 
+        OnPlayerKnockdown?.Invoke(this, new OnPlayerKnockdownEventArgs
+        {
+            isKnockedDown = true
         });
 
     }

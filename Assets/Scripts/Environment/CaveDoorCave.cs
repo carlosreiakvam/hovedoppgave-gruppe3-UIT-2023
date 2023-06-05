@@ -1,6 +1,6 @@
 using Unity.Netcode;
-using UnityEngine.Rendering.Universal;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 /// <summary>
 /// DoorCave class manages the behavior of the cave door in the game. 
 /// It is a NetworkBehaviour, indicating it is expected to function in a networked multiplayer environment.

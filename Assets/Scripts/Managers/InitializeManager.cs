@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,7 +10,7 @@ public class InitializeManager : MonoBehaviour
         // Cap the framerate at 60 FPS
         Application.targetFrameRate = 60;
 
-        gamestatusSO.Reset(); 
+        gamestatusSO.Reset();
         InitializePlatform();
         DestroyNetworkManagerMultiples();
     }

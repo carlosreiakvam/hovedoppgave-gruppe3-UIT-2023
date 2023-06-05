@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
-using Unity.Netcode;
 
 public class LobbyRoom : MonoBehaviour
 {

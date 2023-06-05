@@ -8,7 +8,6 @@ using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LobbyEventArgs : EventArgs
 {
@@ -146,7 +145,7 @@ public class LobbyManager : NetworkBehaviour
             {
                 {
                 LobbyStringConst.IS_LOBBY_READY, new DataObject(
-                 visibility: DataObject.VisibilityOptions.Public, 
+                 visibility: DataObject.VisibilityOptions.Public,
                  value: LobbyStringConst.FALSE)
                  },
             };
@@ -355,7 +354,7 @@ public class LobbyManager : NetworkBehaviour
     {
         gameStatusSO.lobbyPlayers = lobby.Players;
     }
-    
+
     internal async void EndLobby()
     {
         if (!IsServer) return;

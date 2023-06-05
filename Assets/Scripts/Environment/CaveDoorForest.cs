@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// DoorForest class manages the behavior of the forest cave door in the game. 

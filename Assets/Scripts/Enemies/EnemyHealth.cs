@@ -1,10 +1,7 @@
-using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
-using Unity.Netcode;
-using UnityEngine.UI;
 using System;
-using System.Diagnostics.CodeAnalysis;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : NetworkBehaviour
 {

@@ -1,13 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
 using Unity.Netcode;
-using System.Text.RegularExpressions;
-using System;
-using UnityEngine.UI;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
+using UnityEngine;
 
 /// <summary>
 /// Manages the chat system in the game.
