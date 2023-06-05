@@ -11,6 +11,9 @@ public class PlayerHUD : NetworkBehaviour
     private readonly NetworkVariable<FixedString128Bytes> networkPlayerName = new("Player: 0", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server );
     [SerializeField] private List<PlayerNameSO> pName;
 
+    /// <summary>
+    /// Called when the networked object is spawned on the client.
+    /// </summary>
     public override void OnNetworkSpawn()
     {
         networkPlayerName.Value = (pName[(int)OwnerClientId]).Value;

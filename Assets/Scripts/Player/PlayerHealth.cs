@@ -16,6 +16,9 @@ public class PlayerHealth : NetworkBehaviour
     [SerializeField] private FloatVariable healthPowerUpAmount;
     public event EventHandler<OnPlayerKnockdownEventArgs> OnPlayerKnockdown; //Publisher of death!
 
+    /// <summary>
+    /// Custom event arguments for player knockdown event.
+    /// </summary>
     public class OnPlayerKnockdownEventArgs : EventArgs
     {
         public bool isKnockedDown = false;
@@ -27,6 +30,9 @@ public class PlayerHealth : NetworkBehaviour
             hitPoints.SetValue(startingHP);
     }
 
+    /// <summary>
+    /// Called when a sword collision occurs with the player.
+    /// </summary>
     public void SwordCollision()
     {
         if (!IsOwner) return;
@@ -34,6 +40,9 @@ public class PlayerHealth : NetworkBehaviour
         VisualizeHealthChangeServerRpc(hitPoints.Value, startingHP.Value);
     }
 
+    /// <summary>
+    /// Applies damage to the player's health.
+    /// </summary>
     private void ApplyDamage()
     {
         if (IsLocalPlayer)
@@ -47,6 +56,9 @@ public class PlayerHealth : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when the player triggers a 2D collider.
+    /// </summary>
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (IsLocalPlayer)
@@ -58,6 +70,10 @@ public class PlayerHealth : NetworkBehaviour
             if (AddHealth()) SpawnManager.Singleton.DespawnObjectServerRpc(collision.GetComponent<NetworkObject>().NetworkObjectId);
         }
     }
+
+    /// <summary>
+    /// Adds health to the player.
+    /// </summary>
     public bool AddHealth()
     {
         if (hitPoints.Value < 0 || hitPoints.Value == startingHP) return false;
@@ -74,13 +90,18 @@ public class PlayerHealth : NetworkBehaviour
 
     }
 
-
+    /// <summary>
+    /// ServerRpc method to visualize health change on the server.
+    /// </summary>
     [ServerRpc(RequireOwnership = false)]
     private void VisualizeHealthChangeServerRpc(float hp, float startHP)
     {
         VisualizeHealthChangeClientRpc(hp, startingHP);
     }
 
+    /// <summary>
+    /// ClientRpc method to visualize health change on the client.
+    /// </summary>
     [ClientRpc]
     private void VisualizeHealthChangeClientRpc(float hp, float startHP) //inform the other clients
     {
@@ -88,12 +109,18 @@ public class PlayerHealth : NetworkBehaviour
         healthBarVisual.fillAmount = hp / startHP;
     }
 
+    /// <summary>
+    /// ServerRpc method to visualize player death on the server.
+    /// </summary>
     [ServerRpc(RequireOwnership = false)]
     private void VizualizeDeathServerRpc()
     {
         VizualizeDeathClientRpc();
     }
 
+    /// <summary>
+    /// ClientRpc method to visualize player death on the client.
+    /// </summary>
     [ClientRpc]
     private void VizualizeDeathClientRpc()
     {
