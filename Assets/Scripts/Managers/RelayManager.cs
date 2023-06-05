@@ -126,28 +126,4 @@ public class RelayManager : MonoBehaviour
             Debug.Log(e);
         }
     }
-
-
-    /// <summary>
-    /// Joins a relay using the given join code (shortcut version).
-    /// </summary>
-    /// <param name="joinCode">The join code for the relay to join.</param>
-    public async Task JoinRelayShortcut(string joinCode)
-    {
-        try
-        {
-            joinCode = joinCode.Substring(0, 6); // ensure 6 characters only
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-
-            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-        }
-
-        catch (RelayServiceException e)
-        {
-            Debug.Log("RelayServiceException: Fail on JoinRelay");
-            Debug.Log(e);
-        }
-        NetworkManager.Singleton.StartClient();
-    }
 }

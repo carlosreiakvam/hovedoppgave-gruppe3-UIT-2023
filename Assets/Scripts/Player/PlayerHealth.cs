@@ -80,7 +80,7 @@ public class PlayerHealth : NetworkBehaviour
 
         hitPoints.ApplyChange(healthPowerUpAmount.Value);
 
-        if (hitPoints.Value >= startingHP /*- healthPowerUpAmount*/) //might overshoot
+        if (hitPoints.Value >= startingHP ) //might overshoot
         {
             hitPoints.Value = startingHP; // Clamp at max networkHP
         }

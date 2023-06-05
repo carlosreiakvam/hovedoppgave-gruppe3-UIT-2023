@@ -29,14 +29,12 @@ public class PlayerWizardCollision : NetworkBehaviour
     [ClientRpc]
     public void DeactivatePlayersClientRpc(ulong localPlayerId)
     {
-        // Deactivate player. No despawn for networking reasons.
         GameManager.Singleton.DeactivateAllPlayers();
     }
 
     [ClientRpc]
     public void VisualizeGameWonClientRpc(string playerName)
     {
-        // Deactivate player. No despawn for networking reasons.
         GameManager.Singleton.VisualizeOnGameWon(playerName);
 
     }

@@ -47,7 +47,6 @@ public class LobbyManager : NetworkBehaviour
         else
         {
             Singleton = this;
-            // Class is not kept alive on scene change
         }
     }
 
@@ -147,7 +146,7 @@ public class LobbyManager : NetworkBehaviour
             {
                 {
                 LobbyStringConst.IS_LOBBY_READY, new DataObject(
-                 visibility: DataObject.VisibilityOptions.Public, // Visible publicly.
+                 visibility: DataObject.VisibilityOptions.Public, 
                  value: LobbyStringConst.FALSE)
                  },
             };

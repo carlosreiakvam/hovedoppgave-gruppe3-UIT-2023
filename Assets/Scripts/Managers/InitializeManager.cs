@@ -11,7 +11,7 @@ public class InitializeManager : MonoBehaviour
         // Cap the framerate at 60 FPS
         Application.targetFrameRate = 60;
 
-        gamestatusSO.Reset(); // make sure this is run before anything else
+        gamestatusSO.Reset(); 
         InitializePlatform();
         DestroyNetworkManagerMultiples();
     }

@@ -13,7 +13,6 @@ public class GameManager : NetworkBehaviour
     [SerializeField] GameStatusSO gameStatusSO;
     [SerializeField] TextMeshProUGUI infoText;
 
-    // Singleton instance of GameManager
     public static GameManager Singleton;
 
     // Represents the network player ID who currently has the ring

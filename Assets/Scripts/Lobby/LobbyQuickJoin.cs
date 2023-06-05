@@ -75,19 +75,10 @@ public class LobbyQuickJoin : MonoBehaviour
 
     public GameObject CreateSpinner()
     {
-        // Create a new GameObject for the spinner
         GameObject spinner = new GameObject("Spinner");
-
-        // Add the Image component to the spinner
         Image spinnerImage = spinner.AddComponent<Image>();
-
-        // Assign your spinner sprite to the image component
         spinnerImage.sprite = spinnerSprite;
-
-        // Set the spinner as a child of the canvas
         spinner.transform.SetParent(canvas.transform, false);
-
-        // Initially, set the spinner to be invisible
         spinner.SetActive(false);
 
         return spinner;
