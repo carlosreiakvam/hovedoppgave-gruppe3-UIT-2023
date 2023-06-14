@@ -1,5 +1,5 @@
-### Hovedoppgave gruppe 3 UIT 2023
-Carlos Reiakvam, Tore Bjerkan, Mikal Eriksen
+### Fork of bachelor project for the university of Tromsø 2023
+Originally written by Carlos Reiakvam, Tore Bjerkan, Mikal Eriksen
 
 # Journey of the Heroes
 
